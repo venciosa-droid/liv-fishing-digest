@@ -1,5 +1,5 @@
 {
- "reportTime": "Fri 9 Oct 2026 · 8:10 AM PHT · morning refresh",
+ "reportTime": "Fri 9 Oct 2026 · 2:21 PM PHT · afternoon",
  "confidence": "HIGH",
  "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
  "overall": "MARGINAL",
@@ -10,12 +10,12 @@
   "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest feed 5:15 AM PHT)"
  },
  "changed": {
-  "title": "⚠️ What changed",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "Live data is back (ECMWF wind/rain + Open-Meteo Marine tidal currents). Confidence HIGH again.",
-   "Saturday supply UP → ABOVE NORMAL (was NORMAL → softening yesterday PM). ECMWF rates Sat GOOD with HIGH activity.",
-   "Worst day moved Sun → Mon Oct 12 (heavy rain ~18 mm, wind ~10 kt, gusts 15). Sunday is milder than shown yesterday.",
-   "Tidal currents confirmed strong again: Decabaitot 1.0 kt and Turda 0.9 kt are POOR; Tara is 0.8 kt (NOAA background had 0.71). Grounds: 6 GOOD · 5 MARGINAL · 2 POOR (yesterday PM 7 · 6 · 0)."
+   "Saturday supply DOWN → NORMAL → softening (was ABOVE NORMAL at 8 AM). ECMWF now rates Sat MARGINAL: a bit more wind (5.4 kt, gusts 9) and ~8 mm rain.",
+   "Worst day back to Sun Oct 11: wind up to ~11 kt, gusts 16, ~14 mm rain (was 8 kt / 10 mm). Mon 12 is still heavy rain (~20 mm).",
+   "Thu 15 recovery gone: now MARGINAL (~10 mm rain). Shortage risk stays ELEVATED, now Fri through Thu.",
+   "Grounds now: 7 GOOD · 6 MARGINAL · 0 POOR (8 AM was 6 · 5 · 2). The improvement is the afternoon current slack and won't last into the evening."
   ]
  },
  "supply": [
@@ -27,36 +27,35 @@
   },
   {
    "label": "24h Sat",
-   "value": "🟢 ABOVE NORMAL ▲",
-   "note": "Up from softening · wind 4.9 kt, gusts 9",
-   "tone": "good"
-  },
-  {
-   "label": "48h Sun",
-   "value": "🟡 NORMAL → softening",
-   "note": "Turning point · 8.4 kt, gusts 13, ~10 mm",
+   "value": "🟡 NORMAL → softening ▼",
+   "note": "Down from ABOVE NORMAL · wind 5.4 kt, gusts 9, ~8 mm",
    "tone": "ok"
   },
   {
-   "label": "3d Mon 12",
+   "label": "48h Sun 11",
    "value": "🔴 WORST of week · softening",
-   "note": "Heavy rain ~18 mm · 9.8 kt, gusts 15",
+   "note": "Turning point · ~11 kt, gusts 16, ~14 mm",
    "tone": "bad"
   },
   {
-   "label": "5–7d",
-   "value": "🟠 Soft Tue–Wed → 🟢 recovers Thu 15",
-   "note": "Wed heavy rain ~18 mm · Thu GOOD, HIGH activity",
+   "label": "3d Mon 12",
+   "value": "🟠 Softening",
+   "note": "Heavy rain ~20 mm · 9.3 kt, gusts 15",
    "tone": "warn"
+  },
+  {
+   "label": "5–7d",
+   "value": "🟡 NORMAL → softening Tue–Thu",
+   "note": "Moderate rain 8–10 mm/day · no GOOD day in the 7-day",
+   "tone": "ok"
   }
  ],
- "shortageRisk": "No surge. Shortage risk ELEVATED Fri → Wed (unchanged). Build stock from Saturday’s arrivals.",
+ "shortageRisk": "No surge. Shortage risk ELEVATED Fri → Thu (extended a day). No strong arrival day ahead, so hold onto current stock and buy steadily.",
  "bestWindow": {
-  "headline": "Today ~10 AM–2 PM PHT",
+  "headline": "Sat ~10 AM–12 noon PHT",
   "details": [
-   "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers).",
-   "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current.",
-   "Ciron stays workable all day (≤0.3 kt)."
+   "Currents easing (average ~0.2–0.3 kt), wind ≤3.5 kt, before the noon showers reach Coron, Culion and Galoc.",
+   "Today until ~4 PM is the backup: slack currents everywhere, best at Nangalao, Ciron, Alava and Maglalambay (lighter wind)."
   ]
  },
  "turningPoint": {
@@ -165,7 +164,7 @@
    "flags": []
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 9 Oct 8:10 AM PHT. “Now” = 8 AM; range = next 24h (to Sat 8 AM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 9 Oct 2:21 PM PHT. “Now” = 2 PM; range = next 24h (to Sat 1 PM).",
  "areas": [
   {
    "id": "coron",
@@ -174,10 +173,10 @@
    "lng": 120.206,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.5,
-    "dir": "SSW",
+    "kt": 0.1,
+    "dir": "N",
     "range24h": "0.1–0.5",
-    "status": "Moderate",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -192,7 +191,7 @@
    },
    "bestWindow": {
     "report": [
-     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
+     "Currents easing (average ~0.2–0.3 kt), wind ≤3.5 kt, before the noon showers reach Coron, Culion and Galoc."
     ],
     "modelBestHour": "Tue 07"
    }
@@ -202,10 +201,10 @@
    "name": "Culion",
    "lat": 11.8905,
    "lng": 120.022,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.4,
-    "dir": "SSE",
+    "kt": 0.1,
+    "dir": "N",
     "range24h": "0.0–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -222,7 +221,7 @@
    },
    "bestWindow": {
     "report": [
-     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
+     "Currents easing (average ~0.2–0.3 kt), wind ≤3.5 kt, before the noon showers reach Coron, Culion and Galoc."
     ],
     "modelBestHour": "Mon 17"
    }
@@ -232,10 +231,10 @@
    "name": "Linapacan",
    "lat": 11.491,
    "lng": 119.8682,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.4,
-    "dir": "ESE",
+    "kt": 0.1,
+    "dir": "N",
     "range24h": "0.1–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -251,9 +250,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
-    ],
+    "report": null,
     "modelBestHour": "Mon 23"
    }
   },
@@ -262,12 +259,12 @@
    "name": "Tara",
    "lat": 12.2729,
    "lng": 120.3641,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.8,
-    "dir": "SE",
-    "range24h": "0.3–1.1",
-    "status": "Moderate",
+    "kt": 0.4,
+    "dir": "ESE",
+    "range24h": "0.4–1.1",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -281,9 +278,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
-    ],
+    "report": null,
     "modelBestHour": "Tue 12"
    }
   },
@@ -294,9 +289,9 @@
    "lng": 120.1636,
    "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "S",
-    "range24h": "0.0–0.4",
+    "kt": 0.3,
+    "dir": "WSW",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -311,7 +306,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Today until ~4 PM is the backup: slack currents everywhere, best at Nangalao, Ciron, Alava and Maglalambay (lighter wind)."
+    ],
     "modelBestHour": "Mon 17"
    }
   },
@@ -320,10 +317,10 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.3,
-    "dir": "SSW",
+    "kt": 0.4,
+    "dir": "W",
     "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -348,12 +345,12 @@
    "name": "Decabaitot",
    "lat": 11.6483,
    "lng": 119.9629,
-   "rating": "POOR",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 1.0,
-    "dir": "SE",
+    "kt": 0.2,
+    "dir": "SSW",
     "range24h": "0.2–1.2",
-    "status": "Strong",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -367,9 +364,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
-    ],
+    "report": null,
     "modelBestHour": "Tue 03"
    }
   },
@@ -378,12 +373,12 @@
    "name": "Alava",
    "lat": 11.7363,
    "lng": 119.9312,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.7,
-    "dir": "SE",
+    "kt": 0.0,
+    "dir": "E",
     "range24h": "0.0–0.9",
-    "status": "Moderate",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -398,7 +393,7 @@
    },
    "bestWindow": {
     "report": [
-     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
+     "Today until ~4 PM is the backup: slack currents everywhere, best at Nangalao, Ciron, Alava and Maglalambay (lighter wind)."
     ],
     "modelBestHour": "Tue 13"
    }
@@ -408,10 +403,10 @@
    "name": "Galoc",
    "lat": 11.9273,
    "lng": 119.8768,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.3,
-    "dir": "S",
+    "kt": 0.2,
+    "dir": "NW",
     "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -428,7 +423,7 @@
    },
    "bestWindow": {
     "report": [
-     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
+     "Currents easing (average ~0.2–0.3 kt), wind ≤3.5 kt, before the noon showers reach Coron, Culion and Galoc."
     ],
     "modelBestHour": "Tue 07"
    }
@@ -438,10 +433,10 @@
    "name": "Maglalambay",
    "lat": 11.9935,
    "lng": 119.8684,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "S",
+    "kt": 0.2,
+    "dir": "NW",
     "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -457,7 +452,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Today until ~4 PM is the backup: slack currents everywhere, best at Nangalao, Ciron, Alava and Maglalambay (lighter wind)."
+    ],
     "modelBestHour": "Tue 10"
    }
   },
@@ -470,7 +467,7 @@
    "current": {
     "kt": 0.2,
     "dir": "WNW",
-    "range24h": "0.0–0.3",
+    "range24h": "0.0–0.2",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -486,7 +483,7 @@
    },
    "bestWindow": {
     "report": [
-     "Ciron stays workable all day (≤0.3 kt)."
+     "Today until ~4 PM is the backup: slack currents everywhere, best at Nangalao, Ciron, Alava and Maglalambay (lighter wind)."
     ],
     "modelBestHour": "Mon 17"
    }
@@ -496,10 +493,10 @@
    "name": "Decabobo",
    "lat": 12.1295,
    "lng": 120.2089,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "SE",
+    "kt": 0.0,
+    "dir": "E",
     "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -524,12 +521,12 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "POOR",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.9,
+    "kt": 0.3,
     "dir": "SE",
-    "range24h": "0.2–1.1",
-    "status": "Strong",
+    "range24h": "0.3–1.1",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -543,9 +540,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
-    ],
+    "report": null,
     "modelBestHour": "Tue 12"
    }
   }
