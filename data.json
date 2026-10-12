@@ -1,0 +1,520 @@
+{
+ "reportTime": "Fri 9 Oct 2026 · 7:04 AM PHT",
+ "confidence": "LOW",
+ "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
+ "overall": "UNAVAILABLE",
+ "limiter": "UNAVAILABLE",
+ "limiterDetail": "Cannot score grounds without live wind, rain, or currents.",
+ "pagasa": {
+  "status": "UNAVAILABLE",
+  "detail": "Open-Meteo ECMWF: 429 / backoff"
+ },
+ "changed": {
+  "title": "⚠️ What changed",
+  "items": [
+   "Both ECMWF wind/rain and Marine currents are UNAVAILABLE (Open-Meteo daily 429). Yesterday PM still had wind/rain.",
+   "Confidence dropped MODERATE → LOW. Supply & fishing scores frozen as UNAVAILABLE until quota resets ~ 8:05 AM PHT."
+  ]
+ },
+ "supply": [],
+ "shortageRisk": "UNAVAILABLE",
+ "bestWindow": {
+  "headline": "Heuristic only · FAIR · next 24h",
+  "details": [
+   "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+  ]
+ },
+ "turningPoint": {
+  "date": "2026-10-15",
+  "day": "Thu",
+  "from": "MARGINAL",
+  "to": "GOOD"
+ },
+ "worstDay": {
+  "date": "2026-10-12",
+  "day": "Mon",
+  "windKt": "11",
+  "gustKt": "16",
+  "rain": "Moderate (11.1 mm)"
+ },
+ "sevenDay": [
+  {
+   "date": "2026-10-12",
+   "day": "Mon",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "11",
+   "gustKt": "16",
+   "rain": "Moderate (11.1 mm)",
+   "flags": [
+    "WORST",
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "day": "Tue",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "7.3",
+   "gustKt": "12",
+   "rain": "Moderate (9.5 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "day": "Wed",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "4.4",
+   "gustKt": "9.7",
+   "rain": "Moderate (8.5 mm)",
+   "flags": [
+    "BEST",
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "day": "Thu",
+   "fishing": "GOOD",
+   "activity": "HIGH",
+   "supply": "ABOVE NORMAL",
+   "windKt": "9.5",
+   "gustKt": "17",
+   "rain": "Light (4.6 mm)",
+   "flags": [
+    "TURNING"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "day": "Fri",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "10",
+   "gustKt": "13",
+   "rain": "Light (3.4 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "day": "Sat",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "10",
+   "gustKt": "17",
+   "rain": "Moderate (6.1 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "day": "Sun",
+   "fishing": "GOOD",
+   "activity": "HIGH",
+   "supply": "ABOVE NORMAL",
+   "windKt": "6.1",
+   "gustKt": "12",
+   "rain": "Moderate (6.8 mm)",
+   "flags": []
+  }
+ ],
+ "currentsSourceLine": "UNAVAILABLE",
+ "areas": [
+  {
+   "id": "coron",
+   "name": "Coron",
+   "lat": 11.9988,
+   "lng": 120.206,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.0,
+    "dir": "ESE",
+    "gustKt": 15.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": [
+     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+    ],
+    "modelBestHour": "Tue 07"
+   }
+  },
+  {
+   "id": "culion",
+   "name": "Culion",
+   "lat": 11.8905,
+   "lng": 120.022,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.0,
+    "dir": "ESE",
+    "gustKt": 15.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": [
+     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+    ],
+    "modelBestHour": "Mon 17"
+   }
+  },
+  {
+   "id": "linapacan",
+   "name": "Linapacan",
+   "lat": 11.491,
+   "lng": 119.8682,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 8.8,
+    "dir": "ESE",
+    "gustKt": 12.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": [
+     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+    ],
+    "modelBestHour": "Mon 23"
+   }
+  },
+  {
+   "id": "tara",
+   "name": "Tara",
+   "lat": 12.2729,
+   "lng": 120.3641,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.9,
+    "dir": "SE",
+    "gustKt": 14.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": [
+     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+    ],
+    "modelBestHour": "Tue 12"
+   }
+  },
+  {
+   "id": "nangalao",
+   "name": "Nangalao",
+   "lat": 11.4362,
+   "lng": 120.1636,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 9.1,
+    "dir": "ESE",
+    "gustKt": 15.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": [
+     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+    ],
+    "modelBestHour": "Mon 17"
+   }
+  },
+  {
+   "id": "cabunlawan",
+   "name": "Cabunlawan",
+   "lat": 11.3839,
+   "lng": 120.0969,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.4,
+    "dir": "ESE",
+    "gustKt": 14.8,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Mon 23"
+   }
+  },
+  {
+   "id": "decabaitot",
+   "name": "Decabaitot",
+   "lat": 11.6483,
+   "lng": 119.9629,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.4,
+    "dir": "ESE",
+    "gustKt": 14.8,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 03"
+   }
+  },
+  {
+   "id": "alava",
+   "name": "Alava",
+   "lat": 11.7363,
+   "lng": 119.9312,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.2,
+    "dir": "ESE",
+    "gustKt": 15.9,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 13"
+   }
+  },
+  {
+   "id": "galoc",
+   "name": "Galoc",
+   "lat": 11.9273,
+   "lng": 119.8768,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.0,
+    "dir": "ESE",
+    "gustKt": 15.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 07"
+   }
+  },
+  {
+   "id": "maglalambay",
+   "name": "Maglalambay",
+   "lat": 11.9935,
+   "lng": 119.8684,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 9.5,
+    "dir": "ESE",
+    "gustKt": 15.6,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 10"
+   }
+  },
+  {
+   "id": "ciron",
+   "name": "Ciron",
+   "lat": 11.7804,
+   "lng": 120.0837,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 9.5,
+    "dir": "ESE",
+    "gustKt": 18.5,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Mon 17"
+   }
+  },
+  {
+   "id": "decabobo",
+   "name": "Decabobo",
+   "lat": 12.1295,
+   "lng": 120.2089,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.9,
+    "dir": "SE",
+    "gustKt": 14.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 12"
+   }
+  },
+  {
+   "id": "turda",
+   "name": "Turda",
+   "lat": 12.0959,
+   "lng": 120.3073,
+   "rating": "UNAVAILABLE",
+   "current": {
+    "kt": null,
+    "dir": null,
+    "range24h": null,
+    "status": "UNAVAILABLE",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 10.9,
+    "dir": "SE",
+    "gustKt": 14.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Tue 12"
+   }
+  }
+ ],
+ "sources": {
+  "wind": "ECMWF via Open-Meteo",
+  "rain": "ECMWF via Open-Meteo",
+  "currents": "Open-Meteo Marine currents (not ECMWF)",
+  "warnings": "PAGASA"
+ },
+ "links": {
+  "zoomSatellite": "https://zoom.earth/maps/satellite/#view=12.0,120.2,8z",
+  "zoomRain": "https://zoom.earth/maps/precipitation/#view=12.0,120.2,8z"
+ }
+}
