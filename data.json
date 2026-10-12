@@ -1,60 +1,60 @@
 {
- "reportTime": "Mon 12 Oct 2026 · 6:16 AM PHT · morning",
+ "reportTime": "Mon 12 Oct 2026 · 2:22 PM PHT · afternoon",
  "confidence": "HIGH",
  "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
  "overall": "MARGINAL today",
  "limiter": "a combination of wind and rain",
- "limiterDetail": "Main limiter: a combination of wind and rain. ESE wind runs 10–13 kt this morning on Tara, Turda, Decabobo, Ciron and Alava (peak ~9 AM), with showers ~1.4 mm/h from 9 AM to noon on Coron, Culion and Galoc. Currents are calm all day except a 6–10 PM pickup at Decabaitot (1.0 kt), Tara and Turda (0.8 kt).",
+ "limiterDetail": "Main limiter: a combination of wind and rain. ESE wind is at its peak right now, 9–11 kt with gusts up to ~18 (Ciron), easing to 6–8 kt by 5 PM. Showers stay light to moderate, with a wetter spell around midnight to 3 AM on the east and central grounds. Currents are favorable now, with short pickups this evening and Tuesday morning.",
  "pagasa": {
   "status": "CLEAR",
   "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest entries Mon ~5:30 AM PHT are gale advisories for Central Luzon, CALABARZON and Western Visayas only)"
  },
  "changed": {
-  "title": "⚠️ What changed since yesterday afternoon",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "Tue 13 slipped back to MARGINAL → NORMAL, softening. Rain went up to ~10.4 mm (was ~7.3 mm). The supply recovery now starts Wednesday , not Tuesday.",
-   "Sat 17 dropped to MARGINAL and is now the worst day of the week (11 kt, gusts 17). It was GOOD yesterday.",
-   "Today (Mon) is a bit better than feared: rain ~10.2 mm (was ~15.9 mm heavy), wind 9.7 kt. Shortage risk stays MILD , now Mon–Tue with another dip Sat. Wed 14 is the new best day (3.9 kt, gusts 9)."
+   "Wed 14 slipped from GOOD to MARGINAL. It's still the calmest day (4.4 kt, gusts 10), but rain rose to ~8.5 mm (was ~5.2 mm). The 48h supply outlook drops from ABOVE NORMAL to NORMAL, softening.",
+   "Fri 16 also dropped to MARGINAL (10 kt, gusts 13). It was GOOD this morning.",
+   "Shortage risk is up from MILD to ELEVATED , Mon to Sat. Thu 15 is now the only GOOD weekday (9.5 kt, ~4.6 mm), then Sun 18 GOOD. Sat 17 eased a little (10 kt, was 11), and today is now the worst day (11 kt, gusts 16, ~11.1 mm)."
   ]
  },
  "supply": [
   {
    "label": "Today Mon",
    "value": "🟡 NORMAL → softening",
-   "note": "Sunday's reduced catch lands today",
+   "note": "Sunday's reduced catch is landing today",
    "tone": "ok"
   },
   {
    "label": "24h Tue 13",
-   "value": "🟠 Softening · thinnest point ▼",
-   "note": "Downgraded from ABOVE NORMAL · Monday's reduced catch lands, Tue fishing also MARGINAL",
+   "value": "🟠 Softening",
+   "note": "Today's reduced catch lands; Tue fishing also MARGINAL",
    "tone": "warn"
   },
   {
    "label": "48h Wed 14",
-   "value": "🟢 ABOVE NORMAL",
-   "note": "Best fishing day · arrivals late Wed into Thu",
-   "tone": "good"
+   "value": "🟠 Softening · thinnest point ▼",
+   "note": "Downgraded from ABOVE NORMAL · third REDUCED day in a row",
+   "tone": "warn"
   },
   {
    "label": "3d Thu 15",
    "value": "🟢 ABOVE NORMAL",
-   "note": "9.7 kt, gusts 15, ~5.6 mm · steady arrivals",
+   "note": "Only GOOD weekday · arrivals late Thu into Fri",
    "tone": "good"
   },
   {
    "label": "5–7d",
-   "value": "🟢 Fri GOOD · 🟡 Sat dip · 🟢 Sun GOOD",
-   "note": "Sat's weaker catch would show as softer supply Sat–Sun",
+   "value": "🟡 Fri–Sat dip · 🟢 Sun GOOD",
+   "note": "Weaker Fri–Sat catch shows as softer supply Sat–Sun",
    "tone": "ok"
   }
  ],
- "shortageRisk": "No surge. Shortage risk MILD Mon → Tue , with another mild dip around Sat. Supply should be thinnest Tuesday, refilling from late Wednesday.",
+ "shortageRisk": "No surge. Shortage risk ELEVATED Mon → Sat (was MILD). Supply should be thinnest Tue–Wed, with a one-day refill from Thursday's catch.",
  "bestWindow": {
-  "headline": "Tonight ~6–8 PM (west and south) · Tue ~3–5 AM (all)",
+  "headline": "Today ~4–6 PM · Tue ~3–6 AM",
   "details": [
-   "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt.",
-   "Tue ~3–5 AM: calmest stretch on every ground, wind 3–6 kt, currents ≤0.6 kt, only light showers. Galoc and Coron are best (3.3–3.6 kt). Avoid this morning's 8–11 AM on the east grounds."
+   "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build.",
+   "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
   ]
  },
  "turningPoint": {
@@ -163,7 +163,7 @@
    "flags": []
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Mon 12 Oct 6:16 AM PHT. “Now” = 6 AM; range = next 24h (to Tue 5 AM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Mon 12 Oct 2:22 PM PHT. “Now” = 2 PM; range = next 24h (to Tue 1 PM).",
  "areas": [
   {
    "id": "coron",
@@ -172,9 +172,9 @@
    "lng": 120.206,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "W",
-    "range24h": "0.1–0.6",
+    "kt": 0.4,
+    "dir": "NNE",
+    "range24h": "0.0–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -189,10 +189,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt.",
-     "Tue ~3–5 AM: calmest stretch on every ground, wind 3–6 kt, currents ≤0.6 kt, only light showers. Galoc and Coron are best (3.3–3.6 kt). Avoid this morning's 8–11 AM on the east grounds."
-    ],
+    "report": null,
     "modelBestHour": "Tue 07"
    }
   },
@@ -203,9 +200,9 @@
    "lng": 120.022,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "S",
-    "range24h": "0.1–0.5",
+    "kt": 0.4,
+    "dir": "NNW",
+    "range24h": "0.1–0.7",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -220,9 +217,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
-    ],
+    "report": null,
     "modelBestHour": "Mon 17"
    }
   },
@@ -233,9 +228,9 @@
    "lng": 119.8682,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.3,
-    "dir": "ENE",
-    "range24h": "0.2–0.6",
+    "kt": 0.4,
+    "dir": "N",
+    "range24h": "0.2–0.7",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -250,9 +245,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
-    ],
+    "report": null,
     "modelBestHour": "Mon 23"
    }
   },
@@ -264,7 +257,7 @@
    "rating": "MARGINAL",
    "current": {
     "kt": 0.3,
-    "dir": "ESE",
+    "dir": "NE",
     "range24h": "0.2–0.8",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -281,7 +274,7 @@
    },
    "bestWindow": {
     "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
+     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build."
     ],
     "modelBestHour": "Tue 12"
    }
@@ -293,8 +286,8 @@
    "lng": 120.1636,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "NW",
+    "kt": 0.3,
+    "dir": "NNW",
     "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -310,9 +303,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
-    ],
+    "report": null,
     "modelBestHour": "Mon 17"
    }
   },
@@ -340,9 +331,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
-    ],
+    "report": null,
     "modelBestHour": "Mon 23"
    }
   },
@@ -353,9 +342,9 @@
    "lng": 119.9629,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.4,
-    "dir": "SE",
-    "range24h": "0.0–1.0",
+    "kt": 0.2,
+    "dir": "NW",
+    "range24h": "0.0–1.2",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -371,7 +360,8 @@
    },
    "bestWindow": {
     "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
+     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build.",
+     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
     ],
     "modelBestHour": "Tue 03"
    }
@@ -383,9 +373,9 @@
    "lng": 119.9312,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "S",
-    "range24h": "0.0–0.7",
+    "kt": 0.3,
+    "dir": "NW",
+    "range24h": "0.0–0.9",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -400,7 +390,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+    ],
     "modelBestHour": "Tue 13"
    }
   },
@@ -411,9 +403,9 @@
    "lng": 119.8768,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.1,
-    "dir": "W",
-    "range24h": "0.0–0.4",
+    "kt": 0.4,
+    "dir": "NNW",
+    "range24h": "0.1–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -428,10 +420,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt.",
-     "Tue ~3–5 AM: calmest stretch on every ground, wind 3–6 kt, currents ≤0.6 kt, only light showers. Galoc and Coron are best (3.3–3.6 kt). Avoid this morning's 8–11 AM on the east grounds."
-    ],
+    "report": null,
     "modelBestHour": "Tue 07"
    }
   },
@@ -442,9 +431,9 @@
    "lng": 119.8684,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.1,
-    "dir": "W",
-    "range24h": "0.0–0.4",
+    "kt": 0.4,
+    "dir": "NNW",
+    "range24h": "0.1–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -472,7 +461,7 @@
    "current": {
     "kt": 0.4,
     "dir": "NW",
-    "range24h": "0.1–0.5",
+    "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -487,9 +476,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
-    ],
+    "report": null,
     "modelBestHour": "Mon 17"
    }
   },
@@ -500,9 +487,9 @@
    "lng": 120.2089,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "ENE",
-    "range24h": "0.1–0.5",
+    "kt": 0.3,
+    "dir": "NNE",
+    "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -517,7 +504,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+    ],
     "modelBestHour": "Tue 12"
    }
   },
@@ -528,8 +517,8 @@
    "lng": 120.3073,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.3,
-    "dir": "SE",
+    "kt": 0.2,
+    "dir": "NNE",
     "range24h": "0.0–0.8",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -546,7 +535,7 @@
    },
    "bestWindow": {
     "report": [
-     "~6–8 PM tonight: Coron, Culion, Galoc, Linapacan, Nangalao, Cabunlawan and Ciron are nearly dry (≤0.1 mm/h), wind 4–7 kt, currents ≤0.6 kt. Skip Decabaitot, Tara and Turda then, as currents hit 0.8–1.0 kt."
+     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build."
     ],
     "modelBestHour": "Tue 12"
    }
