@@ -8,7 +8,7 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .top .brand{font-weight:700;font-size:16px;margin-right:auto}.top nav a{margin-left:10px;white-space:nowrap}
 .status{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#102a3a}
 .pill{background:#18394d;border-radius:14px;padding:3px 10px;white-space:nowrap}.pill b{color:#fff}
-.wrap{display:grid;grid-template-columns:1fr;gap:10px;padding:10px}
+.wrap{display:grid;grid-template-columns:1fr;gap:10px;padding:10px}.side{display:flex;flex-direction:column;gap:10px}
 #map{height:62vh;min-height:340px;border-radius:10px}
 .card{background:#132e40;border-radius:10px;padding:10px 12px}.card h2{font-size:15px;margin:0 0 8px}
 .bar{display:flex;gap:8px;align-items:stretch;margin:5px 0;border-radius:6px;overflow:hidden;background:#0e2333}
@@ -20,18 +20,18 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .lbl:before{display:none}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
 .leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-@media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 130px);grid-row:span 5}}
+@media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 140px)}.side{height:calc(100vh - 110px);overflow:auto}}
 </style></head><body>
 <div class="top"><span class="brand">🐠 LIV Fishing &amp; Supply</span><nav><a href="digest.html">Full report</a><a href="latest.png">Image</a><a href="archive/">Archive</a></nav></div>
 <div class="status" id="status">Loading…</div>
 <div class="wrap">
 <div><div id="map"></div><div class="ctl"><label><input type="checkbox" id="arr" checked> Current arrows</label><label><input type="checkbox" id="lab" checked> Labels</label></div></div>
-<div class="card"><h2>📦 Supply forecast</h2><div id="supply"></div><p class="fn" id="risk"></p></div>
+<div class="side"><div class="card"><h2>📦 Supply forecast</h2><div id="supply"></div><p class="fn" id="risk"></p></div>
 <div class="card"><h2>🎣 Best fishing window</h2><div id="win"></div></div>
 <div class="card"><h2>↪️ Turning point &amp; worst day</h2><div id="turn"></div></div>
 <div class="card"><h2>📅 7-day (ECMWF wind/gust/rain)</h2><div class="days" id="days"></div></div>
 <div class="card"><h2 id="chgT">What changed</h2><div id="chg"></div><p class="fn" id="src"></p></div>
-</div>
+</div></div>
 <script>
 const U='UNAVAILABLE',E=s=>String(s??U).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626'},EM={GOOD:'🟢',MARGINAL:'🟡',POOR:'🟠',BAD:'🔴'};
@@ -52,8 +52,8 @@ fetch('data.json?'+Date.now()).then(r=>r.json()).then(D=>{
   <tr><td>🎣 Best</td><td>${rep}<br><span class="fn">Model best hour: ${E(bw.modelBestHour)}</span></td></tr></table></div>`,{maxWidth:300});
   if(a.current.kt!=null&&DIR[a.current.dir]!=null){const sz=14+a.current.kt*22;
    L.marker([a.lat,a.lng],{interactive:false,icon:L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
-   html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;margin-top:-${sz*0.9}px;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}});
- map.fitBounds(pts,{padding:[30,30]});
+   html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}});
+ const fit=()=>{map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})};fit();setTimeout(fit,300);addEventListener('resize',fit);
  const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Bad<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)';return d};lg.addTo(map);
  document.getElementById('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
  document.getElementById('lab').onchange=e=>map.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));
