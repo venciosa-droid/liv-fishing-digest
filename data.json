@@ -1,60 +1,60 @@
 {
- "reportTime": "Sun 11 Oct 2026 · 6:19 AM PHT · morning",
+ "reportTime": "Sun 11 Oct 2026 · 2:17 PM PHT · afternoon",
  "confidence": "HIGH",
  "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
  "overall": "MARGINAL today",
- "limiter": "a combination",
- "limiterDetail": "Main limiter: a combination. Moderate showers on the south and west grounds this morning, 9–12 kt ESE wind until ~11 AM, and a ~1 kt current at Decabaitot early.",
+ "limiter": "rain",
+ "limiterDetail": "Main limiter: rain this afternoon on the north and west grounds (~1.4 mm/h from 3 to 5 PM), then wind building tonight to 12–15 kt on the east grounds. Currents are calm now but pick up 5–8 PM at Decabaitot, Turda, Tara and Alava.",
  "pagasa": {
   "status": "CLEAR",
   "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest feed entry Sat 5:11 PM PHT, Davao advisory only)"
  },
  "changed": {
-  "title": "⚠️ What changed since yesterday afternoon",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "Tue 13 lost its break: back to MARGINAL, NORMAL → softening. Wind is fine (6.6 kt, gusts 12) but rain jumped to ~13.4 mm (was ~6.6 mm).",
-   "Wed 14 to Sat 17 upgraded to GOOD → ABOVE NORMAL. Yesterday Wed–Fri were NORMAL → softening. The recovery now starts Wednesday.",
-   "Shortage risk eased from ELEVATED Sun–Fri to MILD Sun–Tue. The worst day moved from Sunday to Mon 12 (12 kt, gusts 17, ~13.5 mm). Sunday eased to 9.9 kt, gusts 16, ~9.8 mm."
+   "Tue 13 is back to GOOD → ABOVE NORMAL. Rain dropped to ~7.3 mm (was ~13.4 mm this morning), wind 7.7 kt, gusts 14. The recovery now starts Tuesday instead of Wednesday.",
+   "Grounds improved a lot this afternoon: 8 GOOD / 5 MARGINAL / 0 POOR, up from 4 / 8 / 1 at 6 AM. Decabaitot's current eased from 1.0 kt to 0.3 kt.",
+   "Shortage risk narrowed from MILD Sun–Tue to MILD Sun–Mon. Mon 12 got wetter and is still the worst day: 11 kt, gusts 17, ~15.9 mm heavy rain (was ~13.5 mm)."
   ]
  },
  "supply": [
   {
    "label": "Today Sun",
    "value": "🟡 NORMAL → softening",
-   "note": "Saturday's good catch still landing this morning, then thinner",
+   "note": "Saturday's catch is landed; today's reduced catch starts to show tonight",
    "tone": "ok"
   },
   {
    "label": "24h Mon 12",
    "value": "🟠 Softening · worst of week",
-   "note": "Sunday's reduced catch shows here · 12 kt, gusts 17, ~13.5 mm",
+   "note": "Sunday's reduced catch lands here · 11 kt, gusts 17, ~15.9 mm",
    "tone": "warn"
   },
   {
    "label": "48h Tue 13",
-   "value": "🟡 NORMAL → softening ▼",
-   "note": "Downgraded from ABOVE NORMAL · rain ~13.4 mm",
-   "tone": "ok"
+   "value": "🟢 ABOVE NORMAL ▲",
+   "note": "Upgraded from NORMAL → softening · fishing GOOD Tue, arrivals late Tue–Wed",
+   "tone": "good"
   },
   {
    "label": "3d Wed 14",
-   "value": "🟢 ABOVE NORMAL ▲",
-   "note": "Turning point · arrivals Wed–Thu",
+   "value": "🟢 ABOVE NORMAL",
+   "note": "6 kt, gusts 10 · steady arrivals",
    "tone": "good"
   },
   {
    "label": "5–7d",
-   "value": "🟢 ABOVE NORMAL Thu–Sat ▲",
-   "note": "Thu 15 best day of the week (5.5 kt, ~5.7 mm)",
+   "value": "🟢 ABOVE NORMAL Thu–Sat",
+   "note": "Thu 15 best day of the week (4.4 kt, ~6.7 mm)",
    "tone": "good"
   }
  ],
- "shortageRisk": "No surge. Shortage risk MILD Sun → Tue. Supply should be thinnest Mon–Tue, with the refill starting Wednesday and stronger Thursday.",
+ "shortageRisk": "No surge. Shortage risk MILD Sun → Mon. Supply should be thinnest Mon into Tue morning, with the refill starting late Tuesday.",
  "bestWindow": {
-  "headline": "Today ~1–4 PM PHT",
+  "headline": "Now to ~5 PM PHT (south and east)",
   "details": [
-   "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h).",
-   "Coron, Culion and Galoc are better from ~3–6 PM once the showers ease. Tonight ~9 PM–midnight is slack and nearly dry, but wind is back to 9–12 kt."
+   "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h).",
+   "Coron, Culion and Galoc are better from ~6–9 PM once the showers ease (~0.5 mm/h, currents ≤0.5 kt, wind 7–10 kt). Tonight ~9–11 PM is slack on most grounds, but wind is back to 9–12 kt."
   ]
  },
  "turningPoint": {
@@ -163,18 +163,18 @@
    "flags": []
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Sun 11 Oct 6:19 AM PHT. “Now” = 6 AM; range = next 24h (to Mon 5 AM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Sun 11 Oct 2:17 PM PHT. “Now” = 2 PM; range = next 24h (to Mon 1 PM).",
  "areas": [
   {
    "id": "coron",
    "name": "Coron",
    "lat": 11.9988,
    "lng": 120.206,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.3,
-    "dir": "SW",
-    "range24h": "0.2–0.5",
+    "kt": 0.2,
+    "dir": "WNW",
+    "range24h": "0.1–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -190,7 +190,7 @@
    },
    "bestWindow": {
     "report": [
-     "Coron, Culion and Galoc are better from ~3–6 PM once the showers ease. Tonight ~9 PM–midnight is slack and nearly dry, but wind is back to 9–12 kt."
+     "Coron, Culion and Galoc are better from ~6–9 PM once the showers ease (~0.5 mm/h, currents ≤0.5 kt, wind 7–10 kt). Tonight ~9–11 PM is slack on most grounds, but wind is back to 9–12 kt."
     ],
     "modelBestHour": "Tue 07"
    }
@@ -202,10 +202,10 @@
    "lng": 120.022,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.5,
-    "dir": "SSE",
-    "range24h": "0.0–0.6",
-    "status": "Moderate",
+    "kt": 0.2,
+    "dir": "NW",
+    "range24h": "0.0–0.5",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -220,7 +220,7 @@
    },
    "bestWindow": {
     "report": [
-     "Coron, Culion and Galoc are better from ~3–6 PM once the showers ease. Tonight ~9 PM–midnight is slack and nearly dry, but wind is back to 9–12 kt."
+     "Coron, Culion and Galoc are better from ~6–9 PM once the showers ease (~0.5 mm/h, currents ≤0.5 kt, wind 7–10 kt). Tonight ~9–11 PM is slack on most grounds, but wind is back to 9–12 kt."
     ],
     "modelBestHour": "Mon 17"
    }
@@ -232,10 +232,10 @@
    "lng": 119.8682,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.5,
-    "dir": "ESE",
+    "kt": 0.2,
+    "dir": "NNW",
     "range24h": "0.1–0.5",
-    "status": "Moderate",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -258,12 +258,12 @@
    "name": "Tara",
    "lat": 12.2729,
    "lng": 120.3641,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.7,
-    "dir": "SE",
-    "range24h": "0.2–0.9",
-    "status": "Moderate",
+    "kt": 0.4,
+    "dir": "E",
+    "range24h": "0.2–0.8",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -286,11 +286,11 @@
    "name": "Nangalao",
    "lat": 11.4362,
    "lng": 120.1636,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.2,
-    "dir": "SSE",
-    "range24h": "0.2–0.5",
+    "kt": 0.3,
+    "dir": "SW",
+    "range24h": "0.1–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -306,7 +306,7 @@
    },
    "bestWindow": {
     "report": [
-     "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h)."
+     "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h)."
     ],
     "modelBestHour": "Mon 17"
    }
@@ -316,10 +316,10 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.1,
-    "dir": "S",
+    "kt": 0.3,
+    "dir": "SW",
     "range24h": "0.1–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -336,7 +336,7 @@
    },
    "bestWindow": {
     "report": [
-     "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h)."
+     "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h)."
     ],
     "modelBestHour": "Mon 23"
    }
@@ -346,12 +346,12 @@
    "name": "Decabaitot",
    "lat": 11.6483,
    "lng": 119.9629,
-   "rating": "POOR",
+   "rating": "GOOD",
    "current": {
-    "kt": 1.0,
-    "dir": "SE",
-    "range24h": "0.2–1.2",
-    "status": "Strong",
+    "kt": 0.3,
+    "dir": "S",
+    "range24h": "0.0–1.0",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -366,7 +366,7 @@
    },
    "bestWindow": {
     "report": [
-     "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h)."
+     "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h)."
     ],
     "modelBestHour": "Tue 03"
    }
@@ -376,12 +376,12 @@
    "name": "Alava",
    "lat": 11.7363,
    "lng": 119.9312,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.8,
-    "dir": "SE",
-    "range24h": "0.1–0.9",
-    "status": "Moderate",
+    "kt": 0.2,
+    "dir": "SW",
+    "range24h": "0.1–0.7",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -396,7 +396,7 @@
    },
    "bestWindow": {
     "report": [
-     "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h)."
+     "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h)."
     ],
     "modelBestHour": "Tue 13"
    }
@@ -406,11 +406,11 @@
    "name": "Galoc",
    "lat": 11.9273,
    "lng": 119.8768,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "SSW",
-    "range24h": "0.2–0.5",
+    "kt": 0.3,
+    "dir": "WNW",
+    "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -426,7 +426,7 @@
    },
    "bestWindow": {
     "report": [
-     "Coron, Culion and Galoc are better from ~3–6 PM once the showers ease. Tonight ~9 PM–midnight is slack and nearly dry, but wind is back to 9–12 kt."
+     "Coron, Culion and Galoc are better from ~6–9 PM once the showers ease (~0.5 mm/h, currents ≤0.5 kt, wind 7–10 kt). Tonight ~9–11 PM is slack on most grounds, but wind is back to 9–12 kt."
     ],
     "modelBestHour": "Tue 07"
    }
@@ -436,11 +436,11 @@
    "name": "Maglalambay",
    "lat": 11.9935,
    "lng": 119.8684,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "SSW",
-    "range24h": "0.2–0.5",
+    "kt": 0.3,
+    "dir": "WNW",
+    "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -455,9 +455,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "~1–4 PM: currents slack everywhere (≤0.4 kt) and wind drops to 2–7 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Maglalambay are driest then (~0.1–0.3 mm/h)."
-    ],
+    "report": null,
     "modelBestHour": "Tue 10"
    }
   },
@@ -466,11 +464,11 @@
    "name": "Ciron",
    "lat": 11.7804,
    "lng": 120.0837,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.2,
-    "dir": "NNW",
-    "range24h": "0.2–0.5",
+    "kt": 0.4,
+    "dir": "W",
+    "range24h": "0.3–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
@@ -485,7 +483,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Now to ~5 PM: currents slack everywhere (≤0.5 kt) and wind 5–8 kt. Nangalao, Cabunlawan, Decabaitot, Alava and Ciron are driest then (~0.2 mm/h)."
+    ],
     "modelBestHour": "Mon 17"
    }
   },
@@ -496,8 +496,8 @@
    "lng": 120.2089,
    "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "SE",
+    "kt": 0.2,
+    "dir": "N",
     "range24h": "0.1–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
@@ -522,12 +522,12 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.8,
+    "kt": 0.3,
     "dir": "SE",
-    "range24h": "0.1–1.0",
-    "status": "Moderate",
+    "range24h": "0.1–0.9",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
