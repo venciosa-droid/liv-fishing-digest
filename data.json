@@ -1,27 +1,62 @@
 {
- "reportTime": "Fri 9 Oct 2026 · 7:04 AM PHT",
- "confidence": "LOW",
+ "reportTime": "Fri 9 Oct 2026 · 8:10 AM PHT · morning refresh",
+ "confidence": "HIGH",
  "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
- "overall": "UNAVAILABLE",
+ "overall": "MARGINAL",
  "limiter": "UNAVAILABLE",
- "limiterDetail": "Cannot score grounds without live wind, rain, or currents.",
+ "limiterDetail": "UNAVAILABLE",
  "pagasa": {
-  "status": "UNAVAILABLE",
-  "detail": "Open-Meteo ECMWF: 429 / backoff"
+  "status": "CLEAR",
+  "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest feed 5:15 AM PHT)"
  },
  "changed": {
   "title": "⚠️ What changed",
   "items": [
-   "Both ECMWF wind/rain and Marine currents are UNAVAILABLE (Open-Meteo daily 429). Yesterday PM still had wind/rain.",
-   "Confidence dropped MODERATE → LOW. Supply & fishing scores frozen as UNAVAILABLE until quota resets ~ 8:05 AM PHT."
+   "Live data is back (ECMWF wind/rain + Open-Meteo Marine tidal currents). Confidence HIGH again.",
+   "Saturday supply UP → ABOVE NORMAL (was NORMAL → softening yesterday PM). ECMWF rates Sat GOOD with HIGH activity.",
+   "Worst day moved Sun → Mon Oct 12 (heavy rain ~18 mm, wind ~10 kt, gusts 15). Sunday is milder than shown yesterday.",
+   "Tidal currents confirmed strong again: Decabaitot 1.0 kt and Turda 0.9 kt are POOR; Tara is 0.8 kt (NOAA background had 0.71). Grounds: 6 GOOD · 5 MARGINAL · 2 POOR (yesterday PM 7 · 6 · 0)."
   ]
  },
- "supply": [],
- "shortageRisk": "UNAVAILABLE",
+ "supply": [
+  {
+   "label": "Today Fri",
+   "value": "🟡 NORMAL → softening",
+   "note": "Unchanged · marginal day, ~8 mm rain",
+   "tone": "ok"
+  },
+  {
+   "label": "24h Sat",
+   "value": "🟢 ABOVE NORMAL ▲",
+   "note": "Up from softening · wind 4.9 kt, gusts 9",
+   "tone": "good"
+  },
+  {
+   "label": "48h Sun",
+   "value": "🟡 NORMAL → softening",
+   "note": "Turning point · 8.4 kt, gusts 13, ~10 mm",
+   "tone": "ok"
+  },
+  {
+   "label": "3d Mon 12",
+   "value": "🔴 WORST of week · softening",
+   "note": "Heavy rain ~18 mm · 9.8 kt, gusts 15",
+   "tone": "bad"
+  },
+  {
+   "label": "5–7d",
+   "value": "🟠 Soft Tue–Wed → 🟢 recovers Thu 15",
+   "note": "Wed heavy rain ~18 mm · Thu GOOD, HIGH activity",
+   "tone": "warn"
+  }
+ ],
+ "shortageRisk": "No surge. Shortage risk ELEVATED Fri → Wed (unchanged). Build stock from Saturday’s arrivals.",
  "bestWindow": {
-  "headline": "Heuristic only · FAIR · next 24h",
+  "headline": "Today ~10 AM–2 PM PHT",
   "details": [
-   "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+   "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers).",
+   "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current.",
+   "Ciron stays workable all day (≤0.3 kt)."
   ]
  },
  "turningPoint": {
@@ -130,19 +165,19 @@
    "flags": []
   }
  ],
- "currentsSourceLine": "UNAVAILABLE",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 9 Oct 8:10 AM PHT. “Now” = 8 AM; range = next 24h (to Sat 8 AM).",
  "areas": [
   {
    "id": "coron",
    "name": "Coron",
    "lat": 11.9988,
    "lng": 120.206,
-   "rating": "UNAVAILABLE",
+   "rating": "MARGINAL",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.5,
+    "dir": "SSW",
+    "range24h": "0.1–0.5",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -157,7 +192,7 @@
    },
    "bestWindow": {
     "report": [
-     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
     ],
     "modelBestHour": "Tue 07"
    }
@@ -167,12 +202,12 @@
    "name": "Culion",
    "lat": 11.8905,
    "lng": 120.022,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.4,
+    "dir": "SSE",
+    "range24h": "0.0–0.6",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -187,7 +222,7 @@
    },
    "bestWindow": {
     "report": [
-     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
     ],
     "modelBestHour": "Mon 17"
    }
@@ -197,12 +232,12 @@
    "name": "Linapacan",
    "lat": 11.491,
    "lng": 119.8682,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.4,
+    "dir": "ESE",
+    "range24h": "0.1–0.6",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -217,7 +252,7 @@
    },
    "bestWindow": {
     "report": [
-     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
     ],
     "modelBestHour": "Mon 23"
    }
@@ -227,12 +262,12 @@
    "name": "Tara",
    "lat": 12.2729,
    "lng": 120.3641,
-   "rating": "UNAVAILABLE",
+   "rating": "MARGINAL",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.8,
+    "dir": "SE",
+    "range24h": "0.3–1.1",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -247,7 +282,7 @@
    },
    "bestWindow": {
     "report": [
-     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
+     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
     ],
     "modelBestHour": "Tue 12"
    }
@@ -257,12 +292,12 @@
    "name": "Nangalao",
    "lat": 11.4362,
    "lng": 120.1636,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.4,
+    "dir": "S",
+    "range24h": "0.0–0.4",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -276,9 +311,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "Dashboard placeholder for Coron / Culion / Linapacan / Tara / Nangalao — low confidence ; ignore for ops until live ECMWF+Marine recover."
-    ],
+    "report": null,
     "modelBestHour": "Mon 17"
    }
   },
@@ -287,12 +320,12 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.3,
+    "dir": "SSW",
+    "range24h": "0.0–0.4",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -315,12 +348,12 @@
    "name": "Decabaitot",
    "lat": 11.6483,
    "lng": 119.9629,
-   "rating": "UNAVAILABLE",
+   "rating": "POOR",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 1.0,
+    "dir": "SE",
+    "range24h": "0.2–1.2",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -334,7 +367,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
+    ],
     "modelBestHour": "Tue 03"
    }
   },
@@ -343,12 +378,12 @@
    "name": "Alava",
    "lat": 11.7363,
    "lng": 119.9312,
-   "rating": "UNAVAILABLE",
+   "rating": "MARGINAL",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.7,
+    "dir": "SE",
+    "range24h": "0.0–0.9",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -362,7 +397,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
+    ],
     "modelBestHour": "Tue 13"
    }
   },
@@ -371,12 +408,12 @@
    "name": "Galoc",
    "lat": 11.9273,
    "lng": 119.8768,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.3,
+    "dir": "S",
+    "range24h": "0.0–0.4",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -390,7 +427,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "~10–11 AM: Coron, Culion, Galoc, Linapacan best (current 0.0–0.2 kt, wind ~2 kt, before the noon showers)."
+    ],
     "modelBestHour": "Tue 07"
    }
   },
@@ -399,12 +438,12 @@
    "name": "Maglalambay",
    "lat": 11.9935,
    "lng": 119.8684,
-   "rating": "UNAVAILABLE",
+   "rating": "MARGINAL",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.3,
+    "dir": "S",
+    "range24h": "0.0–0.4",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -427,12 +466,12 @@
    "name": "Ciron",
    "lat": 11.7804,
    "lng": 120.0837,
-   "rating": "UNAVAILABLE",
+   "rating": "GOOD",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.2,
+    "dir": "WNW",
+    "range24h": "0.0–0.3",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -446,7 +485,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Ciron stays workable all day (≤0.3 kt)."
+    ],
     "modelBestHour": "Mon 17"
    }
   },
@@ -455,12 +496,12 @@
    "name": "Decabobo",
    "lat": 12.1295,
    "lng": 120.2089,
-   "rating": "UNAVAILABLE",
+   "rating": "MARGINAL",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.3,
+    "dir": "SE",
+    "range24h": "0.0–0.5",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -483,12 +524,12 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "UNAVAILABLE",
+   "rating": "POOR",
    "current": {
-    "kt": null,
-    "dir": null,
-    "range24h": null,
-    "status": "UNAVAILABLE",
+    "kt": 0.9,
+    "dir": "SE",
+    "range24h": "0.2–1.1",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
@@ -502,7 +543,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "~11 AM–2 PM: Turda, Decabaitot, Alava, Tara at their easiest current."
+    ],
     "modelBestHour": "Tue 12"
    }
   }
