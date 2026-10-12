@@ -1,99 +1,85 @@
 {
- "reportTime": "Mon 12 Oct 2026 · 2:22 PM PHT · afternoon",
+ "reportTime": "Tue 13 Oct 2026 · 6:20 AM PHT · morning",
  "confidence": "HIGH",
- "liveSnapshot": "12 Oct 2026 · 2:22 PM PHT",
- "overall": "MARGINAL today",
- "limiter": "a combination of wind and rain",
- "limiterDetail": "Main limiter: a combination of wind and rain. ESE wind is at its peak right now, 9–11 kt with gusts up to ~18 (Ciron), easing to 6–8 kt by 5 PM. Showers stay light to moderate, with a wetter spell around midnight to 3 AM on the east and central grounds. Currents are favorable now, with short pickups this evening and Tuesday morning.",
+ "liveSnapshot": "13 Oct 2026 · 6:20 AM PHT",
+ "overall": "MARGINAL today, leaning good",
+ "limiter": "rain, plus evening currents in the east",
+ "limiterDetail": "Main limiter: rain, plus evening currents in the east. Wind is not a problem today (3–9 kt now, easing to 3–7 kt by 10 AM). Showers are light to moderate, wettest around noon to 3 PM on the west and central grounds, ~10.7 mm for the day. Currents are favorable now but build to 1.0–1.3 kt at Decabaitot, Tara, Turda and Alava around 6–10 PM.",
  "pagasa": {
   "status": "CLEAR",
-  "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest entries Mon ~5:30 AM PHT are gale advisories for Central Luzon, CALABARZON and Western Visayas only)"
+  "detail": "PAGASA: CLEAR · nothing active for Calamian / MIMAROPA (latest entries Mon ~5:30 PM PHT are final gale advisories for Central Luzon and CALABARZON only)"
  },
  "changed": {
-  "title": "⚠️ What changed since this morning",
+  "title": "⚠️ What changed since yesterday afternoon",
   "items": [
-   "Wed 14 slipped from GOOD to MARGINAL. It's still the calmest day (4.4 kt, gusts 10), but rain rose to ~8.5 mm (was ~5.2 mm). The 48h supply outlook drops from ABOVE NORMAL to NORMAL, softening.",
-   "Fri 16 also dropped to MARGINAL (10 kt, gusts 13). It was GOOD this morning.",
-   "Shortage risk is up from MILD to ELEVATED , Mon to Sat. Thu 15 is now the only GOOD weekday (9.5 kt, ~4.6 mm), then Sun 18 GOOD. Sat 17 eased a little (10 kt, was 11), and today is now the worst day (11 kt, gusts 16, ~11.1 mm)."
+   "Thu 15 dropped from GOOD to MARGINAL and is now the worst day of the week (11 kt, gusts 18, ~9.0 mm). It was the only GOOD weekday, so the Thursday supply refill is gone. The 3-day outlook drops from ABOVE NORMAL to NORMAL, softening.",
+   "Today got a lot calmer. 11 of 13 grounds are GOOD right now (yesterday afternoon: 0 of 13). Wind is 3–9 kt, gusts ≤13, all in the Good class.",
+   "Shortage risk stays ELEVATED and now runs Tue → Mon 19. Sun 18 is the only GOOD day ahead (4.5 kt). GFS now agrees with ECMWF (yesterday it was lighter and wetter)."
   ]
  },
  "supply": [
   {
-   "label": "Today Mon",
+   "label": "Today Tue",
    "value": "🟡 NORMAL → softening",
-   "note": "Sunday's reduced catch is landing today",
+   "note": "Monday's MARGINAL catch is landing today",
    "tone": "ok"
   },
   {
-   "label": "24h Tue 13",
+   "label": "24h Wed 14",
+   "value": "🟡 NORMAL → softening",
+   "note": "Today's calmer grounds should cushion it a little",
+   "tone": "ok"
+  },
+  {
+   "label": "48h Thu 15",
    "value": "🟠 Softening",
-   "note": "Today's reduced catch lands; Tue fishing also MARGINAL",
+   "note": "Wednesday's rain-reduced catch lands",
    "tone": "warn"
   },
   {
-   "label": "48h Wed 14",
+   "label": "3d Fri 16",
    "value": "🟠 Softening · thinnest point ▼",
-   "note": "Downgraded from ABOVE NORMAL · third REDUCED day in a row",
+   "note": "Downgraded from ABOVE NORMAL · Thursday's rough-day catch lands",
    "tone": "warn"
-  },
-  {
-   "label": "3d Thu 15",
-   "value": "🟢 ABOVE NORMAL",
-   "note": "Only GOOD weekday · arrivals late Thu into Fri",
-   "tone": "good"
   },
   {
    "label": "5–7d",
-   "value": "🟡 Fri–Sat dip · 🟢 Sun GOOD",
-   "note": "Weaker Fri–Sat catch shows as softer supply Sat–Sun",
-   "tone": "ok"
+   "value": "🟡 Sat soft · 🟢 Sun–Mon refill",
+   "note": "Sunday's GOOD day lands Sun–Mon as ABOVE NORMAL",
+   "tone": "good"
   }
  ],
- "shortageRisk": "No surge. Shortage risk ELEVATED Mon → Sat (was MILD). Supply should be thinnest Tue–Wed, with a one-day refill from Thursday's catch.",
+ "shortageRisk": "No surge. Shortage risk ELEVATED Tue → Mon (extended from Mon → Sat). With Thursday gone, there's no midweek refill: supply should stay soft through Saturday, thinnest around Fri.",
  "bestWindow": {
-  "headline": "Today ~4–6 PM · Tue ~3–6 AM",
+  "headline": "Today ~3–5 PM · Wed ~midnight–5 AM",
   "details": [
-   "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build.",
-   "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+   "~3–5 PM today: wind 2–7 kt, showers ≤0.4 mm/h, currents ≤0.5 kt on every ground. Finish the east grounds (Decabaitot, Tara, Turda, Alava) by ~5 PM before currents build.",
+   "Wed ~midnight–5 AM: wind 1–7 kt, currents ≤0.5 kt, showers ≤0.6 mm/h. The model's single best hour is Wed ~midnight at Coron and Decabobo. Late morning (~10 AM–noon) also works on the west grounds before the midday showers."
   ]
  },
  "turningPoint": {
-  "date": "2026-10-15",
-  "day": "Thu",
+  "date": "2026-10-18",
+  "day": "Sun",
   "from": "MARGINAL",
   "to": "GOOD"
  },
  "worstDay": {
-  "date": "2026-10-12",
-  "day": "Mon",
+  "date": "2026-10-15",
+  "day": "Thu",
   "windKt": "11",
-  "gustKt": "16",
-  "rain": "Moderate (11.1 mm)"
+  "gustKt": "18",
+  "rain": "Moderate (9.0 mm)"
  },
  "sevenDay": [
-  {
-   "date": "2026-10-12",
-   "day": "Mon",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "11",
-   "gustKt": "16",
-   "rain": "Moderate (11.1 mm)",
-   "flags": [
-    "WORST",
-    "SHORTAGE"
-   ]
-  },
   {
    "date": "2026-10-13",
    "day": "Tue",
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.3",
+   "windKt": "8.2",
    "gustKt": "12",
-   "rain": "Moderate (9.5 mm)",
+   "rain": "Moderate (10.7 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -104,25 +90,26 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "4.4",
-   "gustKt": "9.7",
-   "rain": "Moderate (8.5 mm)",
+   "windKt": "6.0",
+   "gustKt": "13",
+   "rain": "Moderate (9.6 mm)",
    "flags": [
-    "BEST",
     "SHORTAGE"
    ]
   },
   {
    "date": "2026-10-15",
    "day": "Thu",
-   "fishing": "GOOD",
-   "activity": "HIGH",
-   "supply": "ABOVE NORMAL",
-   "windKt": "9.5",
-   "gustKt": "17",
-   "rain": "Light (4.6 mm)",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "11",
+   "gustKt": "18",
+   "rain": "Moderate (9.0 mm)",
    "flags": [
-    "TURNING"
+    "WORST",
+    "TURNING",
+    "SHORTAGE"
    ]
   },
   {
@@ -131,9 +118,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "10",
-   "gustKt": "13",
-   "rain": "Light (3.4 mm)",
+   "windKt": "9.9",
+   "gustKt": "17",
+   "rain": "Moderate (13.4 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -144,9 +131,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "10",
+   "windKt": "11",
    "gustKt": "17",
-   "rain": "Moderate (6.1 mm)",
+   "rain": "Moderate (6.3 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -157,40 +144,56 @@
    "fishing": "GOOD",
    "activity": "HIGH",
    "supply": "ABOVE NORMAL",
-   "windKt": "6.1",
-   "gustKt": "12",
-   "rain": "Moderate (6.8 mm)",
+   "windKt": "4.5",
+   "gustKt": "13",
+   "rain": "Moderate (6.5 mm)",
    "flags": []
+  },
+  {
+   "date": "2026-10-19",
+   "day": "Mon",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "3.5",
+   "gustKt": "12",
+   "rain": "Moderate (9.0 mm)",
+   "flags": [
+    "BEST",
+    "SHORTAGE"
+   ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Mon 12 Oct 2:22 PM PHT. “Now” = 2 PM; range = next 24h (to Tue 1 PM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Tue 13 Oct 6:20 AM PHT. “Now” = 6 AM; range = next 24h (to Wed 5 AM).",
  "areas": [
   {
    "id": "coron",
    "name": "Coron",
    "lat": 11.9988,
    "lng": 120.206,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "NNE",
-    "range24h": "0.0–0.6",
+    "kt": 0.2,
+    "dir": "E",
+    "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.0,
-    "dir": "ESE",
-    "gustKt": 15.6,
+    "kt": 4.5,
+    "dir": "NE",
+    "gustKt": 9.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
-    "modelBestHour": "Tue 07"
+    "report": [
+     "Wed ~midnight–5 AM: wind 1–7 kt, currents ≤0.5 kt, showers ≤0.6 mm/h. The model's single best hour is Wed ~midnight at Coron and Decabobo. Late morning (~10 AM–noon) also works on the west grounds before the midday showers."
+    ],
+    "modelBestHour": "Wed 00"
    }
   },
   {
@@ -198,27 +201,27 @@
    "name": "Culion",
    "lat": 11.8905,
    "lng": 120.022,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "NNW",
-    "range24h": "0.1–0.7",
+    "kt": 0.3,
+    "dir": "SE",
+    "range24h": "0.0–0.7",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.0,
-    "dir": "ESE",
-    "gustKt": 15.6,
+    "kt": 4.5,
+    "dir": "NE",
+    "gustKt": 9.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 17"
+    "modelBestHour": "Tue 15"
    }
   },
   {
@@ -226,27 +229,27 @@
    "name": "Linapacan",
    "lat": 11.491,
    "lng": 119.8682,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
     "kt": 0.4,
-    "dir": "N",
-    "range24h": "0.2–0.7",
+    "dir": "E",
+    "range24h": "0.1–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.8,
-    "dir": "ESE",
-    "gustKt": 12.6,
+    "kt": 5.5,
+    "dir": "ENE",
+    "gustKt": 8.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 23"
+    "modelBestHour": "Tue 15"
    }
   },
   {
@@ -254,29 +257,29 @@
    "name": "Tara",
    "lat": 12.2729,
    "lng": 120.3641,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "NE",
-    "range24h": "0.2–0.8",
+    "kt": 0.4,
+    "dir": "ESE",
+    "range24h": "0.3–1.0",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.9,
-    "dir": "SE",
-    "gustKt": 14.2,
+    "kt": 3.3,
+    "dir": "E",
+    "gustKt": 6.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build."
+     "~3–5 PM today: wind 2–7 kt, showers ≤0.4 mm/h, currents ≤0.5 kt on every ground. Finish the east grounds (Decabaitot, Tara, Turda, Alava) by ~5 PM before currents build."
     ],
-    "modelBestHour": "Tue 12"
+    "modelBestHour": "Tue 11"
    }
   },
   {
@@ -284,27 +287,27 @@
    "name": "Nangalao",
    "lat": 11.4362,
    "lng": 120.1636,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "NNW",
+    "kt": 0.2,
+    "dir": "NE",
     "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 9.1,
-    "dir": "ESE",
-    "gustKt": 15.6,
+    "kt": 8.4,
+    "dir": "ENE",
+    "gustKt": 11.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 17"
+    "modelBestHour": "Tue 15"
    }
   },
   {
@@ -312,27 +315,27 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "NW",
-    "range24h": "0.1–0.3",
+    "kt": 0.2,
+    "dir": "NE",
+    "range24h": "0.1–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.4,
-    "dir": "ESE",
-    "gustKt": 14.8,
+    "kt": 7.2,
+    "dir": "ENE",
+    "gustKt": 9.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 23"
+    "modelBestHour": "Tue 15"
    }
   },
   {
@@ -342,28 +345,27 @@
    "lng": 119.9629,
    "rating": "MARGINAL",
    "current": {
-    "kt": 0.2,
-    "dir": "NW",
-    "range24h": "0.0–1.2",
-    "status": "Favorable",
+    "kt": 0.5,
+    "dir": "SE",
+    "range24h": "0.2–1.3",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.4,
-    "dir": "ESE",
-    "gustKt": 14.8,
+    "kt": 7.2,
+    "dir": "ENE",
+    "gustKt": 9.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build.",
-     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+     "~3–5 PM today: wind 2–7 kt, showers ≤0.4 mm/h, currents ≤0.5 kt on every ground. Finish the east grounds (Decabaitot, Tara, Turda, Alava) by ~5 PM before currents build."
     ],
-    "modelBestHour": "Tue 03"
+    "modelBestHour": "Wed 01"
    }
   },
   {
@@ -374,15 +376,15 @@
    "rating": "MARGINAL",
    "current": {
     "kt": 0.3,
-    "dir": "NW",
-    "range24h": "0.0–0.9",
+    "dir": "SE",
+    "range24h": "0.1–1.0",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.2,
-    "dir": "ESE",
-    "gustKt": 15.9,
+    "kt": 6.7,
+    "dir": "ENE",
+    "gustKt": 11.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -391,9 +393,9 @@
    },
    "bestWindow": {
     "report": [
-     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+     "~3–5 PM today: wind 2–7 kt, showers ≤0.4 mm/h, currents ≤0.5 kt on every ground. Finish the east grounds (Decabaitot, Tara, Turda, Alava) by ~5 PM before currents build."
     ],
-    "modelBestHour": "Tue 13"
+    "modelBestHour": "Wed 00"
    }
   },
   {
@@ -401,27 +403,27 @@
    "name": "Galoc",
    "lat": 11.9273,
    "lng": 119.8768,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "NNW",
-    "range24h": "0.1–0.4",
+    "kt": 0.1,
+    "dir": "E",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.0,
-    "dir": "ESE",
-    "gustKt": 15.6,
+    "kt": 4.5,
+    "dir": "NE",
+    "gustKt": 9.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Tue 07"
+    "modelBestHour": "Tue 23"
    }
   },
   {
@@ -429,27 +431,27 @@
    "name": "Maglalambay",
    "lat": 11.9935,
    "lng": 119.8684,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "NNW",
-    "range24h": "0.1–0.4",
+    "kt": 0.1,
+    "dir": "E",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 9.5,
-    "dir": "ESE",
-    "gustKt": 15.6,
+    "kt": 8.9,
+    "dir": "ENE",
+    "gustKt": 12.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Tue 10"
+    "modelBestHour": "Wed 00"
    }
   },
   {
@@ -457,27 +459,27 @@
    "name": "Ciron",
    "lat": 11.7804,
    "lng": 120.0837,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.4,
-    "dir": "NW",
-    "range24h": "0.0–0.4",
+    "kt": 0.1,
+    "dir": "E",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 9.5,
-    "dir": "ESE",
-    "gustKt": 18.5,
+    "kt": 6.9,
+    "dir": "ENE",
+    "gustKt": 11.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 17"
+    "modelBestHour": "Wed 00"
    }
   },
   {
@@ -485,29 +487,29 @@
    "name": "Decabobo",
    "lat": 12.1295,
    "lng": 120.2089,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.3,
-    "dir": "NNE",
+    "kt": 0.1,
+    "dir": "E",
     "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.9,
-    "dir": "SE",
-    "gustKt": 14.2,
+    "kt": 3.3,
+    "dir": "E",
+    "gustKt": 6.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Tue ~3–6 AM: wind 4–8 kt, currents ≤0.6 kt, light showers 0.5–0.8 mm/h. Avoid Decabaitot and Alava 7–10 AM Tue (0.9–1.2 kt). Model's single best hour is Tue ~noon at Decabobo."
+     "Wed ~midnight–5 AM: wind 1–7 kt, currents ≤0.5 kt, showers ≤0.6 mm/h. The model's single best hour is Wed ~midnight at Coron and Decabobo. Late morning (~10 AM–noon) also works on the west grounds before the midday showers."
     ],
-    "modelBestHour": "Tue 12"
+    "modelBestHour": "Tue 11"
    }
   },
   {
@@ -515,29 +517,29 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "current": {
-    "kt": 0.2,
-    "dir": "NNE",
-    "range24h": "0.0–0.8",
+    "kt": 0.3,
+    "dir": "SE",
+    "range24h": "0.1–1.0",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.9,
-    "dir": "SE",
-    "gustKt": 14.2,
+    "kt": 3.3,
+    "dir": "E",
+    "gustKt": 6.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "~4–6 PM today: wind easing to 6–9 kt, showers ≤0.5 mm/h, currents ≤0.5 kt on every ground. Wrap up the east grounds (Tara, Turda, Decabaitot) before ~6 PM when currents build."
+     "~3–5 PM today: wind 2–7 kt, showers ≤0.4 mm/h, currents ≤0.5 kt on every ground. Finish the east grounds (Decabaitot, Tara, Turda, Alava) by ~5 PM before currents build."
     ],
-    "modelBestHour": "Tue 12"
+    "modelBestHour": "Tue 11"
    }
   }
  ],
