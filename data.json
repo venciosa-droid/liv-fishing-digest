@@ -167,6 +167,7 @@
    "lat": 11.9988,
    "lng": 120.206,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.2,
     "dir": "W",
@@ -197,6 +198,7 @@
    "lat": 11.8905,
    "lng": 120.022,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "WSW",
@@ -227,6 +229,7 @@
    "lat": 11.491,
    "lng": 119.8682,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "W",
@@ -255,6 +258,7 @@
    "lat": 12.2729,
    "lng": 120.3641,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.6,
     "dir": "SE",
@@ -285,6 +289,7 @@
    "lat": 11.4362,
    "lng": 120.1636,
    "rating": "POOR",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "W",
@@ -315,6 +320,7 @@
    "lat": 11.3839,
    "lng": 120.0969,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "W",
@@ -345,6 +351,7 @@
    "lat": 11.6483,
    "lng": 119.9629,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.4,
     "dir": "WSW",
@@ -375,6 +382,7 @@
    "lat": 11.7363,
    "lng": 119.9312,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "WSW",
@@ -403,6 +411,7 @@
    "lat": 11.9273,
    "lng": 119.8768,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "WNW",
@@ -433,6 +442,7 @@
    "lat": 11.9935,
    "lng": 119.8684,
    "rating": "GOOD",
+   "ratingSource": "report",
    "current": {
     "kt": 0.3,
     "dir": "WNW",
@@ -463,6 +473,7 @@
    "lat": 11.7804,
    "lng": 120.0837,
    "rating": "MARGINAL",
+   "ratingSource": "report",
    "current": {
     "kt": 0.4,
     "dir": "W",
@@ -493,6 +504,7 @@
    "lat": 12.1295,
    "lng": 120.2089,
    "rating": "GOOD",
+   "ratingSource": "report",
    "current": {
     "kt": 0.0,
     "dir": "E",
@@ -523,6 +535,7 @@
    "lat": 12.0959,
    "lng": 120.3073,
    "rating": "GOOD",
+   "ratingSource": "report",
    "current": {
     "kt": 0.4,
     "dir": "SE",
@@ -546,6 +559,36 @@
     ],
     "modelBestHour": "Sat 14"
    }
+  },
+  {
+   "id": "binudac",
+   "name": "Binudac",
+   "lat": 11.819,
+   "lng": 119.901,
+   "rating": "GOOD",
+   "ratingSource": "live model rules (same as /api/live for all grounds)",
+   "current": {
+    "kt": 0.3,
+    "dir": "SSW",
+    "range24h": "0.2–0.4",
+    "status": "Favorable",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 3.7,
+    "dir": "E",
+    "gustKt": 8.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Sat 20"
+   },
+   "note": "Not in this report. Figures from live refresh 17 Oct 2026 · 6:14 PM PHT"
   }
  ],
  "sources": {

@@ -49,7 +49,7 @@ fetch('data.json?'+Date.now()).then(r=>r.json()).then(D=>{
   <tr><td>🌊 Current</td><td><b>${v(a.current.kt,' kt')}</b> toward ${E(a.current.dir)} · ${E(a.current.status)}<br><span class="fn">24h range ${v(a.current.range24h,' kt')} · Open-Meteo Marine (not ECMWF)</span></td></tr>
   <tr><td>💨 Wind</td><td>${v(a.wind.kt,' kt')} ${E(a.wind.dir)}, gust ${v(a.wind.gustKt,' kt')} <span class="fn">ECMWF</span></td></tr>
   <tr><td>🌧️ Rain</td><td>${E(a.rain.intensity)} <span class="fn">ECMWF</span></td></tr>
-  <tr><td>🎣 Best</td><td>${rep}<br><span class="fn">Model best hour: ${E(bw.modelBestHour)}</span></td></tr></table></div>`,{maxWidth:300});
+  ${a.note?`<tr><td colspan=2 style="color:#b45309"><b>ⓘ ${E(a.note)}</b></td></tr>`:''}${a.ratingSource&&a.ratingSource!=='report'&&!a.note?'':''}<tr><td>🎣 Best</td><td>${rep}<br><span class="fn">Model best hour: ${E(bw.modelBestHour)}</span></td></tr></table></div>`,{maxWidth:300});
   if(a.current.kt!=null&&DIR[a.current.dir]!=null){const sz=14+a.current.kt*22;
    L.marker([a.lat,a.lng],{interactive:false,icon:L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
    html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}});
