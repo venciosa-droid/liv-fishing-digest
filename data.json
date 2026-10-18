@@ -627,7 +627,37 @@
     "report": null,
     "modelBestHour": "Sun 21"
    },
-   "note": "Not in this report. Figures from live refresh 18 Oct 2026 · 7:05 PM PHT"
+   "note": "Not in this report. Figures from live refresh 18 Oct 2026 · 7:16 PM PHT"
+  },
+  {
+   "id": "barangonan",
+   "name": "Barangonan",
+   "lat": 11.3443,
+   "lng": 119.6945,
+   "rating": "POOR",
+   "ratingSource": "live model rules (same as /api/live for all grounds)",
+   "current": {
+    "kt": 0.2,
+    "dir": "S",
+    "range24h": "0.0–0.5",
+    "status": "Favorable",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 15.7,
+    "dir": "ENE",
+    "gustKt": 20.4,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "Moderate",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Mon 17"
+   },
+   "note": "Not in this report. Figures from live refresh 18 Oct 2026 · 7:16 PM PHT"
   }
  ],
  "sources": {
