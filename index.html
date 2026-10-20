@@ -167,7 +167,7 @@ async function refresh(why='manual',{live=true}={}){
   if(txt!==Dsig){const first=!D;D=JSON.parse(txt);newReport=!first;Dsig=txt;renderText();if(first){renderMap();fit();setTimeout(fit,300)}}}
  catch(e){if(!D){$('status').textContent='Data UNAVAILABLE ('+e.message+')';busy=false;setBtn('idle','retry');return}}
  if(live){const ids=D.areas.map(a=>a.id).join(',');
-  if(LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
+  if(why=='manual'&&LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
   else{try{const L2=await fetchLive(D.areas);if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}else LIVEERR=[L2.ecmwfErr,L2.marineErr].join('; ');
     if(L2.ecmwf&&L2.marine)try{localStorage.setItem(CACHE_KEY,JSON.stringify(L2))}catch(_){}}
    catch(e){LIVEERR=e.message}}}
