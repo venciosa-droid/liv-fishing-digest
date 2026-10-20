@@ -6,11 +6,18 @@
 *{box-sizing:border-box}body{margin:0;font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0d1b26;color:#e8f1f7}
 a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
 .top .brand{font-weight:700;font-size:16px;margin-right:auto}.top nav a{margin-left:10px;white-space:nowrap}
+#rf{order:3;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-width:104px;min-height:40px;padding:4px 12px;border:1px solid #8fd3ff;border-radius:10px;background:#11557e;color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer;line-height:1.15}
+#rf:hover{background:#176a9c}#rf:disabled{opacity:.8;cursor:wait}#rf small{font-weight:400;font-size:11px;color:#bfe6ff;white-space:nowrap}
+#rf .ic{display:inline-block}#rf.busy .ic{animation:spin 0.9s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.top nav{order:2}
+@media(max-width:640px){.pill{white-space:normal}.top nav{order:4;width:100%}.top nav a:first-child{margin-left:0}#rf{order:2}}
 .status{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#102a3a}
-.pill{background:#18394d;border-radius:14px;padding:3px 10px;white-space:nowrap}.pill b{color:#fff}
+.pill{background:#18394d;border-radius:14px;padding:3px 10px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}.pill b{color:#fff}.pill.live{background:#14532d}.pill.live b{color:#d1fae5}
+.livebar{padding:6px 12px;font-size:12.5px;background:#0f2433;border-bottom:1px solid #1c3b50}.livebar.ok{color:#a7f3d0}.livebar.warn{color:#fed7aa;background:#3b2412}.livebar.part{color:#fde68a;background:#33290f}
 .wrap{display:grid;grid-template-columns:1fr;gap:10px;padding:10px}.side{display:flex;flex-direction:column;gap:10px}
 #map{height:62vh;min-height:340px;border-radius:10px}
-.card{background:#132e40;border-radius:10px;padding:10px 12px}.card h2{font-size:15px;margin:0 0 8px}
+.card{background:#132e40;border-radius:10px;padding:10px 12px}.card h2{font-size:15px;margin:0 0 8px}.card h2 .rs{font-weight:400;font-size:11px;opacity:.7;margin-left:6px}
+.rep{background:#122636;border:1px dashed #2b5470;border-radius:10px;padding:8px 12px;font-size:12.5px;opacity:.95}
 .bar{display:flex;gap:8px;align-items:stretch;margin:5px 0;border-radius:6px;overflow:hidden;background:#0e2333}
 .bar .d{min-width:84px;padding:6px;font-weight:600;color:#fff}.bar .v{padding:6px}.bar .x{font-size:12px;opacity:.8}
 .t-good .d{background:#1f8a4c}.t-ok .d{background:#a88a12}.t-warn .d{background:#c2611b}.t-bad .d{background:#b3261e}
@@ -18,53 +25,165 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .day b{display:block;font-size:12px}.day .r{font-size:16px}.fn{font-size:12px;opacity:.75}
 .lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:600;text-shadow:0 0 3px #000,0 0 3px #000;font-size:11px;padding:0}
 .lbl:before{display:none}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
-.leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}
+.leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}.pop .srcl{font-size:11px;color:#475569}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-@media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 140px)}.side{height:calc(100vh - 110px);overflow:auto}}
+@media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 170px)}.side{height:calc(100vh - 140px);overflow:auto}}
 </style></head><body>
-<div class="top"><span class="brand">🐠 LIV Fishing &amp; Supply</span><nav><a href="digest.html">Full report</a><a href="latest.png">Image</a><a href="archive/">Archive</a></nav></div>
+<div class="top"><span class="brand">🐠 LIV Fishing &amp; Supply</span><nav><a href="digest.html">Full report</a><a href="latest.png">Image</a><a href="archive/">Archive</a></nav>
+<button id="rf" type="button" title="Check for a new report and pull live ECMWF wind/rain + Open-Meteo Marine currents"><span><span class="ic">↻</span> <span id="rfl">Refresh</span></span><small id="rft">Auto every hour</small></button></div>
 <div class="status" id="status">Loading…</div>
+<div class="livebar" id="livebar">Loading…</div>
 <div class="wrap">
 <div><div id="map"></div><div class="ctl"><label><input type="checkbox" id="arr" checked> Current arrows</label><label><input type="checkbox" id="lab" checked> Labels</label></div></div>
-<div class="side"><div class="card"><h2>📦 Supply forecast</h2><div id="supply"></div><p class="fn" id="risk"></p></div>
-<div class="card"><h2>🎣 Best fishing window</h2><div id="win"></div></div>
-<div class="card"><h2>↪️ Turning point &amp; worst day</h2><div id="turn"></div></div>
-<div class="card"><h2>📅 7-day (ECMWF wind/gust/rain)</h2><div class="days" id="days"></div></div>
-<div class="card"><h2 id="chgT">What changed</h2><div id="chg"></div><p class="fn" id="src"></p></div>
+<div class="side"><div class="rep" id="repnote"></div>
+<div class="card"><h2>📦 Supply forecast<span class="rs">from report</span></h2><div id="supply"></div><p class="fn" id="risk"></p></div>
+<div class="card"><h2>🎣 Best fishing window<span class="rs">from report</span></h2><div id="win"></div></div>
+<div class="card"><h2>↪️ Turning point &amp; worst day<span class="rs">from report</span></h2><div id="turn"></div></div>
+<div class="card"><h2>📅 7-day (ECMWF wind/gust/rain)<span class="rs">from report</span></h2><div class="days" id="days"></div></div>
+<div class="card"><h2><span id="chgT">What changed</span><span class="rs">from report</span></h2><div id="chg"></div><p class="fn" id="src"></p></div>
 </div></div>
 <script>
-const U='UNAVAILABLE',E=s=>String(s??U).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626'},EM={GOOD:'🟢',MARGINAL:'🟡',POOR:'🟠',BAD:'🔴'};
+const U='UNAVAILABLE',E=s=>String(s??U).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY POOR':'#dc2626'},EM={GOOD:'🟢',MARGINAL:'🟡',POOR:'🟠',BAD:'🔴','VERY POOR':'🔴'};
 const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
-const v=(x,u='')=>x==null||x===''?U:x+u;
-fetch('data.json?'+Date.now()).then(r=>r.json()).then(D=>{
- document.getElementById('status').innerHTML=[['🕑',D.reportTime],['Fishing',(EM[(D.overall||'').split(' ')[0]]||'')+' '+D.overall],['Limiter',D.limiter],['Confidence',D.confidence],['PAGASA',D.pagasa.status]].map(([k,x])=>`<span class="pill">${k}: <b>${E(x)}</b></span>`).join('');
- const map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
- const arrows=L.layerGroup().addTo(map),pts=[];
- D.areas.forEach(a=>{const c=COL[a.rating]||'#94a3b8';pts.push([a.lat,a.lng]);
-  const m=L.circleMarker([a.lat,a.lng],{radius:10,color:'#fff',weight:2,fillColor:c,fillOpacity:.95}).addTo(map);
-  m.bindTooltip(a.name,{permanent:true,direction:'right',offset:[10,0],className:'lbl'});
-  const bw=a.bestWindow||{},rep=(bw.report||[]).map(E).join('<br>')||'See overall best window';
-  m.bindPopup(`<div class="pop"><h3>${EM[a.rating]||'⚪'} ${E(a.name)} · ${E(a.rating)}</h3><table>
-  <tr><td>🌊 Current</td><td><b>${v(a.current.kt,' kt')}</b> toward ${E(a.current.dir)} · ${E(a.current.status)}<br><span class="fn">24h range ${v(a.current.range24h,' kt')} · Open-Meteo Marine (not ECMWF)</span></td></tr>
-  <tr><td>💨 Wind</td><td>${v(a.wind.kt,' kt')} ${E(a.wind.dir)}, gust ${v(a.wind.gustKt,' kt')} <span class="fn">ECMWF</span></td></tr>
-  <tr><td>🌧️ Rain</td><td>${E(a.rain.intensity)} <span class="fn">ECMWF</span></td></tr>
-  ${a.note?`<tr><td colspan=2 style="color:#b45309"><b>ⓘ ${E(a.note)}</b></td></tr>`:''}${a.ratingSource&&a.ratingSource!=='report'&&!a.note?'':''}<tr><td>🎣 Best</td><td>${rep}<br><span class="fn">Model best hour: ${E(bw.modelBestHour)}</span></td></tr></table></div>`,{maxWidth:300});
+const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
+const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
+const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livLiveV1';
+/* ---------- rating rules: faithful port of server.py (current/wind/rain classes, worst-of) ---------- */
+const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
+const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
+const num=x=>{if(x==null)return null;const f=Number(x);return Number.isFinite(f)?f:null},r1=x=>x==null?null:Math.round(x*10)/10;
+const toKt=(val,unit)=>{if(val==null)return null;const u=(unit||'').toLowerCase().trim();if(['kn','kt','knots'].includes(u))return val;if(['m/s','ms','m s-1'].includes(u))return val*MS_TO_KT;return val*KMH_TO_KT};
+const compass=d=>d==null?'—':['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.floor((d+11.25)/22.5)%16];
+const curClass=k=>k==null?U:k<0.5?'Favorable':k<0.9?'Moderate':k<1.5?'Strong':'Very Strong';
+const windClass=k=>k==null?U:k<=10?'Good':k<=15?'Marginal':k<=20?'Poor':'Very Poor';
+const rainClass=m=>m==null?U:m<1?'Light':m<=5?'Moderate':'Heavy';
+const rankOf=l=>RANK[String(l).toUpperCase()]??2;
+const fishing=(c,w,r)=>{const x=Math.max(rankOf(c),rankOf(w),rankOf(r));return x<=1?'GOOD':x==2?'MARGINAL':x==3?'POOR':'VERY POOR'};
+const hourScore=(w,c,r)=>{let s=0;if(w==null)s+=3;else{s+=Math.max(0,w-2)*.8;if(w>10)s+=(w-10)*1.5}if(c==null)s+=1.5;else{s+=c*4;if(c>=1.5)s+=3}if(r==null)s+=1;else{s+=r*2;if(r>5)s+=4}return s};
+const tPHT=t=>Date.parse(t+(t.length<=16?':00':'')+'+08:00');  // Open-Meteo times are requested in Asia/Manila
+const nowIdx=(times,now)=>{let b=0,bd=null;times.forEach((t,i)=>{const d=Math.abs(tPHT(t)-now);if(bd==null||d<bd){bd=d;b=i}});return b};
+const rain3=(p,i)=>{const vals=[];for(let j=Math.max(0,i-2);j<=i;j++){const x=num(p[j]);if(x!=null)vals.push(x)}return vals.length?vals.reduce((a,b)=>a+b,0):null};
+const labHour=t=>{const d=new Date(tPHT(t));return d.toLocaleDateString('en-US',{weekday:'short',timeZone:'Asia/Manila'})+' '+t.slice(11,13)};
+const fmtPHT=ms=>new Date(ms).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+const fmtLocal=ms=>new Date(ms).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+/* ---------- state ---------- */
+let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0;
+function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
+ const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;return Date.UTC(+m[3],mo,+m[1],h-8,+m[5])}
+/* ---------- live fetch (browser -> Open-Meteo, ONE batched request per API) ---------- */
+async function getJSON(url){let r;try{r=await fetch(url,{cache:'no-store'})}catch(e){throw new Error('network error or blocked')}if(r.status==429)throw new Error('Open-Meteo rate limit (HTTP 429)');
+ if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j&&j.error)throw new Error(j.reason||'API error');return Array.isArray(j)?j:[j]}
+async function fetchLive(areas){
+ const lat=areas.map(a=>a.lat).join(','),lon=areas.map(a=>a.lng).join(',');
+ const eq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',cell_selection:'sea'});
+ const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3'});
+ const [e,m]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq)]);
+ const ok=(r)=>r.status=='fulfilled'&&r.value.length==areas.length;
+ return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf:ok(e)?e.value:null,marine:ok(m)?m.value:null,
+  ecmwfErr:ok(e)?null:'ECMWF: '+(e.reason?.message||'unexpected response'),marineErr:ok(m)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
+function computeLive(a,i,L){
+ const now=L.at,out={};const ec=L.ecmwf&&L.ecmwf[i],ma=L.marine&&L.marine[i];
+ let times=[],ni=0,ws=[],rs=[],cs=[];
+ if(ec&&ec.hourly){const h=ec.hourly;times=h.time||[];ni=nowIdx(times,now);const p=h.precipitation||[];
+  const r3=rain3(p,ni);out.wind={kt:r1(num(h.wind_speed_10m?.[ni])),dir:compass(num(h.wind_direction_10m?.[ni])),gustKt:r1(num(h.wind_gusts_10m?.[ni])),source:'ECMWF via Open-Meteo'};
+  out.rain={intensity:r3==null?U:r3<0.1?'None–Light':rainClass(r3),mm3h:r3==null?null:r1(r3),source:'ECMWF via Open-Meteo'};out.r3=r3;
+  const bump=[];for(let j=ni;j<Math.min(ni+24,p.length);j++){const x=num(p[j]);if(x!=null&&x>=0.3)bump.push(labHour(times[j]))}
+  out.rain.timing=bump.length?bump.slice(0,3).join(', ')+(bump.length>3?'…':''):'Mostly dry next 24h';
+  for(let j=ni;j<Math.min(ni+24,times.length);j++){ws.push(r1(num(h.wind_speed_10m?.[j])));rs.push(r1(num(p[j])))}}
+ if(ma&&ma.hourly){const h=ma.hourly,mt=h.time||[],vel=h.ocean_current_velocity||[],dir=h.ocean_current_direction||[],un=(ma.hourly_units||{}).ocean_current_velocity||'km/h';
+  const mi=nowIdx(mt,now),kt=r1(toKt(num(vel[mi]),un));
+  const nxt=[];for(let j=mi;j<Math.min(mi+24,mt.length);j++){const k=toKt(num(vel[j]),un);if(k!=null)nxt.push(k)}
+  out.current={kt,dir:kt==null?null:compass(num(dir[mi])),status:curClass(kt),range24h:nxt.length?Math.min(...nxt).toFixed(1)+'–'+Math.max(...nxt).toFixed(1):null,source:'Open-Meteo Marine currents'};
+  const mix={};mt.forEach((t,j)=>mix[t]=j);
+  if(times.length){for(let j=ni;j<Math.min(ni+24,times.length);j++){const k=mix[times[j]];cs.push(k==null?null:r1(toKt(num(vel[k]),un)))}}}
+ if(out.wind&&out.current){ // full live rating only when BOTH sources are live (never mix live wind with a stale current)
+  const cc=out.current.status,wc=windClass(out.wind.kt),rc=rainClass(out.r3);out.rating=fishing(cc,wc,rc);
+  const worst=Math.max(rankOf(cc),rankOf(wc),rankOf(rc));out.lim=worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])==worst).map(x=>x[0]):[];
+  let bi=0,bs=null;for(let k=0;k<ws.length;k++){const s=hourScore(ws[k],cs[k]??null,rs[k]);if(bs==null||s<bs){bs=s;bi=k}}
+  out.bestHour=times.length?labHour(times[ni+bi]):null}
+ return out}
+/* ---------- rendering ---------- */
+const RT=()=>String(D.reportTime||U).replace(/ · (morning|afternoon|evening|midday|night)\b.*$/i,'');
+function renderText(){
+ const rt=RT();
+ $('repnote').innerHTML=`📄 Supply, best window, 7-day, what changed &amp; PAGASA are <b>from the ${E(rt)} report</b>. Map pins and the “now” chips update live with <b>↻ Refresh</b>.`;
+ $('supply').innerHTML=(D.supply.length?D.supply:[{label:'Supply',value:U,note:'',tone:'ok'}]).map(b=>`<div class="bar t-${b.tone}"><div class="d">${E(b.label)}</div><div class="v">${E(b.value)}<div class="x">${E(b.note)}</div></div></div>`).join('');
+ $('risk').textContent=D.shortageRisk;
+ $('win').innerHTML=`<b style="font-size:16px">${E(D.bestWindow.headline)}</b>`+D.bestWindow.details.map(p=>`<p>${E(p)}</p>`).join('');
+ const t=D.turningPoint,w=D.worstDay;
+ $('turn').innerHTML=(t?`<p>Rating changes <b>${E(t.day)} ${E(t.date)}</b>: ${E(t.from)} → <b>${E(t.to)}</b></p>`:`<p>No rating change in the 7-day outlook.</p>`)+(w?`<p>Worst day: <b>${E(w.day)} ${E(w.date)}</b> · wind ${E(w.windKt)} kt, gust ${E(w.gustKt)} kt, ${E(w.rain)}</p>`:'')+'<p class="fn">From the ECMWF 7-day ratings in the report.</p>';
+ $('days').innerHTML=D.sevenDay.map(d=>`<div class="day"><b>${E(d.day)}</b>${E((d.date||'').slice(8))}<div class="r">${EM[d.fishing]||'⚪'}</div>${v(d.windKt)}/${v(d.gustKt)} kt<br>${E((d.rain||U).replace(/^.*\((.*)\).*$/,'$1'))}</div>`).join('');
+ $('chgT').textContent=D.changed.title;
+ $('chg').innerHTML=D.changed.items.map(p=>`<p>${E(p)}</p>`).join('')||U;
+ $('src').innerHTML=`${E(D.pagasa.detail)}<br>Wind/rain: ECMWF via Open-Meteo · Currents: Open-Meteo Marine (not ECMWF) · <a href="${E(D.links.zoomSatellite)}">Zoom Earth satellite</a>`}
+function merged(){ // published areas + live overlay (per field), never invented
+ const L=LIVE&&LIVE.ids==D.areas.map(a=>a.id).join(',')?LIVE:null;
+ return D.areas.map((a,i)=>{const x=L?computeLive(a,i,L):{};const live=!!x.rating;
+  return {...a,_lw:!!x.wind,_lc:!!x.current,_live:live,_lim:x.lim||[],wind:x.wind||a.wind,rain:x.rain||a.rain,current:x.current||a.current,
+   rating:live?x.rating:a.rating,bestWindow:{...a.bestWindow,modelBestHour:x.bestHour||a.bestWindow?.modelBestHour},note:live?null:a.note}})}
+function renderMap(){
+ const A=merged(),rep=E(RT()),lt=LIVE?fmtPHT(LIVE.at):null;markers.clearLayers();arrows.clearLayers();pts=[];
+ const showLab=$('lab').checked;
+ A.forEach(a=>{const c=COL[a.rating]||'#94a3b8';pts.push([a.lat,a.lng]);
+  const m=L.circleMarker([a.lat,a.lng],{radius:10,color:'#fff',weight:2,fillColor:c,fillOpacity:.95}).addTo(markers);
+  m.bindTooltip(a.name,{permanent:true,direction:'right',offset:[10,0],className:'lbl'});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
+  const bw=a.bestWindow||{},rp=(bw.report||[]).map(E).join('<br>')||'See overall best window';
+  const tag=f=>f?`<span class="srcl">live ${E(lt)}</span>`:`<span class="srcl">from ${rep} report</span>`;
+  m.bindPopup(`<div class="pop"><h3>${EM[a.rating]||'⚪'} ${E(a.name)} · ${E(a.rating)}</h3><div class="srcl">${a._live?'Rating: live as of '+E(lt)+' (same rules as the report)':'Rating: from the '+rep+' report'}</div><table>
+  <tr><td>🌊 Current</td><td><b>${v(a.current.kt,' kt')}</b> toward ${E(a.current.dir)} · ${E(a.current.status)}<br><span class="fn">24h range ${v(a.current.range24h,' kt')} · Open-Meteo Marine (not ECMWF)</span> ${tag(a._lc)}</td></tr>
+  <tr><td>💨 Wind</td><td>${v(a.wind.kt,' kt')} ${E(a.wind.dir)}, gust ${v(a.wind.gustKt,' kt')} <span class="fn">ECMWF</span> ${tag(a._lw)}</td></tr>
+  <tr><td>🌧️ Rain</td><td>${E(a.rain.intensity)}${a.rain.mm3h!=null?' ('+a.rain.mm3h+' mm/3h)':''} <span class="fn">ECMWF</span> ${tag(a._lw)}${a.rain.timing?'<br><span class="fn">Next 24h: '+E(a.rain.timing)+'</span>':''}</td></tr>
+  ${a.note?`<tr><td colspan=2 style="color:#b45309"><b>ⓘ ${E(a.note)}</b></td></tr>`:''}<tr><td>🎣 Best</td><td>${rp}<br><span class="fn">Model best hour: ${E(bw.modelBestHour)}${a._live?' (live)':''}</span></td></tr></table></div>`,{maxWidth:300});
   if(a.current.kt!=null&&DIR[a.current.dir]!=null){const sz=14+a.current.kt*22;
    L.marker([a.lat,a.lng],{interactive:false,icon:L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
    html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}});
- const fit=()=>{map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})};fit();setTimeout(fit,300);addEventListener('resize',fit);
+ // header chips
+ const liveA=A.filter(a=>a._live),pill=(k,x,cls='')=>`<span class="pill ${cls}">${k}: <b>${E(x)}</b></span>`;let chips=[pill('🕑 Report',D.reportTime)];
+ if(liveA.length){const cnt={};liveA.forEach(a=>cnt[a.rating]=(cnt[a.rating]||0)+1);
+  const sum=['GOOD','MARGINAL','POOR','VERY POOR'].filter(k=>cnt[k]).map(k=>`${EM[k]} ${cnt[k]} ${k.toLowerCase()}`).join(' · ');
+  const lc={};liveA.forEach(a=>a._lim.forEach(f=>lc[f]=(lc[f]||0)+1));const mx=Math.max(0,...Object.values(lc));
+  const lim=mx?Object.keys(lc).filter(k=>lc[k]==mx).join(' + ')+` (${mx} of ${liveA.length} grounds)`:'none — all grounds good';
+  chips.push(pill('Fishing now · live '+fmtPHT(LIVE.at),sum,'live'),pill('Limiter now',lim,'live'),pill('Report outlook',(EM[(D.overall||'').split(' ')[0]]||'')+' '+D.overall))}
+ else chips.push(pill('Fishing',(EM[(D.overall||'').split(' ')[0]]||'')+' '+D.overall+' (report)'),pill('Limiter',D.limiter+' (report)'));
+ chips.push(pill('Confidence',D.confidence),pill('PAGASA',D.pagasa.status+' (report)'));$('status').innerHTML=chips.join('');
+ // live bar
+ const lb=$('livebar'),nx=nextAt?` · Next auto-refresh ${fmtLocal(nextAt)}`:'';
+ if(LIVE&&LIVE.ecmwf&&LIVE.marine){lb.className='livebar ok';lb.innerHTML=`🟢 <b>Live as of ${E(fmtPHT(LIVE.at))}</b> · pins, wind, rain &amp; currents for all ${A.length} grounds (ECMWF wind/rain + Open-Meteo Marine currents, not ECMWF)${nx}`}
+ else if(LIVE&&(LIVE.ecmwf||LIVE.marine)){lb.className='livebar part';lb.innerHTML=`🟡 <b>Partly live (${E(fmtPHT(LIVE.at))})</b>: ${LIVE.ecmwf?'ECMWF wind/rain live':'ECMWF wind/rain live UNAVAILABLE ('+E(LIVE.ecmwfErr)+')'}; ${LIVE.marine?'currents live':'currents live UNAVAILABLE ('+E(LIVE.marineErr)+')'}. Ratings stay from the ${rep} report${nx}`}
+ else if(LIVEERR||(LIVE&&!LIVE.ecmwf&&!LIVE.marine)){lb.className='livebar warn';lb.innerHTML=`⚠️ <b>Live refresh unavailable</b> — showing report from ${rep} (${E(LIVEERR||[LIVE.ecmwfErr,LIVE.marineErr].join('; '))})${nx}`}
+ else{lb.className='livebar';lb.innerHTML=`Showing report from ${rep} (live data snapshot ${E(D.liveSnapshot)}). Tap ↻ Refresh for live conditions${nx}`}}
+function fit(){map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
+function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
+ markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);
  const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Bad<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)';return d};lg.addTo(map);
- document.getElementById('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
- document.getElementById('lab').onchange=e=>map.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));
- document.getElementById('supply').innerHTML=(D.supply.length?D.supply:[{label:'Supply',value:U,note:'',tone:'ok'}]).map(b=>`<div class="bar t-${b.tone}"><div class="d">${E(b.label)}</div><div class="v">${E(b.value)}<div class="x">${E(b.note)}</div></div></div>`).join('');
- document.getElementById('risk').textContent=D.shortageRisk;
- document.getElementById('win').innerHTML=`<b style="font-size:16px">${E(D.bestWindow.headline)}</b>`+D.bestWindow.details.map(p=>`<p>${E(p)}</p>`).join('');
- const t=D.turningPoint,w=D.worstDay;
- document.getElementById('turn').innerHTML=(t?`<p>Rating changes <b>${E(t.day)} ${E(t.date)}</b>: ${E(t.from)} → <b>${E(t.to)}</b></p>`:`<p>No rating change in the 7-day outlook.</p>`)+(w?`<p>Worst day: <b>${E(w.day)} ${E(w.date)}</b> · wind ${E(w.windKt)} kt, gust ${E(w.gustKt)} kt, ${E(w.rain)}</p>`:'')+'<p class="fn">From the ECMWF 7-day ratings.</p>';
- document.getElementById('days').innerHTML=D.sevenDay.map(d=>`<div class="day"><b>${E(d.day)}</b>${E((d.date||'').slice(8))}<div class="r">${EM[d.fishing]||'⚪'}</div>${v(d.windKt)}/${v(d.gustKt)} kt<br>${E((d.rain||U).replace(/^.*\((.*)\).*$/,'$1'))}</div>`).join('');
- document.getElementById('chgT').textContent=D.changed.title;
- document.getElementById('chg').innerHTML=D.changed.items.map(p=>`<p>${E(p)}</p>`).join('')||U;
- document.getElementById('src').innerHTML=`${E(D.pagasa.detail)}<br>Wind/rain: ECMWF via Open-Meteo · Currents: Open-Meteo Marine (not ECMWF) · <a href="${D.links.zoomSatellite}">Zoom Earth satellite</a>`;
-}).catch(e=>{document.getElementById('status').textContent='Data UNAVAILABLE ('+e+')'});
+ $('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
+ $('lab').onchange=e=>markers.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));addEventListener('resize',fit)}
+/* ---------- refresh ---------- */
+function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
+async function refresh(why='manual',{live=true}={}){
+ if(busy)return;busy=true;setBtn('busy','checking…');let newReport=false;
+ try{const r=await fetch('data.json?'+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('data.json HTTP '+r.status);const txt=await r.text();
+  if(txt!==Dsig){const first=!D;D=JSON.parse(txt);newReport=!first;Dsig=txt;renderText();if(first){renderMap();fit();setTimeout(fit,300)}}}
+ catch(e){if(!D){$('status').textContent='Data UNAVAILABLE ('+e.message+')';busy=false;setBtn('idle','retry');return}}
+ if(live){const ids=D.areas.map(a=>a.id).join(',');
+  if(LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
+  else{try{const L2=await fetchLive(D.areas);if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}else LIVEERR=[L2.ecmwfErr,L2.marineErr].join('; ');
+    if(L2.ecmwf&&L2.marine)try{localStorage.setItem(CACHE_KEY,JSON.stringify(L2))}catch(_){}}
+   catch(e){LIVEERR=e.message}}}
+ lastRefresh=Date.now();renderMap();busy=false;
+ setBtn('idle',(LIVE&&(LIVE.ecmwf||LIVE.marine)?'Updated ':'Checked ')+fmtLocal(lastRefresh)+(newReport?' · new report':''))}
+function lastTopOfHour(t=Date.now()){const d=new Date(t);d.setMinutes(0,0,0);return d.getTime()}
+function schedule(){clearTimeout(nextTimer);const d=new Date();d.setHours(d.getHours()+1,0,0,0);nextAt=d.getTime();
+ nextTimer=setTimeout(async()=>{await refresh('hourly');schedule()},nextAt-Date.now()+(Math.random()*20e3));if(D)renderMap()}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible'&&lastRefresh&&lastRefresh<lastTopOfHour()){refresh('missed-hour').then(schedule)}});
+$('rf').onclick=()=>refresh('manual');
+initMap();
+(async()=>{ // first load: published data; live fetch only if the published live snapshot is older than ~1 h
+ try{const c=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');if(c&&Date.now()-c.at<15*60e3)LIVE=c}catch(_){}
+ await refresh('load',{live:false});
+ const snap=D&&parseSnap(D.liveSnapshot),fresh=LIVE&&Date.now()-LIVE.at<LIVE_STALE_MS;
+ if(D&&!fresh&&(!snap||Date.now()-snap>LIVE_STALE_MS))await refresh('load-stale');
+ else if(D)setBtn('idle',(LIVE?'Live ':'Report ')+fmtLocal(LIVE?LIVE.at:(snap||Date.now())));
+ schedule()})();
 </script></body></html>
