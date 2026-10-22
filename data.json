@@ -1,99 +1,80 @@
 {
- "reportTime": "Thu 22 Oct 2026 · ~2:21 PM PHT · afternoon",
+ "reportTime": "Fri 23 Oct 2026 · ~6:15 AM PHT · morning",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "22 Oct 2026 · 2:19 PM PHT",
- "overall": "POOR today, MARGINAL from Friday",
- "limiter": "combination of current and wind",
- "limiterDetail": "The main limiter is a combination of current and wind. Tara, Decabaitot, Alava and Turda run 1.3–1.7 kt now and build to 1.7–2.0 kt around 4–6 PM. ECMWF wind is 11–15 kt now (gusts 17–20), easing to 7–10 kt across most grounds by 9 PM. Rain is negligible today.",
+ "liveSnapshot": "23 Oct 2026 · 6:14 AM PHT",
+ "overall": "MARGINAL today, easing into a dry weekend",
+ "limiter": "current, with wind second",
+ "limiterDetail": "The main limiter is current, with wind second. Decabaitot, Tara, Turda and Alava run 1.3–1.8 kt now and build to 1.5–1.9 kt around 4–6 PM. ECMWF wind is 8–13 kt now, peaking 11–15 kt from 10 AM to 3 PM, then dropping to 5–8 kt by 8–9 PM. Light drizzle this morning (up to 0.5 mm/h), dry tonight.",
  "pagasa": {
   "status": "no gale, wind signal or heavy-rain warning for Calamian / MIMAROPA.",
-  "detail": "PAGASA: no gale, wind signal or heavy-rain warning for Calamian / MIMAROPA. Latest: Tropical Cyclone Warning, Super Typhoon Rosal (Champi) Signal #2 and Signal #1, Thu 22 Oct 10:48 AM PHT, for the far north only. The only other recent item is a Cagayan Valley flood advisory (5:11 AM), which does not cover Palawan. This morning's PAGASA outlook flagged strong to gale-force gusts for most of Luzon and Visayas today and Fri 23."
+  "detail": "PAGASA: no gale, wind signal or heavy-rain warning for Calamian / MIMAROPA. Latest: Tropical Cyclone Warning, Typhoon Rosal (Champi) Signal #2 and Signal #1, Fri 23 Oct 4:52 AM PHT, for the far north. Other recent items are flood advisories for Cagayan Valley (5:39 AM), Ilocos and the Cordillera (final), none covering Palawan."
  },
  "changed": {
-  "title": "⚠️ What changed since this morning",
+  "title": "⚠️ What changed since yesterday afternoon",
   "items": [
-   "No material change: today is still the POOR day. The grounds snapshot moved from 0 GOOD / 9 MARGINAL / 4 POOR / 3 VERY POOR to 0 GOOD / 8 MARGINAL / 6 POOR / 2 VERY POOR. Alava eased to POOR (1.3 kt), while Nangalao dropped to POOR on 14.6 kt wind with gusts to 20. Tara (1.7 kt) and Decabaitot (1.6 kt) stay VERY POOR, and the afternoon current build peaks around 4–6 PM.",
-   "Supply timing is unchanged: arrivals thin out on Fri 23 from today's weak catch, then recover over the weekend. Friday is still MARGINAL (9.7 kt, gusts 15) but now carries a little light rain (~1.7 mm). Sun 25 is still the calmest day (4.1 kt). PAGASA kept Signal #2 on Super Typhoon Rosal for the far north only (10:48 AM PHT); nothing for Palawan."
+   "No material change: Friday is MARGINAL as forecast, with arrivals at their thinnest today. The grounds snapshot is 0 GOOD / 7 MARGINAL / 7 POOR / 2 VERY POOR (was 0 / 8 / 6 / 2). Cabunlawan slipped to POOR on 1.0 kt current and 12.5 kt wind; Decabaitot (1.8 kt) and Tara (1.5 kt) stay VERY POOR.",
+   "Next week shifted: the Mon 26 to Tue 27 rain eased to light (1.1 and 3.5 mm), and the wet day moved to Wed 28 (7.6 mm moderate). Thu 29 is now the windiest day (12 kt, gusts 20). The weekend stays dry and easy (Sat 7.3 kt, Sun 6.6 kt). PAGASA now lists Rosal as a Typhoon (Signal #2 and #1 at 4:52 AM PHT); nothing for Palawan."
   ]
  },
  "supply": [
   {
-   "label": "Today Thu",
-   "value": "🟡 NORMAL, softening ▼",
-   "note": "Wednesday's reduced catch is landing; today's own fishing is POOR (11 kt, gusts 17)",
-   "tone": "ok"
-  },
-  {
-   "label": "24h Fri 23",
+   "label": "Today Fri",
    "value": "🟠 BELOW NORMAL ▼",
-   "note": "Today's weak catch lands. Friday fishing improves to MARGINAL (9.7 kt, light rain)",
+   "note": "Thursday's POOR catch lands today; today's own fishing is MARGINAL (11 kt, gusts 17, light rain)",
    "tone": "warn"
   },
   {
-   "label": "48h Sat 24",
+   "label": "24h Sat 24",
    "value": "🟡 SOFT, recovering ▲",
-   "note": "Friday's MARGINAL catch lands; Saturday eases to 7.4 kt, gusts 12, dry",
+   "note": "Friday's MARGINAL catch, plus tonight's calm evening trips, lands Saturday",
    "tone": "ok"
   },
   {
-   "label": "3d Sun 25",
+   "label": "48h Sun 25",
    "value": "🟡 NORMAL, recovering ▲",
-   "note": "Saturday's catch lands; Sunday is the calmest day (4.1 kt), landing Mon 26",
+   "note": "Saturday's dry, 7 kt catch lands; Sunday also dry (6.6 kt)",
+   "tone": "ok"
+  },
+  {
+   "label": "3d Mon 26",
+   "value": "🟡 NORMAL",
+   "note": "Sunday's catch lands; Monday mostly calm with 1.1 mm light rain",
    "tone": "ok"
   },
   {
    "label": "5–7d",
-   "value": "🟡 NORMAL, softening",
-   "note": "Mon 26 to Tue 27 bring moderate rain (5–7 mm); Wed 28 windier (10 kt, gusts 17). Medium confidence this far out",
+   "value": "🟡 NORMAL, softening late",
+   "note": "Tue 27 lightest wind; Wed 28 moderate rain (7.6 mm) and Thu 29 windier (12 kt, gusts 20) soften arrivals from Thu 29. Medium confidence this far out",
    "tone": "ok"
   }
  ],
- "shortageRisk": "Surge flag OFF (unchanged). Shortage risk stays ELEVATED (guide only), tightest on arrivals Fri 23. Tara, Turda, Decabaitot and Alava run BELOW NORMAL locally on current. Buying from today's landings is still the best move before Friday thins out.",
+ "shortageRisk": "Surge flag OFF (unchanged). Shortage risk stays ELEVATED (guide only), tightest on today's arrivals. Tara, Turda, Decabaitot and Alava stay BELOW NORMAL locally on current. Expect better volume from Saturday; no need to overbuy today at a premium.",
  "bestWindow": {
-  "headline": "Tonight about 9 PM–1 AM, then Friday about 8 AM–1 PM (Coron side)",
+  "headline": "Tonight about 8 PM–2 AM (Coron side), then this morning 9 AM–noon as a second choice",
   "details": [
-   "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt.",
-   "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt.",
+   "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt.",
+   "9 AM–noon today: Coron, Galoc and Linapacan 0.2–0.3 kt, but wind builds to 10–12 kt and drizzle runs 0.3–0.5 mm/h on the Coron side.",
    "Keep boats off Tara and Decabaitot all 24h, and off Turda and Alava this afternoon. Avoid the 4–6 PM current peak everywhere in the south and west."
   ]
  },
- "turningPoint": {
-  "date": "2026-10-23",
-  "day": "Fri",
-  "from": "POOR",
-  "to": "MARGINAL"
- },
+ "turningPoint": null,
  "worstDay": {
-  "date": "2026-10-22",
+  "date": "2026-10-29",
   "day": "Thu",
-  "windKt": "11",
-  "gustKt": "17",
-  "rain": "Light (2.3 mm)"
+  "windKt": "12",
+  "gustKt": "20",
+  "rain": "Light (4.8 mm)"
  },
  "sevenDay": [
-  {
-   "date": "2026-10-22",
-   "day": "Thu",
-   "fishing": "POOR",
-   "activity": "LOW",
-   "supply": "BELOW NORMAL",
-   "windKt": "11",
-   "gustKt": "17",
-   "rain": "Light (2.3 mm)",
-   "flags": [
-    "WORST",
-    "SHORTAGE"
-   ]
-  },
   {
    "date": "2026-10-23",
    "day": "Fri",
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.7",
-   "gustKt": "15",
-   "rain": "Light (1.7 mm)",
+   "windKt": "11",
+   "gustKt": "17",
+   "rain": "Light (3.8 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -104,7 +85,7 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.4",
+   "windKt": "7.3",
    "gustKt": "12",
    "rain": "Mostly dry",
    "flags": [
@@ -117,11 +98,10 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "4.1",
-   "gustKt": "12",
+   "windKt": "6.6",
+   "gustKt": "11",
    "rain": "Mostly dry",
    "flags": [
-    "BEST",
     "SHORTAGE"
    ]
   },
@@ -131,9 +111,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "5.9",
-   "gustKt": "16",
-   "rain": "Moderate (5.1 mm)",
+   "windKt": "6.3",
+   "gustKt": "14",
+   "rain": "Light (1.1 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -144,10 +124,11 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "4.5",
+   "windKt": "4.4",
    "gustKt": "11",
-   "rain": "Moderate (7.1 mm)",
+   "rain": "Light (3.5 mm)",
    "flags": [
+    "BEST",
     "SHORTAGE"
    ]
   },
@@ -157,16 +138,30 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "10",
-   "gustKt": "17",
-   "rain": "Mostly dry",
+   "windKt": "6.9",
+   "gustKt": "16",
+   "rain": "Moderate (7.6 mm)",
    "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "day": "Thu",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "12",
+   "gustKt": "20",
+   "rain": "Light (4.8 mm)",
+   "flags": [
+    "WORST",
     "TURNING",
     "SHORTAGE"
    ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Thu 22 Oct 2:19 PM PHT. “Now” = 2 PM; range = next 24h (to Fri 1 PM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 23 Oct 6:14 AM PHT. “Now” = 6 AM; range = next 24h (to Sat 5 AM).",
  "areas": [
   {
    "id": "coron",
@@ -177,27 +172,27 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "SE",
-    "range24h": "0.3–0.6",
+    "dir": "S",
+    "range24h": "0.2–0.5",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "WNW",
-    "gustKt": 17.1,
+    "kt": 7.6,
+    "dir": "NW",
+    "gustKt": 11.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt.",
-     "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt.",
+     "9 AM–noon today: Coron, Galoc and Linapacan 0.2–0.3 kt, but wind builds to 10–12 kt and drizzle runs 0.3–0.5 mm/h on the Coron side."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Fri 22"
    }
   },
   {
@@ -210,23 +205,23 @@
    "current": {
     "kt": 1.0,
     "dir": "SE",
-    "range24h": "0.5–1.3",
+    "range24h": "0.4–1.2",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "WNW",
-    "gustKt": 17.1,
+    "kt": 7.6,
+    "dir": "NW",
+    "gustKt": 11.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 00"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -237,28 +232,28 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "ESE",
-    "range24h": "0.2–0.9",
+    "kt": 0.7,
+    "dir": "SE",
+    "range24h": "0.2–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.0,
+    "kt": 9.8,
     "dir": "WNW",
-    "gustKt": 15.7,
+    "gustKt": 13.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt.",
-     "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt.",
+     "9 AM–noon today: Coron, Galoc and Linapacan 0.2–0.3 kt, but wind builds to 10–12 kt and drizzle runs 0.3–0.5 mm/h on the Coron side."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -269,27 +264,27 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.7,
+    "kt": 1.5,
     "dir": "SE",
-    "range24h": "1.2–1.9",
+    "range24h": "1.0–1.7",
     "status": "Very strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.9,
-    "dir": "NW",
-    "gustKt": 19.8,
+    "kt": 8.6,
+    "dir": "WNW",
+    "gustKt": 14.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
      "Keep boats off Tara and Decabaitot all 24h, and off Turda and Alava this afternoon. Avoid the 4–6 PM current peak everywhere in the south and west."
     ],
-    "modelBestHour": "Fri 09"
+    "modelBestHour": "Sat 01"
    }
   },
   {
@@ -300,16 +295,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.9,
+    "kt": 1.0,
     "dir": "SSE",
-    "range24h": "0.8–1.2",
+    "range24h": "0.7–1.1",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.6,
+    "kt": 12.5,
     "dir": "WNW",
-    "gustKt": 20.2,
+    "gustKt": 17.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -318,7 +313,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 11"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -326,28 +321,28 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.8,
-    "dir": "SSE",
-    "range24h": "0.7–1.0",
-    "status": "Moderate",
+    "kt": 1.0,
+    "dir": "S",
+    "range24h": "0.6–1.0",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.2,
+    "kt": 12.5,
     "dir": "WNW",
-    "gustKt": 18.9,
+    "gustKt": 17.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 10"
+    "modelBestHour": "Fri 22"
    }
   },
   {
@@ -358,27 +353,27 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.6,
+    "kt": 1.8,
     "dir": "SE",
-    "range24h": "1.0–2.0",
+    "range24h": "0.9–1.9",
     "status": "Very strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.2,
+    "kt": 12.5,
     "dir": "WNW",
-    "gustKt": 18.9,
+    "gustKt": 17.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
      "Keep boats off Tara and Decabaitot all 24h, and off Turda and Alava this afternoon. Avoid the 4–6 PM current peak everywhere in the south and west."
     ],
-    "modelBestHour": "Fri 11"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -391,25 +386,25 @@
    "current": {
     "kt": 1.3,
     "dir": "SE",
-    "range24h": "0.8–1.7",
+    "range24h": "0.5–1.5",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.4,
-    "dir": "WNW",
-    "gustKt": 17.5,
+    "kt": 12.8,
+    "dir": "NW",
+    "gustKt": 18.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
      "Keep boats off Tara and Decabaitot all 24h, and off Turda and Alava this afternoon. Avoid the 4–6 PM current peak everywhere in the south and west."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Sat 00"
    }
   },
   {
@@ -420,28 +415,28 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "SE",
-    "range24h": "0.2–0.8",
+    "kt": 0.5,
+    "dir": "SSE",
+    "range24h": "0.1–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "WNW",
-    "gustKt": 17.1,
+    "kt": 7.6,
+    "dir": "NW",
+    "gustKt": 11.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt.",
-     "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt.",
+     "9 AM–noon today: Coron, Galoc and Linapacan 0.2–0.3 kt, but wind builds to 10–12 kt and drizzle runs 0.3–0.5 mm/h on the Coron side."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -452,28 +447,27 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "SE",
-    "range24h": "0.2–0.8",
+    "kt": 0.5,
+    "dir": "SSE",
+    "range24h": "0.1–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.0,
+    "kt": 13.2,
     "dir": "NW",
-    "gustKt": 17.3,
+    "gustKt": 18.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt.",
-     "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -484,27 +478,27 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "SE",
-    "range24h": "0.2–0.6",
-    "status": "Moderate",
+    "kt": 0.2,
+    "dir": "S",
+    "range24h": "0.1–0.3",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.1,
-    "dir": "WNW",
-    "gustKt": 17.1,
+    "kt": 12.2,
+    "dir": "NW",
+    "gustKt": 16.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "8 AM–1 PM Friday: Coron, Galoc and Maglalambay 0.2–0.3 kt, Linapacan 0.2–0.3 kt, wind 7–9 kt on the Coron side, light drizzle (0.2 mm/h) until about 10 AM. Ciron is best earlier, 3–9 AM at 0.2 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt."
     ],
-    "modelBestHour": "Fri 11"
+    "modelBestHour": "Fri 20"
    }
   },
   {
@@ -515,25 +509,25 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.8,
+    "kt": 0.6,
     "dir": "SE",
-    "range24h": "0.4–0.9",
+    "range24h": "0.3–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.9,
-    "dir": "NW",
-    "gustKt": 19.8,
+    "kt": 8.6,
+    "dir": "WNW",
+    "gustKt": 14.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 08"
+    "modelBestHour": "Sat 01"
    }
   },
   {
@@ -544,27 +538,27 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.3,
+    "kt": 1.4,
     "dir": "SE",
-    "range24h": "1.0–1.7",
+    "range24h": "1.0–1.6",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.9,
-    "dir": "NW",
-    "gustKt": 19.8,
+    "kt": 8.6,
+    "dir": "WNW",
+    "gustKt": 14.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
      "Keep boats off Tara and Decabaitot all 24h, and off Turda and Alava this afternoon. Avoid the 4–6 PM current peak everywhere in the south and west."
     ],
-    "modelBestHour": "Fri 09"
+    "modelBestHour": "Sat 01"
    }
   },
   {
@@ -575,25 +569,25 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.0,
+    "kt": 0.9,
     "dir": "SE",
-    "range24h": "0.5–1.2",
+    "range24h": "0.4–1.0",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.4,
-    "dir": "WNW",
-    "gustKt": 17.5,
+    "kt": 12.8,
+    "dir": "NW",
+    "gustKt": 18.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 00"
+    "modelBestHour": "Fri 22"
    }
   },
   {
@@ -605,26 +599,26 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "SE",
-    "range24h": "0.3–0.6",
+    "dir": "S",
+    "range24h": "0.2–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.0,
+    "kt": 13.2,
     "dir": "NW",
-    "gustKt": 17.3,
+    "gustKt": 18.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "9 PM–1 AM tonight: Coron and Galoc on 0.3 kt current and 7 kt wind, dry. Panlaitan and Maglalambay 0.3 kt but 9–10 kt wind. Linapacan 0.4 kt with wind down to 6 kt."
+     "8 PM–2 AM tonight: Coron, Galoc, Maglalambay and Panlaitan on 0.1–0.2 kt current and 5–8 kt wind, dry. Linapacan 0.2 kt with wind near 5–7 kt. Ciron 0.2–0.3 kt with wind 7–9 kt."
     ],
-    "modelBestHour": "Thu 23"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -635,16 +629,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.9,
+    "kt": 1.2,
     "dir": "SSE",
-    "range24h": "0.5–1.3",
+    "range24h": "0.4–1.2",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.7,
+    "kt": 12.0,
     "dir": "WNW",
-    "gustKt": 18.5,
+    "gustKt": 16.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -653,7 +647,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 12"
+    "modelBestHour": "Fri 23"
    }
   }
  ],
