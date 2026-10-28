@@ -1,74 +1,74 @@
 {
- "reportTime": "Wed 28 Oct 2026 · ~6:15 AM PHT · morning",
+ "reportTime": "Wed 28 Oct 2026 · ~2:20 PM PHT · afternoon",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "28 Oct 2026 · 6:17 AM PHT",
- "overall": "MARGINAL overall: workable on the Coron side and in the south, wind-limited in the west all day and tonight",
+ "liveSnapshot": "28 Oct 2026 · 2:19 PM PHT",
+ "overall": "MARGINAL overall: calm on the Coron side and in the south, POOR in the west and at Linapacan through Thursday midday",
  "limiter": "wind",
- "limiterDetail": "The main limiter is wind in the west (east to northeast winds, 15–21 kt at Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan), plus current at the two pickups in the south. Wind now is 5–17 kt (gusts 8–22): Nangalao 17, Ciron 15, Cabunlawan and Decabaitot 13, Barangonan 10, and 5–8 kt elsewhere. Rain is minor: light showers about 9–11 AM in the west (up to 0.4 mm/h at Barangonan), a brief light shower around noon–2 PM on the Coron side, about 6–8 PM at Alava and Binudac (0.4 mm/h), and about 3–5 AM Thu in the west (up to 0.7 mm/h at Nangalao); 24h totals 0–3.3 mm. The current picks up about 7–11 AM (peak 8–9 AM), eases about noon–3 PM , picks up again about 5–9 PM (peak 6–8 PM), and goes slack on the Coron side and in the south about 11 PM–3 AM Thu.",
+ "limiterDetail": "The main limiter is wind: east to northeast 17–19 kt now at Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan (gusts 24–25), 15 kt at Linapacan, 14 kt at Alava and Binudac, 9 kt on the Coron side, and only 2–6 kt at Tara, Decabobo, Turda, Maglalambay and Panlaitan. Current is the second factor at the evening pickup in the south (Turda and Tara 1.2–1.3 kt). Rain is light until Thursday morning, when the west gets showers about 3 AM–2 PM (up to 1.4 mm/h at Cabunlawan and Decabaitot around noon). 24h totals are 0–8.5 mm; Tara, Decabobo and Turda stay dry.",
  "pagasa": {
   "status": "no gale, wind signal or heavy-rain warning for Calamian / MIMAROPA.",
   "detail": "PAGASA: no gale, wind signal or heavy-rain warning for Calamian / MIMAROPA. The feed still references the Tropical Cyclone Alert for Typhoon Rosal (Champi) , not covering Palawan. The latest items (to Mon 26 Oct 5:26 AM PHT) are final general flood advisories for the Visayas regions, none covering Palawan."
  },
  "changed": {
-  "title": "⚠️ What changed since yesterday afternoon",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "The west-side wind no longer eases this afternoon. It now holds 17–21 kt all day and through the night into Thursday dawn at Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan (yesterday it was forecast to ease after about 1 PM). Linapacan joins at 14–16 kt from about 8 AM, and Alava and Binudac reach 12–14 kt late morning to afternoon. That costs the west a full day and a night trip, so Thursday's supply stays SOFT.",
-   "There's a small upside further out: the regional Thursday forecast eased to 9.8 kt, gusts 15 (was 14 kt, gusts 20), and Friday is calmer at 4.8 kt, so Friday 30 arrivals improve to SLIGHTLY SOFT (was soft). Week shifts: Sat 31 is wetter (5.1 mm, was 1.4) but still GOOD. Sun 1 and Mon 2 are both wetter and breezier (about 9.8 mm each, 11–12 kt, gusts 16–17). Tue 3 looks good. Right now the grounds read 7 GOOD / 7 MARGINAL / 2 POOR / 0 VERY POOR (was 7 / 9 / 0 / 0 at 2 PM yesterday). PAGASA has nothing for Palawan."
+   "The west-side wind now lasts through Thursday morning instead of easing at dawn. Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan hold 16–20 kt (gusts to 25) until about 1 PM Thursday, and Linapacan stays at 13–15 kt. Thursday morning also turns wetter in the west, with showers about 3 AM–2 PM (7–8.5 mm at Nangalao, Cabunlawan, Decabaitot, Barangonan and Linapacan). The regional Thursday forecast is back to 14 kt, gusts 20 (this morning it was 9.8 kt, gusts 15).",
+   "That costs the west a second morning, so Friday 30 arrivals slip back to SOFT (was slightly soft). Thursday stays SOFT. The grounds now read 5 GOOD / 5 MARGINAL / 6 POOR / 0 VERY POOR (was 7 / 7 / 2 / 0 at 6 AM). Saturday's rain rose to 8.9 mm (was 5.1) but wind stays light (5.3 kt). PAGASA has nothing for Palawan."
   ]
  },
  "supply": [
   {
    "label": "Today Wed",
-   "value": "🟢 NORMAL, softening late",
-   "note": "Yesterday's calm day and the Coron-side night trip land today; the west's overnight catch was trimmed by the pre-dawn wind",
-   "tone": "good"
+   "value": "🟡 NORMAL, softening",
+   "note": "Yesterday's Coron-side and southern catch lands today; the west contributes little",
+   "tone": "ok"
   },
   {
    "label": "24h Thu 29",
    "value": "🟠 SOFT (unchanged)",
-   "note": "The west (Nangalao, Cabunlawan, Decabaitot, Ciron, Barangonan) and Linapacan lose today and tonight to 15–21 kt wind",
+   "note": "The west and Linapacan lose today and tonight to 14–20 kt wind; only the Coron side and the south fish tonight",
    "tone": "warn"
   },
   {
    "label": "48h Fri 30",
-   "value": "🟡 SLIGHTLY SOFT (was soft)",
-   "note": "Thursday is now milder regionally (gusts 15, was 20), so more boats return by Thursday afternoon",
-   "tone": "ok"
+   "value": "🟠 SOFT (was slightly soft)",
+   "note": "The west now loses Thursday morning too (16–20 kt plus showers until about 1 PM), and the Coron side gets breezy late Thursday morning",
+   "tone": "warn"
   },
   {
    "label": "3d Sat 31",
    "value": "🟢 Recovering to NORMAL",
-   "note": "Friday is the calmest day of the week (4.8 kt), and its catch lands Saturday",
+   "note": "Friday is calm and dry (7.4 kt), so a full fleet goes out and lands Saturday",
    "tone": "good"
   },
   {
    "label": "5–7d",
-   "value": "🟡 Firm Sun 1, dip Mon 2–Tue 3, recovering Wed 4",
-   "note": "Sat 31 stays GOOD, but Sun 1 and Mon 2 are wetter and breezier (about 9.8 mm, gusts 16–17), trimming Monday and Tuesday arrivals. Medium confidence this far out",
+   "value": "🟡 NORMAL Sun 1, dip Mon 2–Tue 3, firm Wed 4",
+   "note": "Saturday's rain (8.9 mm) is workable in light wind; Sun 1 and Mon 2 are breezier (gusts 16–17), trimming Monday and Tuesday arrivals; Tue 3 is the best day. Medium confidence this far out",
    "tone": "ok"
   }
  ],
- "shortageRisk": "Surge flag OFF (unchanged). Shortage risk stays ELEVATED on the dashboard's detector for Wed–Mon (guide only). The tightest arrivals are Thursday 29. Buy what you need from today's landings; lean on the Coron side, Panlaitan, Maglalambay, Decabobo, Tara and Turda for Thursday.",
+ "shortageRisk": "Surge flag OFF (unchanged). Shortage risk stays ELEVATED on the dashboard's detector for Wed–Mon (guide only). The tightest arrivals are now Thursday 29 and Friday 30. Buy what you need from today's landings and lean on the Coron side, Panlaitan, Maglalambay, Galoc, Decabobo, Tara and Turda for Thursday and Friday.",
  "bestWindow": {
-  "headline": "About noon to 3 PM on sheltered grounds, then tonight about 11 PM–3 AM on the Coron side and in the south",
+  "headline": "Tonight about 11 PM to 6 AM Thursday on the Coron side and in the south; also this afternoon on sheltered grounds",
   "details": [
-   "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM.",
-   "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight.",
-   "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+   "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+   "Now to about 5 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.4 kt, wind 3–6 kt.",
+   "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
   ]
  },
  "turningPoint": {
-  "date": "2026-10-31",
-  "day": "Sat",
+  "date": "2026-11-03",
+  "day": "Tue",
   "from": "MARGINAL",
   "to": "GOOD"
  },
  "worstDay": {
-  "date": "2026-11-01",
-  "day": "Sun",
-  "windKt": "12",
-  "gustKt": "17",
-  "rain": "Moderate (9.8 mm)"
+  "date": "2026-10-29",
+  "day": "Thu",
+  "windKt": "14",
+  "gustKt": "20",
+  "rain": "Mostly dry"
  },
  "sevenDay": [
   {
@@ -77,9 +77,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.5",
+   "windKt": "9.0",
    "gustKt": "16",
-   "rain": "Light (1.5 mm)",
+   "rain": "Light (2.2 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -90,10 +90,12 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.8",
-   "gustKt": "15",
-   "rain": "Light (1.5 mm)",
+   "windKt": "14",
+   "gustKt": "20",
+   "rain": "Mostly dry",
    "flags": [
+    "WORST",
+    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -103,24 +105,25 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "4.8",
+   "windKt": "7.4",
    "gustKt": "12",
-   "rain": "Light (1.1 mm)",
+   "rain": "Mostly dry",
    "flags": [
-    "BEST",
     "SHORTAGE"
    ]
   },
   {
    "date": "2026-10-31",
    "day": "Sat",
-   "fishing": "GOOD",
-   "activity": "HIGH",
-   "supply": "ABOVE NORMAL",
-   "windKt": "6.5",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "5.3",
    "gustKt": "12",
-   "rain": "Moderate (5.1 mm)",
-   "flags": []
+   "rain": "Moderate (8.9 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
   },
   {
    "date": "2026-11-01",
@@ -130,10 +133,8 @@
    "supply": "NORMAL → softening",
    "windKt": "12",
    "gustKt": "17",
-   "rain": "Moderate (9.8 mm)",
+   "rain": "Moderate (5.3 mm)",
    "flags": [
-    "WORST",
-    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -145,7 +146,7 @@
    "supply": "NORMAL → softening",
    "windKt": "11",
    "gustKt": "16",
-   "rain": "Moderate (9.8 mm)",
+   "rain": "Light (3.8 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -159,39 +160,40 @@
    "windKt": "5.4",
    "gustKt": "12",
    "rain": "Light (1.6 mm)",
-   "flags": []
+   "flags": [
+    "BEST"
+   ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Wed 28 Oct 6:17 AM PHT. “Now” = 6 AM; range = next 24h (to Thu 5 AM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Wed 28 Oct 2:19 PM PHT. “Now” = 2 PM; range = next 24h (to Thu 1 PM).",
  "areas": [
   {
    "id": "coron",
    "name": "Coron",
    "lat": 11.9988,
    "lng": 120.206,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
+    "kt": 0.6,
     "dir": "SW",
     "range24h": "0.1–0.8",
-    "status": "Favorable",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.0,
-    "dir": "SE",
-    "gustKt": 8.0,
+    "kt": 8.8,
+    "dir": "E",
+    "gustKt": 15.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM.",
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight."
     ],
     "modelBestHour": "Thu 00"
    }
@@ -201,23 +203,23 @@
    "name": "Culion",
    "lat": 11.8905,
    "lng": 120.022,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "S",
-    "range24h": "0.4–0.9",
-    "status": "Moderate",
+    "kt": 0.4,
+    "dir": "SW",
+    "range24h": "0.4–0.8",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.0,
-    "dir": "SE",
-    "gustKt": 8.0,
+    "kt": 8.8,
+    "dir": "E",
+    "gustKt": 15.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
@@ -230,30 +232,30 @@
    "name": "Linapacan",
    "lat": 11.491,
    "lng": 119.8682,
-   "rating": "GOOD",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "SSE",
-    "range24h": "0.2–1.0",
+    "kt": 0.3,
+    "dir": "SW",
+    "range24h": "0.3–1.0",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.5,
+    "kt": 15.4,
     "dir": "E",
-    "gustKt": 10.9,
+    "gustKt": 20.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Thu 11"
    }
   },
   {
@@ -265,15 +267,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.6,
-    "dir": "SE",
+    "dir": "ESE",
     "range24h": "0.2–1.2",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.1,
-    "dir": "S",
-    "gustKt": 9.3,
+    "kt": 1.8,
+    "dir": "W",
+    "gustKt": 4.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -282,8 +284,8 @@
    },
    "bestWindow": {
     "report": [
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight.",
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
     "modelBestHour": "Thu 01"
    }
@@ -296,27 +298,27 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.4,
+    "kt": 0.6,
     "dir": "SW",
-    "range24h": "0.4–0.8",
-    "status": "Favorable",
+    "range24h": "0.3–0.8",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 16.7,
+    "kt": 18.9,
     "dir": "ENE",
-    "gustKt": 22.0,
+    "gustKt": 25.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Thu 13"
    }
   },
   {
@@ -324,30 +326,30 @@
    "name": "Cabunlawan",
    "lat": 11.3839,
    "lng": 120.0969,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.4,
+    "kt": 0.6,
     "dir": "SW",
-    "range24h": "0.3–0.8",
-    "status": "Favorable",
+    "range24h": "0.5–0.8",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.7,
+    "kt": 19.2,
     "dir": "E",
-    "gustKt": 16.1,
+    "gustKt": 25.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Thu 13"
    }
   },
   {
@@ -355,30 +357,30 @@
    "name": "Decabaitot",
    "lat": 11.6483,
    "lng": 119.9629,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.8,
-    "dir": "SSE",
-    "range24h": "0.5–1.3",
+    "kt": 0.7,
+    "dir": "S",
+    "range24h": "0.3–1.3",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.7,
+    "kt": 19.2,
     "dir": "E",
-    "gustKt": 16.1,
+    "gustKt": 25.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Thu 13"
    }
   },
   {
@@ -389,16 +391,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "SSE",
+    "kt": 0.5,
+    "dir": "SSW",
     "range24h": "0.5–1.1",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.4,
-    "dir": "ESE",
-    "gustKt": 11.5,
+    "kt": 13.5,
+    "dir": "E",
+    "gustKt": 19.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -406,9 +408,7 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
-    ],
+    "report": null,
     "modelBestHour": "Wed 23"
    }
   },
@@ -421,27 +421,27 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.2,
-    "dir": "S",
-    "range24h": "0.2–0.5",
+    "dir": "WSW",
+    "range24h": "0.1–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.0,
-    "dir": "SE",
-    "gustKt": 8.0,
+    "kt": 8.8,
+    "dir": "E",
+    "gustKt": 15.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM.",
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Now to about 5 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.4 kt, wind 3–6 kt."
     ],
-    "modelBestHour": "Wed 23"
+    "modelBestHour": "Thu 00"
    }
   },
   {
@@ -453,15 +453,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.2,
-    "dir": "S",
-    "range24h": "0.2–0.5",
+    "dir": "WSW",
+    "range24h": "0.1–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 6.9,
-    "dir": "SE",
-    "gustKt": 11.5,
+    "kt": 6.2,
+    "dir": "ENE",
+    "gustKt": 13.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -470,10 +470,10 @@
    },
    "bestWindow": {
     "report": [
-     "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM.",
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Now to about 5 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.4 kt, wind 3–6 kt."
     ],
-    "modelBestHour": "Wed 14"
+    "modelBestHour": "Thu 04"
    }
   },
   {
@@ -484,16 +484,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "WSW",
-    "range24h": "0.3–0.8",
-    "status": "Favorable",
+    "kt": 0.8,
+    "dir": "W",
+    "range24h": "0.6–0.8",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 15.2,
-    "dir": "ENE",
-    "gustKt": 18.9,
+    "kt": 18.6,
+    "dir": "E",
+    "gustKt": 24.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -502,9 +502,9 @@
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Wed 20"
    }
   },
   {
@@ -515,16 +515,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "ESE",
+    "kt": 0.1,
+    "dir": "E",
     "range24h": "0.0–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.1,
-    "dir": "S",
-    "gustKt": 9.3,
+    "kt": 1.8,
+    "dir": "W",
+    "gustKt": 4.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -533,8 +533,8 @@
    },
    "bestWindow": {
     "report": [
-     "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM.",
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Now to about 5 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.4 kt, wind 3–6 kt."
     ],
     "modelBestHour": "Thu 00"
    }
@@ -554,9 +554,9 @@
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.1,
-    "dir": "S",
-    "gustKt": 9.3,
+    "kt": 1.8,
+    "dir": "W",
+    "gustKt": 4.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -565,10 +565,10 @@
    },
    "bestWindow": {
     "report": [
-     "11 PM–3 AM tonight: Coron, Tara, Decabobo and Turda 0.0–0.3 kt, Galoc and Maglalambay 0.2–0.4, wind under 5 kt. The dashboard's lowest combined score is Decabobo about midnight.",
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Thu 00"
+    "modelBestHour": "Thu 01"
    }
   },
   {
@@ -576,19 +576,19 @@
    "name": "Binudac",
    "lat": 11.819,
    "lng": 119.901,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.4,
-    "dir": "SSE",
+    "kt": 0.5,
+    "dir": "SSW",
     "range24h": "0.3–0.7",
-    "status": "Favorable",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.4,
-    "dir": "ESE",
-    "gustKt": 11.5,
+    "kt": 13.5,
+    "dir": "E",
+    "gustKt": 19.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -597,7 +597,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 00"
+    "modelBestHour": "Wed 23"
    }
   },
   {
@@ -608,16 +608,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.1,
+    "kt": 0.2,
     "dir": "N",
     "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 6.9,
-    "dir": "SE",
-    "gustKt": 11.5,
+    "kt": 6.2,
+    "dir": "ENE",
+    "gustKt": 13.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -626,9 +626,10 @@
    },
    "bestWindow": {
     "report": [
-     "Noon–3 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.3 kt, wind under 10 kt; the brief Coron-side shower clears by about 2 PM."
+     "11 PM–6 AM tonight: Coron, Tara, Turda, Decabobo, Galoc, Maglalambay and Panlaitan 0.0–0.4 kt, wind 2–6 kt, dry. The dashboard's lowest combined score is Decabobo about midnight.",
+     "Now to about 5 PM: Panlaitan, Decabobo, Galoc and Maglalambay 0.1–0.4 kt, wind 3–6 kt."
     ],
-    "modelBestHour": "Wed 15"
+    "modelBestHour": "Wed 17"
    }
   },
   {
@@ -636,30 +637,30 @@
    "name": "Barangonan",
    "lat": 11.3443,
    "lng": 119.6945,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "SW",
-    "range24h": "0.3–1.5",
+    "kt": 0.4,
+    "dir": "WSW",
+    "range24h": "0.1–1.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.2,
-    "dir": "ENE",
-    "gustKt": 13.6,
+    "kt": 17.2,
+    "dir": "E",
+    "gustKt": 23.5,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan today and tonight (15–21 kt, gusts to 22), off Linapacan from about 8 AM (14–16 kt), and off Decabaitot, Turda, Tara and Alava during the 8–9 AM and 6–8 PM pickups."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan until about 1 PM Thursday (gusts to 25), off Linapacan until about 10 AM Thursday, and off Turda, Tara and Decabaitot during the 6–8 PM pickup."
     ],
-    "modelBestHour": "Wed 06"
+    "modelBestHour": "Thu 11"
    }
   }
  ],
