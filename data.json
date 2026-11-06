@@ -1,19 +1,19 @@
 {
- "reportTime": "Fri 6 Nov 2026 · ~6:20 AM PHT · morning",
+ "reportTime": "Fri 6 Nov 2026 · ~2:20 PM PHT · afternoon",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "6 Nov 2026 · 6:16 AM PHT",
- "overall": "POOR on the east side, GOOD on the Coron side: Coron, Galoc, Panlaitan, Maglalambay and Decabobo fish well; Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan stay shut all day",
+ "liveSnapshot": "6 Nov 2026 · 2:16 PM PHT",
+ "overall": "POOR on the east side, GOOD on the Coron side: Coron, Galoc, Panlaitan, Maglalambay and Decabobo fish well; Nangalao stays VERY POOR and Cabunlawan, Decabaitot, Ciron and Barangonan stay shut through Saturday midday",
  "limiter": "combination",
- "limiterDetail": "The main limiter is a combination , led by east wind (Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan at 17–24 kt, gusts up to 31; Linapacan 13–16 kt), plus current at Decabaitot (1.4–1.7 kt), Barangonan and Alava (1.2–1.6 kt) late morning and again about 9 PM–1 AM, and Tara and Turda (1.0–1.1 kt early morning and late afternoon). Rain is minor: 0.2–0.4 mm/h at Barangonan, elsewhere dry.",
+ "limiterDetail": "The main limiter is a combination , led by east wind (Nangalao 20–23 kt, Cabunlawan/Decabaitot 18.5–22 kt, Ciron 17–22 kt, Barangonan 18–21 kt; Linapacan 12–17 kt), plus current at Decabaitot (1.3–1.7 kt about 9 PM–2 AM), Barangonan and Alava (1.1–1.6 kt tonight), and Tara (1.0–1.1 kt mid-afternoon and again Saturday morning). Rain is minor: 0.1–0.3 mm/h at Barangonan, Linapacan, Maglalambay and Panlaitan about Saturday 3–5 AM / noon, elsewhere dry.",
  "pagasa": {
   "status": "CLEAR",
   "detail": "PAGASA: CLEAR. No gale, wind signal or heavy-rain warning for Calamian / MIMAROPA. The feed still lists an older tropical cyclone alert for Typhoon Rosal (Champi) that doesn't name Palawan; worth a glance on the PAGASA site."
  },
  "changed": {
-  "title": "⚠️ What changed since yesterday afternoon",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "The east wind no longer eases at Friday midday; it is stronger and lasts all of the next 24 hours, so Sat 7 supply drops from NEAR NORMAL to SLIGHTLY SOFT. Nangalao is at 23.6 kt now (gusts 31), Cabunlawan and Decabaitot 22.1 kt (gusts 29), Ciron 21.7 kt (gusts 29), and all four stay at 17–24 kt through Saturday 5 AM. Yesterday's forecast had them easing around noon to 1 PM today.",
-   "Fishing worsened to 5 GOOD / 3 MARGINAL / 4 POOR / 4 VERY POOR (was 5 GOOD / 4 MARGINAL / 7 POOR): those four east grounds are now VERY POOR. That makes five soft arrival days in a row (Wed 4 to Sun 8), so tightening risk is now high. PAGASA still shows no warning for Palawan."
+   "The fishing mix improved to 5 GOOD / 4 MARGINAL / 6 POOR / 1 VERY POOR (was 5 GOOD / 3 MARGINAL / 4 POOR / 4 VERY POOR), but the supply outlook is unchanged. Cabunlawan, Decabaitot, Ciron and Barangonan dropped out of VERY POOR as the east wind eased a few knots from this morning's peaks (Nangalao now 20.4 kt gusts 27, was 23.6 g31; Cabunlawan/Decabaitot 18.5 g24, was 22.1 g29; Ciron 16.6 g21, was 21.7 g29). Tara and Turda recovered to MARGINAL; Alava slipped to POOR on 1.1 kt current.",
+   "East side still has no usable window through Saturday midday — Nangalao stays at 20–23 kt, Cabunlawan/Decabaitot 18.5–22.3 kt, Ciron 16.6–22.1 kt, Barangonan 17.5–20.7 kt. Fri 6 stays SLIGHTLY SOFT leaning softer; Sat 7 and Sun 8 stay SLIGHTLY SOFT; Mon 9 NORMAL. Tightening risk remains high. PAGASA still shows no warning for Palawan."
   ]
  },
  "supply": [
@@ -25,14 +25,14 @@
   },
   {
    "label": "24h Sat 7",
-   "value": "🟡 SLIGHTLY SOFT (was near normal)",
-   "note": "The east side now gets no Friday afternoon window; only the Coron side, Galoc, Panlaitan, Maglalambay and Decabobo fish fully today",
+   "value": "🟡 SLIGHTLY SOFT (unchanged)",
+   "note": "The east side still gets no Friday window; only the Coron side, Galoc, Panlaitan, Maglalambay and Decabobo fish fully today",
    "tone": "ok"
   },
   {
    "label": "48h Sun 8",
    "value": "🟡 SLIGHTLY SOFT (unchanged)",
-   "note": "Saturday is the roughest day (11 kt, gusts 17) and the east side is still at 19–22 kt early Saturday",
+   "note": "Saturday is the roughest near-term day (11 kt, gusts 18) and the east side is still at 19–23 kt early Saturday",
    "tone": "ok"
   },
   {
@@ -43,26 +43,26 @@
   },
   {
    "label": "5–7d",
-   "value": "🟢 Near normal Tue 10, near normal Wed 11 (was slightly soft), near normal Thu 12",
-   "note": "Monday 10 kt with 1.2 mm; Tuesday light (7.9 kt) but gusts 18 and 1.7 mm; Wednesday 8.9 kt, dry. Medium confidence this far out",
+   "value": "🟢 Near normal Tue 10, near normal Wed 11, slightly soft Thu 12 (Thu was near normal)",
+   "note": "Monday lighter than this morning (8.6 kt, gusts 14, 1.1 mm). Tuesday 10 kt, gusts 18, dry. Wednesday 9.7 kt with 1.5 mm. Thursday now the week's roughest (12 kt, gusts 17, 1.9 mm). Medium confidence this far out",
    "tone": "good"
   }
  ],
- "shortageRisk": "Surge flag OFF (unchanged). The dashboard's shortage detector stays ELEVATED for Fri–Thu (guide only; it reacts to the 0.6–0.7 kt daily currents). Tightening risk is now high (was moderate to high): five soft arrival days in a row (Wed 4 to Sun 8), and the east grounds will have missed about three days by Saturday morning. Lean on the Coron side, Galoc, Panlaitan, Maglalambay and Decabobo for weekend supply.",
+ "shortageRisk": "Surge flag OFF (unchanged). The dashboard's shortage detector stays ELEVATED for Fri–Thu (guide only; it reacts to the 0.6–0.7 kt daily currents). Tightening risk remains high: five soft arrival days in a row (Wed 4 to Sun 8), and the east grounds will have missed about three days by Saturday morning. Lean on the Coron side, Galoc, Panlaitan, Maglalambay and Decabobo for weekend supply.",
  "bestWindow": {
-  "headline": "About 11 AM–6 PM today at Panlaitan and Maglalambay; about 5 PM–1 AM on the Coron side; all day at Decabobo",
+  "headline": "About now–6 PM at Panlaitan and Maglalambay; about 5 PM–1 AM on the Coron side; rest of today at Decabobo",
   "details": [
-   "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM.",
-   "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+   "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon.",
+   "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
   ]
  },
  "turningPoint": null,
  "worstDay": {
-  "date": "2026-11-07",
-  "day": "Sat",
-  "windKt": "11",
+  "date": "2026-11-12",
+  "day": "Thu",
+  "windKt": "12",
   "gustKt": "17",
-  "rain": "Mostly dry"
+  "rain": "Light (1.9 mm)"
  },
  "sevenDay": [
   {
@@ -71,7 +71,7 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "8.8",
+   "windKt": "8.9",
    "gustKt": "13",
    "rain": "Mostly dry",
    "flags": [
@@ -85,11 +85,9 @@
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
    "windKt": "11",
-   "gustKt": "17",
+   "gustKt": "18",
    "rain": "Mostly dry",
    "flags": [
-    "WORST",
-    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -113,9 +111,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "10",
-   "gustKt": "15",
-   "rain": "Light (1.2 mm)",
+   "windKt": "8.6",
+   "gustKt": "14",
+   "rain": "Light (1.1 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -126,9 +124,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.9",
+   "windKt": "10",
    "gustKt": "18",
-   "rain": "Light (1.7 mm)",
+   "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
    ]
@@ -139,9 +137,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "8.9",
+   "windKt": "9.7",
    "gustKt": "17",
-   "rain": "Mostly dry",
+   "rain": "Light (1.5 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -152,15 +150,17 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "10",
+   "windKt": "12",
    "gustKt": "17",
-   "rain": "Light (1.6 mm)",
+   "rain": "Light (1.9 mm)",
    "flags": [
+    "WORST",
+    "TURNING",
     "SHORTAGE"
    ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 6 Nov 6:16 AM PHT. “Now” = 6 AM; range = next 24h (to Sat 5 AM).",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 6 Nov 2:16 PM PHT. “Now” = 2 PM; range = next 24h (to Sat 1 PM).",
  "areas": [
   {
    "id": "coron",
@@ -170,16 +170,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "SSW",
+    "kt": 0.0,
+    "dir": "E",
     "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.9,
-    "dir": "E",
-    "gustKt": 11.9,
+    "kt": 8.9,
+    "dir": "ESE",
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -188,7 +188,7 @@
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
     "modelBestHour": "Fri 20"
    }
@@ -201,45 +201,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "W",
+    "kt": 0.8,
+    "dir": "WNW",
     "range24h": "0.6–1.2",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.9,
-    "dir": "E",
-    "gustKt": 11.9,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": null,
-    "modelBestHour": "Fri 19"
-   }
-  },
-  {
-   "id": "linapacan",
-   "name": "Linapacan",
-   "lat": 11.491,
-   "lng": 119.8682,
-   "rating": "POOR",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.7,
-    "dir": "WSW",
-    "range24h": "0.5–1.1",
-    "status": "Moderate",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 15.6,
-    "dir": "ENE",
-    "gustKt": 20.8,
+    "kt": 8.9,
+    "dir": "ESE",
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -252,34 +223,63 @@
    }
   },
   {
-   "id": "tara",
-   "name": "Tara",
-   "lat": 12.2729,
-   "lng": 120.3641,
+   "id": "linapacan",
+   "name": "Linapacan",
+   "lat": 11.491,
+   "lng": 119.8682,
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.1,
-    "dir": "SE",
-    "range24h": "0.6–1.1",
+    "kt": 0.9,
+    "dir": "W",
+    "range24h": "0.5–1.0",
     "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 2.1,
-    "dir": "SSE",
-    "gustKt": 5.6,
+    "kt": 14.3,
+    "dir": "E",
+    "gustKt": 18.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Fri 19"
+   }
+  },
+  {
+   "id": "tara",
+   "name": "Tara",
+   "lat": 12.2729,
+   "lng": 120.3641,
+   "rating": "MARGINAL",
+   "ratingSource": "report",
+   "current": {
+    "kt": 0.8,
+    "dir": "ESE",
+    "range24h": "0.6–1.1",
+    "status": "Moderate",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 2.3,
+    "dir": "ENE",
+    "gustKt": 5.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
-    "modelBestHour": "Fri 11"
+    "modelBestHour": "Sat 00"
    }
   },
   {
@@ -297,9 +297,9 @@
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 23.6,
+    "kt": 20.4,
     "dir": "ENE",
-    "gustKt": 31.1,
+    "gustKt": 26.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -308,9 +308,9 @@
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
     ],
-    "modelBestHour": "Fri 18"
+    "modelBestHour": "Fri 19"
    }
   },
   {
@@ -321,16 +321,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
+    "kt": 0.6,
     "dir": "W",
-    "range24h": "0.3–0.7",
+    "range24h": "0.3–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 22.1,
+    "kt": 18.5,
     "dir": "ENE",
-    "gustKt": 29.0,
+    "gustKt": 23.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -339,9 +339,9 @@
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
     ],
-    "modelBestHour": "Fri 17"
+    "modelBestHour": "Fri 15"
    }
   },
   {
@@ -352,16 +352,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "WNW",
+    "kt": 1.3,
+    "dir": "NW",
     "range24h": "0.6–1.7",
-    "status": "Moderate",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 22.1,
+    "kt": 18.5,
     "dir": "ENE",
-    "gustKt": 29.0,
+    "gustKt": 23.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -370,7 +370,7 @@
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
     ],
     "modelBestHour": "Fri 17"
    }
@@ -380,19 +380,19 @@
    "name": "Alava",
    "lat": 11.7363,
    "lng": 119.9312,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "W",
+    "kt": 1.1,
+    "dir": "WNW",
     "range24h": "0.6–1.5",
-    "status": "Moderate",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.3,
-    "dir": "ENE",
-    "gustKt": 18.3,
+    "kt": 9.5,
+    "dir": "E",
+    "gustKt": 12.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -401,9 +401,9 @@
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
-    "modelBestHour": "Fri 19"
+    "modelBestHour": "Fri 16"
    }
   },
   {
@@ -414,16 +414,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "SSW",
-    "range24h": "0.0–0.3",
+    "kt": 0.2,
+    "dir": "WSW",
+    "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.9,
-    "dir": "E",
-    "gustKt": 11.9,
+    "kt": 8.9,
+    "dir": "ESE",
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -432,7 +432,7 @@
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
     "modelBestHour": "Fri 19"
    }
@@ -445,27 +445,27 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "SSW",
-    "range24h": "0.0–0.3",
+    "kt": 0.2,
+    "dir": "WSW",
+    "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.9,
-    "dir": "E",
-    "gustKt": 12.1,
+    "kt": 3.6,
+    "dir": "SSE",
+    "gustKt": 8.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 17"
    }
   },
   {
@@ -477,15 +477,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "W",
+    "dir": "WNW",
     "range24h": "0.3–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 21.7,
+    "kt": 16.6,
     "dir": "ENE",
-    "gustKt": 28.8,
+    "gustKt": 21.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -494,8 +494,8 @@
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM.",
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon.",
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
     ],
     "modelBestHour": "Fri 14"
    }
@@ -508,25 +508,25 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.4,
-    "dir": "ESE",
-    "range24h": "0.2–0.5",
+    "kt": 0.3,
+    "dir": "SE",
+    "range24h": "0.2–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 2.1,
-    "dir": "SSE",
-    "gustKt": 5.6,
+    "kt": 2.3,
+    "dir": "ENE",
+    "gustKt": 5.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
     "modelBestHour": "Fri 15"
    }
@@ -536,30 +536,30 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "POOR",
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 1.0,
+    "kt": 0.7,
     "dir": "SE",
     "range24h": "0.4–1.0",
-    "status": "Strong",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 2.1,
-    "dir": "SSE",
-    "gustKt": 5.6,
+    "kt": 2.3,
+    "dir": "ENE",
+    "gustKt": 5.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
-    "modelBestHour": "Fri 11"
+    "modelBestHour": "Sat 00"
    }
   },
   {
@@ -570,16 +570,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
-    "dir": "W",
-    "range24h": "0.5–1.1",
+    "kt": 0.8,
+    "dir": "WNW",
+    "range24h": "0.6–1.1",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.3,
-    "dir": "ENE",
-    "gustKt": 18.3,
+    "kt": 9.5,
+    "dir": "E",
+    "gustKt": 12.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -588,7 +588,7 @@
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
     "modelBestHour": "Fri 22"
    }
@@ -601,25 +601,25 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.1,
-    "dir": "S",
-    "range24h": "0.1–0.3",
+    "kt": 0.2,
+    "dir": "NW",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.9,
-    "dir": "E",
-    "gustKt": 12.1,
+    "kt": 3.6,
+    "dir": "SSE",
+    "gustKt": 8.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Panlaitan and Maglalambay: 1–3 kt about 11 AM–6 PM, current 0.1–0.3. Coron and Galoc: 3–4 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–8 kt, current 0.2–0.5 all day. Tara and Turda: wind is light, so go about 11 AM–1 PM or 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest about 8–11 PM (6–8 kt), but current is 1.0–1.5 kt then, so 3–5 PM is the better compromise (10–11 kt, 0.6–0.8 kt current). East side: no usable window; the lightest spell is Ciron at 17–18 kt about 1–11 PM."
+     "Panlaitan and Maglalambay: 0.7–3.6 kt about now–6 PM, current 0.1–0.3. Coron and Galoc: 3.1–5.1 kt from about 5 PM to 1 AM, current 0.0–0.4. Decabobo: 2–5 kt, current 0.2–0.5 rest of today. Tara and Turda: wind is light, so go about 10 PM–1 AM when the current eases to 0.4–0.6 kt. Alava and Binudac: easiest wind about 10 PM–1 AM (6–8 kt), but current is 1.0–1.5 kt then, so mid-afternoon is the better compromise (9–10 kt, 0.6–0.8 kt current at Binudac). East side: no usable window; the lightest spell is Ciron at 16.6–17.5 kt this afternoon."
     ],
     "modelBestHour": "Fri 17"
    }
@@ -632,27 +632,27 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
+    "kt": 1.1,
     "dir": "WNW",
-    "range24h": "0.4–1.6",
-    "status": "Moderate",
+    "range24h": "0.3–1.6",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 19.5,
+    "kt": 19.0,
     "dir": "ENE",
-    "gustKt": 26.6,
+    "gustKt": 24.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": [
-     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan all day and tonight (up to 24 kt, gusts near 31)."
+     "Keep small boats off Nangalao, Cabunlawan, Decabaitot, Ciron and Barangonan this afternoon, tonight and Saturday morning (up to 23 kt, gusts near 27)."
     ],
-    "modelBestHour": "Sat 05"
+    "modelBestHour": "Sat 13"
    }
   }
  ],
