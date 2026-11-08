@@ -35,6 +35,7 @@ vm.runInContext(`
 D=null;forecastTimes=time;selectedTime=time[2];LIVE=fixture;
 chooseForecast(3);assert(selectedTime===time[3]&&$('forecast-slider').value==='3','slider updates selected timestamp');
 assert($('forecast-time').textContent.includes('9:00 AM'),'forecast label follows slider');
+assert($('map-forecast-time').textContent.includes('9:00 AM')&&$('map-forecast-time').textContent.includes('2026')&&$('map-forecast-time').textContent.endsWith('PHT'),'map date/time follows slider with year and PHT');
 $('forecast-play').onclick();assert(playTimer!==null&&selectedTime===time[0],'play restarts at end');
 $('forecast-play').onclick();assert(playTimer===null&&$('forecast-play').textContent==='▶ Play','pause stops timer');
 console.log('PASS: slider selection, date label, play restart and pause');
