@@ -24,7 +24,7 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{background:#0e2333;border-radius:6px;padding:5px 3px;text-align:center;font-size:11px}
 .day b{display:block;font-size:12px}.day .r{font-size:16px}.fn{font-size:12px;opacity:.75}
 .lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:600;text-shadow:0 0 3px #000,0 0 3px #000;font-size:11px;padding:0}
-.lbl:before{display:none}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
+.lbl:before{display:none}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
 .leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}.pop .srcl{font-size:11px;color:#475569}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 @media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 170px)}.side{height:calc(100vh - 140px);overflow:auto}}
@@ -74,7 +74,7 @@ const rain3=(p,i)=>{if(i<2)return null;const vals=[num(p[i-2]),num(p[i-1]),num(p
 const labHour=t=>{const d=new Date(tPHT(t));return d.toLocaleDateString('en-US',{weekday:'short',timeZone:'Asia/Manila'})+' '+t.slice(11,13)};
 const fmtPHT=ms=>new Date(ms).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
 const fmtLocal=fmtPHT;
-const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
 /* ---------- state ---------- */
 let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null;
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
@@ -105,7 +105,9 @@ function computeLive(a,i,L,time=selectedTime){
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
 }
 function stopPlayback(){if(playTimer)clearInterval(playTimer);playTimer=null;$('forecast-play').textContent='▶ Play';$('forecast-play').setAttribute('aria-pressed','false')}
+function updateMapClock(){const active=forecastTimes.includes(selectedTime);$('map-forecast-label').textContent=active?'Forecast time':'Report snapshot';$('map-forecast-time').textContent=active?forecastLabel(selectedTime):(D?RT():'Loading…')}
 function updateForecastControls(){
+ updateMapClock();
  const active=forecastTimes.length>0,idx=Math.max(0,forecastTimes.indexOf(selectedTime));
  $('forecast-slider').disabled=!active;$('forecast-play').disabled=!active||forecastTimes.length<2;
  $('forecast-slider').max=String(Math.max(0,forecastTimes.length-1));$('forecast-slider').value=String(idx);
@@ -149,6 +151,7 @@ function merged(){
  return {...a,...x,_forecast:true,_live:x.rating!==U,_lim:x.lim,note:x.rating===U?'Incomplete forecast inputs: rating UNAVAILABLE. Missing values are never replaced with the report.':null}})
 }
 function renderMap(){
+ updateMapClock();
  const A=merged(),rep=E(RT()),lt=LIVE?fmtPHT(LIVE.at):null;markers.clearLayers();arrows.clearLayers();pts=[];
  const showLab=$('lab').checked;
  A.forEach(a=>{const c=COL[a.rating]||'#94a3b8';pts.push([a.lat,a.lng]);
@@ -180,7 +183,7 @@ function renderMap(){
 function fit(){map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
 function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
  markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);
- const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)';return d};lg.addTo(map);
+ const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)';return d};lg.addTo(map);
  $('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
  $('lab').onchange=e=>markers.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));addEventListener('resize',fit)}
 /* ---------- refresh ---------- */
