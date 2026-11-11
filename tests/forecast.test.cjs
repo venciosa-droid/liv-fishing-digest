@@ -1,6 +1,6 @@
 // Synthetic fixtures only; these are not real weather readings.
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const nodes={};const node=id=>nodes[id]??=( {textContent:'',innerHTML:'',value:'0',checked:true,disabled:false,className:'',attrs:{},setAttribute(k,v){this.attrs[k]=v},classList:{toggle(){}}});
+const nodes={};const node=id=>nodes[id]??=( {textContent:'',innerHTML:'',value:'0',checked:true,disabled:false,className:'',attrs:{},style:{},parentNode:{classList:{toggle(){}}},setAttribute(k,v){this.attrs[k]=v},classList:{toggle(){}}});
 const ctx={console,Date,URLSearchParams,Set,Number,Math,JSON,setTimeout,clearTimeout,setInterval,clearInterval,document:{getElementById:node,addEventListener(){}},addEventListener(){},localStorage:{getItem(){return null},setItem(){}}};
 vm.createContext(ctx);
 let src=fs.readFileSync(require('path').join(__dirname,'../index.html'),'utf8').split('<script>')[1].split('</script>')[0];src=src.slice(0,src.lastIndexOf('\ninitMap();'));
@@ -66,3 +66,36 @@ c=computeLive(area,0,fixture,time[1]).current;assert(currentLabel(c)==='Current 
 assert(!/ECMWF/.test(currentLabel({kt:1,dir:'N'})),'never labelled ECMWF');
 console.log('PASS: current line label, color scale, UNAVAILABLE, slider hour');
 `,ctx);
+// Past 48 hours: slider window, labels, jumps, Now, no report fallback, fetch params.
+vm.runInContext(`
+const H=36e5,NOW=Date.UTC(2026,10,11,10,10);   // Wed 11 Nov 2026 18:10 PHT
+const pht=ms=>new Date(ms+8*H).toISOString().slice(0,16);
+assert(pht(nowHourMs(NOW))==='2026-11-11T18:00','current hour PHT');
+assert(isPast('2026-11-11T17:00',NOW)&&!isPast('2026-11-11T18:00',NOW)&&!isPast('2026-11-12T06:00',NOW),'isPast');
+assert(timeLabel('2026-11-09T18:00',NOW)==='Past · Mon, Nov 9, 2026, 6:00 PM PHT'&&timeLabel('2026-11-12T06:00',NOW).startsWith('Forecast for Thu'),'past/forecast labels');
+assert(dayWord('2026-11-10T08:00',NOW)==='Yesterday'&&dayWord('2026-11-09T20:00',NOW)==='2 days ago'&&dayWord('2026-11-11T02:00',NOW)==='Earlier today','day words');
+const T=[];for(let t=Date.UTC(2026,10,8,16);t<=Date.UTC(2026,10,13,15);t+=H)T.push(pht(t));   // Nov 9 00:00 .. Nov 13 23:00 PHT
+assert(T.length===120,'120 hourly steps');
+assert(T[hoursAgoIdx(T,0,NOW)]==='2026-11-11T18:00'&&T[hoursAgoIdx(T,24,NOW)]==='2026-11-10T18:00'&&T[hoursAgoIdx(T,48,NOW)]==='2026-11-09T18:00','jump indexes');
+// rebuild against the real clock with synthetic times around now
+const realNow=Date.now(),RT2=[];for(let t=nowHourMs(realNow)-60*H;t<=nowHourMs(realNow)+60*H;t+=H)RT2.push(pht(t));
+const series=n=>RT2.map((_,i)=>i%7);
+D={areas:[{id:'one',name:'Fixture',lat:0,lng:0,wind:{kt:99},rain:{mm3h:0},current:{kt:9},rating:'GOOD'}]};
+LIVE={at:realNow,ids:'one',ecmwf:[{hourly:{time:RT2,wind_speed_10m:series(),wind_gusts_10m:series(),wind_direction_10m:series(),precipitation:RT2.map(()=>0)}}],marine:[{hourly_units:{ocean_current_velocity:'km/h'},hourly:{time:RT2,ocean_current_velocity:RT2.map(()=>0.5),ocean_current_direction:RT2.map(()=>90)}}]};
+const saveRender=renderMap;renderMap=()=>{};selectedTime=null;
+rebuildForecastTimes();
+assert(forecastTimes[0]===pht(nowHourMs(realNow)-48*H)&&forecastTimes[forecastTimes.length-1]===RT2[RT2.length-1],'slider spans now-48h to forecast end');
+assert(selectedTime===pht(nowHourMs(realNow)),'default selection is the current hour, not slider start');
+$('forecast-m48').onclick();assert(selectedTime===forecastTimes[0]&&$('forecast-time').textContent.startsWith('Past · '),'-48h jump + Past label');
+assert($('map-forecast-time').textContent.startsWith('Past · ')&&$('past-hint').textContent.includes('landing'),'map clock past + landing hint');
+const m=merged()[0];assert(m._forecast&&m.wind.kt!==99&&m.current.kt!==9,'past hour uses model values, not report');
+$('forecast-m24').onclick();assert(selectedTime===pht(nowHourMs(realNow)-24*H),'-24h jump');
+$('forecast-now').onclick();assert(selectedTime===pht(nowHourMs(realNow))&&$('forecast-time').textContent.startsWith('Forecast for')&&$('past-hint').textContent==='','Now returns to current hour');
+$('forecast-m48').onclick();$('forecast-play').onclick();assert(selectedTime===forecastTimes[0]&&playTimer!==null,'play starts from selected past hour');stopPlayback();
+const keep=LIVE.ecmwf[0].hourly.wind_speed_10m.slice();LIVE.ecmwf[0].hourly.wind_speed_10m=keep.map(()=>null);assert(merged()[0].rating===U&&merged()[0].wind.kt===null,'missing past data UNAVAILABLE');LIVE.ecmwf[0].hourly.wind_speed_10m=keep;
+renderMap=saveRender;
+`,ctx);
+vm.runInContext(`
+var urls=[];getJSON=async u=>{urls.push(u);return [{}]};
+fetchLive([{id:'one',lat:1,lng:2}]).then(()=>{assert(urls.length===2&&urls.every(u=>u.includes('past_days=2')&&u.includes('forecast_days=3')&&u.includes('timezone=Asia%2FManila')),'past_days on both requests');console.log('PASS: past 48h window, labels, jumps, Now, play, no fallback, past_days requests')}).catch(e=>{console.error(e);process_exit(1)});
+`,Object.assign(ctx,{process_exit:c=>process.exit(c)}));
