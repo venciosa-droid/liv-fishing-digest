@@ -40,3 +40,17 @@ $('forecast-play').onclick();assert(playTimer!==null&&selectedTime===time[0],'pl
 $('forecast-play').onclick();assert(playTimer===null&&$('forecast-play').textContent==='▶ Play','pause stops timer');
 console.log('PASS: slider selection, date label, play restart and pause');
 `,ctx);
+// Wind display helpers (display only; fishing rating rules unchanged).
+vm.runInContext(`
+assert(kph(10)===19&&kph(9.7)===18&&kph(0)===0&&kph(null)===null&&kph('')===null,'kt x 1.852 rounded');
+assert(compass(0)==='N'&&compass(67.5)==='ENE'&&compass(359)==='N'&&compass(11.2)==='N'&&compass(11.3)==='NNE'&&compass(200)==='SSW'&&compass(null)==='—','direction to 16-point compass');
+assert(windToward(90)===270&&windToward(0)===180&&windToward(270)===90&&windToward(350)===170&&windToward(null)===null,'arrow points blowing toward (from+180)');
+assert(windTone(18)==='near'&&windTone(17)==='near'&&windTone(16)==='ok'&&windTone(19)==='bad'&&windTone(null)==='na','18 kph threshold tones');
+assert(WINDCOL.ok==='#22c55e'&&WINDCOL.bad==='#ef4444','green/red colors');
+assert(windLabel({kt:17.3,gustKt:24.3,deg:67.5})==='ENE 32 kph g45','label format');
+assert(windLabel({kt:null,gustKt:5,deg:90})==='wind UNAVAILABLE'&&windLabel(null)==='wind UNAVAILABLE','missing wind label');
+assert(windLabel({kt:12.3,gustKt:18.1,dir:'ESE'})==='ESE 23 kph g34','report snapshot compass fallback');
+let r=computeLive(area,0,fixture,time[3]);assert(r.wind.deg===135&&windToward(r.wind.deg)===315&&windLabel(r.wind)==='SE 43 kph g56','forecast hour wind degrees');
+fixture.ecmwf[0].hourly.wind_speed_10m[3]=null;r=computeLive(area,0,fixture,time[3]);assert(r.wind.deg===null&&windLabel(r.wind)==='wind UNAVAILABLE','no arrow without speed');
+console.log('PASS: kph conversion, compass mapping, arrow rotation, 18 kph threshold colors, UNAVAILABLE label');
+`,ctx);
