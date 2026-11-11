@@ -35,16 +35,22 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 @media(prefers-reduced-motion:reduce){.windico .flow,.windico .head{animation:none}}
 @media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 170px)}.side{height:calc(100vh - 140px);overflow:auto}}
 .forecast{padding:10px 12px;background:#132e40;border-bottom:1px solid #315267}.forecast-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}.forecast button{background:#11557e;color:white;border:1px solid #8fd3ff;border-radius:7px;padding:7px 14px;font:600 14px system-ui;cursor:pointer}.forecast button:disabled{opacity:.45;cursor:not-allowed}.forecast input{width:100%;accent-color:#7dd3fc;min-height:30px;cursor:pointer}.forecast-range{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#bfe6ff}.forecast-note{font-size:12px;color:#bfe6ff;margin-top:4px}#forecast-time{font-size:15px}#forecast-state{margin-left:auto;font-size:12px;color:#bfe6ff}.forecast input:focus-visible,.forecast button:focus-visible{outline:3px solid #facc15;outline-offset:2px}
-@media(min-width:900px){#map{height:calc(100vh - 295px);min-height:340px}.side{height:calc(100vh - 265px)}}
+.forecast.past{background:#2b2342;border-bottom-color:#7c5fb3}.forecast.past #forecast-time{color:#e9d5ff}.forecast .jump{padding:7px 10px}
+.track-wrap{position:relative;height:16px;margin:0 0 2px}.ftrack{position:absolute;left:8px;right:8px;top:2px;height:6px;border-radius:3px;background:#1e5b80;overflow:hidden}.ftrack .pastseg{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(135deg,#8b6cc9 0 6px,#6d52a6 6px 12px)}
+.nowtick{position:absolute;top:-1px;width:2px;height:12px;background:#facc15;transform:translateX(-1px)}.nowtick span{position:absolute;top:10px;left:-12px;font-size:10px;color:#facc15;width:26px;text-align:center}
+.past-hint{display:none;margin-top:4px;padding:4px 8px;border-radius:6px;background:#3b2f5c;color:#f3e8ff;font-size:12px}.forecast.past .past-hint{display:block}
+.map-clock.past strong{color:#e9d5ff}.map-clock.past small{color:#c4b5fd}.map-clock.past{border-bottom-color:#8b6cc9}
+@media(min-width:900px){#map{height:calc(100vh - 330px);min-height:340px}.side{height:calc(100vh - 300px)}}
 </style></head><body>
 <div class="top"><span class="brand">🐠 LIV Fishing &amp; Supply</span><nav><a href="digest.html">Full report</a><a href="latest.png">Image</a><a href="archive/">Archive</a></nav>
 <button id="rf" type="button" title="Check for a new report and pull live ECMWF wind/rain + Open-Meteo Marine currents"><span><span class="ic">↻</span> <span id="rfl">Refresh</span></span><small id="rft">Auto every hour</small></button></div>
 <div class="status" id="status">Loading…</div>
 <div class="livebar" id="livebar">Loading…</div>
 <section class="forecast" aria-label="Hourly fishing forecast">
-<div class="forecast-head"><button id="forecast-now" type="button">Now</button><button id="forecast-play" type="button" disabled>▶ Play</button><strong id="forecast-time" aria-live="polite">Loading hourly forecast…</strong><span id="forecast-state"></span></div>
-<label for="forecast-slider" class="forecast-note">Drag to select an hourly forecast · all times PHT</label><input id="forecast-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast hour">
-<div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div><div class="forecast-note" id="forecast-note">Map colors, wind, gusts, rain and currents follow the selected hour. Supply panels remain from the report.</div>
+<div class="forecast-head"><button id="forecast-m48" class="jump" type="button" title="Jump to 48 hours ago">−48h</button><button id="forecast-m24" class="jump" type="button" title="Jump to 24 hours ago">−24h</button><button id="forecast-now" type="button">Now</button><button id="forecast-play" type="button" disabled>▶ Play</button><strong id="forecast-time" aria-live="polite">Loading hourly forecast…</strong><span id="forecast-state"></span></div>
+<label for="forecast-slider" class="forecast-note">Drag to select an hour: past 48 hours (striped) to the end of the forecast · all times PHT</label><input id="forecast-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast hour">
+<div class="track-wrap" aria-hidden="true"><div class="ftrack"><div class="pastseg" id="forecast-pastseg" style="width:0"></div></div><div class="nowtick" id="forecast-nowtick" style="left:8px;display:none"><span>Now</span></div></div>
+<div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div><div class="past-hint" id="past-hint"></div><div class="forecast-note" id="forecast-note">Map colors, wind, gusts, rain and currents follow the selected hour. Supply panels remain from the report.</div>
 </section>
 <div class="wrap">
 <div><div id="map"></div><div class="ctl"><label><input type="checkbox" id="arr" checked> Current arrows</label><label><input type="checkbox" id="warr" checked> Wind arrows</label><label><input type="checkbox" id="wflow" checked> Wind flow animation</label><label><input type="checkbox" id="lab" checked> Labels</label></div></div>
@@ -61,7 +67,7 @@ const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY 
 const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
 const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
 const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
-const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livLiveV1';
+const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livLiveV2',PAST_HOURS=48;
 /* ---------- rating rules: faithful port of server.py (current/wind/rain classes, worst-of) ---------- */
 const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
@@ -94,6 +100,14 @@ const currentLabel=c=>{const k=num(c?.kt);if(k==null)return 'Current UNAVAILABLE
 const LABEL_POS={decabobo:['top',0,-14],galoc:['left',-66,0],binudac:['left',-66,-8],alava:['left',-66,14],nangalao:['right',10,-15],cabunlawan:['right',10,15]};
 const windLabel=w=>{const k=kph(w?.kt);if(k==null)return 'wind UNAVAILABLE';const g=kph(w.gustKt),dir=windDeg(w)==null?'':compass(windDeg(w))+' ';return dir+k+' kph'+(g==null?'':' g'+g)};
 const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+/* ---------- past hours (model's recent values, not observations) ---------- */
+const nowHourMs=(t=Date.now())=>Math.round(t/36e5)*36e5;   // same "current hour" rule the slider has always used
+const isPast=(t,now=Date.now())=>!!t&&tPHT(t)<nowHourMs(now);
+const timeLabel=(t,now=Date.now())=>(isPast(t,now)?'Past · ':'Forecast for ')+forecastLabel(t);
+const phtDay=ms=>new Date(ms).toLocaleDateString('en-CA',{timeZone:'Asia/Manila'});
+const dayWord=(t,now=Date.now())=>{const d=Math.round((Date.parse(phtDay(now))-Date.parse(phtDay(tPHT(t))))/864e5);return d<=0?'Earlier today':d==1?'Yesterday':d==2?'2 days ago':d+' days ago'};
+const hoursAgoIdx=(times,h,now=Date.now())=>{if(!times.length)return -1;const target=nowHourMs(now)-h*36e5;let b=0,bd=null;times.forEach((t,i)=>{const d=Math.abs(tPHT(t)-target);if(bd==null||d<bd){bd=d;b=i}});return b};
+const PAST_NOTE='Past hours show the model\u2019s recent values for those hours (Open-Meteo ECMWF near-analysis + Open-Meteo Marine currents), not on-site observations.';
 /* ---------- state ---------- */
 let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,windArrows,windFlow=null;
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
@@ -103,8 +117,8 @@ async function getJSON(url){let r;try{r=await fetch(url,{cache:'no-store'})}catc
  if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j&&j.error)throw new Error(j.reason||'API error');return Array.isArray(j)?j:[j]}
 async function fetchLive(areas){
  const lat=areas.map(a=>a.lat).join(','),lon=areas.map(a=>a.lng).join(',');
- const eq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',cell_selection:'sea'});
- const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3'});
+ const eq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',past_days:'2',cell_selection:'sea'});
+ const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3',past_days:'2'});
  const [e,m]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq)]);
  const ok=(r)=>r.status=='fulfilled'&&r.value.length==areas.length;
  return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf:ok(e)?e.value:null,marine:ok(m)?m.value:null,
@@ -124,30 +138,37 @@ function computeLive(a,i,L,time=selectedTime){
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
 }
 function stopPlayback(){if(playTimer)clearInterval(playTimer);playTimer=null;$('forecast-play').textContent='▶ Play';$('forecast-play').setAttribute('aria-pressed','false')}
-function updateMapClock(){const active=forecastTimes.includes(selectedTime);$('map-forecast-label').textContent=active?'Forecast time':'Report snapshot';$('map-forecast-time').textContent=active?forecastLabel(selectedTime):(D?RT():'Loading…')}
+function updateMapClock(){const active=forecastTimes.includes(selectedTime),past=active&&isPast(selectedTime);$('map-forecast-label').textContent=active?(past?'Past hour (model values, not observations)':'Forecast time'):'Report snapshot';$('map-forecast-time').textContent=active?(past?'Past · ':'')+forecastLabel(selectedTime):(D?RT():'Loading…');const mc=$('map-forecast-time').parentNode;if(mc&&mc.classList)mc.classList.toggle('past',past)}
 function updateForecastControls(){
  updateMapClock();
  const active=forecastTimes.length>0,idx=Math.max(0,forecastTimes.indexOf(selectedTime));
  $('forecast-slider').disabled=!active;$('forecast-play').disabled=!active||forecastTimes.length<2;
  $('forecast-slider').max=String(Math.max(0,forecastTimes.length-1));$('forecast-slider').value=String(idx);
- $('forecast-time').textContent=active?'Forecast for '+forecastLabel(selectedTime):'Hourly forecast UNAVAILABLE';
- $('forecast-slider').setAttribute('aria-valuetext',active?forecastLabel(selectedTime):U);
+ $('forecast-time').textContent=active?timeLabel(selectedTime):'Hourly forecast UNAVAILABLE';
+ const past=active&&isPast(selectedTime),sec=$('forecast-slider').parentNode;if(sec&&sec.classList)sec.classList.toggle('past',past);
+ $('forecast-m48').disabled=$('forecast-m24').disabled=!active||!forecastTimes.some(t=>isPast(t));
+ const n=forecastTimes.length,ni=active?hoursAgoIdx(forecastTimes,0):-1,frac=n>1&&ni>=0?ni/(n-1):0;
+ $('forecast-pastseg').style.width=(frac*100)+'%';$('forecast-nowtick').style.display=active&&ni>0?'block':'none';$('forecast-nowtick').style.left=`calc(8px + (100% - 16px) * ${frac})`;
+ $('past-hint').textContent=past?dayWord(selectedTime)+' · Boats landing today mostly fished yesterday or the day before (0–1 day landing lag). '+PAST_NOTE:'';
+ $('forecast-slider').setAttribute('aria-valuetext',active?timeLabel(selectedTime):U);
  $('forecast-start').textContent=active?forecastLabel(forecastTimes[0]):'—';
  $('forecast-end').textContent=active?forecastLabel(forecastTimes[forecastTimes.length-1]):'—';
  $('forecast-state').textContent=active&&LIVE?'Data updated '+fmtPHT(LIVE.at):'Report snapshot only';
- $('forecast-note').textContent=active?'Map conditions follow the selected hour; click a ground for wind, gusts, hourly rain and currents. Gray means incomplete data. Supply panels stay from the report.':'Forecast data unavailable. Report map is not a future forecast. Use Refresh to retry.';
+ $('forecast-note').textContent=active?'Map conditions follow the selected hour (past 48 h to forecast end); click a ground for wind, gusts, hourly rain and currents. Gray means incomplete data. Supply panels stay from the report.':'Forecast data unavailable. Report map is not a future forecast. Use Refresh to retry.';
 }
 function rebuildForecastTimes(){
  const ids=D?.areas.map(a=>a.id).join(','),valid=LIVE&&LIVE.ids===ids;
  const times=new Set();if(valid){for(const source of [LIVE.ecmwf,LIVE.marine])for(const loc of source||[])for(const t of loc.hourly?.time||[])if(Number.isFinite(tPHT(t)))times.add(t)}
- const cutoff=Math.round(Date.now()/36e5)*36e5;
+ const cutoff=nowHourMs()-PAST_HOURS*36e5;
  forecastTimes=[...times].filter(t=>tPHT(t)>=cutoff).sort((a,b)=>tPHT(a)-tPHT(b));
- if(!forecastTimes.includes(selectedTime)){selectedTime=forecastTimes[0]||null;stopPlayback()}
+ if(!forecastTimes.includes(selectedTime)){selectedTime=forecastTimes[Math.max(0,hoursAgoIdx(forecastTimes,0))]||null;stopPlayback()}
  updateForecastControls();
 }
 function chooseForecast(index){selectedTime=forecastTimes[Math.max(0,Math.min(forecastTimes.length-1,index))]||null;updateForecastControls();if(D)renderMap()}
 $('forecast-slider').oninput=e=>{stopPlayback();chooseForecast(Number(e.target.value))};
-$('forecast-now').onclick=()=>{stopPlayback();rebuildForecastTimes();chooseForecast(0);if(!forecastTimes.length)refresh('forecast-load')};
+$('forecast-now').onclick=()=>{stopPlayback();rebuildForecastTimes();chooseForecast(Math.max(0,hoursAgoIdx(forecastTimes,0)));if(!forecastTimes.length)refresh('forecast-load')};
+const jumpBack=h=>{stopPlayback();if(forecastTimes.length)chooseForecast(hoursAgoIdx(forecastTimes,h))};
+$('forecast-m48').onclick=()=>jumpBack(48);$('forecast-m24').onclick=()=>jumpBack(24);
 $('forecast-play').onclick=()=>{if(playTimer){stopPlayback();return}if(!forecastTimes.length)return;if(selectedTime===forecastTimes[forecastTimes.length-1])chooseForecast(0);$('forecast-play').textContent='❚❚ Pause';$('forecast-play').setAttribute('aria-pressed','true');playTimer=setInterval(()=>{const next=forecastTimes.indexOf(selectedTime)+1;if(next>=forecastTimes.length){stopPlayback();return}chooseForecast(next);if(next===forecastTimes.length-1)stopPlayback()},1000)};
 /* ---------- rendering ---------- */
 
@@ -179,7 +200,7 @@ function renderMap(){
   const [ld,dx,dy]=LABEL_POS[a.id]||['right',10,0];
   m.bindTooltip(`${E(a.name)}<span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:ld,offset:[dx,dy],className:'lbl'+(ld=='left'?' lbl-left':'')});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
   const bw=a.bestWindow||{},rp=(bw.report||[]).map(E).join('<br>')||'See overall best window';
-  const when=a._forecast?'Forecast for '+forecastLabel(selectedTime):'Snapshot from '+RT()+' report';
+  const when=a._forecast?(isPast(selectedTime)?'Past hour · '+forecastLabel(selectedTime)+' · model values, not observations':'Forecast for '+forecastLabel(selectedTime)):'Snapshot from '+RT()+' report';
   m.bindPopup(`<div class="pop"><h3>${EM[a.rating]||'⚪'} ${E(a.name)} · ${E(a.rating)}</h3><div class="srcl">${E(when)}</div><table>
   <tr><td>🌊 Current</td><td><b>${v(a.current.kt,' kt')}</b> toward ${E(a.current.dir)} · ${E(a.current.status)}<br><span class="srcl">Open-Meteo Marine (not ECMWF)</span></td></tr>
   <tr><td>💨 Wind</td><td>${wk==null?'<b>wind UNAVAILABLE</b>':`<b style="color:${WINDCOL[wt]}">${wk} kph</b> (${E(a.wind.kt)} kt) from ${E(windDeg(a.wind)==null?U:compass(windDeg(a.wind)))}${windDeg(a.wind)==null?'':' → blowing toward '+compass(windToward(windDeg(a.wind)))}<br>gust ${kph(a.wind.gustKt)==null?U:kph(a.wind.gustKt)+' kph ('+E(a.wind.gustKt)+' kt)'}<br>${wt=='bad'?'<b style="color:#b91c1c">Above 18 kph: bad for fishermen</b>':wt=='near'?'<b style="color:#b45309">Near the 18 kph limit</b>':'At or below 18 kph'}`}<br><span class="srcl">ECMWF via Open-Meteo</span></td></tr>
@@ -199,11 +220,11 @@ function renderMap(){
  if(F.length){const cnt={};F.forEach(a=>cnt[a.rating]=(cnt[a.rating]||0)+1);const sum=['GOOD','MARGINAL','POOR','VERY POOR',U].filter(k=>cnt[k]).map(k=>`${EM[k]||'⚪'} ${cnt[k]} ${k.toLowerCase()}`).join(' · ');
  const lc={};F.forEach(a=>a._lim.forEach(f=>lc[f]=(lc[f]||0)+1));const mx=Math.max(0,...Object.values(lc));
  const lim=mx?Object.keys(lc).filter(k=>lc[k]===mx).join(' + ')+` (${mx} grounds)`:cnt[U]?'Incomplete inputs':'none — all grounds good';
- chips.push(pill('Forecast · '+forecastLabel(selectedTime),sum,'live'),pill('Forecast limiter',lim,'live'));
+ const pl=isPast(selectedTime)?'Past':'Forecast';chips.push(pill(pl+' · '+forecastLabel(selectedTime),sum,'live'),pill(pl+' limiter',lim,'live'));
  }else chips.push(pill('Fishing snapshot',D.overall+' (report)'),pill('Limiter',D.limiter+' (report)'));
  chips.push(pill('Report confidence',D.confidence),pill('PAGASA',D.pagasa.status+' (report)'));$('status').innerHTML=chips.join('');
  const lb=$('livebar'),nx=nextAt?` · Next auto-refresh ${fmtLocal(nextAt)}`:'';
- if(F.length){const missing=F.filter(a=>a.rating===U).length,old=Date.now()-LIVE.at>LIVE_STALE_MS;lb.className='livebar '+(missing||LIVEERR||old?'part':'ok');lb.textContent=`Forecast for ${forecastLabel(selectedTime)} · Data updated ${fmtPHT(LIVE.at)} · ECMWF wind/rain + Open-Meteo Marine currents (not ECMWF)`+(missing?` · ${missing} incomplete ratings`:'' )+(LIVEERR?' · Refresh failed; showing cached forecast':'')+(old?' · Cached data over 1 hour old':'')+nx;
+ if(F.length){const missing=F.filter(a=>a.rating===U).length,old=Date.now()-LIVE.at>LIVE_STALE_MS;lb.className='livebar '+(missing||LIVEERR||old?'part':'ok');lb.textContent=`${timeLabel(selectedTime)} · Data updated ${fmtPHT(LIVE.at)} · ECMWF wind/rain + Open-Meteo Marine currents (not ECMWF)`+(missing?` · ${missing} incomplete ratings`:'' )+(LIVEERR?' · Refresh failed; showing cached forecast':'')+(old?' · Cached data over 1 hour old':'')+nx;
  }else{lb.className='livebar warn';lb.textContent=`Report snapshot from ${RT()}; NOT a forecast for another hour. `+(LIVEERR?'Forecast refresh unavailable: '+LIVEERR:'Loading hourly ECMWF / Marine forecast…')+nx}
 }
 /* ---------- light animated wind-flow particles: inverse-distance interpolation of the grounds' selected-hour ECMWF winds ---------- */
