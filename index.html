@@ -24,10 +24,11 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{background:#0e2333;border-radius:6px;padding:5px 3px;text-align:center;font-size:11px}
 .day b{display:block;font-size:12px}.day .r{font-size:16px}.fn{font-size:12px;opacity:.75}
 .lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:600;text-shadow:0 0 3px #000,0 0 3px #000;font-size:11px;padding:0}
-.lbl:before{display:none}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
+.lbl:before{display:none}.lbl-left{text-align:right}.lbl-left .wl,.lbl-left .cl{margin-left:auto}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:11.5px;line-height:1.4;max-width:270px}
 .leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}.pop .srcl{font-size:11px;color:#475569}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-.lbl .wl{display:table;font-size:11px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1;font-weight:600}
+.lbl .wl{display:table;font-size:11px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}.lbl .cl{display:table;font-size:11px;font-weight:700;margin-top:1px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:15px}.cl.c-fav{color:#4ade80}.cl.c-mod{color:#facc15}.cl.c-str{color:#fb923c}.cl.c-vs{color:#f87171}.cl.c-na{color:#cbd5e1;font-weight:600}.hide-cur .lbl .cl{display:none}
+.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1;font-weight:600}
 .windico{pointer-events:none}.windico svg{overflow:visible;display:block}.windico .flow{stroke-dasharray:5 4;animation:windflow .9s linear infinite}
 @keyframes windflow{to{stroke-dashoffset:-9}}.windico .head{animation:windpulse 1.8s ease-in-out infinite}@keyframes windpulse{50%{opacity:.55}}
 .windflow-canvas{pointer-events:none}.lg-wind{display:inline-block;width:22px;vertical-align:middle}
@@ -86,6 +87,11 @@ const windToward=deg=>{const d=num(deg);return d==null?null:((d+180)%360+360)%36
 const windTone=k=>k==null?'na':k>WIND_BAD_KPH?'bad':k>WIND_BAD_KPH-WIND_NEAR_KPH?'near':'ok';
 const WINDCOL={ok:'#22c55e',near:'#f59e0b',bad:'#ef4444',na:'#94a3b8'};
 const windDeg=w=>{if(!w)return null;const d=num(w.deg);return d!=null?d:(DIR[w.dir]??null)};
+/* current line: Open-Meteo Marine (never ECMWF); colors follow the existing current scale */
+const curTone=k=>{const c=num(k);return c==null?'na':c<0.5?'fav':c<0.9?'mod':c<1.5?'str':'vs'};
+const currentLabel=c=>{const k=num(c?.kt);if(k==null)return 'Current UNAVAILABLE';return 'Current → '+(DIR[c.dir]!=null?c.dir+' ':'')+k.toFixed(1)+' kt'};
+// label placement [side,dx,dy]: keeps Decabobo/Turda and the Culion-Alava cluster apart; left labels clear the wind arrow
+const LABEL_POS={decabobo:['top',0,-14],galoc:['left',-66,0],binudac:['left',-66,-8],alava:['left',-66,14],nangalao:['right',10,-15],cabunlawan:['right',10,15]};
 const windLabel=w=>{const k=kph(w?.kt);if(k==null)return 'wind UNAVAILABLE';const g=kph(w.gustKt),dir=windDeg(w)==null?'':compass(windDeg(w))+' ';return dir+k+' kph'+(g==null?'':' g'+g)};
 const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
 /* ---------- state ---------- */
@@ -170,7 +176,8 @@ function renderMap(){
  A.forEach(a=>{const c=COL[a.rating]||'#94a3b8';pts.push([a.lat,a.lng]);
   const m=L.circleMarker([a.lat,a.lng],{radius:10,color:'#fff',weight:2,fillColor:c,fillOpacity:.95}).addTo(markers);
   const wk=kph(a.wind?.kt),wt=windTone(wk);
-  m.bindTooltip(`${E(a.name)}<span class="wl w-${wt}">${E(windLabel(a.wind))}</span>`,{permanent:true,direction:'right',offset:[10,0],className:'lbl'});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
+  const [ld,dx,dy]=LABEL_POS[a.id]||['right',10,0];
+  m.bindTooltip(`${E(a.name)}<span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:ld,offset:[dx,dy],className:'lbl'+(ld=='left'?' lbl-left':'')});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
   const bw=a.bestWindow||{},rp=(bw.report||[]).map(E).join('<br>')||'See overall best window';
   const when=a._forecast?'Forecast for '+forecastLabel(selectedTime):'Snapshot from '+RT()+' report';
   m.bindPopup(`<div class="pop"><h3>${EM[a.rating]||'⚪'} ${E(a.name)} · ${E(a.rating)}</h3><div class="srcl">${E(when)}</div><table>
@@ -223,8 +230,8 @@ function createWindFlow(map){
 function fit(){map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
 function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
  map.createPane('windflow').style.zIndex=350;markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);windFlow=createWindFlow(map);
- const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph';return d};lg.addTo(map);
- $('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
+ const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph<br>Current line (flows toward, Open-Meteo Marine): <span style="color:#4ade80">green</span> &lt;0.5, <span style="color:#facc15">yellow</span> 0.5–0.9, <span style="color:#fb923c">orange</span> 0.9–1.5, <span style="color:#f87171">red</span> ≥1.5 kt';return d};lg.addTo(map);
+ $('arr').onchange=e=>{e.target.checked?arrows.addTo(map):arrows.remove();map.getContainer().classList.toggle('hide-cur',!e.target.checked)};
  $('warr').onchange=e=>e.target.checked?windArrows.addTo(map):windArrows.remove();
  $('wflow').onchange=e=>windFlow.enable(e.target.checked);$('wflow').checked=windFlow.isOn();
  $('lab').onchange=e=>markers.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));addEventListener('resize',fit)}
