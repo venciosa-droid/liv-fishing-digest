@@ -54,3 +54,15 @@ let r=computeLive(area,0,fixture,time[3]);assert(r.wind.deg===135&&windToward(r.
 fixture.ecmwf[0].hourly.wind_speed_10m[3]=null;r=computeLive(area,0,fixture,time[3]);assert(r.wind.deg===null&&windLabel(r.wind)==='wind UNAVAILABLE','no arrow without speed');
 console.log('PASS: kph conversion, compass mapping, arrow rotation, 18 kph threshold colors, UNAVAILABLE label');
 `,ctx);
+// Current line under the wind label (Open-Meteo Marine).
+vm.runInContext(`
+assert(currentLabel({kt:1.6,dir:'NW'})==='Current → NW 1.6 kt'&&currentLabel({kt:0,dir:'E'})==='Current → E 0.0 kt','current label format');
+assert(currentLabel({kt:null,dir:null})==='Current UNAVAILABLE'&&currentLabel(null)==='Current UNAVAILABLE'&&currentLabel({kt:'',dir:'N'})==='Current UNAVAILABLE','missing current');
+assert(curTone(0.49)==='fav'&&curTone(0.5)==='mod'&&curTone(0.89)==='mod'&&curTone(0.9)==='str'&&curTone(1.49)==='str'&&curTone(1.5)==='vs'&&curTone(null)==='na','current scale matches curClass');
+[0.2,0.5,0.9,1.5].forEach((k,i)=>assert(curClass(k)===['Favorable','Moderate','Strong','Very Strong'][i],'curClass unchanged'));
+fixture.ecmwf[0].hourly.wind_speed_10m[3]=23;
+let c=computeLive(area,0,fixture,time[3]).current;assert(currentLabel(c)==='Current → S 2.2 kt'&&curTone(c.kt)==='vs','forecast hour current label (4 km/h)');
+c=computeLive(area,0,fixture,time[1]).current;assert(currentLabel(c)==='Current UNAVAILABLE','missing marine hour shows UNAVAILABLE');
+assert(!/ECMWF/.test(currentLabel({kt:1,dir:'N'})),'never labelled ECMWF');
+console.log('PASS: current line label, color scale, UNAVAILABLE, slider hour');
+`,ctx);
