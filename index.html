@@ -27,6 +27,11 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .lbl:before{display:none}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.5}
 .leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}.pop .srcl{font-size:11px;color:#475569}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.lbl .wl{display:table;font-size:11px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1;font-weight:600}
+.windico{pointer-events:none}.windico svg{overflow:visible;display:block}.windico .flow{stroke-dasharray:5 4;animation:windflow .9s linear infinite}
+@keyframes windflow{to{stroke-dashoffset:-9}}.windico .head{animation:windpulse 1.8s ease-in-out infinite}@keyframes windpulse{50%{opacity:.55}}
+.windflow-canvas{pointer-events:none}.lg-wind{display:inline-block;width:22px;vertical-align:middle}
+@media(prefers-reduced-motion:reduce){.windico .flow,.windico .head{animation:none}}
 @media(min-width:900px){.wrap{grid-template-columns:1.6fr 1fr}#map{height:calc(100vh - 170px)}.side{height:calc(100vh - 140px);overflow:auto}}
 .forecast{padding:10px 12px;background:#132e40;border-bottom:1px solid #315267}.forecast-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}.forecast button{background:#11557e;color:white;border:1px solid #8fd3ff;border-radius:7px;padding:7px 14px;font:600 14px system-ui;cursor:pointer}.forecast button:disabled{opacity:.45;cursor:not-allowed}.forecast input{width:100%;accent-color:#7dd3fc;min-height:30px;cursor:pointer}.forecast-range{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#bfe6ff}.forecast-note{font-size:12px;color:#bfe6ff;margin-top:4px}#forecast-time{font-size:15px}#forecast-state{margin-left:auto;font-size:12px;color:#bfe6ff}.forecast input:focus-visible,.forecast button:focus-visible{outline:3px solid #facc15;outline-offset:2px}
 @media(min-width:900px){#map{height:calc(100vh - 295px);min-height:340px}.side{height:calc(100vh - 265px)}}
@@ -41,7 +46,7 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 <div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div><div class="forecast-note" id="forecast-note">Map colors, wind, gusts, rain and currents follow the selected hour. Supply panels remain from the report.</div>
 </section>
 <div class="wrap">
-<div><div id="map"></div><div class="ctl"><label><input type="checkbox" id="arr" checked> Current arrows</label><label><input type="checkbox" id="lab" checked> Labels</label></div></div>
+<div><div id="map"></div><div class="ctl"><label><input type="checkbox" id="arr" checked> Current arrows</label><label><input type="checkbox" id="warr" checked> Wind arrows</label><label><input type="checkbox" id="wflow" checked> Wind flow animation</label><label><input type="checkbox" id="lab" checked> Labels</label></div></div>
 <div class="side"><div class="rep" id="repnote"></div>
 <div class="card"><h2>📦 Supply forecast<span class="rs">from report</span></h2><div id="supply"></div><p class="fn" id="risk"></p></div>
 <div class="card"><h2>🎣 Best fishing window<span class="rs">from report</span></h2><div id="win"></div></div>
@@ -74,9 +79,17 @@ const rain3=(p,i)=>{if(i<2)return null;const vals=[num(p[i-2]),num(p[i-1]),num(p
 const labHour=t=>{const d=new Date(tPHT(t));return d.toLocaleDateString('en-US',{weekday:'short',timeZone:'Asia/Manila'})+' '+t.slice(11,13)};
 const fmtPHT=ms=>new Date(ms).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
 const fmtLocal=fmtPHT;
+/* ---------- wind display (display only; does NOT change fishing ratings) ---------- */
+const KT_TO_KPH=1.852,WIND_BAD_KPH=18,WIND_NEAR_KPH=2;
+const kph=kt=>{const k=num(kt);return k==null?null:Math.round(k*KT_TO_KPH)};
+const windToward=deg=>{const d=num(deg);return d==null?null:((d+180)%360+360)%360};   // meteorological "from" -> "blowing toward"
+const windTone=k=>k==null?'na':k>WIND_BAD_KPH?'bad':k>WIND_BAD_KPH-WIND_NEAR_KPH?'near':'ok';
+const WINDCOL={ok:'#22c55e',near:'#f59e0b',bad:'#ef4444',na:'#94a3b8'};
+const windDeg=w=>{if(!w)return null;const d=num(w.deg);return d!=null?d:(DIR[w.dir]??null)};
+const windLabel=w=>{const k=kph(w?.kt);if(k==null)return 'wind UNAVAILABLE';const g=kph(w.gustKt),dir=windDeg(w)==null?'':compass(windDeg(w))+' ';return dir+k+' kph'+(g==null?'':' g'+g)};
 const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
 /* ---------- state ---------- */
-let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null;
+let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,windArrows,windFlow=null;
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
  const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;return Date.UTC(+m[3],mo,+m[1],h-8,+m[5])}
 /* ---------- live fetch (browser -> Open-Meteo, ONE batched request per API) ---------- */
@@ -99,7 +112,7 @@ function computeLive(a,i,L,time=selectedTime){
  const ck=toKt(at(mh.ocean_current_velocity,mi),ma?.hourly_units?.ocean_current_velocity||'km/h');
  const cc=curClass(ck),wc=windClass(wk),rc=rainClass(r3),rating=fishing(cc,wc,rc);
  const worst=rating===U?null:Math.max(rankOf(cc),rankOf(wc),rankOf(rc));
- return {time:target,wind:{kt:r1(wk),gustKt:r1(gust),dir:compass(at(eh.wind_direction_10m,ei)),source:'ECMWF via Open-Meteo'},
+ return {time:target,wind:{kt:r1(wk),gustKt:r1(gust),deg:wk==null?null:at(eh.wind_direction_10m,ei),dir:compass(at(eh.wind_direction_10m,ei)),source:'ECMWF via Open-Meteo'},
  rain:{mmHour:r1(mm),mm3h:r1(r3),intensity:rainClass(r3),source:'ECMWF via Open-Meteo'},
  current:{kt:r1(ck),dir:ck==null?null:compass(at(mh.ocean_current_direction,mi)),status:cc,source:'Open-Meteo Marine currents'},
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
@@ -152,21 +165,27 @@ function merged(){
 }
 function renderMap(){
  updateMapClock();
- const A=merged(),rep=E(RT()),lt=LIVE?fmtPHT(LIVE.at):null;markers.clearLayers();arrows.clearLayers();pts=[];
+ const A=merged(),rep=E(RT()),lt=LIVE?fmtPHT(LIVE.at):null;markers.clearLayers();arrows.clearLayers();windArrows.clearLayers();pts=[];
  const showLab=$('lab').checked;
  A.forEach(a=>{const c=COL[a.rating]||'#94a3b8';pts.push([a.lat,a.lng]);
   const m=L.circleMarker([a.lat,a.lng],{radius:10,color:'#fff',weight:2,fillColor:c,fillOpacity:.95}).addTo(markers);
-  m.bindTooltip(a.name,{permanent:true,direction:'right',offset:[10,0],className:'lbl'});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
+  const wk=kph(a.wind?.kt),wt=windTone(wk);
+  m.bindTooltip(`${E(a.name)}<span class="wl w-${wt}">${E(windLabel(a.wind))}</span>`,{permanent:true,direction:'right',offset:[10,0],className:'lbl'});if(!showLab)setTimeout(()=>m.closeTooltip(),0);
   const bw=a.bestWindow||{},rp=(bw.report||[]).map(E).join('<br>')||'See overall best window';
   const when=a._forecast?'Forecast for '+forecastLabel(selectedTime):'Snapshot from '+RT()+' report';
   m.bindPopup(`<div class="pop"><h3>${EM[a.rating]||'⚪'} ${E(a.name)} · ${E(a.rating)}</h3><div class="srcl">${E(when)}</div><table>
   <tr><td>🌊 Current</td><td><b>${v(a.current.kt,' kt')}</b> toward ${E(a.current.dir)} · ${E(a.current.status)}<br><span class="srcl">Open-Meteo Marine (not ECMWF)</span></td></tr>
-  <tr><td>💨 Wind</td><td>${v(a.wind.kt,' kt')} ${E(a.wind.dir)}, gust ${v(a.wind.gustKt,' kt')}<br><span class="srcl">ECMWF via Open-Meteo</span></td></tr>
+  <tr><td>💨 Wind</td><td>${wk==null?'<b>wind UNAVAILABLE</b>':`<b style="color:${WINDCOL[wt]}">${wk} kph</b> (${E(a.wind.kt)} kt) from ${E(windDeg(a.wind)==null?U:compass(windDeg(a.wind)))}${windDeg(a.wind)==null?'':' → blowing toward '+compass(windToward(windDeg(a.wind)))}<br>gust ${kph(a.wind.gustKt)==null?U:kph(a.wind.gustKt)+' kph ('+E(a.wind.gustKt)+' kt)'}<br>${wt=='bad'?'<b style="color:#b91c1c">Above 18 kph: bad for fishermen</b>':wt=='near'?'<b style="color:#b45309">Near the 18 kph limit</b>':'At or below 18 kph'}`}<br><span class="srcl">ECMWF via Open-Meteo</span></td></tr>
   <tr><td>🌧️ Rain</td><td>${a._forecast?v(a.rain.mmHour,' mm this hour')+'<br>Trailing 3h: '+v(a.rain.mm3h,' mm'):E(a.rain.intensity)+' · '+v(a.rain.mm3h,' mm/3h')}<br><span class="srcl">ECMWF via Open-Meteo</span></td></tr>
   ${a.note?`<tr><td colspan=2 style="color:#b45309"><b>ⓘ ${E(a.note)}</b></td></tr>`:''}<tr><td>🎣 Report window</td><td>${rp}<br><span class="srcl">From ${rep} report; does not follow slider.</span></td></tr></table></div>`,{maxWidth:320});
   if(a.current.kt!=null&&DIR[a.current.dir]!=null){const sz=14+a.current.kt*22;
    L.marker([a.lat,a.lng],{interactive:false,icon:L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
-   html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}});
+   html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[a.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}
+  const wd=windToward(windDeg(a.wind));
+  if(wk!=null&&wd!=null){const len=Math.round(Math.min(46,22+wk*0.6)),col=WINDCOL[wt],box=len*2+16;
+   L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+   html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${wd})"><line x1="0" y1="-12" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line class="flow" x1="0" y1="-12" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path class="head" d="M0 ${-len-9} L-6 ${-len+1} L6 ${-len+1} Z" fill="${col}" stroke="#0b1220" stroke-width="1.6" stroke-linejoin="round"/></g></svg>`})}).addTo(windArrows)}});
+ if(windFlow)windFlow.setData(A);
  // Forecast summary never reuses report ratings for missing selected-hour data.
  const F=A.filter(a=>a._forecast),pill=(k,x,cls='')=>`<span class="pill ${cls}">${k}: <b>${E(x)}</b></span>`;
  let chips=[pill('🕑 Report',D.reportTime)];
@@ -180,11 +199,34 @@ function renderMap(){
  if(F.length){const missing=F.filter(a=>a.rating===U).length,old=Date.now()-LIVE.at>LIVE_STALE_MS;lb.className='livebar '+(missing||LIVEERR||old?'part':'ok');lb.textContent=`Forecast for ${forecastLabel(selectedTime)} · Data updated ${fmtPHT(LIVE.at)} · ECMWF wind/rain + Open-Meteo Marine currents (not ECMWF)`+(missing?` · ${missing} incomplete ratings`:'' )+(LIVEERR?' · Refresh failed; showing cached forecast':'')+(old?' · Cached data over 1 hour old':'')+nx;
  }else{lb.className='livebar warn';lb.textContent=`Report snapshot from ${RT()}; NOT a forecast for another hour. `+(LIVEERR?'Forecast refresh unavailable: '+LIVEERR:'Loading hourly ECMWF / Marine forecast…')+nx}
 }
+/* ---------- light animated wind-flow particles: inverse-distance interpolation of the grounds' selected-hour ECMWF winds ---------- */
+function idwWind(p,src,power=2){let su=0,sv=0,sw=0;for(const s of src){const dx=p[0]-s.x,dy=p[1]-s.y,d2=dx*dx+dy*dy;if(d2<1)return [s.u,s.v,s.k];const w=1/Math.pow(d2,power/2);su+=w*s.u;sv+=w*s.v;sw+=w}
+ if(!sw)return null;const u=su/sw,v=sv/sw;return [u,v,null]}
+function createWindFlow(map){
+ const reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const cv=L.DomUtil.create('canvas','windflow-canvas',map.getPane('windflow')),cx=cv.getContext('2d');
+ let data=[],src=[],parts=[],on=!reduce,raf=null,N=260;
+ function size(){if(!map._loaded)return;const s=map.getSize();cv.width=s.x;cv.height=s.y;cv.style.width=s.x+'px';cv.style.height=s.y+'px';L.DomUtil.setPosition(cv,map.containerPointToLayerPoint([0,0]));parts=[];project()}
+ function project(){if(!map._loaded){src=[];return}src=data.map(a=>{const k=kph(a.wind?.kt),t=windToward(windDeg(a.wind));if(k==null||t==null)return null;const p=map.latLngToContainerPoint([a.lat,a.lng]),r=t*Math.PI/180;return {x:p.x,y:p.y,u:Math.sin(r)*k,v:-Math.cos(r)*k,k}}).filter(Boolean)}
+ function spawn(){return {x:Math.random()*cv.width,y:Math.random()*cv.height,age:Math.floor(Math.random()*80)}}
+ function frame(){raf=null;if(!on)return;cx.globalCompositeOperation='destination-in';cx.fillStyle='rgba(0,0,0,0.9)';cx.fillRect(0,0,cv.width,cv.height);cx.globalCompositeOperation='source-over';
+  if(src.length){while(parts.length<N)parts.push(spawn());cx.lineWidth=1.2;
+   for(const q of parts){const w=idwWind([q.x,q.y],src);if(!w){Object.assign(q,spawn());continue}const sp=Math.hypot(w[0],w[1]),ox=q.x,oy=q.y;q.x+=w[0]*0.06;q.y+=w[1]*0.06;q.age++;
+    cx.strokeStyle=sp>WIND_BAD_KPH?'rgba(239,68,68,.6)':'rgba(255,255,255,.7)';cx.beginPath();cx.moveTo(ox,oy);cx.lineTo(q.x,q.y);cx.stroke();
+    if(q.age>90||q.x<0||q.y<0||q.x>cv.width||q.y>cv.height)Object.assign(q,spawn(),{age:0})}}
+  raf=requestAnimationFrame(frame)}
+ function start(){if(on&&!raf)raf=requestAnimationFrame(frame)}
+ map.on('movestart zoomstart',()=>{cx.clearRect(0,0,cv.width,cv.height);parts=[]});map.on('moveend zoomend resize',size);
+ map.whenReady(()=>{size();start()});
+ return {setData(A){data=A||[];project();if(!src.length)cx.clearRect(0,0,cv.width,cv.height);start()},
+  enable(x){on=!!x;cx.clearRect(0,0,cv.width,cv.height);parts=[];if(on)start()},isOn:()=>on,count:()=>src.length}}
 function fit(){map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
 function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
- markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);
- const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)';return d};lg.addTo(map);
+ map.createPane('windflow').style.zIndex=350;markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);windFlow=createWindFlow(map);
+ const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph';return d};lg.addTo(map);
  $('arr').onchange=e=>e.target.checked?arrows.addTo(map):arrows.remove();
+ $('warr').onchange=e=>e.target.checked?windArrows.addTo(map):windArrows.remove();
+ $('wflow').onchange=e=>windFlow.enable(e.target.checked);$('wflow').checked=windFlow.isOn();
  $('lab').onchange=e=>markers.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));addEventListener('resize',fit)}
 /* ---------- refresh ---------- */
 function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
