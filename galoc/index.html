@@ -131,16 +131,15 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 .map-block .forecast{border:0;border-top:1px solid #315267;border-radius:0}
 .map-stage{position:relative}
 #map{width:100%;aspect-ratio:7/6;max-height:360px;min-height:240px;background:#0a1a12}
-.map-clock{position:absolute;left:8px;top:52px;z-index:500;background:#0b1220e6;color:#fff;padding:4px 8px;border-radius:8px;max-width:62%;pointer-events:none}
-.map-clock small{display:block;color:#bfe6ff;font-size:10px}
-.map-clock strong{display:block;font-size:12px;line-height:1.35;color:#fff}
+#map .leaflet-tooltip-pane{overflow:visible}
 #map-recenter{position:absolute;top:8px;left:8px;z-index:500;min-height:36px;padding:6px 10px;border:1px solid #8fd3ff;border-radius:8px;background:#0b1220cc;color:#fff;font:700 12px system-ui;cursor:pointer}
 .leaflet-control-zoom a{width:36px!important;height:36px!important;line-height:36px!important;font-size:18px!important}
 .leaflet-control-attribution{font-size:9px;background:rgba(11,18,32,.7)!important;color:#d6e8f3!important}
 .leaflet-control-attribution a{color:#8fd3ff!important}
 .lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:700;text-shadow:0 0 3px #000,0 0 3px #000;font-size:13px;padding:0}
 .lbl:before{display:none}
-.lbl .wl,.lbl .cl{display:table;font-size:12px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}
+.lbl .wl,.lbl .cl,.lbl .tl{display:table;font-size:12px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}
+.lbl .tl{font-size:14px;line-height:20px;color:#fff;padding:1px 7px;margin-top:3px}
 .wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1}
 .cl.c-fav{color:#4ade80}.cl.c-mod{color:#facc15}.cl.c-str{color:#fb923c}.cl.c-vs{color:#f87171}.cl.c-na{color:#cbd5e1}
 .windico,.curico{pointer-events:none}
@@ -170,10 +169,6 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
     <div class="map-stage">
       <div id="map" role="region" aria-label="Satellite map of Galoc Station on Galoc Island"></div>
       <button type="button" id="map-recenter" title="Return to Galoc Station">Recenter</button>
-      <div class="map-clock" id="map-clock">
-        <small id="map-forecast-label">Forecast time</small>
-        <strong id="map-forecast-time">Loading…</strong>
-      </div>
     </div>
     <div class="map-legend">Pin = fishing color · Wind arrow = blowing toward (red if over 18 kph) · Current arrow = flow, colored by kt</div>
     <section class="forecast" id="forecast-sec" aria-label="Hourly fishing forecast">
@@ -341,7 +336,8 @@ function liveHourTimes(){
  if(valid){for(const source of [LIVE.ecmwf,LIVE.marine])for(const loc of source||[])for(const t of loc.hourly?.time||[])if(Number.isFinite(tPHT(t)))times.add(t)}
  return [...times].sort((a,b)=>tPHT(a)-tPHT(b));
 }
-function updateMapClock(){const active=forecastTimes.includes(selectedTime);if($('map-forecast-label'))$('map-forecast-label').textContent=active?'Forecast time':'Report snapshot';if($('map-forecast-time'))$('map-forecast-time').textContent=active?(shortLabel(selectedTime)+' PHT'):(D?RT():'Loading…')}
+const clockText=()=>forecastTimes.includes(selectedTime)?(shortLabel(selectedTime)+' PHT'):(D?RT():'Loading…');
+function updateMapClock(){const el=$('map-forecast-time');if(el)el.textContent=clockText()}
 function updateForecastControls(){
  updateMapClock();
  const active=forecastTimes.length>0,idx=Math.max(0,forecastTimes.indexOf(selectedTime));
@@ -499,7 +495,7 @@ function renderMap(){
  const c=COL[a.rating]||'#94a3b8';
  const pin=L.circleMarker([lat,lng],{radius:11,color:'#fff',weight:3,fillColor:c,fillOpacity:.95}).addTo(markers);
  const wk=kph(a.wind?.kt),wt=windTone(wk);
- pin.bindTooltip(`<b>Galoc Station</b><span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:'right',offset:[14,0],className:'lbl'});
+ pin.bindTooltip(`<b>Galoc Station</b><span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span><span class="tl" id="map-forecast-time">${E(clockText())}</span>`,{permanent:true,direction:'right',offset:[14,0],opacity:1,className:'lbl'});
  if(a.current&&num(a.current.kt)!=null&&DIR[a.current.dir]!=null){
   const ck=num(a.current.kt),col=CURCOL[curTone(ck)],len=Math.round(Math.min(36,16+ck*14)),box=len*2+18;
   L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'curico',iconSize:[box,box],iconAnchor:[box/2,box/2],

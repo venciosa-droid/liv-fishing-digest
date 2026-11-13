@@ -11,6 +11,8 @@ assert(!/id="forecast-m48"/.test(raw)&&!/id="forecast-m24"/.test(raw),'no past-h
 assert(/Now to the next 48 hours/.test(raw),'slider copy is Now to +48h');
 assert(raw.includes('STATION_LAT=11.966933')&&raw.includes('STATION_LNG=119.845707')&&raw.includes('MAP_ZOOM=12.5'),'map centered on Galoc Station');
 assert(/Galoc Station/.test(raw),'Galoc Station marker label');
+assert(!/class="map-clock"/.test(raw)&&!/id="map-clock"/.test(raw),'top-left forecast time box removed');
+assert(/class="tl" id="map-forecast-time"/.test(raw),'forecast time is a third pin label');
 let src=raw.split('<script>')[1].split('</script>')[0];
 src=src.slice(0,src.lastIndexOf('/* boot */'));
 vm.runInContext(src,ctx);
