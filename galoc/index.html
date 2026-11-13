@@ -6,8 +6,6 @@
 <meta name="theme-color" content="#0b3d5c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Galoc LIV">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <title>Galoc station · LIV fishing</title>
 <style>
 *{box-sizing:border-box}
@@ -162,6 +160,7 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 @keyframes windpulse{50%{opacity:.55}}
 .map-legend{padding:6px 10px 4px;font-size:11px;line-height:1.35;color:#bfe6ff;background:#0e2333}
 @media(prefers-reduced-motion:reduce){.windico .flow,.windico .head{animation:none}}
+.map-ph{margin:0;padding:80px 16px;text-align:center;color:#bfe6ff;font-size:14px}
 </style>
 </head>
 <body>
@@ -177,9 +176,19 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 </header>
 <div class="wrap">
   <p id="updated">Last updated: Loading…</p>
+  <section class="hero UNAVAILABLE" id="hero" aria-live="polite">
+    <p class="when" id="hero-when">Loading…</p>
+    <p class="rating" id="hero-rating">…</p>
+    <p class="limit" id="hero-limit"></p>
+    <div class="ice" id="ice-prep">
+      <h2>Ice prep, next 3 days</h2>
+      <div id="ice-days">Loading…</div>
+      <p class="ice-note" id="ice-note">This is a guide from wind and current only. Catch usually lands the same day or the next day (0–1 day landing lag). Missing hours are never filled in.</p>
+    </div>
+  </section>
   <div class="map-block">
     <div class="map-stage">
-      <div id="map" role="region" aria-label="Satellite map of Galoc Station on Galoc Island"></div>
+      <div id="map" role="region" aria-label="Satellite map of Galoc Station on Galoc Island"><p class="map-ph" id="map-placeholder">Map loads after the forecast.</p></div>
       <button type="button" id="map-recenter" title="Return to Galoc Station">Recenter</button>
     </div>
     <div class="map-legend">Pin = fishing color · Wind arrow = blowing toward (red if over 18 kph) · Current arrow = flow, colored by kt</div>
@@ -196,16 +205,6 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
       <p class="fn" id="forecast-note">The map and conditions follow the selected hour. Gray means data is missing.</p>
     </section>
   </div>
-  <section class="hero UNAVAILABLE" id="hero" aria-live="polite">
-    <p class="when" id="hero-when">Loading…</p>
-    <p class="rating" id="hero-rating">…</p>
-    <p class="limit" id="hero-limit"></p>
-    <div class="ice" id="ice-prep">
-      <h2>Ice prep, next 3 days</h2>
-      <div id="ice-days">Loading…</div>
-      <p class="ice-note" id="ice-note">This is a guide from wind and current only. Catch usually lands the same day or the next day (0–1 day landing lag). Missing hours are never filled in.</p>
-    </div>
-  </section>
   <div class="metrics">
     <div class="metric" id="wind-card">
       <div class="arrow w-na" id="wind-arrow" aria-hidden="true">
@@ -264,7 +263,7 @@ const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY 
 const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
 const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
 const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
-const DATA_URL='../data.json';
+const DATA_URL='../data.json',GALOC_URL='galoc.json',FRESH_MS=60*60e3,LEAFLET_CSS='vendor/leaflet.css',LEAFLET_JS='vendor/leaflet.js';
 const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livGalocLiveV1',PAST_HOURS=0,FWD_HOURS=48,FORECAST_DAYS='8';
 const ESRI_URL='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 const ESRI_REF_URL='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}';
@@ -589,7 +588,68 @@ function renderUpdated(){
  const err=LIVEERR?' · '+LIVEERR:'';
  $('updated').textContent='Last updated: '+live+' · '+rep+err+' · all times PHT';
 }
-function fitGalocView(){if(!map)return;map.invalidateSize();map.setView([STATION_LAT,STATION_LNG],MAP_ZOOM,{animate:false})}
+
+function isFreshCache(at,now){now=now==null?Date.now():now;return at!=null&&(now-at)<FRESH_MS}
+function pageIsSlow(){
+  try{
+    var nav=performance.getEntriesByType('navigation')[0];
+    if(nav&&(nav.responseStart>1500||nav.duration>4000))return true;
+  }catch(e){}
+  var c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+  if(c){
+    if(c.saveData)return true;
+    var typ=String(c.effectiveType||'');
+    if(typ==='slow-2g'||typ==='2g'||typ==='3g')return true;
+  }
+  return false;
+}
+function mapZoom(){return pageIsSlow()?11.5:MAP_ZOOM}
+function applyGalocPayload(j){
+  if(!j)return false;
+  if(j.area){
+    AREA=j.area;
+    D={reportTime:j.reportTime||(D&&D.reportTime)||null,areas:[j.area]};
+  }
+  if(j.ecmwf||j.marine){
+    LIVE={at:j.at||Date.now(),ids:j.ids||'galoc',ecmwf:j.ecmwf||null,marine:j.marine||null,ecmwfErr:null,marineErr:null};
+  }else if(j.at&&j.ids){
+    LIVE=j;
+  }
+  return !!(LIVE&&(AREA||(LIVE&&(LIVE.ecmwf||LIVE.marine))));
+}
+async function fetchGalocJson(){
+  const r=await fetch(GALOC_URL,{cache:'no-cache'});
+  if(!r.ok)throw new Error('galoc.json HTTP '+r.status);
+  return r.json();
+}
+function loadLeaflet(){
+  return new Promise(function(resolve,reject){
+    if(typeof L!=='undefined'){resolve();return}
+    var css=document.createElement('link');
+    css.rel='stylesheet';css.href=LEAFLET_CSS;css.crossOrigin='';
+    document.head.appendChild(css);
+    var s=document.createElement('script');
+    s.src=LEAFLET_JS;s.crossOrigin='';
+    s.onload=function(){resolve()};
+    s.onerror=function(){reject(new Error('Leaflet failed to load'))};
+    document.body.appendChild(s);
+  });
+}
+function scheduleMap(){
+  function go(){
+    loadLeaflet().then(function(){
+      initMap();
+      renderMap();
+      if(map){map.invalidateSize();fitGalocView()}
+    }).catch(function(){
+      var el=$('map');
+      if(el&&!map)el.innerHTML='<p class="map-ph">Map UNAVAILABLE.</p>';
+    });
+  }
+  if(typeof requestIdleCallback==='function')requestIdleCallback(go,{timeout:1500});
+  else setTimeout(go,100);
+}
+function fitGalocView(){if(!map)return;map.invalidateSize();map.setView([STATION_LAT,STATION_LNG],mapZoom(),{animate:false})}
 function renderMap(){
  if(!map||typeof L==='undefined'||!AREA)return;
  const a=currentView();
@@ -613,10 +673,14 @@ function renderMap(){
 }
 function initMap(){
  if(map||typeof L==='undefined'||!$('map'))return;
+ const slow=pageIsSlow();
+ const ph=$('map-placeholder');if(ph&&ph.parentNode)ph.parentNode.removeChild(ph);
  map=L.map('map',{zoomSnap:.25,zoomControl:false,attributionControl:true,minZoom:11,maxZoom:18});
  L.control.zoom({position:'topright'}).addTo(map);
- L.tileLayer(ESRI_URL,{maxZoom:18,attribution:'Tiles © Esri'}).addTo(map);
- L.tileLayer(ESRI_REF_URL,{maxZoom:18,opacity:.9,pane:'overlayPane'}).addTo(map);
+ L.tileLayer(ESRI_URL,{maxZoom:18,keepBuffer:slow?0:1,updateWhenIdle:true,updateWhenZooming:false,attribution:'Tiles © Esri'}).addTo(map);
+ if(!slow){
+  L.tileLayer(ESRI_REF_URL,{maxZoom:18,opacity:.9,pane:'overlayPane',keepBuffer:0,updateWhenIdle:true,updateWhenZooming:false}).addTo(map);
+ }
  markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);
  map.setMaxBounds(L.latLngBounds([11.90,119.78],[12.04,119.94]));
  fitGalocView();
@@ -636,13 +700,19 @@ function setListDay(day){
 $('tab-today').onclick=()=>setListDay('today');
 $('tab-tomorrow').onclick=()=>setListDay('tomorrow');
 function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
-async function refresh(why='manual',{live=true}={}){
- if(busy)return;busy=true;setBtn('busy');
+async function refresh(why='manual',opts){
+ opts=opts||{};
+ const live=opts.live!==false,background=!!opts.background;
+ if(busy)return;busy=true;
+ if(!background)setBtn('busy');
  try{
-  const r=await fetch(DATA_URL+'?'+Date.now(),{cache:'no-store'});
-  if(!r.ok)throw new Error('data.json HTTP '+r.status);
-  D=await r.json();
-  AREA=galocFrom(D);
+  if(!AREA||!background){
+   try{
+    const r=await fetch(DATA_URL+'?'+Date.now(),{cache:'no-store'});
+    if(r.ok){D=await r.json();AREA=galocFrom(D)||AREA}
+    else if(!AREA)throw new Error('data.json HTTP '+r.status);
+   }catch(e){if(!AREA)throw e}
+  }
   if(!AREA)throw new Error('Galoc was not found in the report');
   if(live){
     try{
@@ -654,23 +724,49 @@ async function refresh(why='manual',{live=true}={}){
   }
   rebuildForecastTimes();
   render();
+  if(map){map.invalidateSize();renderMap()}
   lastRefresh=Date.now();
   setBtn('idle','Updated '+fmtPHT(Date.now()));
  }catch(e){
   setBtn('idle','Refresh failed');
-  $('updated').textContent='Last updated: UNAVAILABLE · '+ (e.message||e);
-  if(!AREA)$('hero-rating').textContent=U;
+  if(!background){
+    $('updated').textContent='Last updated: UNAVAILABLE · '+ (e.message||e);
+    if(!AREA)$('hero-rating').textContent=U;
+  }
  }finally{busy=false}
 }
 function schedule(){clearTimeout(nextTimer);const d=new Date();d.setHours(d.getHours()+1,0,0,0);nextAt=d.getTime();
  nextTimer=setTimeout(async()=>{await refresh('hourly');schedule()},nextAt-Date.now()+(Math.random()*20e3))}
 $('rf').onclick=()=>refresh('manual');
 async function boot(){
- initMap();
- try{const raw=localStorage.getItem(CACHE_KEY);if(raw){const c=JSON.parse(raw);if(c&&c.at&&Date.now()-c.at<LIVE_STALE_MS)LIVE=c}}catch(e){}
- await refresh('boot');
- if(map){map.invalidateSize();fitGalocView()}
+ var file=null,store=null;
+ try{
+  var raw=localStorage.getItem(CACHE_KEY);
+  if(raw){var c=JSON.parse(raw);if(c&&c.at)store=c}
+ }catch(e){}
+ try{file=await fetchGalocJson()}catch(e){}
+ var cached=null;
+ if(file&&store)cached=(Number(file.at||0)>=Number(store.at||0))?file:store;
+ else cached=file||store;
+ if(cached){
+  applyGalocPayload(cached);
+  if(file&&file.reportTime){
+   D=D||{};
+   D.reportTime=file.reportTime;
+   if(file.area){D.areas=[file.area];AREA=file.area}
+  }
+  if(!AREA)AREA={id:'galoc',name:'Galoc',lat:11.9273,lng:119.8768};
+  if(LIVE){
+   rebuildForecastTimes();
+   render();
+   setBtn('idle','Updated '+fmtPHT(LIVE.at||Date.now()));
+  }
+ }
+ if(!isFreshCache(LIVE&&LIVE.at)){
+  refresh('boot',{live:true,background:!!(LIVE&&AREA)});
+ }
  schedule();
+ scheduleMap();
 }
 /* boot */
 boot();
