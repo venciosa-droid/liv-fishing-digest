@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#0b3d5c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Galoc LIV">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <title>Galoc station · LIV fishing</title>
 <style>
 *{box-sizing:border-box}
@@ -18,7 +20,7 @@ body{
 }
 a{color:#8fd3ff}
 header{
-  position:sticky;top:0;z-index:20;
+  position:sticky;top:0;z-index:4000;
   display:flex;align-items:center;gap:10px;
   padding:10px 12px calc(10px + env(safe-area-inset-top));
   padding-top:max(10px,env(safe-area-inset-top));
@@ -124,6 +126,31 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 .foot{font-size:14px;color:#bfe6ff;padding:4px 2px 20px}
 .err{background:#431407;color:#fed7aa;border-radius:12px;padding:10px 12px}
 @media(prefers-reduced-motion:reduce){#rf.busy .ic{animation:none}}
+
+.map-block{background:#132e40;border-radius:14px;overflow:hidden;border:1px solid #315267}
+.map-block .forecast{border:0;border-top:1px solid #315267;border-radius:0}
+.map-stage{position:relative}
+#map{width:100%;aspect-ratio:7/6;max-height:360px;min-height:240px;background:#0a1a12}
+.map-clock{position:absolute;left:8px;top:52px;z-index:500;background:#0b1220e6;color:#fff;padding:4px 8px;border-radius:8px;max-width:62%;pointer-events:none}
+.map-clock small{display:block;color:#bfe6ff;font-size:10px}
+.map-clock strong{display:block;font-size:12px;line-height:1.35;color:#fff}
+#map-recenter{position:absolute;top:8px;left:8px;z-index:500;min-height:36px;padding:6px 10px;border:1px solid #8fd3ff;border-radius:8px;background:#0b1220cc;color:#fff;font:700 12px system-ui;cursor:pointer}
+.leaflet-control-zoom a{width:36px!important;height:36px!important;line-height:36px!important;font-size:18px!important}
+.leaflet-control-attribution{font-size:9px;background:rgba(11,18,32,.7)!important;color:#d6e8f3!important}
+.leaflet-control-attribution a{color:#8fd3ff!important}
+.lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:700;text-shadow:0 0 3px #000,0 0 3px #000;font-size:13px;padding:0}
+.lbl:before{display:none}
+.lbl .wl,.lbl .cl{display:table;font-size:12px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}
+.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1}
+.cl.c-fav{color:#4ade80}.cl.c-mod{color:#facc15}.cl.c-str{color:#fb923c}.cl.c-vs{color:#f87171}.cl.c-na{color:#cbd5e1}
+.windico,.curico{pointer-events:none}
+.windico svg,.curico svg{overflow:visible;display:block}
+.windico .flow{stroke-dasharray:5 4;animation:windflow .9s linear infinite}
+@keyframes windflow{to{stroke-dashoffset:-9}}
+.windico .head{animation:windpulse 1.8s ease-in-out infinite}
+@keyframes windpulse{50%{opacity:.55}}
+.map-legend{padding:6px 10px 4px;font-size:11px;line-height:1.35;color:#bfe6ff;background:#0e2333}
+@media(prefers-reduced-motion:reduce){.windico .flow,.windico .head{animation:none}}
 </style>
 </head>
 <body>
@@ -139,6 +166,29 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 </header>
 <div class="wrap">
   <p id="updated">Last updated: Loading…</p>
+  <div class="map-block">
+    <div class="map-stage">
+      <div id="map" role="region" aria-label="Satellite map of Galoc Island, Popototan and Maglalambay"></div>
+      <button type="button" id="map-recenter" title="Return to the Galoc Island view">Recenter</button>
+      <div class="map-clock" id="map-clock">
+        <small id="map-forecast-label">Forecast time</small>
+        <strong id="map-forecast-time">Loading…</strong>
+      </div>
+    </div>
+    <div class="map-legend">Pin = fishing color · Wind arrow = blowing toward (red if over 18 kph) · Current arrow = flow, colored by kt</div>
+    <section class="forecast" id="forecast-sec" aria-label="Hourly fishing forecast">
+      <div class="forecast-head">
+        <button id="forecast-now" type="button">Now</button>
+        <button id="forecast-play" type="button" disabled>▶ Play</button>
+        <strong id="forecast-time">Loading hourly forecast…</strong>
+        <span id="forecast-state"></span>
+      </div>
+      <label for="forecast-slider" class="fn">Drag to pick an hour from Now to the next 48 hours. All times PHT.</label>
+      <input id="forecast-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast hour">
+      <div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div>
+      <p class="fn" id="forecast-note">The map and conditions follow the selected hour. Gray means data is missing.</p>
+    </section>
+  </div>
   <section class="hero UNAVAILABLE" id="hero" aria-live="polite">
     <p class="when" id="hero-when">Loading…</p>
     <p class="rating" id="hero-rating">…</p>
@@ -177,22 +227,6 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
       </div>
     </div>
   </div>
-  <section class="forecast" id="forecast-sec" aria-label="Hourly fishing forecast">
-    <div class="forecast-head">
-      <button id="forecast-m48" class="jump" type="button" title="Jump to 48 hours ago">−48h</button>
-      <button id="forecast-m24" class="jump" type="button" title="Jump to 24 hours ago">−24h</button>
-      <button id="forecast-now" type="button">Now</button>
-      <button id="forecast-play" type="button" disabled>▶ Play</button>
-      <strong id="forecast-time">Loading hourly forecast…</strong>
-      <span id="forecast-state"></span>
-    </div>
-    <label for="forecast-slider" class="fn">Drag to pick an hour: past 48 hours (striped) to the end of the forecast. All times PHT.</label>
-    <input id="forecast-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast hour">
-    <div class="track-wrap" aria-hidden="true"><div class="ftrack"><div class="pastseg" id="forecast-pastseg" style="width:0"></div></div><div class="nowtick" id="forecast-nowtick" style="left:8px;display:none"><span>Now</span></div></div>
-    <div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div>
-    <div class="past-hint" id="past-hint"></div>
-    <p class="fn" id="forecast-note">Conditions follow the selected hour. Gray means data is missing.</p>
-  </section>
   <section class="card">
     <h2>Best times to go out</h2>
     <div class="days" id="outlook">Loading…</div>
@@ -212,8 +246,6 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
     <a href="../">All fishing grounds</a> · <a href="../digest.html">Full report</a>
   </p>
 </div>
-<div id="map-forecast-time" hidden></div>
-<div id="map-forecast-label" hidden></div>
 <script>
 const U='UNAVAILABLE',E=s=>String(s??U).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY POOR':'#dc2626',UNAVAILABLE:'#94a3b8'};
@@ -221,7 +253,11 @@ const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW
 const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
 const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
 const DATA_URL='../data.json';
-const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livGalocLiveV1',PAST_HOURS=48,FORECAST_DAYS='8';
+const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livGalocLiveV1',PAST_HOURS=0,FWD_HOURS=48,FORECAST_DAYS='8';
+const ESRI_URL='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+const ESRI_REF_URL='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}';
+const MAP_SW=[11.908,119.808],MAP_NE=[12.020,119.925];
+const CURCOL={fav:'#4ade80',mod:'#facc15',str:'#fb923c',vs:'#f87171',na:'#94a3b8'};
 const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
 const num=x=>{if(x==null||x==='')return null;const f=Number(x);return Number.isFinite(f)?f:null},r1=x=>x==null?null:Math.round(x*10)/10;
@@ -248,6 +284,7 @@ const curTone=k=>{const c=num(k);return c==null?'na':c<0.5?'fav':c<0.9?'mod':c<1
 const currentLabel=c=>{const k=num(c?.kt);if(k==null)return 'Current UNAVAILABLE';return 'Current → '+(DIR[c.dir]!=null?c.dir+' ':'')+k.toFixed(1)+' kt'};
 const windLabel=w=>{const k=kph(w?.kt);if(k==null)return 'wind UNAVAILABLE';const g=kph(w.gustKt),dir=windDeg(w)==null?'':compass(windDeg(w))+' ';return dir+k+' kph'+(g==null?'':' g'+g)};
 const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+const shortLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'});
 const nowHourMs=(t=Date.now())=>Math.round(t/36e5)*36e5;
 const isPast=(t,now=Date.now())=>!!t&&tPHT(t)<nowHourMs(now);
 const timeLabel=(t,now=Date.now())=>(isPast(t,now)?'Past · ':'Forecast for ')+forecastLabel(t);
@@ -272,7 +309,7 @@ function hourSpan(first,last){
   }
   return s+'–'+e;
 }
-let D=null,AREA=null,LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,listDay='today',showPastHours=false;
+let D=null,AREA=null,LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,listDay='today',map=null,markers=null,arrows=null,windArrows=null;
 async function getJSON(url){let r;try{r=await fetch(url,{cache:'no-store'})}catch(e){throw new Error('network error or blocked')}if(r.status==429)throw new Error('Open-Meteo rate limit (HTTP 429)');
  if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j&&j.error)throw new Error(j.reason||'API error');return Array.isArray(j)?j:[j]}
 async function fetchLive(areas){
@@ -298,37 +335,33 @@ function computeLive(a,i,L,time=selectedTime){
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
 }
 function stopPlayback(){if(playTimer)clearInterval(playTimer);playTimer=null;$('forecast-play').textContent='▶ Play';$('forecast-play').setAttribute('aria-pressed','false')}
-function updateMapClock(){const active=forecastTimes.includes(selectedTime),past=active&&isPast(selectedTime);if($('map-forecast-label'))$('map-forecast-label').textContent=active?(past?'Past hour (model values, not observations)':'Forecast time'):'Report snapshot';if($('map-forecast-time')){$('map-forecast-time').textContent=active?(past?'Past · ':'')+forecastLabel(selectedTime):(D?RT():'Loading…');const mc=$('map-forecast-time').parentNode;if(mc&&mc.classList)mc.classList.toggle('past',past)}}
+function liveHourTimes(){
+ const ids=AREA?.id||'',valid=LIVE&&LIVE.ids===ids,times=new Set();
+ if(valid){for(const source of [LIVE.ecmwf,LIVE.marine])for(const loc of source||[])for(const t of loc.hourly?.time||[])if(Number.isFinite(tPHT(t)))times.add(t)}
+ return [...times].sort((a,b)=>tPHT(a)-tPHT(b));
+}
+function updateMapClock(){const active=forecastTimes.includes(selectedTime);if($('map-forecast-label'))$('map-forecast-label').textContent=active?'Forecast time':'Report snapshot';if($('map-forecast-time'))$('map-forecast-time').textContent=active?(shortLabel(selectedTime)+' PHT'):(D?RT():'Loading…')}
 function updateForecastControls(){
  updateMapClock();
  const active=forecastTimes.length>0,idx=Math.max(0,forecastTimes.indexOf(selectedTime));
  $('forecast-slider').disabled=!active;$('forecast-play').disabled=!active||forecastTimes.length<2;
  $('forecast-slider').max=String(Math.max(0,forecastTimes.length-1));$('forecast-slider').value=String(idx);
  $('forecast-time').textContent=active?timeLabel(selectedTime):'Hourly forecast UNAVAILABLE';
- const past=active&&isPast(selectedTime),sec=$('forecast-sec')||$('forecast-slider').parentNode;if(sec&&sec.classList)sec.classList.toggle('past',past);
- $('forecast-m48').disabled=$('forecast-m24').disabled=!active||!forecastTimes.some(t=>isPast(t));
- const n=forecastTimes.length,ni=active?hoursAgoIdx(forecastTimes,0):-1,frac=n>1&&ni>=0?ni/(n-1):0;
- $('forecast-pastseg').style.width=(frac*100)+'%';$('forecast-nowtick').style.display=active&&ni>0?'block':'none';$('forecast-nowtick').style.left=`calc(8px + (100% - 16px) * ${frac})`;
- $('past-hint').textContent=past?dayWord(selectedTime)+' · Boats landing today mostly fished yesterday or the day before (0–1 day landing lag). '+PAST_NOTE:'';
  $('forecast-slider').setAttribute('aria-valuetext',active?timeLabel(selectedTime):U);
- $('forecast-start').textContent=active?forecastLabel(forecastTimes[0]):'—';
- $('forecast-end').textContent=active?forecastLabel(forecastTimes[forecastTimes.length-1]):'—';
+ $('forecast-start').textContent=active?('Now · '+shortLabel(forecastTimes[0])):'—';
+ $('forecast-end').textContent=active?('+48h · '+shortLabel(forecastTimes[forecastTimes.length-1])):'—';
  $('forecast-state').textContent=active&&LIVE?'Data updated '+fmtPHT(LIVE.at):'Report snapshot only';
- $('forecast-note').textContent=active?'Conditions follow the selected hour (past 48 h to forecast end). Gray means incomplete data.':'Forecast data unavailable. The report snapshot is not a future forecast. Use Refresh to retry.';
+ $('forecast-note').textContent=active?'The map and conditions follow the selected hour (Now to +48 h). Gray means incomplete data.':'Forecast data unavailable. The report snapshot is not a future forecast. Use Refresh to retry.';
 }
 function rebuildForecastTimes(){
- const ids=AREA?.id||'',valid=LIVE&&LIVE.ids===ids;
- const times=new Set();if(valid){for(const source of [LIVE.ecmwf,LIVE.marine])for(const loc of source||[])for(const t of loc.hourly?.time||[])if(Number.isFinite(tPHT(t)))times.add(t)}
- const cutoff=nowHourMs()-PAST_HOURS*36e5;
- forecastTimes=[...times].filter(t=>tPHT(t)>=cutoff).sort((a,b)=>tPHT(a)-tPHT(b));
+ const start=nowHourMs(), end=start+FWD_HOURS*36e5;
+ forecastTimes=liveHourTimes().filter(t=>{const ms=tPHT(t);return ms>=start&&ms<=end});
  if(!forecastTimes.includes(selectedTime)){selectedTime=forecastTimes[Math.max(0,hoursAgoIdx(forecastTimes,0))]||null;stopPlayback()}
  updateForecastControls();
 }
 function chooseForecast(index){selectedTime=forecastTimes[Math.max(0,Math.min(forecastTimes.length-1,index))]||null;updateForecastControls();render()}
 $('forecast-slider').oninput=e=>{stopPlayback();chooseForecast(Number(e.target.value))};
 $('forecast-now').onclick=()=>{stopPlayback();rebuildForecastTimes();chooseForecast(Math.max(0,hoursAgoIdx(forecastTimes,0)));if(!forecastTimes.length)refresh('forecast-load')};
-const jumpBack=h=>{stopPlayback();if(forecastTimes.length)chooseForecast(hoursAgoIdx(forecastTimes,h))};
-$('forecast-m48').onclick=()=>jumpBack(48);$('forecast-m24').onclick=()=>jumpBack(24);
 $('forecast-play').onclick=()=>{if(playTimer){stopPlayback();return}if(!forecastTimes.length)return;if(selectedTime===forecastTimes[forecastTimes.length-1])chooseForecast(0);$('forecast-play').textContent='❚❚ Pause';$('forecast-play').setAttribute('aria-pressed','true');playTimer=setInterval(()=>{const next=forecastTimes.indexOf(selectedTime)+1;if(next>=forecastTimes.length){stopPlayback();return}chooseForecast(next);if(next===forecastTimes.length-1)stopPlayback()},1000)};
 function currentView(){
  if(!AREA)return null;
@@ -418,32 +451,24 @@ function renderHours(){
  const tom=phtDay(Date.now()+24*36e5);
  const want=listDay==='tomorrow'?tom:today;
  const rows=forecastTimes.filter(t=>phtDay(tPHT(t))===want);
- if(!rows.length){$('hour-list').textContent='No hourly data for this day.';return}
- const earlier=listDay==='today'?rows.filter(t=>isPast(t)):[];
- const selectedPast=selectedTime&&earlier.includes(selectedTime);
- const hidePast=listDay==='today'&&!showPastHours&&earlier.length&&!selectedPast;
- const visible=hidePast?rows.filter(t=>!isPast(t)):rows;
- const toggle=hidePast?`<button type="button" class="hr" id="show-past-hours">Show earlier today (${earlier.length} hours)</button>`:(listDay==='today'&&showPastHours&&earlier.length?`<button type="button" class="hr" id="hide-past-hours">Hide earlier today</button>`:'');
- $('hour-list').innerHTML=toggle+visible.map(t=>{
-  const h=hourEntry(t),past=isPast(t),on=t===selectedTime,cls=(h.rating==='VERY POOR'?'VERYPOOR':h.rating)+(past?' past':'')+(on?' on':'');
+ if(!rows.length){$('hour-list').textContent='No hourly data for this day in the next 48 hours.';return}
+ $('hour-list').innerHTML=rows.map(t=>{
+  const h=hourEntry(t),on=t===selectedTime,cls=(h.rating==='VERY POOR'?'VERYPOOR':h.rating)+(on?' on':'');
   const dry=h.rain?.mmHour===0&&(h.rain?.mm3h===0||h.rain?.mm3h==null);
   const rain=h.rain?.intensity===U||(h.rain?.intensity==null&&h.rain?.mmHour==null)?'rain '+U:dry?'no rain':(h.rain.intensity||U);
   return `<button type="button" class="hr ${cls}" data-t="${E(t)}"><div class="t">${E(clockHour(t))}</div><div><div class="r">${E(h.rating)}</div><div class="d">${E(windLabel(h.wind))} · ${E(currentLabel(h.current))} · ${E(rain)}</div></div></button>`;
  }).join('');
- $('hour-list').onclick=e=>{
-  if(e.target.closest('#show-past-hours')){showPastHours=true;renderHours();return}
-  if(e.target.closest('#hide-past-hours')){showPastHours=false;renderHours();return}
-  const b=e.target.closest('button[data-t]');if(!b)return;stopPlayback();const i=forecastTimes.indexOf(b.getAttribute('data-t'));if(i>=0)chooseForecast(i)
- };
+ $('hour-list').onclick=e=>{const b=e.target.closest('button[data-t]');if(!b)return;stopPlayback();const i=forecastTimes.indexOf(b.getAttribute('data-t'));if(i>=0)chooseForecast(i)};
 }
 function renderOutlook(){
- if(!LIVE||!AREA||!forecastTimes.length){$('outlook').textContent='Day-by-day outlook UNAVAILABLE.';return}
+ const all=liveHourTimes().filter(t=>tPHT(t)>=nowHourMs());
+ if(!LIVE||!AREA||!all.length){$('outlook').textContent='Day-by-day outlook UNAVAILABLE.';return}
  const today=phtDay(Date.now());
  const days=[];
- for(const t of forecastTimes){const d=phtDay(tPHT(t));if(d>=today&&!days.includes(d))days.push(d)}
+ for(const t of all){const d=phtDay(tPHT(t));if(d>=today&&!days.includes(d))days.push(d)}
  if(!days.length){$('outlook').textContent='Day-by-day outlook UNAVAILABLE.';return}
  $('outlook').innerHTML=days.map(d=>{
-  const hours=forecastTimes.filter(t=>phtDay(tPHT(t))===d).map(hourEntry).filter(h=>h.rating!==U||h.wind||h.current);
+  const hours=all.filter(t=>phtDay(tPHT(t))===d).map(hourEntry).filter(h=>h.rating!==U||h.wind||h.current);
   const future=d===today?hours.filter(h=>!isPast(h.time)):hours;
   const usable=future.filter(h=>h.rating&&h.rating!==U);
   const runs=bestRuns(usable);
@@ -464,9 +489,44 @@ function renderUpdated(){
  const err=LIVEERR?' · '+LIVEERR:'';
  $('updated').textContent='Last updated: '+live+' · '+rep+err+' · all times PHT';
 }
+function fitGalocView(){if(!map)return;map.invalidateSize();map.fitBounds(L.latLngBounds(MAP_SW,MAP_NE),{padding:[12,12],animate:false,maxZoom:14})}
+function renderMap(){
+ if(!map||typeof L==='undefined'||!AREA)return;
+ const a=currentView();
+ markers.clearLayers();arrows.clearLayers();windArrows.clearLayers();
+ if(!a||a.lat==null||a.lng==null)return;
+ const c=COL[a.rating]||'#94a3b8';
+ const pin=L.circleMarker([a.lat,a.lng],{radius:11,color:'#fff',weight:2.5,fillColor:c,fillOpacity:.95}).addTo(markers);
+ const wk=kph(a.wind?.kt),wt=windTone(wk);
+ pin.bindTooltip(`<b>Galoc</b><span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:'right',offset:[14,0],className:'lbl'});
+ if(a.current&&num(a.current.kt)!=null&&DIR[a.current.dir]!=null){
+  const ck=num(a.current.kt),col=CURCOL[curTone(ck)],len=Math.round(Math.min(36,16+ck*14)),box=len*2+18;
+  L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'curico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+   html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${DIR[a.current.dir]})"><line x1="0" y1="4" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line x1="0" y1="4" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path d="M0 ${-len-8} L-5.5 ${-len+2} L5.5 ${-len+2} Z" fill="${col}" stroke="#0b1220" stroke-width="1.4" stroke-linejoin="round"/></g></svg>`})}).addTo(arrows);
+ }
+ const wd=windToward(windDeg(a.wind));
+ if(wk!=null&&wd!=null){
+  const len=Math.round(Math.min(46,22+wk*0.6)),col=WINDCOL[wt],box=len*2+16;
+  L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+   html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${wd})"><line x1="0" y1="-12" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line class="flow" x1="0" y1="-12" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path class="head" d="M0 ${-len-9} L-6 ${-len+1} L6 ${-len+1} Z" fill="${col}" stroke="#0b1220" stroke-width="1.6" stroke-linejoin="round"/></g></svg>`})}).addTo(windArrows);
+ }
+}
+function initMap(){
+ if(map||typeof L==='undefined'||!$('map'))return;
+ map=L.map('map',{zoomSnap:.25,zoomControl:false,attributionControl:true,minZoom:11,maxZoom:18});
+ L.control.zoom({position:'topright'}).addTo(map);
+ L.tileLayer(ESRI_URL,{maxZoom:18,attribution:'Tiles © Esri'}).addTo(map);
+ L.tileLayer(ESRI_REF_URL,{maxZoom:18,opacity:.9,pane:'overlayPane'}).addTo(map);
+ markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);
+ const view=L.latLngBounds(MAP_SW,MAP_NE);
+ map.setMaxBounds(view.pad(0.7));
+ fitGalocView();
+ if($('map-recenter'))$('map-recenter').onclick=()=>fitGalocView();
+ addEventListener('resize',()=>{if(map)map.invalidateSize()});
+}
 function render(){
  const a=currentView();
- renderHero(a);renderWind(a);renderCurrent(a);renderRain(a);renderHours();renderOutlook();renderUpdated();
+ renderHero(a);renderWind(a);renderCurrent(a);renderRain(a);renderHours();renderOutlook();renderUpdated();renderMap();
 }
 function setListDay(day){
  listDay=day;
@@ -507,8 +567,10 @@ function schedule(){clearTimeout(nextTimer);const d=new Date();d.setHours(d.getH
  nextTimer=setTimeout(async()=>{await refresh('hourly');schedule()},nextAt-Date.now()+(Math.random()*20e3))}
 $('rf').onclick=()=>refresh('manual');
 async function boot(){
+ initMap();
  try{const raw=localStorage.getItem(CACHE_KEY);if(raw){const c=JSON.parse(raw);if(c&&c.at&&Date.now()-c.at<LIVE_STALE_MS)LIVE=c}}catch(e){}
  await refresh('boot');
+ if(map){map.invalidateSize();fitGalocView()}
  schedule();
 }
 /* boot */
