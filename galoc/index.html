@@ -168,8 +168,8 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
   <p id="updated">Last updated: Loading…</p>
   <div class="map-block">
     <div class="map-stage">
-      <div id="map" role="region" aria-label="Satellite map of Galoc Island, Popototan and Maglalambay"></div>
-      <button type="button" id="map-recenter" title="Return to the Galoc Island view">Recenter</button>
+      <div id="map" role="region" aria-label="Satellite map of Galoc Station on Galoc Island"></div>
+      <button type="button" id="map-recenter" title="Return to Galoc Station">Recenter</button>
       <div class="map-clock" id="map-clock">
         <small id="map-forecast-label">Forecast time</small>
         <strong id="map-forecast-time">Loading…</strong>
@@ -256,7 +256,8 @@ const DATA_URL='../data.json';
 const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livGalocLiveV1',PAST_HOURS=0,FWD_HOURS=48,FORECAST_DAYS='8';
 const ESRI_URL='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 const ESRI_REF_URL='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}';
-const MAP_SW=[11.908,119.808],MAP_NE=[12.020,119.925];
+const STATION_LAT=11.966933,STATION_LNG=119.845707,MAP_ZOOM=12.5;
+const MAP_SW=[11.930,119.810],MAP_NE=[11.995,119.890];
 const CURCOL={fav:'#4ade80',mod:'#facc15',str:'#fb923c',vs:'#f87171',na:'#94a3b8'};
 const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
@@ -489,25 +490,25 @@ function renderUpdated(){
  const err=LIVEERR?' · '+LIVEERR:'';
  $('updated').textContent='Last updated: '+live+' · '+rep+err+' · all times PHT';
 }
-function fitGalocView(){if(!map)return;map.invalidateSize();map.fitBounds(L.latLngBounds(MAP_SW,MAP_NE),{padding:[12,12],animate:false,maxZoom:14})}
+function fitGalocView(){if(!map)return;map.invalidateSize();map.setView([STATION_LAT,STATION_LNG],MAP_ZOOM,{animate:false})}
 function renderMap(){
  if(!map||typeof L==='undefined'||!AREA)return;
  const a=currentView();
  markers.clearLayers();arrows.clearLayers();windArrows.clearLayers();
- if(!a||a.lat==null||a.lng==null)return;
+ const lat=STATION_LAT,lng=STATION_LNG;
  const c=COL[a.rating]||'#94a3b8';
- const pin=L.circleMarker([a.lat,a.lng],{radius:11,color:'#fff',weight:2.5,fillColor:c,fillOpacity:.95}).addTo(markers);
+ const pin=L.circleMarker([lat,lng],{radius:11,color:'#fff',weight:3,fillColor:c,fillOpacity:.95}).addTo(markers);
  const wk=kph(a.wind?.kt),wt=windTone(wk);
- pin.bindTooltip(`<b>Galoc</b><span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:'right',offset:[14,0],className:'lbl'});
+ pin.bindTooltip(`<b>Galoc Station</b><span class="wl w-${wt}">${E(windLabel(a.wind))}</span><span class="cl c-${curTone(a.current?.kt)}">${E(currentLabel(a.current))}</span>`,{permanent:true,direction:'right',offset:[14,0],className:'lbl'});
  if(a.current&&num(a.current.kt)!=null&&DIR[a.current.dir]!=null){
   const ck=num(a.current.kt),col=CURCOL[curTone(ck)],len=Math.round(Math.min(36,16+ck*14)),box=len*2+18;
-  L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'curico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+  L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'curico',iconSize:[box,box],iconAnchor:[box/2,box/2],
    html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${DIR[a.current.dir]})"><line x1="0" y1="4" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line x1="0" y1="4" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path d="M0 ${-len-8} L-5.5 ${-len+2} L5.5 ${-len+2} Z" fill="${col}" stroke="#0b1220" stroke-width="1.4" stroke-linejoin="round"/></g></svg>`})}).addTo(arrows);
  }
  const wd=windToward(windDeg(a.wind));
  if(wk!=null&&wd!=null){
   const len=Math.round(Math.min(46,22+wk*0.6)),col=WINDCOL[wt],box=len*2+16;
-  L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+  L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
    html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${wd})"><line x1="0" y1="-12" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line class="flow" x1="0" y1="-12" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path class="head" d="M0 ${-len-9} L-6 ${-len+1} L6 ${-len+1} Z" fill="${col}" stroke="#0b1220" stroke-width="1.6" stroke-linejoin="round"/></g></svg>`})}).addTo(windArrows);
  }
 }
@@ -518,8 +519,7 @@ function initMap(){
  L.tileLayer(ESRI_URL,{maxZoom:18,attribution:'Tiles © Esri'}).addTo(map);
  L.tileLayer(ESRI_REF_URL,{maxZoom:18,opacity:.9,pane:'overlayPane'}).addTo(map);
  markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);
- const view=L.latLngBounds(MAP_SW,MAP_NE);
- map.setMaxBounds(view.pad(0.7));
+ map.setMaxBounds(L.latLngBounds([11.90,119.78],[12.04,119.94]));
  fitGalocView();
  if($('map-recenter'))$('map-recenter').onclick=()=>fitGalocView();
  addEventListener('resize',()=>{if(map)map.invalidateSize()});
