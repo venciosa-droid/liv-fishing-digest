@@ -9,7 +9,8 @@ assert(/leaflet/i.test(raw)&&/World_Imagery/.test(raw),'Leaflet + Esri World Ima
 assert(/18 kph line/.test(raw)&&/means gust/.test(raw),'18 kph line and gust legend are visible');
 assert(!/id="forecast-m48"/.test(raw)&&!/id="forecast-m24"/.test(raw),'no past-hour jump buttons');
 assert(/Now to the next 48 hours/.test(raw),'slider copy is Now to +48h');
-assert(raw.includes('MAP_SW=[11.908,119.808]')&&raw.includes('MAP_NE=[12.020,119.925]'),'map framed on Galoc / Popototan / Maglalambay');
+assert(raw.includes('STATION_LAT=11.966933')&&raw.includes('STATION_LNG=119.845707')&&raw.includes('MAP_ZOOM=12.5'),'map centered on Galoc Station');
+assert(/Galoc Station/.test(raw),'Galoc Station marker label');
 let src=raw.split('<script>')[1].split('</script>')[0];
 src=src.slice(0,src.lastIndexOf('/* boot */'));
 vm.runInContext(src,ctx);
