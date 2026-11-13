@@ -15,6 +15,11 @@ assert(!/class="map-clock"/.test(raw)&&!/id="map-clock"/.test(raw),'top-left for
 assert(/class="tl" id="map-forecast-time"/.test(raw),'forecast time is a third pin label');
 assert(/id="hero"/.test(raw)&&/Ice prep, next 3 days/.test(raw)&&/id="ice-prep"/.test(raw),'ice prep sits on the status card');
 assert(/guide from wind and current only/.test(raw)&&/0–1 day landing lag/.test(raw),'ice disclaimer names wind and current only and the landing lag');
+const head=raw.split('</head>')[0];
+assert(!/<link[^>]+leaflet/i.test(head)&&!/<script[^>]+leaflet/i.test(head),'Leaflet script and CSS are not in the document head');
+assert(/GALOC_URL='galoc.json'/.test(raw),'page loads galoc.json');
+assert(/vendor\/leaflet\.js/.test(raw),'Leaflet is loaded from a same-origin copy after first paint');
+
 let src=raw.split('<script>')[1].split('</script>')[0];
 src=src.slice(0,src.lastIndexOf('/* boot */'));
 vm.runInContext(src,ctx);
@@ -187,3 +192,27 @@ days=icePrepDays(ICE_NOW);
 assert(days.every(d=>d.key==='full'),'heavy rain does not change the wind-and-current ice guide');
 console.log('PASS: ice prep days, lag, verdicts, rain ignored, no invented data');
 `,ctx);
+
+vm.runInContext(`
+assert(GALOC_URL==='galoc.json'&&FRESH_MS===60*60e3,'galoc cache constants');
+assert(isFreshCache(1000,1000+59*60e3),'59 minutes is still fresh');
+assert(!isFreshCache(1000,1000+60*60e3),'1 hour is no longer fresh');
+assert(!isFreshCache(null,Date.now())&&!isFreshCache(undefined,Date.now()),'missing timestamp is not treated as fresh');
+const payload={at:1000,reportTime:'Sat 14 Nov 2026 · ~6:20 AM PHT',area:{id:'galoc',name:'Galoc',lat:11.9273,lng:119.8768},ids:'galoc',
+  ecmwf:[{hourly:{time:['2026-11-14T07:00'],wind_speed_10m:[5],wind_direction_10m:[90],wind_gusts_10m:[7],precipitation:[0]}}],
+  marine:[{hourly_units:{ocean_current_velocity:'kn'},hourly:{time:['2026-11-14T07:00'],ocean_current_velocity:[0.2],ocean_current_direction:[90]}}]};
+AREA=null;D=null;LIVE=null;
+assert(applyGalocPayload(payload)&&AREA.id==='galoc'&&D.reportTime.indexOf('Sat 14')>=0,'cached galoc area and report time are applied');
+assert(LIVE.ecmwf[0].hourly.wind_speed_10m[0]===5&&LIVE.marine[0].hourly.ocean_current_velocity[0]===0.2,'cached hourly series is applied');
+console.log('PASS: galoc.json cache, 1h freshness, Leaflet deferred');
+`,ctx);
+
+const galocJson=require('fs').readFileSync(require('path').join(__dirname,'../galoc/galoc.json'),'utf8');
+const gj=JSON.parse(galocJson);
+const assert2=require('assert');
+assert2.strictEqual(gj.ids,'galoc');
+assert2.ok(gj.area&&gj.area.id==='galoc');
+assert2.ok(Array.isArray(gj.ecmwf[0].hourly.time)&&gj.ecmwf[0].hourly.time.length>=24);
+assert2.ok(gj.ecmwf[0].hourly.time.length===gj.marine[0].hourly.time.length);
+assert2.ok(galocJson.length<20000,'galoc.json stays small');
+console.log('PASS: galoc.json on disk is Galoc-only and compact');
