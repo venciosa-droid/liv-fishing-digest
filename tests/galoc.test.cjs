@@ -13,6 +13,8 @@ assert(raw.includes('STATION_LAT=11.966933')&&raw.includes('STATION_LNG=119.8457
 assert(/Galoc Station/.test(raw),'Galoc Station marker label');
 assert(!/class="map-clock"/.test(raw)&&!/id="map-clock"/.test(raw),'top-left forecast time box removed');
 assert(/class="tl" id="map-forecast-time"/.test(raw),'forecast time is a third pin label');
+assert(/id="hero"/.test(raw)&&/Ice prep, next 3 days/.test(raw)&&/id="ice-prep"/.test(raw),'ice prep sits on the status card');
+assert(/guide from wind and current only/.test(raw)&&/0–1 day landing lag/.test(raw),'ice disclaimer names wind and current only and the landing lag');
 let src=raw.split('<script>')[1].split('</script>')[0];
 src=src.slice(0,src.lastIndexOf('/* boot */'));
 vm.runInContext(src,ctx);
@@ -117,3 +119,71 @@ fetchLive([{id:'galoc',lat:11.9273,lng:119.8768}]).then(()=>{
   console.log('PASS: Now to +48h window, labels, Now, Galoc-only fetch, past_days requests');
 }).catch(e=>{console.error(e);process_exit(1)});
 `,Object.assign(ctx,{process_exit:c=>process.exit(c)}));
+
+vm.runInContext(`
+var ICE_NOW=Date.parse('2026-11-14T06:00:00+08:00');
+function phtIso(ms){return new Date(ms+8*3600e3).toISOString().slice(0,16)}
+function series(fromIso,toIso){
+  const out=[];
+  for(let t=tPHT(fromIso);t<=tPHT(toIso);t+=36e5)out.push(phtIso(t));
+  return out;
+}
+function liveFrom(hours,windFn,curFn,rainFn){
+  const rain=rainFn||(()=>0);
+  return {at:ICE_NOW,ids:'galoc',ecmwf:[{hourly:{
+    time:hours,
+    wind_speed_10m:hours.map(windFn),
+    wind_gusts_10m:hours.map(t=>(windFn(t)==null?null:windFn(t)+2)),
+    wind_direction_10m:hours.map(()=>90),
+    precipitation:hours.map(rain)
+  }}],marine:[{hourly_units:{ocean_current_velocity:'kn'},hourly:{
+    time:hours,
+    ocean_current_velocity:hours.map(curFn),
+    ocean_current_direction:hours.map(()=>90)
+  }}]};
+}
+const HOURS=series('2026-11-12T00:00','2026-11-17T12:00');
+AREA={id:'galoc',name:'Galoc'};
+D={areas:[AREA],reportTime:'Sat 14 Nov 2026 · ~6:20 AM PHT · morning'};
+
+const friNight=tripTimes(HOURS,'2026-11-13');
+assert(friNight[0]==='2026-11-13T18:00'&&friNight[friNight.length-1]==='2026-11-14T05:00'&&friNight.length===12,'night window is 6 PM to 6 AM');
+assert(!friNight.includes('2026-11-13T17:00')&&!friNight.includes('2026-11-14T06:00'),'17:00 and 6 AM are outside the fishing night');
+
+assert(seaRating({wind:{kt:4},current:{kt:0.2,status:'Favorable'},rain:{mm3h:20,intensity:'Heavy'}})==='GOOD','ice rating ignores rain');
+assert(seaRating({wind:{kt:18},current:{kt:0.2,status:'Favorable'}})==='POOR','strong wind is poor for ice');
+assert(seaRating({wind:{kt:null},current:{kt:0.2,status:'Favorable'}})==='UNAVAILABLE','missing wind is not invented');
+
+LIVE=liveFrom(HOURS,()=>5,()=>0.2);
+let days=icePrepDays(ICE_NOW);
+assert(days.length===3,'three landing days');
+assert(days[0].day==='2026-11-14'&&days[0].title.includes('today')&&days[1].day==='2026-11-15'&&days[2].day==='2026-11-16','today plus the next 2 days in PHT');
+assert(days.every(d=>d.key==='full'&&d.label==='Have ice ready: full'),'calm nights: full ice');
+assert(days[0].reason.includes('Good hours')&&days[0].reason.includes('wind under 18 kph'),'reason names good hours and 18 kph');
+assert(days[0].reason.includes('Thu')&&days[0].reason.includes('Fri'),'Saturday landings use Thursday and Friday nights (0-1 day lag)');
+
+function windThuOnly(t){
+  const d=t.slice(0,10),h=+t.slice(11,13);
+  return (d==='2026-11-12'&&h>=18)||(d==='2026-11-13'&&h<6)?5:18;
+}
+LIVE=liveFrom(HOURS,windThuOnly,()=>0.2);
+days=icePrepDays(ICE_NOW);
+assert(days[0].key==='full'&&days[0].label==='Have ice ready: full','Saturday stays full from Thursday night (lag 1)');
+assert(days[1].key==='little'&&days[1].label==='Little ice needed: rough','Sunday is little ice when Friday and Saturday nights were rough');
+assert(days[0].reason.includes('Thu')&&days[0].reason.includes('Good hours'),'reason points at the good Thursday night');
+
+function fourGood(t){return (t>='2026-11-13T18:00'&&t<='2026-11-13T21:00')?5:18}
+LIVE=liveFrom(HOURS,fourGood,()=>0.2);
+days=icePrepDays(ICE_NOW);
+assert(days[0].key==='some'&&days[0].label==='Some ice: light catch expected','four good hours: some ice');
+assert(days[0].reason.includes('Good hours')&&days[0].reason.includes('Fri'),'names the short Friday window');
+
+LIVE=liveFrom(HOURS,()=>null,()=>null);
+days=icePrepDays(ICE_NOW);
+assert(days.every(d=>d.key==='na'&&d.label==='Ice guide UNAVAILABLE'),'missing hours stay UNAVAILABLE and are never filled in');
+
+LIVE=liveFrom(HOURS,()=>5,()=>0.2,()=>12);
+days=icePrepDays(ICE_NOW);
+assert(days.every(d=>d.key==='full'),'heavy rain does not change the wind-and-current ice guide');
+console.log('PASS: ice prep days, lag, verdicts, rain ignored, no invented data');
+`,ctx);

@@ -126,6 +126,18 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
 .foot{font-size:14px;color:#bfe6ff;padding:4px 2px 20px}
 .err{background:#431407;color:#fed7aa;border-radius:12px;padding:10px 12px}
 @media(prefers-reduced-motion:reduce){#rf.busy .ic{animation:none}}
+.hero .ice{margin:14px 0 0;padding:12px 0 0;border-top:1px solid rgba(255,255,255,.22);text-align:left}
+.hero .ice h2{margin:0 0 8px;font-size:16px;font-weight:800}
+.ice-day{background:rgba(0,0,0,.28);border-radius:10px;padding:8px 10px;margin:0 0 6px}
+.ice-day .d{font-weight:800;font-size:15px}
+.ice-day .v{font-size:15px;font-weight:700;margin-top:2px}
+.ice-day .x{font-size:13px;line-height:1.35;color:#e8f1f7;margin-top:2px;font-weight:400}
+.ice-day.full .v{color:#bbf7d0}
+.ice-day.some .v{color:#fde68a}
+.ice-day.little .v{color:#fed7aa}
+.ice-day.na .v{color:#cbd5e1}
+.ice-note{margin:8px 0 0;font-size:12px;line-height:1.4;color:#d6e8f3;font-weight:400}
+
 
 .map-block{background:#132e40;border-radius:14px;overflow:hidden;border:1px solid #315267}
 .map-block .forecast{border:0;border-top:1px solid #315267;border-radius:0}
@@ -188,6 +200,11 @@ header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
     <p class="when" id="hero-when">Loading…</p>
     <p class="rating" id="hero-rating">…</p>
     <p class="limit" id="hero-limit"></p>
+    <div class="ice" id="ice-prep">
+      <h2>Ice prep, next 3 days</h2>
+      <div id="ice-days">Loading…</div>
+      <p class="ice-note" id="ice-note">This is a guide from wind and current only. Catch usually lands the same day or the next day (0–1 day landing lag). Missing hours are never filled in.</p>
+    </div>
   </section>
   <div class="metrics">
     <div class="metric" id="wind-card">
@@ -377,6 +394,92 @@ function limitText(a){
  const extra=windTone(kph(a.wind?.kt))==='bad'?' Wind is above the 18 kph line.':'';
  return 'Limited by '+(why.length?why.join(' and '):'conditions')+'.'+extra;
 }
+
+const ICE_START_H=18,ICE_END_H=6;
+const ICE_LABEL={full:'Have ice ready: full',some:'Some ice: light catch expected',little:'Little ice needed: rough',na:'Ice guide UNAVAILABLE'};
+const addPhtDays=(day,n)=>phtDay(Date.parse(day+'T12:00:00+08:00')+n*864e5);
+function seaRating(h){
+  const c=h?.current?.status??curClass(h?.current?.kt);
+  const w=windClass(h?.wind?.kt);
+  if([c,w].some(x=>x==null||String(x).toUpperCase()===U))return U;
+  const x=Math.max(rankOf(c),rankOf(w));
+  return x<=1?'GOOD':x==2?'MARGINAL':x==3?'POOR':'VERY POOR';
+}
+function tripTimes(all,startDay){
+  const next=addPhtDays(startDay,1);
+  return all.filter(t=>{
+    const d=phtDay(tPHT(t)),h=Number(String(t).slice(11,13));
+    return (d===startDay&&h>=ICE_START_H)||(d===next&&h<ICE_END_H);
+  }).sort((a,b)=>tPHT(a)-tPHT(b));
+}
+function nightSpan(first,last){
+  const opt={weekday:'short',hour:'numeric',timeZone:'Asia/Manila'};
+  const s=new Date(tPHT(first)).toLocaleString('en-US',opt).replace(',','');
+  const e=new Date(tPHT(last)+36e5).toLocaleString('en-US',opt).replace(',','');
+  return s+'–'+e;
+}
+function nightLabel(startDay){return nightSpan(startDay+'T18:00',addPhtDays(startDay,1)+'T05:00')}
+function iceWindPhrase(hours){
+  const ks=hours.map(h=>kph(h.wind?.kt)).filter(x=>x!=null);
+  if(!ks.length)return 'wind UNAVAILABLE';
+  const lo=Math.min(...ks),hi=Math.max(...ks);
+  if(hi<=WIND_BAD_KPH)return 'wind under 18 kph';
+  return lo===hi?'wind '+lo+' kph':'wind '+lo+'–'+hi+' kph';
+}
+function iceReason(windows){
+  const bits=[],usableW=[],missingW=[];
+  for(const w of windows){
+    const n=w.hours.filter(h=>h.sea&&h.sea!==U).length;
+    (n>=6?usableW:missingW).push(w);
+  }
+  const runsOf=(kind)=>usableW.flatMap(w=>runsWhere(w.hours,h=>h.sea===kind));
+  const good=runsOf('GOOD');
+  if(good.length){
+    bits.push('Good hours '+good.map(run=>nightSpan(run[0].time,run[run.length-1].time)+', '+iceWindPhrase(run)).join('; '));
+  }else{
+    const marg=runsOf('MARGINAL');
+    if(marg.length)bits.push('Marginal hours '+marg.map(run=>nightSpan(run[0].time,run[run.length-1].time)+', '+iceWindPhrase(run)).join('; '));
+    else if(usableW.length){
+      bits.push('Rough '+usableW.map(w=>nightLabel(w.startDay)).join(' and ')+', '+iceWindPhrase(usableW.flatMap(w=>w.hours.filter(h=>h.sea&&h.sea!==U))));
+    }
+  }
+  for(const w of missingW)bits.push(nightLabel(w.startDay)+' UNAVAILABLE');
+  return bits.join('. ')+(bits.length?'.':'');
+}
+function iceVerdict(windows){
+  const usable=windows.flatMap(w=>w.hours).filter(h=>h.sea&&h.sea!==U);
+  if(usable.length<6)return 'na';
+  const G=usable.filter(h=>h.sea==='GOOD').length,M=usable.filter(h=>h.sea==='MARGINAL').length;
+  if(G>=6)return 'full';
+  if(G>=2||M>=6||(G+M)>=6)return 'some';
+  return 'little';
+}
+function iceWindowsForDay(day,all){
+  return [addPhtDays(day,-2),addPhtDays(day,-1)].map(startDay=>{
+    const hours=tripTimes(all,startDay).map(t=>{const h=hourEntry(t);return {...h,sea:seaRating(h)}});
+    return {startDay,hours};
+  });
+}
+function icePrepDays(now=Date.now()){
+  const all=liveHourTimes();
+  if(!LIVE||!AREA||!all.length)return [];
+  const today=phtDay(now);
+  return [0,1,2].map(n=>{
+    const day=addPhtDays(today,n);
+    const windows=iceWindowsForDay(day,all);
+    const key=iceVerdict(windows);
+    const title=new Date(day+'T12:00:00+08:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'Asia/Manila'})+(n===0?' · today':'');
+    const reason=iceReason(windows)||'Not enough hourly data for the fishing nights that land this day.';
+    return {day,key,title,label:ICE_LABEL[key],reason};
+  });
+}
+function renderIce(){
+  const el=$('ice-days');
+  if(!el)return;
+  const days=icePrepDays();
+  if(!days.length){el.textContent='Ice guide UNAVAILABLE.';return}
+  el.innerHTML=days.map(d=>`<div class="ice-day ${E(d.key)}"><div class="d">${E(d.title)}</div><div class="v">${E(d.label)}</div><div class="x">${E(d.reason)}</div></div>`).join('');
+}
 function renderHero(a){
  const past=a?._forecast&&isPast(a.time||selectedTime);
  const hero=$('hero');
@@ -522,7 +625,7 @@ function initMap(){
 }
 function render(){
  const a=currentView();
- renderHero(a);renderWind(a);renderCurrent(a);renderRain(a);renderHours();renderOutlook();renderUpdated();renderMap();
+ renderHero(a);renderWind(a);renderCurrent(a);renderRain(a);renderHours();renderOutlook();renderIce();renderUpdated();renderMap();
 }
 function setListDay(day){
  listDay=day;
