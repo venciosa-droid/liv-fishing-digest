@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b3d5c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Galoc LIV">
+<title>Galoc station · LIV fishing</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font:18px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  background:#0d1b26;color:#e8f1f7;
+  padding:0 0 env(safe-area-inset-bottom);
+  -webkit-text-size-adjust:100%;
+}
+a{color:#8fd3ff}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px calc(10px + env(safe-area-inset-top));
+  padding-top:max(10px,env(safe-area-inset-top));
+  background:#0b3d5c;
+}
+header .brand{flex:1;min-width:0}
+header h1{margin:0;font-size:22px;line-height:1.2}
+header p{margin:1px 0 0;font-size:13px;color:#bfe6ff}
+#rf{
+  flex:none;min-width:96px;min-height:48px;padding:6px 12px;
+  border:1px solid #8fd3ff;border-radius:12px;background:#11557e;color:#fff;
+  font:700 16px system-ui;cursor:pointer;line-height:1.15;
+}
+#rf:disabled{opacity:.75;cursor:wait}
+#rf small{display:block;font-weight:400;font-size:11px;color:#bfe6ff}
+#rf.busy .ic{display:inline-block;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wrap{padding:12px;display:flex;flex-direction:column;gap:12px;max-width:520px;margin:0 auto}
+#updated{margin:0;font-size:14px;color:#bfe6ff}
+.hero{
+  border-radius:18px;padding:18px 16px 16px;text-align:center;
+  background:#132e40;border:2px solid #1c3b50;
+}
+.hero .when{font-size:14px;color:#bfe6ff;margin:0 0 6px}
+.hero .rating{font-size:42px;font-weight:800;letter-spacing:.02em;line-height:1.05;margin:0}
+.hero .limit{margin:8px 0 0;font-size:16px}
+.hero.GOOD{background:#14532d;border-color:#22c55e}
+.hero.MARGINAL{background:#3f2f0b;border-color:#eab308}
+.hero.POOR{background:#431407;border-color:#f97316}
+.hero.VERYPOOR,.hero.BAD{background:#450a0a;border-color:#dc2626}
+.hero.UNAVAILABLE{background:#1e293b;border-color:#64748b}
+.hero.past{box-shadow:inset 0 0 0 2px #8b6cc9}
+.hero.past .when{color:#e9d5ff}
+.metrics{display:flex;flex-direction:column;gap:10px}
+.metric{background:#132e40;border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center}
+.metric .k{font-size:13px;color:#bfe6ff;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.metric .v{font-size:22px;font-weight:800;line-height:1.2}
+.metric .s{font-size:14px;margin-top:2px;color:#d6e8f3}
+.arrow{
+  width:56px;height:56px;border-radius:50%;background:#0e2333;
+  display:flex;align-items:center;justify-content:center;
+}
+.arrow svg{width:36px;height:36px;display:block;transform-origin:50% 50%}
+.w-ok .v,.w-ok.arrow svg path,.hint.ok{color:#4ade80}
+.w-near .v,.hint.near{color:#fbbf24}
+.w-bad .v,.w-bad.arrow svg path,.hint.bad{color:#f87171}
+.w-na .v{color:#cbd5e1}
+.c-fav .v,.c-fav.arrow svg path{color:#4ade80}
+.c-mod .v,.c-mod.arrow svg path{color:#facc15}
+.c-str .v,.c-str.arrow svg path{color:#fb923c}
+.c-vs .v,.c-vs.arrow svg path{color:#f87171}
+.c-na .v{color:#cbd5e1}
+.meter{position:relative;height:14px;margin-top:8px;background:#0e2333;border-radius:7px;overflow:visible}
+.meter .fill{height:100%;border-radius:7px;width:0;max-width:100%;background:#4ade80}
+.meter .mark{position:absolute;top:-3px;bottom:-3px;width:3px;background:#fff;border-radius:1px;left:45%;transform:translateX(-1px)}
+.meter .mlab{position:absolute;top:16px;left:45%;transform:translateX(-50%);font-size:11px;color:#e8f1f7;white-space:nowrap;font-weight:700}
+.hint{font-size:14px;margin-top:18px}
+.forecast{background:#132e40;border-radius:14px;padding:12px;border:1px solid #315267}
+.forecast.past{background:#2b2342;border-color:#7c5fb3}
+.forecast-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.forecast button,.tabs button{
+  background:#11557e;color:#fff;border:1px solid #8fd3ff;border-radius:10px;
+  padding:10px 12px;font:700 15px system-ui;cursor:pointer;min-height:44px;
+}
+.forecast button:disabled,.tabs button:disabled{opacity:.45;cursor:not-allowed}
+.forecast input{width:100%;accent-color:#7dd3fc;min-height:36px;margin:8px 0 2px}
+.forecast-range{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#bfe6ff}
+#forecast-time{font-size:16px;flex:1 1 100%}
+#forecast-state{font-size:13px;color:#bfe6ff}
+.forecast.past #forecast-time{color:#e9d5ff}
+.track-wrap{position:relative;height:16px;margin:0 0 2px}
+.ftrack{position:absolute;left:8px;right:8px;top:2px;height:6px;border-radius:3px;background:#1e5b80;overflow:hidden}
+.ftrack .pastseg{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(135deg,#8b6cc9 0 6px,#6d52a6 6px 12px)}
+.nowtick{position:absolute;top:-1px;width:2px;height:12px;background:#facc15;transform:translateX(-1px)}
+.nowtick span{position:absolute;top:10px;left:-12px;font-size:10px;color:#facc15;width:26px;text-align:center}
+.past-hint{display:none;margin-top:8px;padding:8px 10px;border-radius:8px;background:#3b2f5c;color:#f3e8ff;font-size:14px}
+.forecast.past .past-hint{display:block}
+.fn{font-size:13px;color:#bfe6ff;margin:8px 0 0}
+.card{background:#132e40;border-radius:14px;padding:12px 14px}
+.card h2{margin:0 0 8px;font-size:18px}
+.tabs{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.tabs button[aria-selected="true"]{background:#1d7a4a;border-color:#4ade80}
+.hours{display:flex;flex-direction:column;gap:6px}
+.hr{
+  display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:center;
+  width:100%;text-align:left;border:0;border-radius:10px;padding:8px 10px;
+  background:#0e2333;color:#e8f1f7;font:16px system-ui;cursor:pointer;min-height:52px;
+}
+.hr .t{font-weight:800}
+.hr .r{font-size:13px;font-weight:800}
+.hr .d{font-size:14px;color:#d6e8f3}
+.hr.on{outline:2px solid #7dd3fc}
+.hr.past{background:#241b38;color:#e9d5ff}
+.hr.GOOD{box-shadow:inset 6px 0 0 #22c55e}
+.hr.MARGINAL{box-shadow:inset 6px 0 0 #eab308}
+.hr.POOR{box-shadow:inset 6px 0 0 #f97316}
+.hr.VERYPOOR{box-shadow:inset 6px 0 0 #dc2626}
+.hr.UNAVAILABLE{box-shadow:inset 6px 0 0 #94a3b8}
+.days{display:flex;flex-direction:column;gap:8px}
+.day{background:#0e2333;border-radius:12px;padding:10px 12px}
+.day b{display:block;font-size:17px}
+.day .win{margin:4px 0 0;font-size:15px}
+.foot{font-size:14px;color:#bfe6ff;padding:4px 2px 20px}
+.err{background:#431407;color:#fed7aa;border-radius:12px;padding:10px 12px}
+@media(prefers-reduced-motion:reduce){#rf.busy .ic{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>Galoc station</h1>
+    <p>LIV fishing · Amihan season</p>
+  </div>
+  <button id="rf" type="button" title="Reload the report and the latest hourly forecast">
+    <span><span class="ic">↻</span> <span id="rfl">Refresh</span></span>
+    <small id="rft">Auto every hour</small>
+  </button>
+</header>
+<div class="wrap">
+  <p id="updated">Last updated: Loading…</p>
+  <section class="hero UNAVAILABLE" id="hero" aria-live="polite">
+    <p class="when" id="hero-when">Loading…</p>
+    <p class="rating" id="hero-rating">…</p>
+    <p class="limit" id="hero-limit"></p>
+  </section>
+  <div class="metrics">
+    <div class="metric" id="wind-card">
+      <div class="arrow w-na" id="wind-arrow" aria-hidden="true">
+        <svg viewBox="0 0 36 36" id="wind-svg"><path id="wind-ptr" d="M18 3 L28 30 L18 24 L8 30 Z" fill="currentColor"/></svg>
+      </div>
+      <div>
+        <div class="k">Wind</div>
+        <div class="v" id="wind-val">Loading…</div>
+        <div class="s" id="wind-dir"></div>
+        <div class="meter" aria-hidden="true"><div class="fill" id="wind-fill"></div><div class="mark" style="left:45%"></div><div class="mlab" style="left:45%">18 kph line</div></div>
+        <div class="hint" id="wind-hint"></div>
+      </div>
+    </div>
+    <div class="metric" id="cur-card">
+      <div class="arrow c-na" id="cur-arrow" aria-hidden="true">
+        <svg viewBox="0 0 36 36"><path id="cur-ptr" d="M18 3 L28 30 L18 24 L8 30 Z" fill="currentColor"/></svg>
+      </div>
+      <div>
+        <div class="k">Current</div>
+        <div class="v" id="cur-val">Loading…</div>
+        <div class="s" id="cur-dir"></div>
+        <div class="hint" id="cur-hint"></div>
+      </div>
+    </div>
+    <div class="metric" id="rain-card">
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M18 4c6 8 10 12 10 18a10 10 0 1 1-20 0c0-6 4-10 10-18z" fill="#7dd3fc"/></svg></div>
+      <div>
+        <div class="k">Rain</div>
+        <div class="v" id="rain-val">Loading…</div>
+        <div class="s" id="rain-src"></div>
+      </div>
+    </div>
+  </div>
+  <section class="forecast" id="forecast-sec" aria-label="Hourly fishing forecast">
+    <div class="forecast-head">
+      <button id="forecast-m48" class="jump" type="button" title="Jump to 48 hours ago">−48h</button>
+      <button id="forecast-m24" class="jump" type="button" title="Jump to 24 hours ago">−24h</button>
+      <button id="forecast-now" type="button">Now</button>
+      <button id="forecast-play" type="button" disabled>▶ Play</button>
+      <strong id="forecast-time">Loading hourly forecast…</strong>
+      <span id="forecast-state"></span>
+    </div>
+    <label for="forecast-slider" class="fn">Drag to pick an hour: past 48 hours (striped) to the end of the forecast. All times PHT.</label>
+    <input id="forecast-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast hour">
+    <div class="track-wrap" aria-hidden="true"><div class="ftrack"><div class="pastseg" id="forecast-pastseg" style="width:0"></div></div><div class="nowtick" id="forecast-nowtick" style="left:8px;display:none"><span>Now</span></div></div>
+    <div class="forecast-range"><span id="forecast-start">—</span><span id="forecast-end">—</span></div>
+    <div class="past-hint" id="past-hint"></div>
+    <p class="fn" id="forecast-note">Conditions follow the selected hour. Gray means data is missing.</p>
+  </section>
+  <section class="card">
+    <h2>Best times to go out</h2>
+    <div class="days" id="outlook">Loading…</div>
+    <p class="fn">Windows are from the hourly ECMWF wind and rain plus Open-Meteo Marine currents (not ECMWF). Missing hours are marked UNAVAILABLE and are never filled in.</p>
+  </section>
+  <section class="card">
+    <h2>Hour by hour</h2>
+    <div class="tabs" role="tablist" aria-label="Hour list day">
+      <button type="button" id="tab-today" role="tab" aria-selected="true">Today</button>
+      <button type="button" id="tab-tomorrow" role="tab" aria-selected="false">Tomorrow</button>
+    </div>
+    <div class="hours" id="hour-list">Loading…</div>
+  </section>
+  <p class="foot">
+    All times are PHT (Asia/Manila). Wind is in kph; <b>g</b> means gust. Wind above 18 kph is bad for fishing.
+    Current colors: green under 0.5 kt, yellow 0.5–0.9, orange 0.9–1.5, red 1.5 kt or more.<br>
+    <a href="../">All fishing grounds</a> · <a href="../digest.html">Full report</a>
+  </p>
+</div>
+<div id="map-forecast-time" hidden></div>
+<div id="map-forecast-label" hidden></div>
+<script>
+const U='UNAVAILABLE',E=s=>String(s??U).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY POOR':'#dc2626',UNAVAILABLE:'#94a3b8'};
+const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
+const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
+const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
+const DATA_URL='../data.json';
+const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livGalocLiveV1',PAST_HOURS=48,FORECAST_DAYS='8';
+const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
+const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
+const num=x=>{if(x==null||x==='')return null;const f=Number(x);return Number.isFinite(f)?f:null},r1=x=>x==null?null:Math.round(x*10)/10;
+const toKt=(val,unit)=>{if(val==null)return null;const u=(unit||'').toLowerCase().trim();if(['kn','kt','knots'].includes(u))return val;if(['m/s','ms','m s-1'].includes(u))return val*MS_TO_KT;return val*KMH_TO_KT};
+const compass=d=>d==null?'—':['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.floor((d+11.25)/22.5)%16];
+const curClass=k=>k==null?U:k<0.5?'Favorable':k<0.9?'Moderate':k<1.5?'Strong':'Very Strong';
+const windClass=k=>k==null?U:k<=10?'Good':k<=15?'Marginal':k<=20?'Poor':'Very Poor';
+const rainClass=m=>m==null?U:m<1?'Light':m<=5?'Moderate':'Heavy';
+const rankOf=l=>RANK[String(l).toUpperCase()]??2;
+const fishing=(c,w,r)=>{if([c,w,r].some(x=>x==null||String(x).toUpperCase()===U))return U;const x=Math.max(rankOf(c),rankOf(w),rankOf(r));return x<=1?'GOOD':x==2?'MARGINAL':x==3?'POOR':'VERY POOR'};
+const hourScore=(w,c,r)=>{let s=0;if(w==null)s+=3;else{s+=Math.max(0,w-2)*.8;if(w>10)s+=(w-10)*1.5}if(c==null)s+=1.5;else{s+=c*4;if(c>=1.5)s+=3}if(r==null)s+=1;else{s+=r*2;if(r>5)s+=4}return s};
+const tPHT=t=>Date.parse(t+(t.length<=16?':00':'')+'+08:00');
+const nowIdx=(times,now)=>{let b=0,bd=null;times.forEach((t,i)=>{const d=Math.abs(tPHT(t)-now);if(bd==null||d<bd){bd=d;b=i}});return b};
+const rain3=(p,i)=>{if(i<2)return null;const vals=[num(p[i-2]),num(p[i-1]),num(p[i])];return vals.every(x=>x!=null)?vals.reduce((a,b)=>a+b,0):null};
+const labHour=t=>{const d=new Date(tPHT(t));return d.toLocaleDateString('en-US',{weekday:'short',timeZone:'Asia/Manila'})+' '+t.slice(11,13)};
+const fmtPHT=ms=>new Date(ms).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+const KT_TO_KPH=1.852,WIND_BAD_KPH=18,WIND_NEAR_KPH=2;
+const kph=kt=>{const k=num(kt);return k==null?null:Math.round(k*KT_TO_KPH)};
+const windToward=deg=>{const d=num(deg);return d==null?null:((d+180)%360+360)%360};
+const windTone=k=>k==null?'na':k>WIND_BAD_KPH?'bad':k>WIND_BAD_KPH-WIND_NEAR_KPH?'near':'ok';
+const WINDCOL={ok:'#22c55e',near:'#f59e0b',bad:'#ef4444',na:'#94a3b8'};
+const windDeg=w=>{if(!w)return null;const d=num(w.deg);return d!=null?d:(DIR[w.dir]??null)};
+const curTone=k=>{const c=num(k);return c==null?'na':c<0.5?'fav':c<0.9?'mod':c<1.5?'str':'vs'};
+const currentLabel=c=>{const k=num(c?.kt);if(k==null)return 'Current UNAVAILABLE';return 'Current → '+(DIR[c.dir]!=null?c.dir+' ':'')+k.toFixed(1)+' kt'};
+const windLabel=w=>{const k=kph(w?.kt);if(k==null)return 'wind UNAVAILABLE';const g=kph(w.gustKt),dir=windDeg(w)==null?'':compass(windDeg(w))+' ';return dir+k+' kph'+(g==null?'':' g'+g)};
+const forecastLabel=t=>new Date(tPHT(t)).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZone:'Asia/Manila'})+' PHT';
+const nowHourMs=(t=Date.now())=>Math.round(t/36e5)*36e5;
+const isPast=(t,now=Date.now())=>!!t&&tPHT(t)<nowHourMs(now);
+const timeLabel=(t,now=Date.now())=>(isPast(t,now)?'Past · ':'Forecast for ')+forecastLabel(t);
+const phtDay=ms=>new Date(ms).toLocaleDateString('en-CA',{timeZone:'Asia/Manila'});
+const dayWord=(t,now=Date.now())=>{const d=Math.round((Date.parse(phtDay(now))-Date.parse(phtDay(tPHT(t))))/864e5);return d<=0?'Earlier today':d==1?'Yesterday':d==2?'2 days ago':d+' days ago'};
+const hoursAgoIdx=(times,h,now=Date.now())=>{if(!times.length)return -1;const target=nowHourMs(now)-h*36e5;let b=0,bd=null;times.forEach((t,i)=>{const d=Math.abs(tPHT(t)-target);if(bd==null||d<bd){bd=d;b=i}});return b};
+const PAST_NOTE='Past hours show the model\u2019s recent values for those hours (Open-Meteo ECMWF near-analysis + Open-Meteo Marine currents), not on-site observations.';
+const galocFrom=D=>(D?.areas||[]).find(a=>a.id==='galoc'||String(a.name||'').toLowerCase()==='galoc')||null;
+const RT=()=>String(D?.reportTime||U).replace(/ · (morning|afternoon|evening|midday|night)\b.*$/i,'');
+const clockHour=t=>{const d=new Date(tPHT(t));return d.toLocaleTimeString('en-US',{hour:'numeric',timeZone:'Asia/Manila'})};
+const clockRange=(a,b)=>{const s=clockHour(a),e=new Date(tPHT(b)+36e5).toLocaleTimeString('en-US',{hour:'numeric',timeZone:'Asia/Manila'});return s===e?s:s.replace(' AM','–').replace(' PM','–').replace(/–(AM|PM)$/,'')+'–'+e};
+/* fmt "5 PM–11 PM" more cleanly */
+function hourSpan(first,last){
+  const start=tPHT(first), end=tPHT(last)+36e5;
+  const hours=Math.round((end-start)/36e5);
+  if(hours>=22)return 'All day';
+  const s=new Date(start).toLocaleTimeString('en-US',{hour:'numeric',timeZone:'Asia/Manila'});
+  const e=new Date(end).toLocaleTimeString('en-US',{hour:'numeric',timeZone:'Asia/Manila'});
+  if(hours<=12){
+    const sm=s.slice(-2),em=e.slice(-2);
+    if(sm===em)return s.replace(/ AM| PM/,'')+'–'+e;
+  }
+  return s+'–'+e;
+}
+let D=null,AREA=null,LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,listDay='today',showPastHours=false;
+async function getJSON(url){let r;try{r=await fetch(url,{cache:'no-store'})}catch(e){throw new Error('network error or blocked')}if(r.status==429)throw new Error('Open-Meteo rate limit (HTTP 429)');
+ if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j&&j.error)throw new Error(j.reason||'API error');return Array.isArray(j)?j:[j]}
+async function fetchLive(areas){
+ const lat=areas.map(a=>a.lat).join(','),lon=areas.map(a=>a.lng).join(',');
+ const eq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:FORECAST_DAYS,past_days:'2',cell_selection:'sea'});
+ const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:FORECAST_DAYS,past_days:'2'});
+ const [e,m]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq)]);
+ const ok=(r)=>r.status=='fulfilled'&&r.value.length==areas.length;
+ return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf:ok(e)?e.value:null,marine:ok(m)?m.value:null,
+  ecmwfErr:ok(e)?null:'ECMWF: '+(e.reason?.message||'unexpected response'),marineErr:ok(m)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
+function computeLive(a,i,L,time=selectedTime){
+ const ec=L.ecmwf?.[i],ma=L.marine?.[i],eh=ec?.hourly||{},mh=ma?.hourly||{};
+ const target=time||eh.time?.[nowIdx(eh.time,L.at)]||mh.time?.[nowIdx(mh.time,L.at)];
+ const ei=(eh.time||[]).indexOf(target),mi=(mh.time||[]).indexOf(target);
+ const at=(arr,j)=>j<0?null:num(arr?.[j]);
+ const wk=at(eh.wind_speed_10m,ei),gust=at(eh.wind_gusts_10m,ei),mm=at(eh.precipitation,ei),r3=ei<0?null:rain3(eh.precipitation||[],ei);
+ const ck=toKt(at(mh.ocean_current_velocity,mi),ma?.hourly_units?.ocean_current_velocity||'km/h');
+ const cc=curClass(ck),wc=windClass(wk),rc=rainClass(r3),rating=fishing(cc,wc,rc);
+ const worst=rating===U?null:Math.max(rankOf(cc),rankOf(wc),rankOf(rc));
+ return {time:target,wind:{kt:r1(wk),gustKt:r1(gust),deg:wk==null?null:at(eh.wind_direction_10m,ei),dir:compass(at(eh.wind_direction_10m,ei)),source:'ECMWF via Open-Meteo'},
+ rain:{mmHour:r1(mm),mm3h:r1(r3),intensity:rainClass(r3),source:'ECMWF via Open-Meteo'},
+ current:{kt:r1(ck),dir:ck==null?null:compass(at(mh.ocean_current_direction,mi)),status:cc,source:'Open-Meteo Marine currents'},
+ rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
+}
+function stopPlayback(){if(playTimer)clearInterval(playTimer);playTimer=null;$('forecast-play').textContent='▶ Play';$('forecast-play').setAttribute('aria-pressed','false')}
+function updateMapClock(){const active=forecastTimes.includes(selectedTime),past=active&&isPast(selectedTime);if($('map-forecast-label'))$('map-forecast-label').textContent=active?(past?'Past hour (model values, not observations)':'Forecast time'):'Report snapshot';if($('map-forecast-time')){$('map-forecast-time').textContent=active?(past?'Past · ':'')+forecastLabel(selectedTime):(D?RT():'Loading…');const mc=$('map-forecast-time').parentNode;if(mc&&mc.classList)mc.classList.toggle('past',past)}}
+function updateForecastControls(){
+ updateMapClock();
+ const active=forecastTimes.length>0,idx=Math.max(0,forecastTimes.indexOf(selectedTime));
+ $('forecast-slider').disabled=!active;$('forecast-play').disabled=!active||forecastTimes.length<2;
+ $('forecast-slider').max=String(Math.max(0,forecastTimes.length-1));$('forecast-slider').value=String(idx);
+ $('forecast-time').textContent=active?timeLabel(selectedTime):'Hourly forecast UNAVAILABLE';
+ const past=active&&isPast(selectedTime),sec=$('forecast-sec')||$('forecast-slider').parentNode;if(sec&&sec.classList)sec.classList.toggle('past',past);
+ $('forecast-m48').disabled=$('forecast-m24').disabled=!active||!forecastTimes.some(t=>isPast(t));
+ const n=forecastTimes.length,ni=active?hoursAgoIdx(forecastTimes,0):-1,frac=n>1&&ni>=0?ni/(n-1):0;
+ $('forecast-pastseg').style.width=(frac*100)+'%';$('forecast-nowtick').style.display=active&&ni>0?'block':'none';$('forecast-nowtick').style.left=`calc(8px + (100% - 16px) * ${frac})`;
+ $('past-hint').textContent=past?dayWord(selectedTime)+' · Boats landing today mostly fished yesterday or the day before (0–1 day landing lag). '+PAST_NOTE:'';
+ $('forecast-slider').setAttribute('aria-valuetext',active?timeLabel(selectedTime):U);
+ $('forecast-start').textContent=active?forecastLabel(forecastTimes[0]):'—';
+ $('forecast-end').textContent=active?forecastLabel(forecastTimes[forecastTimes.length-1]):'—';
+ $('forecast-state').textContent=active&&LIVE?'Data updated '+fmtPHT(LIVE.at):'Report snapshot only';
+ $('forecast-note').textContent=active?'Conditions follow the selected hour (past 48 h to forecast end). Gray means incomplete data.':'Forecast data unavailable. The report snapshot is not a future forecast. Use Refresh to retry.';
+}
+function rebuildForecastTimes(){
+ const ids=AREA?.id||'',valid=LIVE&&LIVE.ids===ids;
+ const times=new Set();if(valid){for(const source of [LIVE.ecmwf,LIVE.marine])for(const loc of source||[])for(const t of loc.hourly?.time||[])if(Number.isFinite(tPHT(t)))times.add(t)}
+ const cutoff=nowHourMs()-PAST_HOURS*36e5;
+ forecastTimes=[...times].filter(t=>tPHT(t)>=cutoff).sort((a,b)=>tPHT(a)-tPHT(b));
+ if(!forecastTimes.includes(selectedTime)){selectedTime=forecastTimes[Math.max(0,hoursAgoIdx(forecastTimes,0))]||null;stopPlayback()}
+ updateForecastControls();
+}
+function chooseForecast(index){selectedTime=forecastTimes[Math.max(0,Math.min(forecastTimes.length-1,index))]||null;updateForecastControls();render()}
+$('forecast-slider').oninput=e=>{stopPlayback();chooseForecast(Number(e.target.value))};
+$('forecast-now').onclick=()=>{stopPlayback();rebuildForecastTimes();chooseForecast(Math.max(0,hoursAgoIdx(forecastTimes,0)));if(!forecastTimes.length)refresh('forecast-load')};
+const jumpBack=h=>{stopPlayback();if(forecastTimes.length)chooseForecast(hoursAgoIdx(forecastTimes,h))};
+$('forecast-m48').onclick=()=>jumpBack(48);$('forecast-m24').onclick=()=>jumpBack(24);
+$('forecast-play').onclick=()=>{if(playTimer){stopPlayback();return}if(!forecastTimes.length)return;if(selectedTime===forecastTimes[forecastTimes.length-1])chooseForecast(0);$('forecast-play').textContent='❚❚ Pause';$('forecast-play').setAttribute('aria-pressed','true');playTimer=setInterval(()=>{const next=forecastTimes.indexOf(selectedTime)+1;if(next>=forecastTimes.length){stopPlayback();return}chooseForecast(next);if(next===forecastTimes.length-1)stopPlayback()},1000)};
+function currentView(){
+ if(!AREA)return null;
+ if(LIVE&&selectedTime&&forecastTimes.includes(selectedTime)){
+  const x=computeLive(AREA,0,LIVE,selectedTime);
+  return {...AREA,...x,_forecast:true,_live:x.rating!==U,note:x.rating===U?'Incomplete forecast inputs: rating UNAVAILABLE. Missing values are never replaced with the report.':null};
+ }
+ return {...AREA,_forecast:false};
+}
+function setArrow(el,deg){if(!el)return;const svg=el.closest?el.closest('svg')||el:el;const wrap=svg.closest?svg.closest('.arrow')||svg:svg;if(deg==null){wrap.style.visibility='hidden';return}wrap.style.visibility='visible';svg.style.transform='rotate('+deg+'deg)'}
+function limitText(a){
+ if(!a)return U;
+ if(a.rating===U)return a.note||'Some data is missing, so the rating is UNAVAILABLE.';
+ if(a.rating==='GOOD')return 'Good to go out at this hour.';
+ const why=(a.lim||[]).map(k=>k==='wind'?'wind':k==='current'?'current':'rain');
+ const extra=windTone(kph(a.wind?.kt))==='bad'?' Wind is above the 18 kph line.':'';
+ return 'Limited by '+(why.length?why.join(' and '):'conditions')+'.'+extra;
+}
+function renderHero(a){
+ const past=a?._forecast&&isPast(a.time||selectedTime);
+ const hero=$('hero');
+ const rate=a?.rating||U;
+ hero.className='hero '+(rate==='VERY POOR'?'VERYPOOR':rate)+(past?' past':'');
+ $('hero-when').textContent=a?._forecast?timeLabel(selectedTime):(D?'Report snapshot · '+RT():'Loading…');
+ $('hero-rating').textContent=rate;
+ $('hero-limit').textContent=limitText(a);
+}
+function renderWind(a){
+ const w=a?.wind,kt=kph(w?.kt),tone=windTone(kt),deg=windDeg(w),toward=windToward(deg);
+ const card=$('wind-card');card.className='metric '+('w-'+tone);
+ $('wind-arrow').className='arrow w-'+tone;
+ setArrow($('wind-ptr'),toward);
+ $('wind-val').textContent=windLabel(w);
+ $('wind-dir').textContent=kt==null?U:(deg==null?'Direction UNAVAILABLE':'From '+(w.dir||compass(deg))+' · blowing toward '+compass(toward));
+ $('wind-fill').style.width=(kt==null?0:Math.min(100,(kt/40)*100))+'%';
+ $('wind-fill').style.background=WINDCOL[tone];
+ $('wind-hint').className='hint '+((tone==='ok'&&'ok')||(tone==='near'&&'near')||(tone==='bad'&&'bad')||'');
+ $('wind-hint').textContent=kt==null?'Wind UNAVAILABLE':tone==='bad'?'Above 18 kph: bad for fishing':tone==='near'?'Near the 18 kph limit':'At or below 18 kph';
+}
+function renderCurrent(a){
+ const c=a?.current,k=num(c?.kt),tone=curTone(k),deg=c&&DIR[c.dir]!=null?DIR[c.dir]:null;
+ $('cur-arrow').className='arrow c-'+tone;
+ setArrow($('cur-ptr'),deg);
+ $('cur-val').textContent=currentLabel(c);
+ const st=c?.status&&c.status!==U?c.status+' · ':'';
+ $('cur-dir').textContent=k==null?U:st+'Flows toward '+(c.dir||U)+' · Open-Meteo Marine (not ECMWF)';
+ const hint={fav:'Weak current (under 0.5 kt).',mod:'Moderate current (0.5–0.9 kt).',str:'Strong current (0.9–1.5 kt).',vs:'Very strong current (1.5 kt or more).',na:''};
+ $('cur-hint').textContent=hint[tone]||'';
+}
+function renderRain(a){
+ const r=a?.rain;
+ if(!r||(r.intensity==null&&r.mmHour==null&&r.mm3h==null)){ $('rain-val').textContent=U;$('rain-src').textContent='Rain UNAVAILABLE';return; }
+ const dry=r.mmHour===0&&(r.mm3h===0||r.mm3h==null);
+ $('rain-val').textContent=dry?'No rain':(r.intensity||U);
+ $('rain-src').textContent=(r.mmHour!=null||r.mm3h!=null)?((r.mmHour==null?'Hourly rain UNAVAILABLE':r.mmHour+' mm this hour')+(r.mm3h==null?' · 3-hour rain UNAVAILABLE':' · '+r.mm3h+' mm in 3 hours')+' · ECMWF via Open-Meteo'):((r.intensity||U)+' · ECMWF via Open-Meteo');
+}
+function hourEntry(t){
+ const x=computeLive(AREA,0,LIVE,t);
+ return {...x,score:hourScore(x.wind?.kt,x.current?.kt,x.rain?.mm3h)};
+}
+function runsWhere(hours,ok){
+ const runs=[];let cur=null;
+ for(const h of hours){if(ok(h)){if(cur)cur.push(h);else cur=[h]}else if(cur){runs.push(cur);cur=null}}
+ if(cur)runs.push(cur);
+ return runs;
+}
+function describeRun(run){
+ const rating=run.every(h=>h.rating==='GOOD')?'GOOD':run.every(h=>h.rating==='GOOD'||h.rating==='MARGINAL')?'MARGINAL':run[0].rating;
+ const wks=run.map(h=>kph(h.wind?.kt)).filter(x=>x!=null);
+ const cks=run.map(h=>num(h.current?.kt)).filter(x=>x!=null);
+ const wind=wks.length?(Math.min(...wks)===Math.max(...wks)?wks[0]+' kph':Math.min(...wks)+'–'+Math.max(...wks)+' kph'):U;
+ const cur=cks.length?(Math.min(...cks)===Math.max(...cks)?cks[0].toFixed(1)+' kt':Math.min(...cks).toFixed(1)+'–'+Math.max(...cks).toFixed(1)+' kt'):U;
+ return hourSpan(run[0].time,run[run.length-1].time)+' · '+rating+' · wind '+wind+', current '+cur;
+}
+function bestRuns(hours){
+ if(!hours.length)return [];
+ let runs=runsWhere(hours,h=>h.rating==='GOOD');
+ if(!runs.length)runs=runsWhere(hours,h=>h.rating==='MARGINAL');
+ runs.sort((a,b)=>b.length-a.length||(a.reduce((s,h)=>s+h.score,0)/a.length)-(b.reduce((s,h)=>s+h.score,0)/b.length));
+ const top=runs.slice(0,2);
+ top.sort((a,b)=>tPHT(a[0].time)-tPHT(b[0].time));
+ return top;
+}
+function renderHours(){
+ if(!LIVE||!AREA||!forecastTimes.length){$('hour-list').textContent=LIVEERR?'Hourly list UNAVAILABLE. '+LIVEERR:'Hourly list UNAVAILABLE.';return}
+ const today=phtDay(Date.now());
+ const tom=phtDay(Date.now()+24*36e5);
+ const want=listDay==='tomorrow'?tom:today;
+ const rows=forecastTimes.filter(t=>phtDay(tPHT(t))===want);
+ if(!rows.length){$('hour-list').textContent='No hourly data for this day.';return}
+ const earlier=listDay==='today'?rows.filter(t=>isPast(t)):[];
+ const selectedPast=selectedTime&&earlier.includes(selectedTime);
+ const hidePast=listDay==='today'&&!showPastHours&&earlier.length&&!selectedPast;
+ const visible=hidePast?rows.filter(t=>!isPast(t)):rows;
+ const toggle=hidePast?`<button type="button" class="hr" id="show-past-hours">Show earlier today (${earlier.length} hours)</button>`:(listDay==='today'&&showPastHours&&earlier.length?`<button type="button" class="hr" id="hide-past-hours">Hide earlier today</button>`:'');
+ $('hour-list').innerHTML=toggle+visible.map(t=>{
+  const h=hourEntry(t),past=isPast(t),on=t===selectedTime,cls=(h.rating==='VERY POOR'?'VERYPOOR':h.rating)+(past?' past':'')+(on?' on':'');
+  const dry=h.rain?.mmHour===0&&(h.rain?.mm3h===0||h.rain?.mm3h==null);
+  const rain=h.rain?.intensity===U||(h.rain?.intensity==null&&h.rain?.mmHour==null)?'rain '+U:dry?'no rain':(h.rain.intensity||U);
+  return `<button type="button" class="hr ${cls}" data-t="${E(t)}"><div class="t">${E(clockHour(t))}</div><div><div class="r">${E(h.rating)}</div><div class="d">${E(windLabel(h.wind))} · ${E(currentLabel(h.current))} · ${E(rain)}</div></div></button>`;
+ }).join('');
+ $('hour-list').onclick=e=>{
+  if(e.target.closest('#show-past-hours')){showPastHours=true;renderHours();return}
+  if(e.target.closest('#hide-past-hours')){showPastHours=false;renderHours();return}
+  const b=e.target.closest('button[data-t]');if(!b)return;stopPlayback();const i=forecastTimes.indexOf(b.getAttribute('data-t'));if(i>=0)chooseForecast(i)
+ };
+}
+function renderOutlook(){
+ if(!LIVE||!AREA||!forecastTimes.length){$('outlook').textContent='Day-by-day outlook UNAVAILABLE.';return}
+ const today=phtDay(Date.now());
+ const days=[];
+ for(const t of forecastTimes){const d=phtDay(tPHT(t));if(d>=today&&!days.includes(d))days.push(d)}
+ if(!days.length){$('outlook').textContent='Day-by-day outlook UNAVAILABLE.';return}
+ $('outlook').innerHTML=days.map(d=>{
+  const hours=forecastTimes.filter(t=>phtDay(tPHT(t))===d).map(hourEntry).filter(h=>h.rating!==U||h.wind||h.current);
+  const future=d===today?hours.filter(h=>!isPast(h.time)):hours;
+  const usable=future.filter(h=>h.rating&&h.rating!==U);
+  const runs=bestRuns(usable);
+  const label=new Date(d+'T12:00:00+08:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'Asia/Manila'});
+  const isToday=d===today;
+  let body;
+  if(!usable.length)body='UNAVAILABLE — not enough hourly data.';
+  else if(!runs.length){
+    const worst=usable.reduce((w,h)=>rankOf(h.rating)>rankOf(w.rating)?h:w,usable[0]);
+    body=(isToday?'No good window later today':'No good window')+' · conditions stay '+(worst.rating)+'.';
+  }else body=(isToday?'Later today: ':'')+runs.map(describeRun).join(' · also ');
+  return `<div class="day"><b>${E(label)}${isToday?' · today':''}</b><div class="win">${E(body)}</div></div>`;
+ }).join('');
+}
+function renderUpdated(){
+ const live=LIVE?'forecast '+fmtPHT(LIVE.at):'forecast UNAVAILABLE';
+ const rep=D?'report '+RT():'report UNAVAILABLE';
+ const err=LIVEERR?' · '+LIVEERR:'';
+ $('updated').textContent='Last updated: '+live+' · '+rep+err+' · all times PHT';
+}
+function render(){
+ const a=currentView();
+ renderHero(a);renderWind(a);renderCurrent(a);renderRain(a);renderHours();renderOutlook();renderUpdated();
+}
+function setListDay(day){
+ listDay=day;
+ $('tab-today').setAttribute('aria-selected',day==='today'?'true':'false');
+ $('tab-tomorrow').setAttribute('aria-selected',day==='tomorrow'?'true':'false');
+ renderHours();
+}
+$('tab-today').onclick=()=>setListDay('today');
+$('tab-tomorrow').onclick=()=>setListDay('tomorrow');
+function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
+async function refresh(why='manual',{live=true}={}){
+ if(busy)return;busy=true;setBtn('busy');
+ try{
+  const r=await fetch(DATA_URL+'?'+Date.now(),{cache:'no-store'});
+  if(!r.ok)throw new Error('data.json HTTP '+r.status);
+  D=await r.json();
+  AREA=galocFrom(D);
+  if(!AREA)throw new Error('Galoc was not found in the report');
+  if(live){
+    try{
+      const L2=await fetchLive([AREA]);
+      if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}
+      else LIVEERR=[L2.ecmwfErr,L2.marineErr].filter(Boolean).join('; ');
+      try{if(LIVE)localStorage.setItem(CACHE_KEY,JSON.stringify(LIVE))}catch(e){}
+    }catch(e){LIVEERR=e.message||String(e)}
+  }
+  rebuildForecastTimes();
+  render();
+  lastRefresh=Date.now();
+  setBtn('idle','Updated '+fmtPHT(Date.now()));
+ }catch(e){
+  setBtn('idle','Refresh failed');
+  $('updated').textContent='Last updated: UNAVAILABLE · '+ (e.message||e);
+  if(!AREA)$('hero-rating').textContent=U;
+ }finally{busy=false}
+}
+function schedule(){clearTimeout(nextTimer);const d=new Date();d.setHours(d.getHours()+1,0,0,0);nextAt=d.getTime();
+ nextTimer=setTimeout(async()=>{await refresh('hourly');schedule()},nextAt-Date.now()+(Math.random()*20e3))}
+$('rf').onclick=()=>refresh('manual');
+async function boot(){
+ try{const raw=localStorage.getItem(CACHE_KEY);if(raw){const c=JSON.parse(raw);if(c&&c.at&&Date.now()-c.at<LIVE_STALE_MS)LIVE=c}}catch(e){}
+ await refresh('boot');
+ schedule();
+}
+/* boot */
+boot();
+</script>
+</body>
+</html>
