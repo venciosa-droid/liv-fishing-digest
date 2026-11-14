@@ -3,6 +3,8 @@ const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('ass
 const htmlPath=path.join(__dirname,'../galoc/print.html');
 const raw=fs.readFileSync(htmlPath,'utf8');
 assert(/id="print"/.test(raw),'Print button is on the page');
+assert(!/<a[^>]*>Galoc Station<\/a>/.test(raw)&&!/<a[^>]*>All fishing grounds<\/a>/.test(raw),'top nav links to Galoc Station and All fishing grounds are removed');
+assert(fs.readFileSync(path.join(__dirname,'../galoc/index.html'),'utf8').includes('href="print.html"'),'Galoc page still links to the 7-day plan');
 assert(/Color key/.test(raw)&&/Green/.test(raw)&&/Yellow/.test(raw)&&/Red/.test(raw)&&/Blue/.test(raw),'color key names all four inks');
 assert(/print-color-adjust:\s*exact/.test(raw)&&/-webkit-print-color-adjust:\s*exact/.test(raw),'print keeps ink colors');
 assert(/FRESH_MS=12\*60\*60e3/.test(raw),'client refreshes when saved data is older than 12 hours');
