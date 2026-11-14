@@ -75,6 +75,10 @@ assert.strictEqual(vm.runInContext('confidence("2026-11-17",'+now+')',ctx),'High
 assert.strictEqual(vm.runInContext('confidence("2026-11-18",'+now+')',ctx),'Lower','after 48h confidence is Lower');
 
 assert.strictEqual(vm.runInContext('fmtPht('+now+')',ctx),'Sun 15 Nov 2026, 12:30 AM PHT','Updated time is in PHT');
+assert.strictEqual(vm.runInContext('mdLabel("2026-11-15")',ctx),'11/15','date is Month/Day');
+assert.strictEqual(vm.runInContext('weekdayLong("2026-11-15")',ctx),'Sunday','weekday is the full name');
+assert.strictEqual(vm.runInContext('dayLabel("2026-11-15")',ctx),'11/15 Sunday','plain label is date then weekday');
+assert.strictEqual(vm.runInContext('mdLabel("2026-01-05")',ctx),'1/5','Month/Day has no extra zeros');
 
 const jsonPath=path.join(__dirname,'../galoc/fresh7.json');
 assert(fs.existsSync(jsonPath),'published snapshot exists');
@@ -91,9 +95,16 @@ assert.strictEqual(rendered.galoc.length,7,'Galoc has 7 day rows');
 assert.strictEqual(rendered.coron.length,7,'Coron has 7 day rows');
 assert(nodes.updated.textContent.includes('PHT'),'Updated line shows PHT');
 assert(nodes.galoc.innerHTML.includes('Wind (kph)'),'Galoc table is rendered');
+assert(nodes.galoc.innerHTML.includes('11/15')&&nodes.galoc.innerHTML.includes('Sunday')&&nodes.galoc.innerHTML.includes('Saturday'),'Galoc table uses Month/Day over weekday');
+assert(nodes.coron.innerHTML.includes('11/15')&&nodes.coron.innerHTML.includes('Sunday'),'Coron table uses the same date labels');
+assert(nodes.sum.innerHTML.includes('11/15')&&nodes.sum.innerHTML.includes('Sunday'),'summary uses Month/Day and weekday');
+assert(/class="md"/.test(nodes.galoc.innerHTML)&&/<span class="wk">Sunday<\/span>/.test(nodes.galoc.innerHTML),'date is on top and weekday is on the line below');
+assert(/class="star"/.test(nodes.galoc.innerHTML),'lower-confidence days still have a *');
+const wed=rendered.galoc.find(r=>r.day==='2026-11-18');
+assert(wed&&wed.conf==='Lower'&&wed.md==='11/18'&&wed.wk==='Wednesday','Wed 18 keeps * data and the new labels');
 assert(/good weather/.test(raw),'green is explained as good weather');
 console.log('fresh7 tests ok');
 console.log('Galoc verdicts:');
 for(const r of rendered.galoc){
-  console.log(`  ${r.label}  fish=${r.fishing}  catch=${r.catch}  ice=${r.ice}  supply=${r.supply}  conf=${r.conf}  go=${r.goout}`);
+  console.log(`  ${r.md} ${r.wk}  fish=${r.fishing}  catch=${r.catch}  ice=${r.ice}  supply=${r.supply}  conf=${r.conf}  go=${r.goout}`);
 }
