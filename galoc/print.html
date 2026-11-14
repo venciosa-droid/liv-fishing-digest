@@ -144,7 +144,7 @@ function planDays(now){const t0=phtYmd(now),out=[];for(let i=0;i<7;i++)out.push(
 function isFresh(at,now,windowMs){if(at==null||!Number.isFinite(+at))return false;const age=(now-+at);return age<(windowMs??FRESH_MS)&&age>=-60e3}
 function weekday(ymd){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(Date.parse(ymd+'T12:00:00+08:00'))}
 function weekdayLong(ymd){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'long'}).format(Date.parse(ymd+'T12:00:00+08:00'))}
-function mdLabel(ymd){const d=new Date(ymd+'T12:00:00+08:00');const m=new Intl.DateTimeFormat('en-US',{timeZone:TZ,month:'numeric'}).format(d);const day=new Intl.DateTimeFormat('en-US',{timeZone:TZ,day:'numeric'}).format(d);return m+'/'+day}
+function mdLabel(ymd){const d=new Date(ymd+'T12:00:00+08:00');const m=new Intl.DateTimeFormat('en-US',{timeZone:TZ,month:'short'}).format(d);const day=new Intl.DateTimeFormat('en-US',{timeZone:TZ,day:'numeric'}).format(d);return m+' '+day}
 function dayLabel(ymd){return mdLabel(ymd)+' '+weekdayLong(ymd)}
 function rangeLabel(days){if(!days.length)return '';const a=new Date(days[0]+'T12:00:00+08:00'),b=new Date(days[days.length-1]+'T12:00:00+08:00');const fmt=d=>new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(d);return fmt(a)+' – '+fmt(b)}
 function hourLabel(h){h=Number(h);if(h===0||h===24)return '12 AM';if(h===12)return '12 PM';return (h%12)+' '+(h<12?'AM':'PM')}
