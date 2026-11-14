@@ -20,7 +20,7 @@
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{margin:0;padding:0;background:#eef3fa;color:var(--ink);font:11px/1.35 "Segoe UI",system-ui,sans-serif}
 .wrap{max-width:210mm;margin:0 auto;padding:10px 12px 28px;background:var(--paper)}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:0 0 8px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;margin:0 0 8px}
 .toolbar a,.toolbar button{font:600 13px/1.2 system-ui,sans-serif;color:#fff;background:var(--ink);border:0;border-radius:6px;padding:8px 12px;text-decoration:none;cursor:pointer}
 .toolbar button.print{background:var(--good)}
 .toolbar button:disabled{opacity:.6;cursor:wait}
@@ -90,10 +90,6 @@ span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 
 <body>
 <div class="wrap">
   <div class="toolbar no-print">
-    <div class="links">
-      <a href="./">Galoc Station</a>
-      <a href="../">All fishing grounds</a>
-    </div>
     <div class="links">
       <button type="button" id="rf">Refresh forecast</button>
       <button type="button" class="print" id="print">Print</button>
