@@ -1,314 +1,527 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LIV local fresh fish plan · Galoc &amp; Coron · 15–21 Nov 2026</title>
+<title>LIV 7-day local fresh fish plan</title>
 <style>
-  @page { size: A4 portrait; margin: 8.5mm 8.5mm 10mm 8.5mm; }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    background: #fff; color: #111;
-    font: 10pt/1.3 "DejaVu Sans", "Liberation Sans", "Noto Sans", Arial, Helvetica, sans-serif;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .sheet { max-width: 190mm; margin: 0 auto; }
-  header.top {
-    background: #111; color: #fff;
-    padding: 6px 11px 7px;
-    display: flex; justify-content: space-between; gap: 12px; align-items: flex-end;
-  }
-  header.top h1 {
-    margin: 0; font-size: 15.5pt; line-height: 1.12; font-weight: 800; letter-spacing: .01em;
-  }
-  header.top .sub { margin: 2px 0 0; font-size: 9.5pt; font-weight: 400; color: #eee; }
-  header.top .meta { text-align: right; font-size: 8.5pt; line-height: 1.3; color: #eee; white-space: nowrap; }
-  .banner {
-    border: 1.5px solid #111; border-top: 0;
-    padding: 3px 11px; font-size: 9pt; font-weight: 700;
-    background: #f2f2f2;
-  }
-  h2 {
-    margin: 8px 0 3px; font-size: 12.5pt; border-bottom: 2.5px solid #111;
-    padding: 0 0 1px; letter-spacing: .01em;
-    break-after: avoid; page-break-after: avoid;
-  }
-  h2.coron { page-break-before: always; break-before: page; }
-  h2 small { font-weight: 600; font-size: 9pt; display: block; margin-top: 1px; }
-  .sum {
-    border: 1.75px solid #111; margin: 6px 0 4px; padding: 4px 8px 5px;
-    font-size: 9.2pt;
-  }
-  .sum p { margin: 0 0 3px; }
-  .sum p:last-child { margin: 0; }
-  .sum b.label { font-weight: 800; }
-  table.tbl {
-    width: 100%; border-collapse: collapse; table-layout: fixed;
-    font-size: 8.3pt; margin: 0 0 3px;
-  }
-  table.wide { font-size: 8.6pt; }
-  table.tbl th, table.tbl td {
-    border: 1px solid #111; padding: 3px 4px; vertical-align: top;
-    text-align: left;
-  }
-  table.tbl th {
-    background: #111; color: #fff; font-weight: 700; font-size: 7.6pt;
-    text-transform: uppercase; letter-spacing: .03em; vertical-align: bottom;
-  }
-  table.wide th { font-size: 8pt; }
-  table.tbl td.d { font-weight: 800; white-space: nowrap; width: 11%; }
-  table.tbl .star { font-weight: 700; }
-  tr:nth-child(even) td { background: #f3f3f3; }
-  /* Fishing tones: readable in grayscale and named in the cell. */
-  td.fish { font-weight: 800; text-align: center; }
-  td.fish.good { background: #d9d9d9 !important; color: #111; }
-  td.fish.mix { background: #b5b5b5 !important; color: #111; }
-  td.fish.marg { background: #8a8a8a !important; color: #fff; }
-  td.fish.poor { background: #4a4a4a !important; color: #fff; }
-  td.fish.vpoor { background: #111 !important; color: #fff; }
-  td.fish.na { background: #fff !important; color: #111; }
-  td.ice-full, td.sup-go, td.catch { font-weight: 800; }
-  td.ice-full, td.sup-go { background: #d9d9d9 !important; }
-  td.ice-some, td.sup-lim { background: #b5b5b5 !important; font-weight: 800; }
-  td.ice-little, td.sup-hold { background: #4a4a4a !important; color: #fff; font-weight: 800; }
-  td.go { font-size: 8pt; }
-  table.wide td.go { font-size: 8.1pt; }
-  table.tbl tr { page-break-inside: avoid; break-inside: avoid; }
-  thead { display: table-header-group; }
-  .gfs { margin: 1px 0 6px; font-size: 8pt; }
-  .notes {
-    border: 1.5px solid #111; padding: 6px 9px 7px; margin-top: 6px;
-    font-size: 8.2pt; page-break-inside: avoid; break-inside: avoid;
-  }
-  .notes h2 { margin: 0 0 4px; font-size: 11pt; border-bottom: 1.5px solid #111; }
-  .notes p { margin: 0 0 4px; }
-  .notes p:last-child { margin: 0; }
-  .printbar {
-    display: none; margin: 8px 12px 0; font-size: 11pt;
-  }
-  @media print { .printbar { display: none !important; } }
-  @media screen {
-    body { background: #e8e8e8; padding: 16px 0 32px; }
-    .sheet {
-      background: #fff; padding: 0 0 16px;
-      box-shadow: 0 1px 8px rgba(0,0,0,.25); max-width: 210mm;
-    }
-    header.top, .banner { margin: 0 0; }
-    .sum, h2, .tbl, .gfs, .notes { margin-left: 10mm; margin-right: 10mm; }
-    h2, .sum { margin-left: 10mm; margin-right: 10mm; }
-    .printbar { display: block; margin: 12px 10mm 0; }
-    .printbar button {
-      font: 700 12pt system-ui, sans-serif; padding: 8px 14px;
-      background: #111; color: #fff; border: 0; border-radius: 6px; cursor: pointer;
-    }
-  }
+:root{
+  --ink:#124a9a;
+  --good:#0b6b2b;
+  --good-bg:#e5f6ea;
+  --caut:#8a5a00;
+  --caut-bg:#fff3bf;
+  --warn:#b00000;
+  --warn-bg:#fde4e4;
+  --na:#555;
+  --line:#c5d4ea;
+  --paper:#fff;
+}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;padding:0;background:#eef3fa;color:var(--ink);font:11px/1.35 "Segoe UI",system-ui,sans-serif}
+.wrap{max-width:210mm;margin:0 auto;padding:10px 12px 28px;background:var(--paper)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:0 0 8px}
+.toolbar a,.toolbar button{font:600 13px/1.2 system-ui,sans-serif;color:#fff;background:var(--ink);border:0;border-radius:6px;padding:8px 12px;text-decoration:none;cursor:pointer}
+.toolbar button.print{background:var(--good)}
+.toolbar button:disabled{opacity:.6;cursor:wait}
+.toolbar .links{display:flex;gap:8px;flex-wrap:wrap}
+h1{font:700 18px/1.2 system-ui,sans-serif;margin:0 0 2px;color:var(--ink)}
+.sub{margin:0 0 4px;font-size:12px}
+.updated{margin:0 0 6px;font-weight:700;font-size:12px}
+.err{color:var(--warn);font-weight:700;margin:0 0 8px}
+.key{display:flex;flex-wrap:wrap;gap:6px 12px;margin:0 0 8px;padding:5px 8px;border:1px solid var(--line);border-radius:4px;font-size:10.5px}
+.key b{font-weight:700;padding:1px 5px;border-radius:3px}
+.key .g{color:var(--good);background:var(--good-bg)}
+.key .c{color:var(--caut);background:var(--caut-bg)}
+.key .w{color:var(--warn);background:var(--warn-bg)}
+.key .b{color:var(--ink)}
+.sum{border:1px solid var(--line);border-radius:4px;padding:6px 8px;margin:0 0 10px}
+.sum p{margin:0 0 5px}
+.sum p:last-child{margin:0}
+.sum b.label{display:inline-block;min-width:7.2em}
+h2{font:700 13px/1.2 system-ui,sans-serif;margin:10px 0 3px;color:var(--ink)}
+h2 .place{font-weight:500;font-size:11px}
+table.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+table.tbl th,table.tbl td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;text-align:left}
+table.tbl th{background:#e8eef8;font-size:9.5px;font-weight:700}
+table.tbl td{font-size:10px}
+table.tbl .d{width:9%;white-space:nowrap;font-weight:700}
+table.tbl .star{color:var(--caut);font-weight:700}
+.good,td.good,.catch-High{color:var(--good);background:var(--good-bg);font-weight:700}
+.caut,td.caut,.catch-Normal,.catch-Light{color:var(--caut);background:var(--caut-bg);font-weight:700}
+.catch-Normal{color:var(--good);background:var(--good-bg)}
+.warn,td.warn,.catch-Very,td.poor{color:var(--warn);background:var(--warn-bg);font-weight:700}
+td.na,.na{color:var(--na);font-weight:700}
+span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 2px}
+.notes{margin:8px 0 0;font-size:9.5px}
+.notes p{margin:0 0 3px}
+.status{margin:4px 0 0;font-size:10px}
+@media screen and (max-width:700px){
+  .wrap{padding:8px}
+  table.tbl{display:block;overflow-x:auto}
+  table.tbl th,table.tbl td{font-size:10px}
+  h1{font-size:16px}
+}
+@media print{
+  @page{size:A4 portrait;margin:8mm 8mm 8mm 8mm}
+  html,body{background:#fff}
+  .wrap{max-width:none;padding:0;margin:0}
+  .toolbar{display:none!important}
+  h1{font-size:15px}
+  h2{font-size:12px;margin:6px 0 2px}
+  h2{break-after:avoid;page-break-after:avoid}
+  h2.coron{break-before:auto;page-break-before:auto}
+  .sum{margin:0 0 6px;padding:4px 6px}
+  table.tbl th,table.tbl td{padding:2px 3px;font-size:9px}
+  table.tbl th{font-size:8.5px}
+  table.tbl tr{page-break-inside:avoid;break-inside:avoid}
+  .notes{font-size:8px;margin:5px 0 0}
+  .key{font-size:9px;margin:0 0 6px}
+}
 </style>
 </head>
 <body>
-<div class="sheet">
-  <header class="top">
-    <div>
-      <h1>LIV local fresh fish plan</h1>
-      <p class="sub">Sun 15 – Sat 21 Nov 2026 · All times PHT · Fresh (not live) fish</p>
+<div class="wrap">
+  <div class="toolbar no-print">
+    <div class="links">
+      <a href="./">Galoc Station</a>
+      <a href="../">All fishing grounds</a>
     </div>
-    <div class="meta">
-      Priority: Galoc Station<br>
-      Coron is secondary<br>
-      Issued Sat 14 Nov 2026, 9:24 PM PHT
+    <div class="links">
+      <button type="button" id="rf">Refresh forecast</button>
+      <button type="button" class="print" id="print">Print</button>
     </div>
-  </header>
-  <div class="banner">Plan ahead for supply and ice at Galoc Station. Landing lag is 0–1 day. Wind above 18 kph is bad for fishing.</div>
-
-  <div class="sum">
-    <p><b class="label">Best supply days.</b> Sun 15, Mon 16, Tue 17, Wed 18, and Sat 21. Catch High; 6 PM–6 AM hours at or under 18 kph.</p>
-    <p><b class="label">Days to cut back.</b> Not a full hold. Thu 19 and Fri 20 have rougher go-out hours (see table). Landings can still arrive the same day or the next.</p>
-    <p><b class="label">Ice plan.</b> Full ice every day, Sun 15–Sat 21. Catch from a good night usually lands that morning or the next day. Weaker window: late Thu night into Fri morning (above 18 kph); still prepare full ice Fri and Sat.</p>
   </div>
-
-  <h2>Galoc Station <small>11.966933, 119.845707 · Galoc Island, Culion · Priority ground</small></h2>
-  <table class="tbl wide">
-    <thead>
-      <tr>
-        <th class="d">Day</th>
-        <th>Wind (kph)</th>
-        <th>Current</th>
-        <th>Rain</th>
-        <th>Fishing</th>
-        <th>Best go-out (night / early morning)</th>
-        <th>Fresh catch</th>
-        <th>Ice prep</th>
-        <th>Supply</th>
-      </tr>
-    </thead><tbody><tr>
-        <td class="d">Sun 15</td>
-        <td>E 10 avg · max 16 g22</td>
-        <td>SSW 0.2–0.4 kt</td>
-        <td>1.2 mm</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Mon 16</td>
-        <td>ESE 9 avg · max E 13 g19</td>
-        <td>SSW 0.1–0.3 kt</td>
-        <td>0.6 mm</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Tue 17<span class="star">*</span></td>
-        <td>ENE 14 avg · max 20 g27</td>
-        <td>WSW 0.2–0.4 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Wed 18<span class="star">*</span></td>
-        <td>ENE 9 avg · max NW 19 g27</td>
-        <td>S 0.1–0.5 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Thu 19<span class="star">*</span></td>
-        <td>ENE 12 avg · max 18 g24</td>
-        <td>SSW 0.2–0.3 kt</td>
-        <td>Dry</td>
-        <td class="fish mix">GOOD / MARGINAL</td>
-        <td class="go">AM: Wed 6 PM–6 AM, under 18 kph. PM: Thu good 6 PM–12 AM, under 18 kph; after midnight above 18 kph.</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Fri 20<span class="star">*</span></td>
-        <td>E 15 avg · max ENE 23 g46</td>
-        <td>SW 0.2–0.4 kt</td>
-        <td>Dry</td>
-        <td class="fish mix">GOOD / MARGINAL</td>
-        <td class="go">AM: Thu good 6 PM–12 AM, under 18 kph; after midnight above 18 kph. PM: Fri 6 PM–6 AM, under 18 kph.</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Sat 21<span class="star">*</span></td>
-        <td>NNW 7 avg · max 11 g23</td>
-        <td>SSW 0.2–0.7 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">AM: Fri 6 PM–6 AM, under 18 kph. PM: Sat good 7 PM–6 AM, under 18 kph.</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr></tbody></table>
-  <p class="gfs">GFS is close on Sun 15, Sat 21. GFS check (not combined with ECMWF): Mon 16 GFS windier (20 vs 13 kph); Tue 17 GFS lighter (14 vs 20 kph); Wed 18 GFS lighter (14 vs 19 kph); Thu 19 GFS lighter (10 vs 18 kph); Fri 20 GFS lighter (17 vs 23 kph). Days marked * are more than 48 hours out, so confidence is lower.</p>
-
-  <h2 class="coron">Coron <small>11.9988, 120.206 · Secondary ground</small></h2>
-  <table class="tbl">
-    <thead>
-      <tr>
-        <th class="d">Day</th>
-        <th>Wind (kph)</th>
-        <th>Current</th>
-        <th>Rain</th>
-        <th>Fishing</th>
-        <th>Best go-out (night / early morning)</th>
-        <th>Fresh catch</th>
-        <th>Ice prep</th>
-        <th>Supply</th>
-      </tr>
-    </thead><tbody><tr>
-        <td class="d">Sun 15</td>
-        <td>E 10 avg · max 19 g28</td>
-        <td>NNE 0.1–0.8 kt</td>
-        <td>2.4 mm</td>
-        <td class="fish mix">GOOD / MARGINAL</td>
-        <td class="go">AM: Sat good 6 PM–1 AM, under 18 kph. PM: Sun good 6 PM–3 AM, under 18 kph.</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Mon 16</td>
-        <td>NNE 10 avg · max ESE 21 g33</td>
-        <td>NNE 0.1–0.7 kt</td>
-        <td>0.3 mm</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">AM: Sun good 6 PM–3 AM, under 18 kph. PM: Mon 6 PM–6 AM, under 18 kph.</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Tue 17<span class="star">*</span></td>
-        <td>ENE 11 avg · max E 19 g29</td>
-        <td>N 0.0–0.3 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Wed 18<span class="star">*</span></td>
-        <td>NNE 5 avg · max E 12 g22</td>
-        <td>NNE 0.0–0.3 kt</td>
-        <td>0.6 mm</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Thu 19<span class="star">*</span></td>
-        <td>E 11 avg · max SE 16 g31</td>
-        <td>W 0.1–0.3 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Fri 20<span class="star">*</span></td>
-        <td>E 13 avg · max 21 g41</td>
-        <td>W 0.1–0.3 kt</td>
-        <td>Dry</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr><tr>
-        <td class="d">Sat 21<span class="star">*</span></td>
-        <td>E 6 avg · max 11 g19</td>
-        <td>SW 0.0–0.5 kt</td>
-        <td>0.6 mm</td>
-        <td class="fish good">GOOD</td>
-        <td class="go">6 PM–6 AM, wind under 18 kph</td>
-        <td class="catch">High</td>
-        <td class="ice-full">Full</td>
-        <td class="sup-go">Supply</td>
-      </tr></tbody></table>
-  <p class="gfs">GFS does not agree at Coron: it is much windier every day (GFS daily max 26–36 kph vs ECMWF 11–21 kph). ECMWF is the primary forecast and is not combined with GFS. ECMWF looks generally workable, but GFS does not agree — it is much windier. Treat Coron as a backup only and lean on Galoc Station.</p>
-
-  <section class="notes">
-    <h2>Notes and confidence</h2>
-    <p><b>Confidence:</b> High through 48 hours from issue time (Sun 15 and Mon 16). From Tue 17 onward, confidence is lower. Coron is lower even inside 48 hours because GFS does not agree with ECMWF on wind.</p>
-    <p><b>How to read this:</b> Fishing color uses the same rules as the Galoc station page (worst of wind, current, and rain). Best go-out hours are the night and early-morning window (about 6 PM–6 AM). Expected local fresh catch and ice prep use those nights and the 0–1 day landing lag. Ice is a guide from wind and current only. Supply advice is supply / limited / hold.</p>
-    <p><b>Wind and sources:</b> Wind is in kph; <b>g</b> means gust. Wind above 18 kph is bad for fishing. ECMWF via Open-Meteo is primary and is never averaged with GFS (agreement check only). Currents are Open-Meteo Marine, not ECMWF. Rain is the day’s ECMWF total. Missing values are marked UNAVAILABLE and are never filled in.</p>
-    <p><b>This is not a live-fish report.</b> It is a planning sheet for local fresh catch and ice at Galoc Station. Issued Sat 14 Nov 2026, 9:24 PM PHT from the live model feeds.</p>
-  </section>
-  <p class="printbar"><button type="button" onclick="window.print()">Print this report</button></p>
+  <h1>LIV local fresh fish plan</h1>
+  <p class="sub" id="range">Next 7 days from today, Philippines time (PHT)</p>
+  <p class="updated" id="updated">Updated: loading…</p>
+  <p class="err" id="err" hidden></p>
+  <div class="key" aria-label="Color key">
+    <span><b class="g">Green</b> good weather / good days</span>
+    <span><b class="c">Yellow</b> caution (marginal)</span>
+    <span><b class="w">Red</b> warning (wind above 18 kph, very poor)</span>
+    <span><b class="b">Blue</b> general information</span>
+  </div>
+  <section class="sum" id="sum"><p>Loading the 7-day plan…</p></section>
+  <h2 id="h-galoc">Galoc Station <span class="place">· priority · Galoc Island, Culion, Palawan · 11.966933, 119.845707</span></h2>
+  <div id="galoc"></div>
+  <h2 class="coron" id="h-coron">Coron <span class="place">· secondary ground</span></h2>
+  <div id="coron"></div>
+  <div class="notes" id="notes"></div>
+  <p class="status" id="status"></p>
 </div>
+<script>
+const TZ='Asia/Manila',DATA_URL='fresh7.json',STORE_KEY='livFresh7V1',FRESH_MS=12*60*60e3;
+const KT_TO_KPH=1.852,KMH_TO_KT=0.539957,WIND_BAD_KPH=18;
+const COMPASS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
+const AREA_META={
+  galoc:{id:'galoc',name:'Galoc Station',place:'Galoc Island, Culion, Palawan',lat:11.966933,lng:119.845707},
+  coron:{id:'coron',name:'Coron',place:'Coron, Palawan',lat:11.9988,lng:120.206}
+};
+function $(id){return document.getElementById(id)}
+function num(x){if(x==null||x==='')return null;const f=Number(x);return Number.isFinite(f)?f:null}
+function r1(x){return x==null?null:Math.round(x*10)/10}
+function kph(kt){const k=num(kt);return k==null?null:Math.round(k*KT_TO_KPH)}
+function compass(d){d=num(d);return d==null?null:COMPASS[Math.floor((d+11.25)/22.5)%16]}
+function curClass(k){if(k==null)return 'UNAVAILABLE';if(k<0.5)return 'Favorable';if(k<0.9)return 'Moderate';if(k<1.5)return 'Strong';return 'Very Strong'}
+function windClass(kt){if(kt==null)return 'UNAVAILABLE';if(kt<=10)return 'Good';if(kt<=15)return 'Marginal';if(kt<=20)return 'Poor';return 'Very Poor'}
+function rainClass(mm3){if(mm3==null)return 'UNAVAILABLE';if(mm3<1)return 'Light';if(mm3<=5)return 'Moderate';return 'Heavy'}
+function rankOf(label){return RANK[String(label).toUpperCase()]??2}
+function fishing(c,w,r){if([c,w,r].some(x=>x==null||String(x).toUpperCase()==='UNAVAILABLE'))return 'UNAVAILABLE';const x=Math.max(rankOf(c),rankOf(w),rankOf(r));return x<=1?'GOOD':x===2?'MARGINAL':x===3?'POOR':'VERY POOR'}
+function seaRating(c,w){if([c,w].some(x=>x==null||String(x).toUpperCase()==='UNAVAILABLE'))return 'UNAVAILABLE';const x=Math.max(rankOf(c),rankOf(w));return x<=1?'GOOD':x===2?'MARGINAL':x===3?'POOR':'VERY POOR'}
+function rain3(precip,i){if(i<2)return null;const a=num(precip[i-2]),b=num(precip[i-1]),c=num(precip[i]);return a==null||b==null||c==null?null:a+b+c}
+function phtYmd(ms){return new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(ms))}
+function addDays(ymd,n){return phtYmd(Date.parse(ymd+'T12:00:00+08:00')+n*86400e3)}
+function planDays(now){const t0=phtYmd(now),out=[];for(let i=0;i<7;i++)out.push(addDays(t0,i));return out}
+function isFresh(at,now,windowMs){if(at==null||!Number.isFinite(+at))return false;const age=(now-+at);return age<(windowMs??FRESH_MS)&&age>=-60e3}
+function weekday(ymd){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(Date.parse(ymd+'T12:00:00+08:00'))}
+function dayLabel(ymd){const d=new Date(ymd+'T12:00:00+08:00');const wd=new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(d);const day=new Intl.DateTimeFormat('en-US',{timeZone:TZ,day:'numeric'}).format(d);return wd+' '+day}
+function rangeLabel(days){if(!days.length)return '';const a=new Date(days[0]+'T12:00:00+08:00'),b=new Date(days[days.length-1]+'T12:00:00+08:00');const fmt=d=>new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(d);return fmt(a)+' – '+fmt(b)}
+function hourLabel(h){h=Number(h);if(h===0||h===24)return '12 AM';if(h===12)return '12 PM';return (h%12)+' '+(h<12?'AM':'PM')}
+function nightSpan(hours){if(!hours||!hours.length)return 'UNAVAILABLE';const a=hours[0].hour,b=(hours[hours.length-1].hour+1)%24;return hourLabel(a)+'–'+hourLabel(b||24)}
+function fmtPht(ms){if(ms==null||!Number.isFinite(+ms))return 'UNAVAILABLE';const d=new Date(+ms);const date=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(d).replace(',','');const time=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit',hour12:true}).format(d);return date+', '+time+' PHT'}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function buildHours(payload){
+  const e=payload.ecmwf||{},m=payload.marine||{};
+  const eh=e.hourly||{},mh=m.hourly||{};
+  const times=eh.time||[];
+  const mt={};(mh.time||[]).forEach((t,i)=>{mt[t]=i});
+  const unit=String((m.hourly_units||{}).ocean_current_velocity||'km/h').toLowerCase();
+  const ws=eh.wind_speed_10m||[],wg=eh.wind_gusts_10m||[],wd=eh.wind_direction_10m||[],pr=eh.precipitation||[];
+  const cvA=mh.ocean_current_velocity||[],cdA=mh.ocean_current_direction||[];
+  const out=[];
+  for(let i=0;i<times.length;i++){
+    const t=times[i],wk=num(ws[i]),gk=num(wg[i]),dir=num(wd[i]),mm=num(pr[i]),r3=rain3(pr,i);
+    const j=mt[t];
+    let ck=null,cd=null;
+    if(j!=null){
+      const cv=num(cvA[j]);
+      if(cv!=null) ck=(unit==='kn'||unit==='kt'||unit==='knots')?cv:cv*KMH_TO_KT;
+      cd=num(cdA[j]);
+    }
+    const cc=curClass(ck),wc=windClass(wk),rc=rainClass(r3);
+    out.push({time:t,day:t.slice(0,10),hour:+t.slice(11,13),wk,w_kph:kph(wk),g_kph:kph(gk),dir:compass(dir),ck:r1(ck),cdir:compass(cd),cc,mm:r1(mm),r3:r1(r3),rating:fishing(cc,wc,rc),sea:seaRating(cc,wc)});
+  }
+  return out;
+}
+function gfsDailyMax(payload,day){
+  const gh=(payload.gfs||{}).hourly||{};
+  const times=gh.time||[],speeds=gh.wind_speed_10m||[],gusts=gh.wind_gusts_10m||[];
+  const wks=[],gks=[];
+  for(let i=0;i<times.length;i++){
+    if(times[i].slice(0,10)!==day)continue;
+    const w=kph(speeds[i]),g=kph(gusts[i]);
+    if(w!=null)wks.push(w);
+    if(g!=null)gks.push(g);
+  }
+  if(!wks.length)return [null,null];
+  return [Math.max(...wks),gks.length?Math.max(...gks):null];
+}
+function trip(hours,startDay){
+  const nxt=addDays(startDay,1);
+  return hours.filter(h=>(h.day===startDay&&h.hour>=18)||(h.day===nxt&&h.hour<6));
+}
+function runsWhere(hours,pred){
+  const out=[];let cur=[];
+  for(const h of hours){if(pred(h))cur.push(h);else if(cur.length){out.push(cur);cur=[]}}
+  if(cur.length)out.push(cur);
+  return out;
+}
+function iceAndCatch(windows){
+  const usable=windows.flat().filter(h=>h.sea!=='UNAVAILABLE');
+  if(usable.length<6)return {ice:'UNAVAILABLE',ice_key:'na',catch:'UNAVAILABLE',supply:'UNAVAILABLE',G:0,M:0,usable:usable.length};
+  const G=usable.filter(h=>h.sea==='GOOD').length,M=usable.filter(h=>h.sea==='MARGINAL').length;
+  let ice,ice_key;
+  if(G>=6){ice='Full';ice_key='full'}
+  else if(G>=2||M>=6||(G+M)>=6){ice='Some';ice_key='some'}
+  else {ice='Little';ice_key='little'}
+  let catchv;
+  if(G>=10)catchv='High';
+  else if(G>=6||(G>=4&&G+M>=12))catchv='Normal';
+  else if(G>=2||G+M>=6)catchv='Light';
+  else catchv='Very light';
+  const supply={High:'Supply',Normal:'Supply',Light:'Limited','Very light':'Hold'}[catchv];
+  return {ice,ice_key,catch:catchv,supply,G,M,usable:usable.length};
+}
+function windPhrase(hours,under18IfTrue=true){
+  const wks=hours.map(h=>h.w_kph).filter(v=>v!=null);
+  if(!wks.length)return 'wind UNAVAILABLE';
+  const lo=Math.min(...wks),hi=Math.max(...wks);
+  if(under18IfTrue&&hi<=WIND_BAD_KPH)return 'wind under 18 kph';
+  if(lo===hi)return 'wind '+hi+' kph';
+  return 'wind '+lo+'–'+hi+' kph';
+}
+function tripStartDay(tripHours){
+  if(!tripHours.length)return null;
+  const h0=tripHours[0];
+  return h0.hour>=18?h0.day:addDays(h0.day,-1);
+}
+function describeTrip(tripHours){
+  if(!tripHours.length)return 'UNAVAILABLE';
+  const usable=tripHours.filter(h=>h.rating!=='UNAVAILABLE');
+  if(usable.length<6)return 'UNAVAILABLE';
+  const start=tripStartDay(tripHours);
+  const dayword=start?weekday(start):'';
+  const good=runsWhere(tripHours,h=>h.rating==='GOOD');
+  const over=tripHours.filter(h=>h.w_kph!=null&&h.w_kph>WIND_BAD_KPH);
+  if(good.length===1&&good[0].length===usable.length)return (dayword+' '+nightSpan(good[0])+', '+windPhrase(good[0])).trim();
+  if(good.length){
+    const parts=good.map(nightSpan).join(', ');
+    const extra=over.length?'; after midnight wind above 18 kph':'';
+    return (dayword+' good '+parts+', '+windPhrase(good.flat())+extra).trim();
+  }
+  const marg=runsWhere(tripHours,h=>h.rating==='MARGINAL');
+  if(marg.length)return (dayword+' marginal '+marg.map(nightSpan).join(', ')+', '+windPhrase(marg.flat(),false)).trim();
+  return (dayword+' rough, '+windPhrase(usable,false)).trim();
+}
+function goOutText(amTrip,pmTrip){
+  const early=describeTrip(amTrip),night=describeTrip(pmTrip);
+  const isFullGood=(text,tr)=>tr&&tr.length&&tr.every(h=>h.rating==='UNAVAILABLE'||h.rating==='GOOD')&&text.includes('6 PM–6 AM');
+  if(isFullGood(early,amTrip)&&isFullGood(night,pmTrip))return '6 PM–6 AM, '+windPhrase(amTrip.concat(pmTrip));
+  const short=s=>s.replace('wind under 18 kph','under 18 kph').replace('wind above 18 kph','above 18 kph');
+  return 'AM: '+short(early)+'. PM: '+short(night)+'.';
+}
+function fishingTone(amTrip,pmTrip){
+  const hours=amTrip.concat(pmTrip).filter(h=>h.rating!=='UNAVAILABLE');
+  if(hours.length<6)return 'UNAVAILABLE';
+  const counts={};for(const h of hours)counts[h.rating]=(counts[h.rating]||0)+1;
+  if(counts['VERY POOR']||counts.POOR){
+    if((counts.GOOD||0)>=12)return 'GOOD / '+(counts.POOR?'POOR':'VERY POOR');
+    return counts.POOR&&!counts['VERY POOR']?'POOR':'VERY POOR';
+  }
+  if(counts.MARGINAL&&counts.GOOD){
+    if(counts.MARGINAL<=4&&counts.GOOD>=16)return 'GOOD';
+    return 'GOOD / MARGINAL';
+  }
+  if(counts.MARGINAL&&!counts.GOOD)return 'MARGINAL';
+  return 'GOOD';
+}
+function modal(arr){if(!arr.length)return '';const c={};for(const x of arr)c[x]=(c[x]||0)+1;return Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0]}
+function calendarStats(hours,day){
+  const dayh=hours.filter(h=>h.day===day);
+  const wks=dayh.map(h=>h.w_kph).filter(v=>v!=null);
+  const gks=dayh.map(h=>h.g_kph).filter(v=>v!=null);
+  const dirs=dayh.map(h=>h.dir).filter(Boolean);
+  const cks=dayh.map(h=>h.ck).filter(v=>v!=null);
+  const cdirs=dayh.map(h=>h.cdir).filter(Boolean);
+  const mms=dayh.map(h=>h.mm).filter(v=>v!=null);
+  const missingW=dayh.length<24||dayh.some(h=>h.w_kph==null);
+  const missingC=dayh.length<24||dayh.some(h=>h.ck==null);
+  const missingR=dayh.length<24||dayh.some(h=>h.mm==null);
+  let wind='UNAVAILABLE',windMax=null,windOver=false;
+  if(wks.length){
+    const avg=Math.round(wks.reduce((a,b)=>a+b,0)/wks.length);
+    const mx=Math.max(...wks);windMax=mx;windOver=mx>WIND_BAD_KPH;
+    const d=modal(dirs);
+    const maxH=dayh.filter(h=>h.w_kph!=null).sort((a,b)=>b.w_kph-a.w_kph)[0];
+    const md=(maxH&&maxH.dir)||d;
+    const gust=gks.length?Math.max(...gks):null;
+    const gustS=gust!=null?' g'+gust:'';
+    wind=(d&&md&&d!==md)?`${d} ${avg} avg · max ${md} ${mx}${gustS}`:`${d} ${avg} avg · max ${mx}${gustS}`.trim();
+    if(missingW)wind+=' (some hours UNAVAILABLE)';
+  }
+  let current='UNAVAILABLE';
+  if(cks.length){
+    const lo=Math.min(...cks),hi=Math.max(...cks);
+    const cd=modal(cdirs);
+    const rng=lo===hi?lo.toFixed(1)+' kt':lo.toFixed(1)+'–'+hi.toFixed(1)+' kt';
+    current=(cd+' '+rng).trim();
+    if(missingC)current+=' (some hours UNAVAILABLE)';
+  }
+  let rain='UNAVAILABLE';
+  if(mms.length&&!missingR){const total=r1(mms.reduce((a,b)=>a+b,0));rain=total===0?'Dry':total.toFixed(1)+' mm'}
+  else if(mms.length){const total=r1(mms.reduce((a,b)=>a+b,0));rain=(total===0?'Dry':total.toFixed(1)+' mm')+' (incomplete)'}
+  return {wind,current,rain,windMax,windOver};
+}
+function confidence(day,now){const start=Date.parse(day+'T00:00:00+08:00');return start<=now+48*3600e3?'High':'Lower'}
+function gfsAgree(emax,gmax){
+  if(emax==null||gmax==null)return 'UNAVAILABLE';
+  const diff=Math.abs(gmax-emax);
+  if(diff<=4)return 'Agrees';
+  if(gmax>emax+4)return 'GFS windier ('+gmax+' vs '+emax+' kph)';
+  return 'GFS lighter ('+gmax+' vs '+emax+' kph)';
+}
+function buildRows(payload,days,now){
+  const hours=buildHours(payload);
+  return days.map(day=>{
+    const am=trip(hours,addDays(day,-1)),pm=trip(hours,day),lag1=trip(hours,addDays(day,-2));
+    const landing=iceAndCatch([lag1,am]);
+    const stats=calendarStats(hours,day);
+    const [gmax]=gfsDailyMax(payload,day);
+    const dayh=hours.filter(h=>h.day===day);
+    const emax=dayh.reduce((m,h)=>h.w_kph==null?m:m==null?h.w_kph:Math.max(m,h.w_kph),null);
+    const goWinds=am.concat(pm).map(h=>h.w_kph).filter(v=>v!=null);
+    const goOver=goWinds.some(v=>v>WIND_BAD_KPH);
+    return {day,label:dayLabel(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
+  });
+}
+function toneClass(fishing){
+  const f=String(fishing).toUpperCase();
+  if(f.includes('UNAVAILABLE'))return 'na';
+  if(f.includes('VERY POOR')||f==='POOR'||f.includes('/ POOR'))return 'warn';
+  if(f.includes('MARGINAL'))return 'caut';
+  if(f.includes('GOOD'))return 'good';
+  return 'na';
+}
+function iceClass(key){return {full:'good',some:'caut',little:'warn',na:'na'}[key]||'na'}
+function supplyClass(s){return {Supply:'good',Limited:'caut',Hold:'warn',UNAVAILABLE:'na'}[s]||'na'}
+function catchClass(s){return {High:'good',Normal:'good',Light:'caut','Very light':'warn',UNAVAILABLE:'na'}[s]||'na'}
+function paintGo(s){
+  return esc(s)
+    .replace(/above 18 kph/g,'<span class="warn">above 18 kph</span>')
+    .replace(/UNAVAILABLE/g,'<span class="na">UNAVAILABLE</span>');
+}
+function listDays(rows){
+  if(!rows.length)return 'none';
+  if(rows.length===1)return rows[0].label;
+  return rows.slice(0,-1).map(r=>r.label).join(', ')+' and '+rows[rows.length-1].label;
+}
+function prose(galoc,days){
+  const best=galoc.filter(r=>r.supply==='Supply'&&r.catch==='High'&&!/MARGINAL|POOR/.test(r.fishing));
+  const mixed=galoc.filter(r=>/MARGINAL|POOR/.test(r.fishing)||/above 18/.test(r.goout));
+  const cut=galoc.filter(r=>r.supply==='Limited'||r.supply==='Hold');
+  const iceFull=galoc.length&&galoc.every(r=>r.ice==='Full');
+  const span=dayLabel(days[0])+'–'+dayLabel(days[days.length-1]);
+  let bestS;
+  if(!best.length)bestS='No clearly strong Galoc supply days in this week’s ECMWF forecast.';
+  else if(best.length===7)bestS='All seven days at Galoc Station look workable for supply on the ECMWF forecast.';
+  else if(best.length>=4)bestS=listDays(best)+'. Catch High; 6 PM–6 AM hours at or under 18 kph.';
+  else bestS=listDays(best)+'.';
+  let cutS;
+  if(mixed.length)cutS='Not a full hold. '+listDays(mixed)+' have rougher go-out hours (see table). Landings can still arrive the same day or the next.';
+  else if(cut.length)cutS=listDays(cut)+'.';
+  else cutS='No Galoc day is a hold or limited-supply day on this ECMWF forecast.';
+  let iceS;
+  if(iceFull){
+    iceS='Full ice every day, '+span+'. Catch from a good night usually lands that morning or the next day.';
+    if(mixed.length)iceS+=' Weaker window: '+listDays(mixed)+'; still prepare ice as the table shows.';
+  }else iceS=galoc.map(r=>r.label+' '+(r.ice==='UNAVAILABLE'?'UNAVAILABLE':r.ice.toLowerCase())).join('; ')+'.';
+  return {bestS,cutS,iceS};
+}
+function tableHtml(rows){
+  const head='<thead><tr><th class="d">Day</th><th>Wind (kph)</th><th>Current</th><th>Rain</th><th>Fishing</th><th>Best go-out (night / early morning)</th><th>Fresh catch</th><th>Ice prep</th><th>Supply</th></tr></thead>';
+  const body=rows.map(r=>{
+    const star=r.conf==='High'?'':'<span class="star">*</span>';
+    const wcls=r.goOver?'warn':'';
+    return `<tr>
+      <td class="d">${esc(r.label)}${star}</td>
+      <td class="${wcls}">${esc(r.wind)}</td>
+      <td>${esc(r.current)}</td>
+      <td>${esc(r.rain)}</td>
+      <td class="${toneClass(r.fishing)}">${esc(r.fishing)}</td>
+      <td>${paintGo(r.goout)}</td>
+      <td class="${catchClass(r.catch)}">${esc(r.catch)}</td>
+      <td class="${iceClass(r.ice_key)}">${esc(r.ice)}</td>
+      <td class="${supplyClass(r.supply)}">${esc(r.supply)}</td>
+    </tr>`;
+  }).join('');
+  return `<table class="tbl">${head}<tbody>${body}</tbody></table>`;
+}
+function gfsLine(rows,name){
+  const windier=rows.filter(r=>String(r.gfs).startsWith('GFS windier'));
+  const lighter=rows.filter(r=>String(r.gfs).startsWith('GFS lighter'));
+  const agrees=rows.filter(r=>r.gfs==='Agrees');
+  const na=rows.filter(r=>r.gfs==='UNAVAILABLE');
+  if(na.length===rows.length)return name+' GFS check UNAVAILABLE.';
+  if(windier.length>=3)return name+' GFS check: often windier than ECMWF ('+listDays(windier)+'). Treat those days with more caution.';
+  if(lighter.length>=3)return name+' GFS check: often lighter than ECMWF ('+listDays(lighter)+').';
+  if(agrees.length>=5)return name+' GFS check: generally agrees with ECMWF.';
+  const bits=[];
+  if(windier.length)bits.push('windier '+listDays(windier));
+  if(lighter.length)bits.push('lighter '+listDays(lighter));
+  if(agrees.length)bits.push('agrees '+listDays(agrees));
+  return name+' GFS check: '+(bits.join('; ')||'mixed')+'.';
+}
+function hasAreaData(area){return !!((((area||{}).ecmwf||{}).hourly||{}).time||[]).length}
+function render(payload,now){
+  now=now??Date.now();
+  const days=planDays(now);
+  const at=payload&&payload.at;
+  const source=payload&&payload.source;
+  const areas=(payload&&payload.areas)||{};
+  const galocPayload=areas.galoc||{};
+  const coronPayload=areas.coron||{};
+  const galoc=hasAreaData(galocPayload)?buildRows(galocPayload,days,at||now):[];
+  const coron=hasAreaData(coronPayload)?buildRows(coronPayload,days,at||now):[];
+  const range=rangeLabel(days);
+  $('range').textContent=range+' · always the next 7 days from today (PHT)';
+  const srcBit=source==='live'?' (live forecast)':source==='publish'?' (digest publish)':'';
+  $('updated').textContent='Updated: '+fmtPht(at)+srcBit;
+  document.title='LIV 7-day local fresh fish plan · '+range;
+  if(!galoc.length){
+    $('sum').innerHTML='<p class="err">Galoc forecast UNAVAILABLE. No values were invented.</p>';
+    $('galoc').innerHTML='<p>UNAVAILABLE</p>';
+    $('coron').innerHTML=coron.length?tableHtml(coron):'<p>UNAVAILABLE</p>';
+    return {days,galoc,coron};
+  }
+  const p=prose(galoc,days);
+  $('sum').innerHTML=`<p><b class="label good">Best days to supply:</b> ${esc(p.bestS)}</p>
+    <p><b class="label caut">Days to cut back:</b> ${esc(p.cutS)}</p>
+    <p><b class="label good">Ice plan for the week:</b> ${esc(p.iceS)}</p>
+    <p>${esc(gfsLine(galoc,'Galoc Station'))} ${esc(gfsLine(coron,'Coron'))}</p>`;
+  $('galoc').innerHTML=tableHtml(galoc);
+  $('coron').innerHTML=coron.length?tableHtml(coron):'<p>UNAVAILABLE</p>';
+  const lastHigh=galoc.filter(r=>r.conf==='High').slice(-1)[0];
+  const confLine=lastHigh
+    ?'Confidence is High through '+lastHigh.label+' (calendar days that begin within 48 hours of this update) and Lower after, marked *.'
+    :'Confidence is Lower for all seven days (more than 48 hours from this update), marked *.';
+  $('notes').innerHTML=`<p>${esc(confLine)} Wind is shown in kph, with g for gust. Wind above 18 kph is treated as bad, especially at night and early-morning go-out hours. Currents come from the Open-Meteo Marine model and are not labeled ECMWF. ECMWF is the primary forecast; GFS is an agreement check only. Ice prep and expected fresh catch use wind and current only, with a 0–1 day landing lag. Rain is used in the fishing color only. Values are never invented; missing hours are marked UNAVAILABLE. The page updates at each digest publish (about 6:20 AM and 2:20 PM PHT) and from a live forecast if the saved data is older than about 12 hours.</p>`;
+  return {days,galoc,coron};
+}
+function apiUrl(kind,lat,lng){
+  const common='latitude='+lat+'&longitude='+lng+'&timezone=Asia%2FManila&forecast_days=10&past_days=3';
+  if(kind==='marine')return 'https://marine-api.open-meteo.com/v1/marine?'+common+'&hourly=ocean_current_velocity,ocean_current_direction';
+  const wind='&hourly=wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation&wind_speed_unit=kn&precipitation_unit=mm&cell_selection=sea';
+  const host='https://api.open-meteo.com/v1/'+(kind==='gfs'?'gfs':'ecmwf');
+  return host+'?'+common+wind;
+}
+async function fetchJson(url){
+  const r=await fetch(url,{cache:'no-cache'});
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  return r.json();
+}
+function slimArea(id,meta,ecmwf,marine,gfs){
+  return Object.assign({},meta,{id,ecmwf:ecmwf||{hourly:{}},marine:marine||{hourly:{}},gfs:gfs||{hourly:{}}});
+}
+async function fetchAreaLive(meta){
+  const [e,m,g]=await Promise.allSettled([
+    fetchJson(apiUrl('ecmwf',meta.lat,meta.lng)),
+    fetchJson(apiUrl('marine',meta.lat,meta.lng)),
+    fetchJson(apiUrl('gfs',meta.lat,meta.lng))
+  ]);
+  const ecmwf=e.status==='fulfilled'?e.value:null;
+  const marine=m.status==='fulfilled'?m.value:null;
+  const gfs=g.status==='fulfilled'?g.value:null;
+  if(!ecmwf||!((ecmwf.hourly||{}).time||[]).length)throw new Error((meta.name||meta.id)+' ECMWF UNAVAILABLE');
+  return slimArea(meta.id,meta,ecmwf,marine,gfs);
+}
+async function fetchLive(){
+  const galoc=await fetchAreaLive(AREA_META.galoc);
+  let coron=null;
+  try{coron=await fetchAreaLive(AREA_META.coron)}catch(e){coron=slimArea('coron',AREA_META.coron,null,null,null)}
+  return {at:Date.now(),source:'live',tz:TZ,areas:{galoc,coron}};
+}
+function readStore(){
+  try{return JSON.parse(localStorage.getItem(STORE_KEY)||'null')}catch(e){return null}
+}
+function writeStore(data){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(data))}catch(e){}
+}
+function newer(a,b){
+  const at=a&&Number.isFinite(+a.at)?+a.at:-1,bt=b&&Number.isFinite(+b.at)?+b.at:-1;
+  if(at<0&&bt<0)return null;
+  return at>=bt?a:b;
+}
+async function loadFile(){
+  try{return await fetchJson(DATA_URL)}catch(e){return null}
+}
+function setErr(msg){const el=$('err');if(!el)return;if(!msg){el.hidden=true;el.textContent='';return}el.hidden=false;el.textContent=msg}
+function setStatus(msg){if($('status'))$('status').textContent=msg||''}
+function setBusy(on){const b=$('rf');if(b){b.disabled=!!on;b.textContent=on?'Refreshing…':'Refresh forecast'}}
+async function refresh(forceLive){
+  setBusy(true);
+  try{
+    const live=await fetchLive();
+    writeStore(live);
+    render(live);
+    setErr('');
+    setStatus('');
+  }catch(e){
+    setErr('Live forecast UNAVAILABLE. '+((e&&e.message)||'No values were invented.'));
+  }finally{setBusy(false)}
+}
+async function boot(){
+  const file=await loadFile();
+  const store=readStore();
+  const cached=newer(file,store);
+  if(cached&&hasAreaData((cached.areas||{}).galoc)){
+    render(cached);
+    setStatus(isFresh(cached.at,Date.now())?'Showing the saved 7-day plan.':'Saved plan is older than 12 hours. Checking for a live forecast…');
+  }
+  if(forceLiveNeeded(cached)){
+    try{
+      const live=await fetchLive();
+      writeStore(live);
+      render(live);
+      setErr('');
+      setStatus('');
+    }catch(e){
+      if(!(cached&&hasAreaData((cached.areas||{}).galoc))){
+        setErr('Forecast UNAVAILABLE. No values were invented.');
+        $('sum').innerHTML='<p>Forecast UNAVAILABLE.</p>';
+      }else{
+        setErr('Live forecast UNAVAILABLE; showing the last saved plan. No values were invented.');
+        setStatus('');
+      }
+    }
+  }else setStatus('');
+}
+function forceLiveNeeded(cached){return !cached||!hasAreaData((cached.areas||{}).galoc)||!isFresh(cached.at,Date.now())}
+if($('print'))$('print').onclick=()=>window.print();
+if($('rf'))$('rf').onclick=()=>refresh(true);
+/* boot */
+boot();
+</script>
 </body>
 </html>
