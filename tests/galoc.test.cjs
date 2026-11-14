@@ -18,6 +18,8 @@ assert(/guide from wind and current only/.test(raw)&&/0–1 day landing lag/.tes
 const head=raw.split('</head>')[0];
 assert(!/<link[^>]+leaflet/i.test(head)&&!/<script[^>]+leaflet/i.test(head),'Leaflet script and CSS are not in the document head');
 assert(/GALOC_URL='galoc.json'/.test(raw),'page loads galoc.json');
+assert(/print\.html/.test(raw),'link to printable 7-day fresh plan');
+
 assert(/vendor\/leaflet\.js/.test(raw),'Leaflet is loaded from a same-origin copy after first paint');
 
 let src=raw.split('<script>')[1].split('</script>')[0];
