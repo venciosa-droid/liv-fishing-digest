@@ -45,8 +45,13 @@ table.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
 table.tbl th,table.tbl td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;text-align:left}
 table.tbl th{background:#e8eef8;font-size:9.5px;font-weight:700}
 table.tbl td{font-size:10px}
-table.tbl .d{width:9%;white-space:nowrap;font-weight:700}
+table.tbl .d{width:11%;white-space:nowrap;font-weight:700;line-height:1.15}
+table.tbl .d .md{display:block;font-weight:700}
+table.tbl .d .wk{display:block;font-weight:500;font-size:9px}
 table.tbl .star{color:var(--caut);font-weight:700}
+.dchip{display:inline-block;vertical-align:middle;text-align:center;line-height:1.15;margin:0 2px;white-space:nowrap}
+.dchip .md{display:block;font-weight:700}
+.dchip .wk{display:block;font-weight:500;font-size:10px}
 .good,td.good,.catch-High{color:var(--good);background:var(--good-bg);font-weight:700}
 .caut,td.caut,.catch-Normal,.catch-Light{color:var(--caut);background:var(--caut-bg);font-weight:700}
 .catch-Normal{color:var(--good);background:var(--good-bg)}
@@ -72,11 +77,13 @@ span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 
   h2{break-after:avoid;page-break-after:avoid}
   h2.coron{break-before:auto;page-break-before:auto}
   .sum{margin:0 0 6px;padding:4px 6px}
-  table.tbl th,table.tbl td{padding:2px 3px;font-size:9px}
-  table.tbl th{font-size:8.5px}
+  table.tbl th,table.tbl td{padding:1px 3px;font-size:8.5px}
+  table.tbl th{font-size:8px}
+  table.tbl .d .wk,.dchip .wk{font-size:7.5px}
   table.tbl tr{page-break-inside:avoid;break-inside:avoid}
-  .notes{font-size:8px;margin:5px 0 0}
-  .key{font-size:9px;margin:0 0 6px}
+  .notes{font-size:7.5px;margin:4px 0 0}
+  .key{font-size:8.5px;margin:0 0 4px}
+  .sum{margin:0 0 4px}
 }
 </style>
 </head>
@@ -136,7 +143,9 @@ function addDays(ymd,n){return phtYmd(Date.parse(ymd+'T12:00:00+08:00')+n*86400e
 function planDays(now){const t0=phtYmd(now),out=[];for(let i=0;i<7;i++)out.push(addDays(t0,i));return out}
 function isFresh(at,now,windowMs){if(at==null||!Number.isFinite(+at))return false;const age=(now-+at);return age<(windowMs??FRESH_MS)&&age>=-60e3}
 function weekday(ymd){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(Date.parse(ymd+'T12:00:00+08:00'))}
-function dayLabel(ymd){const d=new Date(ymd+'T12:00:00+08:00');const wd=new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(d);const day=new Intl.DateTimeFormat('en-US',{timeZone:TZ,day:'numeric'}).format(d);return wd+' '+day}
+function weekdayLong(ymd){return new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'long'}).format(Date.parse(ymd+'T12:00:00+08:00'))}
+function mdLabel(ymd){const d=new Date(ymd+'T12:00:00+08:00');const m=new Intl.DateTimeFormat('en-US',{timeZone:TZ,month:'numeric'}).format(d);const day=new Intl.DateTimeFormat('en-US',{timeZone:TZ,day:'numeric'}).format(d);return m+'/'+day}
+function dayLabel(ymd){return mdLabel(ymd)+' '+weekdayLong(ymd)}
 function rangeLabel(days){if(!days.length)return '';const a=new Date(days[0]+'T12:00:00+08:00'),b=new Date(days[days.length-1]+'T12:00:00+08:00');const fmt=d=>new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(d);return fmt(a)+' – '+fmt(b)}
 function hourLabel(h){h=Number(h);if(h===0||h===24)return '12 AM';if(h===12)return '12 PM';return (h%12)+' '+(h<12?'AM':'PM')}
 function nightSpan(hours){if(!hours||!hours.length)return 'UNAVAILABLE';const a=hours[0].hour,b=(hours[hours.length-1].hour+1)%24;return hourLabel(a)+'–'+hourLabel(b||24)}
@@ -313,7 +322,7 @@ function buildRows(payload,days,now){
     const emax=dayh.reduce((m,h)=>h.w_kph==null?m:m==null?h.w_kph:Math.max(m,h.w_kph),null);
     const goWinds=am.concat(pm).map(h=>h.w_kph).filter(v=>v!=null);
     const goOver=goWinds.some(v=>v>WIND_BAD_KPH);
-    return {day,label:dayLabel(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
+    return {day,label:dayLabel(day),md:mdLabel(day),wk:weekdayLong(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
   });
 }
 function toneClass(fishing){
@@ -332,17 +341,28 @@ function paintGo(s){
     .replace(/above 18 kph/g,'<span class="warn">above 18 kph</span>')
     .replace(/UNAVAILABLE/g,'<span class="na">UNAVAILABLE</span>');
 }
+function dayChip(r){
+  if(!r)return '';
+  const star=r.conf==='High'||r.conf==null?'':'<span class="star">*</span>';
+  const md=r.md||mdLabel(r.day),wk=r.wk||weekdayLong(r.day);
+  return `<span class="dchip"><b class="md">${esc(md)}${star}</b><span class="wk">${esc(wk)}</span></span>`;
+}
 function listDays(rows){
   if(!rows.length)return 'none';
-  if(rows.length===1)return rows[0].label;
-  return rows.slice(0,-1).map(r=>r.label).join(', ')+' and '+rows[rows.length-1].label;
+  if(rows.length===1)return dayChip(rows[0]);
+  return rows.slice(0,-1).map(dayChip).join(' ')+' and '+dayChip(rows[rows.length-1]);
+}
+function rangeChips(rows){
+  if(!rows.length)return '';
+  if(rows.length===1)return dayChip(rows[0]);
+  return dayChip(rows[0])+'–'+dayChip(rows[rows.length-1]);
 }
 function prose(galoc,days){
   const best=galoc.filter(r=>r.supply==='Supply'&&r.catch==='High'&&!/MARGINAL|POOR/.test(r.fishing));
   const mixed=galoc.filter(r=>/MARGINAL|POOR/.test(r.fishing)||/above 18/.test(r.goout));
   const cut=galoc.filter(r=>r.supply==='Limited'||r.supply==='Hold');
   const iceFull=galoc.length&&galoc.every(r=>r.ice==='Full');
-  const span=dayLabel(days[0])+'–'+dayLabel(days[days.length-1]);
+  const span=rangeChips(galoc);
   let bestS;
   if(!best.length)bestS='No clearly strong Galoc supply days in this week’s ECMWF forecast.';
   else if(best.length===7)bestS='All seven days at Galoc Station look workable for supply on the ECMWF forecast.';
@@ -356,7 +376,7 @@ function prose(galoc,days){
   if(iceFull){
     iceS='Full ice every day, '+span+'. Catch from a good night usually lands that morning or the next day.';
     if(mixed.length)iceS+=' Weaker window: '+listDays(mixed)+'; still prepare ice as the table shows.';
-  }else iceS=galoc.map(r=>r.label+' '+(r.ice==='UNAVAILABLE'?'UNAVAILABLE':r.ice.toLowerCase())).join('; ')+'.';
+  }else iceS=galoc.map(r=>dayChip(r)+' '+(r.ice==='UNAVAILABLE'?'UNAVAILABLE':r.ice.toLowerCase())).join('; ')+'.';
   return {bestS,cutS,iceS};
 }
 function tableHtml(rows){
@@ -365,7 +385,7 @@ function tableHtml(rows){
     const star=r.conf==='High'?'':'<span class="star">*</span>';
     const wcls=r.goOver?'warn':'';
     return `<tr>
-      <td class="d">${esc(r.label)}${star}</td>
+      <td class="d"><span class="md">${esc(r.md||mdLabel(r.day))}${star}</span><span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></td>
       <td class="${wcls}">${esc(r.wind)}</td>
       <td>${esc(r.current)}</td>
       <td>${esc(r.rain)}</td>
@@ -384,13 +404,13 @@ function gfsLine(rows,name){
   const agrees=rows.filter(r=>r.gfs==='Agrees');
   const na=rows.filter(r=>r.gfs==='UNAVAILABLE');
   if(na.length===rows.length)return name+' GFS check UNAVAILABLE.';
-  if(windier.length>=3)return name+' GFS check: often windier than ECMWF ('+listDays(windier)+'). Treat those days with more caution.';
-  if(lighter.length>=3)return name+' GFS check: often lighter than ECMWF ('+listDays(lighter)+').';
+  if(windier.length>=3)return name+' GFS check: often windier than ECMWF on '+listDays(windier)+'. Treat those days with more caution.';
+  if(lighter.length>=3)return name+' GFS check: often lighter than ECMWF on '+listDays(lighter)+'.';
   if(agrees.length>=5)return name+' GFS check: generally agrees with ECMWF.';
   const bits=[];
-  if(windier.length)bits.push('windier '+listDays(windier));
-  if(lighter.length)bits.push('lighter '+listDays(lighter));
-  if(agrees.length)bits.push('agrees '+listDays(agrees));
+  if(windier.length)bits.push('windier on '+listDays(windier));
+  if(lighter.length)bits.push('lighter on '+listDays(lighter));
+  if(agrees.length)bits.push('agrees on '+listDays(agrees));
   return name+' GFS check: '+(bits.join('; ')||'mixed')+'.';
 }
 function hasAreaData(area){return !!((((area||{}).ecmwf||{}).hourly||{}).time||[]).length}
@@ -416,17 +436,17 @@ function render(payload,now){
     return {days,galoc,coron};
   }
   const p=prose(galoc,days);
-  $('sum').innerHTML=`<p><b class="label good">Best days to supply:</b> ${esc(p.bestS)}</p>
-    <p><b class="label caut">Days to cut back:</b> ${esc(p.cutS)}</p>
-    <p><b class="label good">Ice plan for the week:</b> ${esc(p.iceS)}</p>
-    <p>${esc(gfsLine(galoc,'Galoc Station'))} ${esc(gfsLine(coron,'Coron'))}</p>`;
+  $('sum').innerHTML=`<p><b class="label good">Best days to supply:</b> ${p.bestS}</p>
+    <p><b class="label caut">Days to cut back:</b> ${p.cutS}</p>
+    <p><b class="label good">Ice plan for the week:</b> ${p.iceS}</p>
+    <p>${gfsLine(galoc,'Galoc Station')} ${gfsLine(coron,'Coron')}</p>`;
   $('galoc').innerHTML=tableHtml(galoc);
   $('coron').innerHTML=coron.length?tableHtml(coron):'<p>UNAVAILABLE</p>';
   const lastHigh=galoc.filter(r=>r.conf==='High').slice(-1)[0];
   const confLine=lastHigh
-    ?'Confidence is High through '+lastHigh.label+' (calendar days that begin within 48 hours of this update) and Lower after, marked *.'
+    ?'Confidence is High through <b>'+esc(lastHigh.md)+'</b> '+esc(lastHigh.wk)+' (calendar days that begin within 48 hours of this update) and Lower after, marked *.'
     :'Confidence is Lower for all seven days (more than 48 hours from this update), marked *.';
-  $('notes').innerHTML=`<p>${esc(confLine)} Wind is shown in kph, with g for gust. Wind above 18 kph is treated as bad, especially at night and early-morning go-out hours. Currents come from the Open-Meteo Marine model and are not labeled ECMWF. ECMWF is the primary forecast; GFS is an agreement check only. Ice prep and expected fresh catch use wind and current only, with a 0–1 day landing lag. Rain is used in the fishing color only. Values are never invented; missing hours are marked UNAVAILABLE. The page updates at each digest publish (about 6:20 AM and 2:20 PM PHT) and from a live forecast if the saved data is older than about 12 hours.</p>`;
+  $('notes').innerHTML=`<p>${confLine} Wind is shown in kph, with g for gust. Wind above 18 kph is treated as bad, especially at night and early-morning go-out hours. Currents come from the Open-Meteo Marine model and are not labeled ECMWF. ECMWF is the primary forecast; GFS is an agreement check only. Ice prep and expected fresh catch use wind and current only, with a 0–1 day landing lag. Rain is used in the fishing color only. Values are never invented; missing hours are marked UNAVAILABLE. The page updates at each digest publish (about 6:20 AM and 2:20 PM PHT) and from a live forecast if the saved data is older than about 12 hours.</p>`;
   return {days,galoc,coron};
 }
 function apiUrl(kind,lat,lng){
