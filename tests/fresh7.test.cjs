@@ -10,9 +10,10 @@ assert(/print-color-adjust:\s*exact/.test(raw)&&/-webkit-print-color-adjust:\s*e
 assert(/FRESH_MS=12\*60\*60e3/.test(raw),'client refreshes when saved data is older than 12 hours');
 assert(/DATA_URL='fresh7.json'/.test(raw),'page loads the published snapshot first');
 assert(/api\.open-meteo\.com\/v1\//.test(raw)&&/marine-api\.open-meteo\.com/.test(raw)&&/apiUrl\('gfs'/.test(raw)&&/apiUrl\('ecmwf'/.test(raw),'live refresh uses ECMWF, Marine, and GFS');
-assert(/0–1 day landing lag/.test(raw),'landing lag is stated');
 assert(/never invented/.test(raw)||/No values were invented/.test(raw),'does not invent missing values');
-assert(/Wind is shown in kph/.test(raw)&&/g for gust/.test(raw),'wind is in kph with gusts');
+assert(/Wind is in kph/.test(raw),'wind unit is kph');
+assert(/font:18px/.test(raw),'body text is at least 18px on screen');
+assert(!/<table/.test(raw)&&!/tableHtml/.test(raw),'dense tables are gone');
 const pub=fs.readFileSync('/workspace/liv-fishing-dashboard/publish_digest.sh','utf8');
 assert(/make_fresh7_json\.py/.test(pub)&&/galoc_print\.html/.test(pub),'digest publish regenerates the 7-day plan');
 const redirect=fs.readFileSync(path.join(__dirname,'../fresh7/index.html'),'utf8');
@@ -96,17 +97,24 @@ assert.deepStrictEqual([...rendered.days],[...days],'render uses the next 7 days
 assert.strictEqual(rendered.galoc.length,7,'Galoc has 7 day rows');
 assert.strictEqual(rendered.coron.length,7,'Coron has 7 day rows');
 assert(nodes.updated.textContent.includes('PHT'),'Updated line shows PHT');
-assert(nodes.galoc.innerHTML.includes('Wind (kph)'),'Galoc table is rendered');
+assert(/class="day /.test(nodes.galoc.innerHTML),'Galoc day cards are rendered');
+assert(/>(GOOD|CAUTION|WARNING|UNAVAILABLE)</.test(nodes.galoc.innerHTML),'one plain-word verdict per day');
+assert(/Ice: (Yes|Ready less|No|UNAVAILABLE)/.test(nodes.galoc.innerHTML)&&/Supply: (Yes|Ready less|No|UNAVAILABLE)/.test(nodes.galoc.innerHTML),'ice and supply in plain words');
+assert(!/ECMWF|GFS|kt|landing lag/.test(nodes.galoc.innerHTML+nodes.sum.innerHTML+nodes.notes.innerHTML),'no model jargon on the page');
 assert(nodes.galoc.innerHTML.includes('Nov 15')&&nodes.galoc.innerHTML.includes('Sunday')&&nodes.galoc.innerHTML.includes('Saturday'),'Galoc table uses Nov 15 over weekday');
 assert(nodes.coron.innerHTML.includes('Nov 15')&&nodes.coron.innerHTML.includes('Sunday'),'Coron table uses the same date labels');
 assert(nodes.sum.innerHTML.includes('Nov 15')&&nodes.sum.innerHTML.includes('Sunday'),'summary uses short month name and weekday');
 assert(/class="md"/.test(nodes.galoc.innerHTML)&&/<span class="wk">Sunday<\/span>/.test(nodes.galoc.innerHTML),'date is on top and weekday is on the line below');
-assert(/class="star"/.test(nodes.galoc.innerHTML),'lower-confidence days still have a *');
 const wed=rendered.galoc.find(r=>r.day==='2026-11-18');
 assert(wed&&wed.conf==='Lower'&&wed.md==='Nov 18'&&wed.wk==='Wednesday','Wed 18 keeps * data and the new labels');
-assert(/good weather/.test(raw),'green is explained as good weather');
+assert(/GOOD/.test(raw)&&/CAUTION/.test(raw)&&/WARNING/.test(raw),'color key uses plain words');
+assert.strictEqual(vm.runInContext('plainVerdict({fishing:"GOOD / MARGINAL"})',ctx),'CAUTION','marginal is CAUTION');
+assert.strictEqual(vm.runInContext('plainVerdict({fishing:"VERY POOR"})',ctx),'WARNING','very poor is WARNING');
+assert.strictEqual(vm.runInContext('plainVerdict({fishing:"UNAVAILABLE"})',ctx),'UNAVAILABLE','missing stays UNAVAILABLE');
+assert.strictEqual(vm.runInContext('iceWords("Some")',ctx),'Ready less','some ice is Ready less');
+assert.strictEqual(vm.runInContext('supplyWords("Hold")',ctx),'No','hold is No');
 console.log('fresh7 tests ok');
 console.log('Galoc verdicts:');
 for(const r of rendered.galoc){
-  console.log(`  ${r.md} ${r.wk}  fish=${r.fishing}  catch=${r.catch}  ice=${r.ice}  supply=${r.supply}  conf=${r.conf}  go=${r.goout}`);
+  console.log(`  ${r.md} ${r.wk}  ${vm.runInContext('plainVerdict('+JSON.stringify(r)+')',ctx)}  Ice: ${vm.runInContext('iceWords('+JSON.stringify(r.ice)+')',ctx)}  Supply: ${vm.runInContext('supplyWords('+JSON.stringify(r.supply)+')',ctx)}  — ${vm.runInContext('shortReason('+JSON.stringify(r)+')',ctx)}`);
 }

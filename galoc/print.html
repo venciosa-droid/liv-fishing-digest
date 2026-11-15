@@ -18,72 +18,90 @@
   --paper:#fff;
 }
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{margin:0;padding:0;background:#eef3fa;color:var(--ink);font:11px/1.35 "Segoe UI",system-ui,sans-serif}
-.wrap{max-width:210mm;margin:0 auto;padding:10px 12px 28px;background:var(--paper)}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;margin:0 0 8px}
-.toolbar a,.toolbar button{font:600 13px/1.2 system-ui,sans-serif;color:#fff;background:var(--ink);border:0;border-radius:6px;padding:8px 12px;text-decoration:none;cursor:pointer}
+html,body{margin:0;padding:0;background:#eef3fa;color:var(--ink);font:18px/1.45 "Segoe UI",system-ui,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:16px 18px 36px;background:var(--paper)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end;margin:0 0 14px}
+.toolbar button{font:700 18px/1.2 system-ui,sans-serif;color:#fff;background:var(--ink);border:0;border-radius:8px;padding:12px 16px;min-height:48px;cursor:pointer}
 .toolbar button.print{background:var(--good)}
 .toolbar button:disabled{opacity:.6;cursor:wait}
-.toolbar .links{display:flex;gap:8px;flex-wrap:wrap}
-h1{font:700 18px/1.2 system-ui,sans-serif;margin:0 0 2px;color:var(--ink)}
-.sub{margin:0 0 4px;font-size:12px}
-.updated{margin:0 0 6px;font-weight:700;font-size:12px}
-.err{color:var(--warn);font-weight:700;margin:0 0 8px}
-.key{display:flex;flex-wrap:wrap;gap:6px 12px;margin:0 0 8px;padding:5px 8px;border:1px solid var(--line);border-radius:4px;font-size:10.5px}
-.key b{font-weight:700;padding:1px 5px;border-radius:3px}
+h1{font:700 32px/1.2 system-ui,sans-serif;margin:0 0 6px;color:var(--ink)}
+.sub{margin:0 0 4px;font-size:18px}
+.updated{margin:0 0 12px;font-weight:700;font-size:18px}
+.err{color:var(--warn);font-weight:700;margin:0 0 12px}
+.key{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 16px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;font-size:18px}
+.key b{font-weight:700;padding:2px 8px;border-radius:4px}
 .key .g{color:var(--good);background:var(--good-bg)}
 .key .c{color:var(--caut);background:var(--caut-bg)}
 .key .w{color:var(--warn);background:var(--warn-bg)}
 .key .b{color:var(--ink)}
-.sum{border:1px solid var(--line);border-radius:4px;padding:6px 8px;margin:0 0 10px}
-.sum p{margin:0 0 5px}
+.sum{border:2px solid var(--line);border-radius:8px;padding:14px 16px;margin:0 0 20px}
+.sum p{margin:0 0 10px}
 .sum p:last-child{margin:0}
-.sum b.label{display:inline-block;min-width:7.2em}
-h2{font:700 13px/1.2 system-ui,sans-serif;margin:10px 0 3px;color:var(--ink)}
-h2 .place{font-weight:500;font-size:11px}
-table.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
-table.tbl th,table.tbl td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;text-align:left}
-table.tbl th{background:#e8eef8;font-size:9.5px;font-weight:700}
-table.tbl td{font-size:10px}
-table.tbl .d{width:11%;white-space:nowrap;font-weight:700;line-height:1.15}
-table.tbl .d .md{display:block;font-weight:700}
-table.tbl .d .wk{display:block;font-weight:500;font-size:9px}
-table.tbl .star{color:var(--caut);font-weight:700}
-.dchip{display:inline-block;vertical-align:middle;text-align:center;line-height:1.15;margin:0 2px;white-space:nowrap}
-.dchip .md{display:block;font-weight:700}
-.dchip .wk{display:block;font-weight:500;font-size:10px}
-.good,td.good,.catch-High{color:var(--good);background:var(--good-bg);font-weight:700}
-.caut,td.caut,.catch-Normal,.catch-Light{color:var(--caut);background:var(--caut-bg);font-weight:700}
-.catch-Normal{color:var(--good);background:var(--good-bg)}
-.warn,td.warn,.catch-Very,td.poor{color:var(--warn);background:var(--warn-bg);font-weight:700}
-td.na,.na{color:var(--na);font-weight:700}
-span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 2px}
-.notes{margin:8px 0 0;font-size:9.5px}
-.notes p{margin:0 0 3px}
-.status{margin:4px 0 0;font-size:10px}
-@media screen and (max-width:700px){
-  .wrap{padding:8px}
-  table.tbl{display:block;overflow-x:auto}
-  table.tbl th,table.tbl td{font-size:10px}
-  h1{font-size:16px}
+.sum b.label{display:inline-block;min-width:5.5em}
+h2{font:700 26px/1.2 system-ui,sans-serif;margin:22px 0 10px;color:var(--ink)}
+h2 .place{display:block;font-weight:500;font-size:18px;margin-top:2px}
+h2.coron{font-size:22px;margin-top:28px}
+.dchip{white-space:nowrap}
+.dchip .md{display:block;font-weight:700;font-size:18px}
+.dchip .wk{display:block;font-weight:500;font-size:16px}
+.days{display:flex;flex-direction:column;gap:12px}
+.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px;break-inside:avoid;page-break-inside:avoid}
+.day.good{border-left-color:var(--good);background:#f7fbf8}
+.day.caut{border-left-color:var(--caut);background:#fffdf3}
+.day.warn{border-left-color:var(--warn);background:#fff8f8}
+.day.na{border-left-color:var(--na);background:#f5f5f5}
+.day .when{grid-row:1/4;align-self:center}
+.day .md{display:block;font-weight:700;font-size:24px;line-height:1.15;color:var(--ink)}
+.day .wk{display:block;font-weight:500;font-size:18px;margin-top:2px}
+.day .verdict{grid-column:2;font:700 28px/1.1 system-ui,sans-serif;letter-spacing:.02em}
+.day .verdict.good,.facts .good{color:var(--good)}
+.day .verdict.caut,.facts .caut{color:var(--caut)}
+.day .verdict.warn,.facts .warn{color:var(--warn)}
+.day .verdict.na,.facts .na,.na{color:var(--na);font-weight:700}
+.day .facts{grid-column:2;font-size:20px;font-weight:600;display:flex;flex-wrap:wrap;gap:6px 22px}
+.day .why{grid-column:2;margin:4px 0 0;font-size:18px;font-weight:500}
+span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
+.days-mini .day{grid-template-rows:auto auto;padding:10px 12px;border-left-width:8px}
+.days-mini .when{grid-row:1/3}
+.days-mini .md{font-size:20px}
+.days-mini .wk{font-size:18px}
+.days-mini .verdict{font-size:22px}
+.days-mini .facts{font-size:18px}
+.notes{margin:18px 0 0;font-size:18px}
+.notes p{margin:0}
+.status{margin:10px 0 0;font-size:18px}
+@media screen and (max-width:600px){
+  .wrap{padding:12px}
+  h1{font-size:28px}
+  h2{font-size:24px}
+  .day{grid-template-columns:1fr;grid-template-rows:auto}
+  .day .when,.day .verdict,.day .facts,.day .why{grid-column:1;grid-row:auto}
+  .day .when{margin-bottom:4px}
+  .toolbar button{width:100%}
 }
 @media print{
-  @page{size:A4 portrait;margin:8mm 8mm 8mm 8mm}
-  html,body{background:#fff}
+  @page{size:A4 portrait;margin:10mm}
+  html,body{background:#fff;font-size:12pt;line-height:1.35}
   .wrap{max-width:none;padding:0;margin:0}
   .toolbar{display:none!important}
-  h1{font-size:15px}
-  h2{font-size:12px;margin:6px 0 2px}
-  h2{break-after:avoid;page-break-after:avoid}
-  h2.coron{break-before:auto;page-break-before:auto}
-  .sum{margin:0 0 6px;padding:4px 6px}
-  table.tbl th,table.tbl td{padding:1px 3px;font-size:8.5px}
-  table.tbl th{font-size:8px}
-  table.tbl .d .wk,.dchip .wk{font-size:7.5px}
-  table.tbl tr{page-break-inside:avoid;break-inside:avoid}
-  .notes{font-size:7.5px;margin:4px 0 0}
-  .key{font-size:8.5px;margin:0 0 4px}
-  .sum{margin:0 0 4px}
+  h1{font-size:20pt;margin:0 0 4px}
+  h2{font-size:16pt;margin:10px 0 6px;break-after:avoid;page-break-after:avoid}
+  h2.coron{font-size:14pt;break-before:page;page-break-before:always}
+  h2 .place{font-size:11pt}
+  .sub,.updated,.key,.notes,.sum p,.day .wk,.day .why,.days-mini .facts{font-size:11pt}
+  .key{margin:0 0 8px;padding:6px 8px}
+  .sum{margin:0 0 8px;padding:8px 10px}
+  .dchip .md{font-size:11pt}
+  .dchip .wk{font-size:10pt}
+  .days{gap:6px}
+  .day{padding:7px 10px;column-gap:12px;border-radius:6px}
+  .day .md{font-size:14pt}
+  .day .verdict{font-size:16pt}
+  .day .facts{font-size:12pt}
+  .days-mini .day{padding:5px 8px}
+  .days-mini .md{font-size:12pt}
+  .days-mini .verdict{font-size:13pt}
+  .notes{margin:8px 0 0}
 }
 </style>
 </head>
@@ -95,20 +113,20 @@ span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 
       <button type="button" class="print" id="print">Print</button>
     </div>
   </div>
-  <h1>LIV local fresh fish plan</h1>
+  <h1>LIV 7-day fresh fish plan</h1>
   <p class="sub" id="range">Next 7 days from today, Philippines time (PHT)</p>
   <p class="updated" id="updated">Updated: loading…</p>
   <p class="err" id="err" hidden></p>
   <div class="key" aria-label="Color key">
-    <span><b class="g">Green</b> good weather / good days</span>
-    <span><b class="c">Yellow</b> caution (marginal)</span>
-    <span><b class="w">Red</b> warning (wind above 18 kph, very poor)</span>
+    <span><b class="g">Green</b> GOOD</span>
+    <span><b class="c">Yellow</b> CAUTION</span>
+    <span><b class="w">Red</b> WARNING</span>
     <span><b class="b">Blue</b> general information</span>
   </div>
   <section class="sum" id="sum"><p>Loading the 7-day plan…</p></section>
-  <h2 id="h-galoc">Galoc Station <span class="place">· priority · Galoc Island, Culion, Palawan · 11.966933, 119.845707</span></h2>
+  <h2 id="h-galoc">Galoc Station <span class="place">Use this first</span></h2>
   <div id="galoc"></div>
-  <h2 class="coron" id="h-coron">Coron <span class="place">· secondary ground</span></h2>
+  <h2 class="coron" id="h-coron">Coron <span class="place">Second choice</span></h2>
   <div id="coron"></div>
   <div class="notes" id="notes"></div>
   <p class="status" id="status"></p>
@@ -329,19 +347,42 @@ function toneClass(fishing){
   if(f.includes('GOOD'))return 'good';
   return 'na';
 }
-function iceClass(key){return {full:'good',some:'caut',little:'warn',na:'na'}[key]||'na'}
-function supplyClass(s){return {Supply:'good',Limited:'caut',Hold:'warn',UNAVAILABLE:'na'}[s]||'na'}
-function catchClass(s){return {High:'good',Normal:'good',Light:'caut','Very light':'warn',UNAVAILABLE:'na'}[s]||'na'}
-function paintGo(s){
+function plainVerdict(r){
+  const f=String((r&&r.fishing)||'').toUpperCase();
+  if(f.includes('UNAVAILABLE')||!f)return 'UNAVAILABLE';
+  if(f.includes('VERY POOR')||f==='POOR'||f.includes('/ POOR')||f.includes('/ VERY POOR'))return 'WARNING';
+  if(f.includes('MARGINAL')||(r&&r.goOver))return 'CAUTION';
+  if(f.includes('GOOD'))return 'GOOD';
+  return 'UNAVAILABLE';
+}
+function iceWords(ice){return {Full:'Yes',Some:'Ready less',Little:'No',UNAVAILABLE:'UNAVAILABLE'}[ice]||'UNAVAILABLE'}
+function supplyWords(s){return {Supply:'Yes',Limited:'Ready less',Hold:'No',UNAVAILABLE:'UNAVAILABLE'}[s]||'UNAVAILABLE'}
+function wordClass(word){return {Yes:'good','Ready less':'caut',No:'warn',UNAVAILABLE:'na',GOOD:'good',CAUTION:'caut',WARNING:'warn'}[word]||'na'}
+function paintWhy(s){
   return esc(s)
     .replace(/above 18 kph/g,'<span class="warn">above 18 kph</span>')
     .replace(/UNAVAILABLE/g,'<span class="na">UNAVAILABLE</span>');
 }
+function shortReason(r){
+  if(!r)return 'UNAVAILABLE';
+  if(r.fishing==='UNAVAILABLE'||r.goout==='UNAVAILABLE')return 'Forecast UNAVAILABLE';
+  const go=String(r.goout||'');
+  if(r.goOver||/above 18/.test(go)){
+    if(/after midnight/.test(go))return 'Wind above 18 kph after midnight';
+    return 'Wind above 18 kph at night';
+  }
+  if(/under 18/.test(go)||/6 PM–6 AM/.test(go))return 'Wind under 18 kph at night';
+  if(/rough/i.test(go)){
+    const m=go.match(/wind \d+(–\d+)? kph/);
+    return m?'Rough night, '+m[0]:'Rough night';
+  }
+  if(/marginal/i.test(go))return 'Rougher wind at night';
+  return '';
+}
 function dayChip(r){
   if(!r)return '';
-  const star=r.conf==='High'||r.conf==null?'':'<span class="star">*</span>';
   const md=r.md||mdLabel(r.day),wk=r.wk||weekdayLong(r.day);
-  return `<span class="dchip"><b class="md">${esc(md)}${star}</b><span class="wk">${esc(wk)}</span></span>`;
+  return `<span class="dchip"><b>${esc(md)}</b> ${esc(wk)}</span>`;
 }
 function listDays(rows){
   if(!rows.length)return 'none';
@@ -351,63 +392,41 @@ function listDays(rows){
 function rangeChips(rows){
   if(!rows.length)return '';
   if(rows.length===1)return dayChip(rows[0]);
-  return dayChip(rows[0])+'–'+dayChip(rows[rows.length-1]);
+  return dayChip(rows[0])+' to '+dayChip(rows[rows.length-1]);
 }
-function prose(galoc,days){
-  const best=galoc.filter(r=>r.supply==='Supply'&&r.catch==='High'&&!/MARGINAL|POOR/.test(r.fishing));
-  const mixed=galoc.filter(r=>/MARGINAL|POOR/.test(r.fishing)||/above 18/.test(r.goout));
-  const cut=galoc.filter(r=>r.supply==='Limited'||r.supply==='Hold');
-  const iceFull=galoc.length&&galoc.every(r=>r.ice==='Full');
-  const span=rangeChips(galoc);
+function prose(galoc){
+  const best=galoc.filter(r=>plainVerdict(r)==='GOOD'&&supplyWords(r.supply)==='Yes');
+  const careful=galoc.filter(r=>{const v=plainVerdict(r);return v==='CAUTION'||v==='WARNING'});
+  const iceYes=galoc.length&&galoc.every(r=>iceWords(r.ice)==='Yes');
+  const iceNo=galoc.filter(r=>iceWords(r.ice)==='No'||iceWords(r.ice)==='Ready less'||iceWords(r.ice)==='UNAVAILABLE');
   let bestS;
-  if(!best.length)bestS='No clearly strong Galoc supply days in this week’s ECMWF forecast.';
-  else if(best.length===7)bestS='All seven days at Galoc Station look workable for supply on the ECMWF forecast.';
-  else if(best.length>=4)bestS=listDays(best)+'. Catch High; 6 PM–6 AM hours at or under 18 kph.';
+  if(!best.length)bestS='No clearly good supply days this week.';
+  else if(best.length===7)bestS='All 7 days look good.';
   else bestS=listDays(best)+'.';
   let cutS;
-  if(mixed.length)cutS='Not a full hold. '+listDays(mixed)+' have rougher go-out hours (see table). Landings can still arrive the same day or the next.';
-  else if(cut.length)cutS=listDays(cut)+'.';
-  else cutS='No Galoc day is a hold or limited-supply day on this ECMWF forecast.';
+  if(careful.length)cutS=listDays(careful)+'.';
+  else cutS='No days need a cut-back this week.';
   let iceS;
-  if(iceFull){
-    iceS='Full ice every day, '+span+'. Catch from a good night usually lands that morning or the next day.';
-    if(mixed.length)iceS+=' Weaker window: '+listDays(mixed)+'; still prepare ice as the table shows.';
-  }else iceS=galoc.map(r=>dayChip(r)+' '+(r.ice==='UNAVAILABLE'?'UNAVAILABLE':r.ice.toLowerCase())).join('; ')+'.';
+  if(iceYes)iceS='Yes every day, '+rangeChips(galoc)+'.';
+  else if(!iceNo.length)iceS='UNAVAILABLE';
+  else iceS=galoc.map(r=>dayChip(r)+' '+iceWords(r.ice)).join('; ')+'.';
   return {bestS,cutS,iceS};
 }
-function tableHtml(rows){
-  const head='<thead><tr><th class="d">Day</th><th>Wind (kph)</th><th>Current</th><th>Rain</th><th>Fishing</th><th>Best go-out (night / early morning)</th><th>Fresh catch</th><th>Ice prep</th><th>Supply</th></tr></thead>';
-  const body=rows.map(r=>{
-    const star=r.conf==='High'?'':'<span class="star">*</span>';
-    const wcls=r.goOver?'warn':'';
-    return `<tr>
-      <td class="d"><span class="md">${esc(r.md||mdLabel(r.day))}${star}</span><span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></td>
-      <td class="${wcls}">${esc(r.wind)}</td>
-      <td>${esc(r.current)}</td>
-      <td>${esc(r.rain)}</td>
-      <td class="${toneClass(r.fishing)}">${esc(r.fishing)}</td>
-      <td>${paintGo(r.goout)}</td>
-      <td class="${catchClass(r.catch)}">${esc(r.catch)}</td>
-      <td class="${iceClass(r.ice_key)}">${esc(r.ice)}</td>
-      <td class="${supplyClass(r.supply)}">${esc(r.supply)}</td>
-    </tr>`;
-  }).join('');
-  return `<table class="tbl">${head}<tbody>${body}</tbody></table>`;
+function dayCard(r,compact){
+  const v=plainVerdict(r);
+  const ice=iceWords(r.ice),sup=supplyWords(r.supply);
+  const why=compact?'':shortReason(r);
+  const reason=why?`<p class="why">${paintWhy(why)}</p>`:'';
+  return `<article class="day ${wordClass(v)}${compact?' mini':''}">
+    <div class="when"><span class="md">${esc(r.md||mdLabel(r.day))}</span><span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></div>
+    <div class="verdict ${wordClass(v)}">${esc(v)}</div>
+    <div class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span><span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></div>
+    ${reason}
+  </article>`;
 }
-function gfsLine(rows,name){
-  const windier=rows.filter(r=>String(r.gfs).startsWith('GFS windier'));
-  const lighter=rows.filter(r=>String(r.gfs).startsWith('GFS lighter'));
-  const agrees=rows.filter(r=>r.gfs==='Agrees');
-  const na=rows.filter(r=>r.gfs==='UNAVAILABLE');
-  if(na.length===rows.length)return name+' GFS check UNAVAILABLE.';
-  if(windier.length>=3)return name+' GFS check: often windier than ECMWF on '+listDays(windier)+'. Treat those days with more caution.';
-  if(lighter.length>=3)return name+' GFS check: often lighter than ECMWF on '+listDays(lighter)+'.';
-  if(agrees.length>=5)return name+' GFS check: generally agrees with ECMWF.';
-  const bits=[];
-  if(windier.length)bits.push('windier on '+listDays(windier));
-  if(lighter.length)bits.push('lighter on '+listDays(lighter));
-  if(agrees.length)bits.push('agrees on '+listDays(agrees));
-  return name+' GFS check: '+(bits.join('; ')||'mixed')+'.';
+function daysHtml(rows,compact){
+  if(!rows||!rows.length)return '<p>UNAVAILABLE</p>';
+  return `<div class="days${compact?' days-mini':''}">${rows.map(r=>dayCard(r,!!compact)).join('')}</div>`;
 }
 function hasAreaData(area){return !!((((area||{}).ecmwf||{}).hourly||{}).time||[]).length}
 function render(payload,now){
@@ -421,28 +440,25 @@ function render(payload,now){
   const galoc=hasAreaData(galocPayload)?buildRows(galocPayload,days,at||now):[];
   const coron=hasAreaData(coronPayload)?buildRows(coronPayload,days,at||now):[];
   const range=rangeLabel(days);
-  $('range').textContent=range+' · always the next 7 days from today (PHT)';
-  const srcBit=source==='live'?' (live forecast)':source==='publish'?' (digest publish)':'';
+  $('range').textContent=range+' · the next 7 days, Philippines time (PHT)';
+  const srcBit=source==='live'?' (live forecast)':source==='publish'?'':'';
   $('updated').textContent='Updated: '+fmtPht(at)+srcBit;
-  document.title='LIV 7-day local fresh fish plan · '+range;
+  document.title='LIV 7-day fresh fish plan · '+range;
   if(!galoc.length){
     $('sum').innerHTML='<p class="err">Galoc forecast UNAVAILABLE. No values were invented.</p>';
     $('galoc').innerHTML='<p>UNAVAILABLE</p>';
-    $('coron').innerHTML=coron.length?tableHtml(coron):'<p>UNAVAILABLE</p>';
+    $('coron').innerHTML=coron.length?daysHtml(coron,true):'<p>UNAVAILABLE</p>';
     return {days,galoc,coron};
   }
-  const p=prose(galoc,days);
-  $('sum').innerHTML=`<p><b class="label good">Best days to supply:</b> ${p.bestS}</p>
-    <p><b class="label caut">Days to cut back:</b> ${p.cutS}</p>
-    <p><b class="label good">Ice plan for the week:</b> ${p.iceS}</p>
-    <p>${gfsLine(galoc,'Galoc Station')} ${gfsLine(coron,'Coron')}</p>`;
-  $('galoc').innerHTML=tableHtml(galoc);
-  $('coron').innerHTML=coron.length?tableHtml(coron):'<p>UNAVAILABLE</p>';
+  const p=prose(galoc);
+  $('sum').innerHTML=`<p><b class="label good">Good days:</b> ${p.bestS}</p>
+    <p><b class="label caut">Be careful:</b> ${p.cutS}</p>
+    <p><b class="label good">Ice:</b> ${p.iceS}</p>`;
+  $('galoc').innerHTML=daysHtml(galoc,false);
+  $('coron').innerHTML=coron.length?daysHtml(coron,true):'<p>UNAVAILABLE</p>';
   const lastHigh=galoc.filter(r=>r.conf==='High').slice(-1)[0];
-  const confLine=lastHigh
-    ?'Confidence is High through <b>'+esc(lastHigh.md)+'</b> '+esc(lastHigh.wk)+' (calendar days that begin within 48 hours of this update) and Lower after, marked *.'
-    :'Confidence is Lower for all seven days (more than 48 hours from this update), marked *.';
-  $('notes').innerHTML=`<p>${confLine} Wind is shown in kph, with g for gust. Wind above 18 kph is treated as bad, especially at night and early-morning go-out hours. Currents come from the Open-Meteo Marine model and are not labeled ECMWF. ECMWF is the primary forecast; GFS is an agreement check only. Ice prep and expected fresh catch use wind and current only, with a 0–1 day landing lag. Rain is used in the fishing color only. Values are never invented; missing hours are marked UNAVAILABLE. The page updates at each digest publish (about 6:20 AM and 2:20 PM PHT) and from a live forecast if the saved data is older than about 12 hours.</p>`;
+  const far=lastHigh?'Days after '+esc(lastHigh.md)+' '+esc(lastHigh.wk)+' are farther ahead and may still change. ':'';
+  $('notes').innerHTML=`<p>${far}Wind is in kph. If something is missing, it says UNAVAILABLE — no values were invented. The plan updates about 6:20 AM and 2:20 PM, and by itself if it is more than 12 hours old.</p>`;
   return {days,galoc,coron};
 }
 function apiUrl(kind,lat,lng){
