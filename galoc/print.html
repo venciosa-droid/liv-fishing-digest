@@ -40,17 +40,15 @@ h1{font:700 32px/1.2 system-ui,sans-serif;margin:0 0 6px;color:var(--ink)}
 .sum b.label{display:inline-block;min-width:5.5em}
 h2{font:700 26px/1.2 system-ui,sans-serif;margin:22px 0 10px;color:var(--ink)}
 h2 .place{display:block;font-weight:500;font-size:18px;margin-top:2px}
-h2.coron{font-size:22px;margin-top:28px}
+h2.coron{font-size:22px;margin-top:22px}
 .dchip{white-space:nowrap}
-.dchip .md{display:block;font-weight:700;font-size:18px}
-.dchip .wk{display:block;font-weight:500;font-size:16px}
 .days{display:flex;flex-direction:column;gap:12px}
-.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px;break-inside:avoid;page-break-inside:avoid}
+.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px;break-inside:avoid;page-break-inside:avoid}
 .day.good{border-left-color:var(--good);background:#f7fbf8}
 .day.caut{border-left-color:var(--caut);background:#fffdf3}
 .day.warn{border-left-color:var(--warn);background:#fff8f8}
 .day.na{border-left-color:var(--na);background:#f5f5f5}
-.day .when{grid-row:1/4;align-self:center}
+.day .when{grid-row:1/5;align-self:center}
 .day .md{display:block;font-weight:700;font-size:24px;line-height:1.15;color:var(--ink)}
 .day .wk{display:block;font-weight:500;font-size:18px;margin-top:2px}
 .day .verdict{grid-column:2;font:700 28px/1.1 system-ui,sans-serif;letter-spacing:.02em}
@@ -59,14 +57,20 @@ h2.coron{font-size:22px;margin-top:28px}
 .day .verdict.warn,.facts .warn{color:var(--warn)}
 .day .verdict.na,.facts .na,.na{color:var(--na);font-weight:700}
 .day .facts{grid-column:2;font-size:20px;font-weight:600;display:flex;flex-wrap:wrap;gap:6px 22px}
-.day .why{grid-column:2;margin:4px 0 0;font-size:18px;font-weight:500}
-span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
-.days-mini .day{grid-template-rows:auto auto;padding:10px 12px;border-left-width:8px}
-.days-mini .when{grid-row:1/3}
-.days-mini .md{font-size:20px}
-.days-mini .wk{font-size:18px}
-.days-mini .verdict{font-size:22px}
-.days-mini .facts{font-size:18px}
+.day .wx{grid-column:2;margin:2px 0 0;font-size:18px;font-weight:500;display:flex;flex-wrap:wrap;gap:2px 18px}
+span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
+.crows{display:flex;flex-direction:column;gap:6px}
+.crow{display:grid;grid-template-columns:7em 6.5em 1fr;gap:2px 12px;align-items:center;padding:8px 10px;border:2px solid var(--line);border-left-width:8px;border-radius:8px;font-size:18px;break-inside:avoid;page-break-inside:avoid}
+.crow.good{border-left-color:var(--good);background:#f7fbf8}
+.crow.caut{border-left-color:var(--caut);background:#fffdf3}
+.crow.warn{border-left-color:var(--warn);background:#fff8f8}
+.crow.na{border-left-color:var(--na);background:#f5f5f5}
+.crow .when{grid-row:1/3}
+.crow .md{display:block;font-weight:700;font-size:18px;line-height:1.15}
+.crow .wk{display:block;font-size:16px}
+.crow .verdict{font:700 20px/1.1 system-ui,sans-serif}
+.crow .facts,.crow .wx{font-weight:600}
+.crow .wx{grid-column:2/4;font-weight:500}
 .notes{margin:18px 0 0;font-size:18px}
 .notes p{margin:0}
 .status{margin:10px 0 0;font-size:18px}
@@ -75,33 +79,40 @@ span.warn{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 
   h1{font-size:28px}
   h2{font-size:24px}
   .day{grid-template-columns:1fr;grid-template-rows:auto}
-  .day .when,.day .verdict,.day .facts,.day .why{grid-column:1;grid-row:auto}
+  .day .when,.day .verdict,.day .facts,.day .wx{grid-column:1;grid-row:auto}
   .day .when{margin-bottom:4px}
+  .crow{grid-template-columns:1fr 1fr}
+  .crow .when{grid-row:auto}
+  .crow .wx{grid-column:1/3}
   .toolbar button{width:100%}
 }
 @media print{
-  @page{size:A4 portrait;margin:10mm}
-  html,body{background:#fff;font-size:12pt;line-height:1.35}
+  @page{size:A4 portrait;margin:8mm}
+  html,body{background:#fff;font-size:11pt;line-height:1.3}
   .wrap{max-width:none;padding:0;margin:0}
-  .toolbar{display:none!important}
-  h1{font-size:20pt;margin:0 0 4px}
-  h2{font-size:16pt;margin:10px 0 6px;break-after:avoid;page-break-after:avoid}
-  h2.coron{font-size:14pt;break-before:page;page-break-before:always}
-  h2 .place{font-size:11pt}
-  .sub,.updated,.key,.notes,.sum p,.day .wk,.day .why,.days-mini .facts{font-size:11pt}
-  .key{margin:0 0 8px;padding:6px 8px}
-  .sum{margin:0 0 8px;padding:8px 10px}
-  .dchip .md{font-size:11pt}
-  .dchip .wk{font-size:10pt}
-  .days{gap:6px}
-  .day{padding:7px 10px;column-gap:12px;border-radius:6px}
-  .day .md{font-size:14pt}
-  .day .verdict{font-size:16pt}
-  .day .facts{font-size:12pt}
-  .days-mini .day{padding:5px 8px}
-  .days-mini .md{font-size:12pt}
-  .days-mini .verdict{font-size:13pt}
-  .notes{margin:8px 0 0}
+  .toolbar,.status{display:none!important}
+  h1{font-size:16pt;margin:0 0 2px}
+  .sub,.updated{font-size:10pt;margin:0 0 3px}
+  h2{font-size:12pt;margin:5px 0 3px;break-after:avoid;page-break-after:avoid}
+  h2.coron{font-size:11pt;margin:4px 0 2px;break-before:auto;page-break-before:auto}
+  h2 .place{font-size:9pt;display:inline;margin-left:6px}
+  .key{margin:0 0 3px;padding:2px 6px;font-size:8.5pt;gap:4px 10px}
+  .sum{margin:0 0 4px;padding:3px 7px}
+  .sum p{margin:0 0 1px;font-size:9.5pt}
+  .days{gap:2px}
+  .day{padding:3px 8px;column-gap:10px;border-radius:5px;border-left-width:7px}
+  .day .md{font-size:12pt}
+  .day .wk{font-size:9pt}
+  .day .verdict{font-size:13pt}
+  .day .facts{font-size:10.5pt}
+  .day .wx{font-size:10pt}
+  .crows{gap:2px}
+  .crow{padding:2px 6px;grid-template-columns:5.6em 5.4em 1fr;gap:0 8px;font-size:9pt;border-radius:4px;border-left-width:6px}
+  .crow .md{font-size:9.5pt}
+  .crow .wk{font-size:8pt}
+  .crow .verdict{font-size:10pt}
+  .crow .wx{grid-column:2/4;font-size:9pt}
+  .notes{margin:3px 0 0;font-size:8pt}
 }
 </style>
 </head>
@@ -334,10 +345,32 @@ function buildRows(payload,days,now){
     const [gmax]=gfsDailyMax(payload,day);
     const dayh=hours.filter(h=>h.day===day);
     const emax=dayh.reduce((m,h)=>h.w_kph==null?m:m==null?h.w_kph:Math.max(m,h.w_kph),null);
-    const goWinds=am.concat(pm).map(h=>h.w_kph).filter(v=>v!=null);
-    const goOver=goWinds.some(v=>v>WIND_BAD_KPH);
-    return {day,label:dayLabel(day),md:mdLabel(day),wk:weekdayLong(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
+    const fish=am.concat(pm);
+    const nw=nightWind(fish),nc=nightCurrent(fish);
+    const goOver=nw.over;
+    return {day,label:dayLabel(day),md:mdLabel(day),wk:weekdayLong(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,goWindKph:nw.kph,goWindDir:nw.dir,goWindText:nw.text,goCurrentKt:nc.kt,goCurrentWord:nc.word,goCurrentText:nc.text,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
   });
+}
+function nightWind(hours){
+  const have=(hours||[]).filter(h=>h&&h.w_kph!=null);
+  if(!have.length)return {kph:null,dir:null,text:'UNAVAILABLE',over:false};
+  const maxH=have.reduce((a,b)=>a.w_kph>=b.w_kph?a:b);
+  const kph=maxH.w_kph,dir=maxH.dir||null;
+  const text=dir?kph+' kph from '+dir:kph+' kph';
+  return {kph,dir,text,over:kph>WIND_BAD_KPH};
+}
+function currentWord(k){
+  if(k==null)return 'UNAVAILABLE';
+  if(k<0.5)return 'weak';
+  if(k<0.9)return 'medium';
+  return 'strong';
+}
+function nightCurrent(hours){
+  const have=(hours||[]).filter(h=>h&&h.ck!=null);
+  if(!have.length)return {kt:null,word:'UNAVAILABLE',text:'UNAVAILABLE'};
+  const kt=Math.max(...have.map(h=>h.ck));
+  const word=currentWord(kt);
+  return {kt,word,text:word+' ('+kt.toFixed(1)+' kt)'};
 }
 function toneClass(fishing){
   const f=String(fishing).toUpperCase();
@@ -412,21 +445,41 @@ function prose(galoc){
   else iceS=galoc.map(r=>dayChip(r)+' '+iceWords(r.ice)).join('; ')+'.';
   return {bestS,cutS,iceS};
 }
-function dayCard(r,compact){
+function windLine(r){
+  const t=(r&&r.goWindText)||'UNAVAILABLE';
+  if(t==='UNAVAILABLE')return '<span class="na">Wind: UNAVAILABLE</span>';
+  const over=r.goOver||(r.goWindKph!=null&&r.goWindKph>WIND_BAD_KPH);
+  return over?`<span class="over">Wind: ${esc(t)}</span>`:`<span>Wind: ${esc(t)}</span>`;
+}
+function currentLine(r){
+  const t=(r&&r.goCurrentText)||'UNAVAILABLE';
+  if(t==='UNAVAILABLE')return '<span class="na">Current: UNAVAILABLE</span>';
+  return '<span>Current: '+esc(t)+'</span>';
+}
+function dayCard(r){
   const v=plainVerdict(r);
   const ice=iceWords(r.ice),sup=supplyWords(r.supply);
-  const why=compact?'':shortReason(r);
-  const reason=why?`<p class="why">${paintWhy(why)}</p>`:'';
-  return `<article class="day ${wordClass(v)}${compact?' mini':''}">
+  return `<article class="day ${wordClass(v)}">
     <div class="when"><span class="md">${esc(r.md||mdLabel(r.day))}</span><span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></div>
     <div class="verdict ${wordClass(v)}">${esc(v)}</div>
     <div class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span><span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></div>
-    ${reason}
+    <div class="wx">${windLine(r)} · ${currentLine(r)}</div>
+  </article>`;
+}
+function coronRow(r){
+  const v=plainVerdict(r);
+  const ice=iceWords(r.ice),sup=supplyWords(r.supply);
+  return `<article class="crow ${wordClass(v)}">
+    <div class="when"><span class="md">${esc(r.md||mdLabel(r.day))}</span><span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></div>
+    <div class="verdict ${wordClass(v)}">${esc(v)}</div>
+    <div class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span> · <span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></div>
+    <div class="wx">${windLine(r)} · ${currentLine(r)}</div>
   </article>`;
 }
 function daysHtml(rows,compact){
   if(!rows||!rows.length)return '<p>UNAVAILABLE</p>';
-  return `<div class="days${compact?' days-mini':''}">${rows.map(r=>dayCard(r,!!compact)).join('')}</div>`;
+  if(compact)return `<div class="crows">${rows.map(coronRow).join('')}</div>`;
+  return `<div class="days">${rows.map(dayCard).join('')}</div>`;
 }
 function hasAreaData(area){return !!((((area||{}).ecmwf||{}).hourly||{}).time||[]).length}
 function render(payload,now){
@@ -458,7 +511,7 @@ function render(payload,now){
   $('coron').innerHTML=coron.length?daysHtml(coron,true):'<p>UNAVAILABLE</p>';
   const lastHigh=galoc.filter(r=>r.conf==='High').slice(-1)[0];
   const far=lastHigh?'Days after '+esc(lastHigh.md)+' '+esc(lastHigh.wk)+' are farther ahead and may still change. ':'';
-  $('notes').innerHTML=`<p>${far}Wind is in kph. If something is missing, it says UNAVAILABLE — no values were invented. The plan updates about 6:20 AM and 2:20 PM, and by itself if it is more than 12 hours old.</p>`;
+  $('notes').innerHTML=`<p>${far}Wind is in kph. Missing information says UNAVAILABLE — no values were invented.</p>`;
   return {days,galoc,coron};
 }
 function apiUrl(kind,lat,lng){
