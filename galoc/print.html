@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="version" content="19">
 <title>LIV 7-day local fresh fish plan</title>
 <style>
 :root{
@@ -43,7 +47,7 @@ h2 .place{display:block;font-weight:500;font-size:18px;margin-top:2px}
 h2.coron{font-size:22px;margin-top:22px}
 .dchip{white-space:nowrap}
 .days{display:flex;flex-direction:column;gap:12px}
-.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px;break-inside:avoid;page-break-inside:avoid}
+.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px}
 .day.good{border-left-color:var(--good);background:#f7fbf8}
 .day.caut{border-left-color:var(--caut);background:#fffdf3}
 .day.warn{border-left-color:var(--warn);background:#fff8f8}
@@ -60,7 +64,7 @@ h2.coron{font-size:22px;margin-top:22px}
 .day .wx{grid-column:2;margin:2px 0 0;font-size:18px;font-weight:500;display:flex;flex-wrap:wrap;gap:2px 18px}
 span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
 .crows{display:flex;flex-direction:column;gap:6px}
-.crow{display:grid;grid-template-columns:7em 6.5em 1fr;gap:2px 12px;align-items:center;padding:8px 10px;border:2px solid var(--line);border-left-width:8px;border-radius:8px;font-size:18px;break-inside:avoid;page-break-inside:avoid}
+.crow{display:grid;grid-template-columns:7em 6.5em 1fr;gap:2px 12px;align-items:center;padding:8px 10px;border:2px solid var(--line);border-left-width:8px;border-radius:8px;font-size:18px}
 .crow.good{border-left-color:var(--good);background:#f7fbf8}
 .crow.caut{border-left-color:var(--caut);background:#fffdf3}
 .crow.warn{border-left-color:var(--warn);background:#fff8f8}
@@ -71,6 +75,7 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
 .crow .verdict{font:700 20px/1.1 system-ui,sans-serif}
 .crow .facts,.crow .wx{font-weight:600}
 .crow .wx{grid-column:2/4;font-weight:500}
+.ctbl{display:none}
 .notes{margin:18px 0 0;font-size:18px}
 .notes p{margin:0}
 .status{margin:10px 0 0;font-size:18px}
@@ -87,32 +92,42 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
   .toolbar button{width:100%}
 }
 @media print{
-  @page{size:A4 portrait;margin:8mm}
-  html,body{background:#fff;font-size:11pt;line-height:1.3}
-  .wrap{max-width:none;padding:0;margin:0}
+  @page{size:auto;margin:0.4in}
+  html,body{background:#fff!important;font-size:10.5pt;line-height:1.25;color:var(--ink)}
+  .wrap{max-width:none;padding:0;margin:0;background:#fff!important}
   .toolbar,.status{display:none!important}
-  h1{font-size:16pt;margin:0 0 2px}
-  .sub,.updated{font-size:10pt;margin:0 0 3px}
-  h2{font-size:12pt;margin:5px 0 3px;break-after:avoid;page-break-after:avoid}
-  h2.coron{font-size:11pt;margin:4px 0 2px;break-before:auto;page-break-before:auto}
-  h2 .place{font-size:9pt;display:inline;margin-left:6px}
-  .key{margin:0 0 3px;padding:2px 6px;font-size:8.5pt;gap:4px 10px}
-  .sum{margin:0 0 4px;padding:3px 7px}
-  .sum p{margin:0 0 1px;font-size:9.5pt}
+  h1{font-size:14pt;margin:0 0 1px}
+  .sub,.updated{font-size:9pt;margin:0 0 2px}
+  h2,h2.coron{font-size:11pt;margin:5px 0 3px;break-before:auto;break-after:auto;page-break-before:auto;page-break-after:auto;page-break-inside:auto}
+  h2.coron{font-size:10.5pt;margin:5px 0 2px}
+  h2 .place{font-size:8.5pt;display:inline;margin-left:6px}
+  .key{margin:0 0 3px;padding:2px 5px;font-size:8.5pt;gap:4px 8px;background:none}
+  .key b{background:none!important;padding:0 4px;border:1px solid currentColor}
+  .key .g{color:var(--good)}
+  .key .c{color:var(--caut)}
+  .key .w{color:var(--warn)}
+  .key .b{color:var(--ink)}
+  .sum{margin:0 0 4px;padding:3px 6px;background:none}
+  .sum p{margin:0 0 1px;font-size:9pt}
   .days{gap:2px}
-  .day{padding:3px 8px;column-gap:10px;border-radius:5px;border-left-width:7px}
-  .day .md{font-size:12pt}
-  .day .wk{font-size:9pt}
-  .day .verdict{font-size:13pt}
-  .day .facts{font-size:10.5pt}
-  .day .wx{font-size:10pt}
-  .crows{gap:2px}
-  .crow{padding:2px 6px;grid-template-columns:5.6em 5.4em 1fr;gap:0 8px;font-size:9pt;border-radius:4px;border-left-width:6px}
-  .crow .md{font-size:9.5pt}
-  .crow .wk{font-size:8pt}
-  .crow .verdict{font-size:10pt}
-  .crow .wx{grid-column:2/4;font-size:9pt}
-  .notes{margin:3px 0 0;font-size:8pt}
+  .day,.crow,.ctbl tr{background:none!important;break-inside:auto;page-break-inside:auto}
+  .day{padding:2px 6px;column-gap:8px;border-radius:0;border:1px solid var(--line);border-left-width:7px}
+  .day .md{font-size:11pt}
+  .day .wk{font-size:8.5pt}
+  .day .verdict{font-size:12pt}
+  .day .facts{font-size:9.5pt}
+  .day .wx{font-size:9pt}
+  .crows{display:none}
+  .ctbl{display:table;width:100%;border-collapse:collapse;font-size:8.5pt}
+  .ctbl td{border:1px solid var(--line);padding:1px 4px;vertical-align:top}
+  .ctbl .md{display:inline;font-weight:700;font-size:8.5pt}
+  .ctbl .wk{display:inline;font-size:8.5pt;margin-left:4px}
+  .ctbl .verdict{font-size:9pt;font-weight:700}
+  .ctbl tr.good{border-left:5px solid var(--good)}
+  .ctbl tr.caut{border-left:5px solid var(--caut)}
+  .ctbl tr.warn{border-left:5px solid var(--warn)}
+  span.warn,.wx .over{color:var(--warn);background:none!important;font-weight:700}
+  .notes{margin:4px 0 0;font-size:8pt;break-before:auto;page-break-before:auto}
 }
 </style>
 </head>
@@ -143,7 +158,7 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
   <p class="status" id="status"></p>
 </div>
 <script>
-const TZ='Asia/Manila',DATA_URL='fresh7.json',STORE_KEY='livFresh7V1',FRESH_MS=12*60*60e3;
+const TZ='Asia/Manila',DATA_URL='fresh7.json?v=19',STORE_KEY='livFresh7V1',FRESH_MS=12*60*60e3;
 const KT_TO_KPH=1.852,KMH_TO_KT=0.539957,WIND_BAD_KPH=18;
 const COMPASS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
@@ -476,9 +491,23 @@ function coronRow(r){
     <div class="wx">${windLine(r)} · ${currentLine(r)}</div>
   </article>`;
 }
+function coronTable(rows){
+  const body=rows.map(r=>{
+    const v=plainVerdict(r);
+    const ice=iceWords(r.ice),sup=supplyWords(r.supply);
+    return `<tr class="${wordClass(v)}">
+      <td class="d"><span class="md">${esc(r.md||mdLabel(r.day))}</span> <span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></td>
+      <td class="verdict ${wordClass(v)}">${esc(v)}</td>
+      <td class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span> · <span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></td>
+      <td class="wx">${windLine(r)}</td>
+      <td class="wx">${currentLine(r)}</td>
+    </tr>`;
+  }).join('');
+  return `<table class="ctbl"><tbody>${body}</tbody></table>`;
+}
 function daysHtml(rows,compact){
   if(!rows||!rows.length)return '<p>UNAVAILABLE</p>';
-  if(compact)return `<div class="crows">${rows.map(coronRow).join('')}</div>`;
+  if(compact)return `<div class="crows">${rows.map(coronRow).join('')}</div>`+coronTable(rows);
   return `<div class="days">${rows.map(dayCard).join('')}</div>`;
 }
 function hasAreaData(area){return !!((((area||{}).ecmwf||{}).hourly||{}).time||[]).length}
