@@ -100,7 +100,19 @@ assert(nodes.updated.textContent.includes('PHT'),'Updated line shows PHT');
 assert(/class="day /.test(nodes.galoc.innerHTML),'Galoc day cards are rendered');
 assert(/>(GOOD|CAUTION|WARNING|UNAVAILABLE)</.test(nodes.galoc.innerHTML),'one plain-word verdict per day');
 assert(/Ice: (Yes|Ready less|No|UNAVAILABLE)/.test(nodes.galoc.innerHTML)&&/Supply: (Yes|Ready less|No|UNAVAILABLE)/.test(nodes.galoc.innerHTML),'ice and supply in plain words');
-assert(!/ECMWF|GFS|kt|landing lag/.test(nodes.galoc.innerHTML+nodes.sum.innerHTML+nodes.notes.innerHTML),'no model jargon on the page');
+assert(!/ECMWF|GFS|landing lag/.test(nodes.sum.innerHTML+nodes.notes.innerHTML),'no model jargon in the summary or notes');
+assert(/Wind: /.test(nodes.galoc.innerHTML)&&/Current: /.test(nodes.galoc.innerHTML),'Galoc shows Wind and Current lines');
+assert(/Wind: /.test(nodes.coron.innerHTML)&&/Current: /.test(nodes.coron.innerHTML),'Coron shows Wind and Current lines');
+assert(/kph from /.test(nodes.galoc.innerHTML)||/Wind: UNAVAILABLE/.test(nodes.galoc.innerHTML),'wind is in kph with a direction when known');
+assert(/(weak|medium|strong) \(\d+\.\d+ kt\)/.test(nodes.galoc.innerHTML)||/Current: UNAVAILABLE/.test(nodes.galoc.innerHTML),'current uses weak/medium/strong and kt, or UNAVAILABLE');
+assert.strictEqual(vm.runInContext('nightWind([{w_kph:10,dir:"NE"},{w_kph:22,dir:"E"}]).text',ctx),'22 kph from E','night wind is the max fishing-hour wind');
+assert.strictEqual(vm.runInContext('nightWind([{w_kph:10,dir:"NE"},{w_kph:22,dir:"E"}]).over',ctx),true,'wind above 18 kph is flagged');
+assert.strictEqual(vm.runInContext('nightWind([{w_kph:null},{w_kph:null}]).text',ctx),'UNAVAILABLE','missing wind is UNAVAILABLE');
+assert.strictEqual(vm.runInContext('nightCurrent([{ck:0.3},{ck:0.6}]).text',ctx),'medium (0.6 kt)','current word follows the max fishing-hour current');
+assert.strictEqual(vm.runInContext('nightCurrent([]).text',ctx),'UNAVAILABLE','missing current is UNAVAILABLE');
+assert.strictEqual(vm.runInContext('currentWord(0.2)',ctx),'weak');
+assert.strictEqual(vm.runInContext('currentWord(0.5)',ctx),'medium');
+assert.strictEqual(vm.runInContext('currentWord(1.2)',ctx),'strong');
 assert(nodes.galoc.innerHTML.includes('Nov 15')&&nodes.galoc.innerHTML.includes('Sunday')&&nodes.galoc.innerHTML.includes('Saturday'),'Galoc table uses Nov 15 over weekday');
 assert(nodes.coron.innerHTML.includes('Nov 15')&&nodes.coron.innerHTML.includes('Sunday'),'Coron table uses the same date labels');
 assert(nodes.sum.innerHTML.includes('Nov 15')&&nodes.sum.innerHTML.includes('Sunday'),'summary uses short month name and weekday');
@@ -116,5 +128,5 @@ assert.strictEqual(vm.runInContext('supplyWords("Hold")',ctx),'No','hold is No')
 console.log('fresh7 tests ok');
 console.log('Galoc verdicts:');
 for(const r of rendered.galoc){
-  console.log(`  ${r.md} ${r.wk}  ${vm.runInContext('plainVerdict('+JSON.stringify(r)+')',ctx)}  Ice: ${vm.runInContext('iceWords('+JSON.stringify(r.ice)+')',ctx)}  Supply: ${vm.runInContext('supplyWords('+JSON.stringify(r.supply)+')',ctx)}  — ${vm.runInContext('shortReason('+JSON.stringify(r)+')',ctx)}`);
+  console.log(`  ${r.md} ${r.wk}  ${vm.runInContext('plainVerdict('+JSON.stringify(r)+')',ctx)}  Ice: ${vm.runInContext('iceWords('+JSON.stringify(r.ice)+')',ctx)}  Supply: ${vm.runInContext('supplyWords('+JSON.stringify(r.supply)+')',ctx)}  Wind: ${r.goWindText}  Current: ${r.goCurrentText}`);
 }
