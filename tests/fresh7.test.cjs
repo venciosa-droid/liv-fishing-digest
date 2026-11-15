@@ -109,6 +109,11 @@ assert(!/ECMWF|GFS|landing lag/.test(nodes.sum.innerHTML+nodes.notes.innerHTML),
 assert(/Wind: /.test(nodes.galoc.innerHTML)&&/Current: /.test(nodes.galoc.innerHTML),'Galoc shows Wind and Current lines');
 assert(/Wind: /.test(nodes.coron.innerHTML)&&/Current: /.test(nodes.coron.innerHTML),'Coron shows Wind and Current lines');
 assert(/kph from /.test(nodes.galoc.innerHTML)||/Wind: UNAVAILABLE/.test(nodes.galoc.innerHTML),'wind is in kph with a direction when known');
+assert(/class="careful"/.test(nodes.sum.innerHTML)&&/Be careful:/.test(nodes.sum.innerHTML),'Be careful line is marked red');
+assert(/Lowest wind:/.test(nodes.galoc.innerHTML)&&/kph at /.test(nodes.galoc.innerHTML),'Galoc shows lowest and highest wind times');
+assert(/Low \d+ kph /.test(nodes.coron.innerHTML)&&/High \d+ kph /.test(nodes.coron.innerHTML),'Coron shows compact low/high wind times');
+assert(/fresh7\.json\?v=21/.test(raw)&&/name="version" content="21"/.test(raw),'cache-bust is v=21');
+assert(/print\.html\?v=21/.test(redirect),'/fresh7/ redirect is cache-busted to v=21');
 assert(/(weak|medium|strong) \(\d+\.\d+ kt\)/.test(nodes.galoc.innerHTML)||/Current: UNAVAILABLE/.test(nodes.galoc.innerHTML),'current uses weak/medium/strong and kt, or UNAVAILABLE');
 assert.strictEqual(vm.runInContext('nightWind([{w_kph:10,dir:"NE"},{w_kph:22,dir:"E"}]).text',ctx),'22 kph from E','night wind is the max fishing-hour wind');
 assert.strictEqual(vm.runInContext('nightWind([{w_kph:10,dir:"NE"},{w_kph:22,dir:"E"}]).over',ctx),true,'wind above 18 kph is flagged');
@@ -118,6 +123,24 @@ assert.strictEqual(vm.runInContext('nightCurrent([]).text',ctx),'UNAVAILABLE','m
 assert.strictEqual(vm.runInContext('currentWord(0.2)',ctx),'weak');
 assert.strictEqual(vm.runInContext('currentWord(0.5)',ctx),'medium');
 assert.strictEqual(vm.runInContext('currentWord(1.2)',ctx),'strong');
+
+function dayHours(winds){
+  return winds.map((w,h)=>({day:'2026-11-15',hour:h,w_kph:w}));
+}
+const ext=vm.runInContext('dayWindExtremes('+JSON.stringify(dayHours([8,8,23,8,8,8,8,8,8,8,3,8,8,8,8,8,8,8,8,8,8,8,8,8]))+',"2026-11-15")',ctx);
+assert.strictEqual(ext.text,'Lowest wind: 3 kph at 10 AM · Highest: 23 kph at 2 AM','daily min/max use 00-23 PHT and 12-hour times');
+assert.strictEqual(ext.hiOver,true,'highest above 18 kph is flagged');
+assert.strictEqual(ext.shortText,'Low 3 kph 10 AM / High 23 kph 2 AM','Coron uses a compact low/high phrase');
+const ext18=vm.runInContext('dayWindExtremes('+JSON.stringify(dayHours([5,18,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]))+',"2026-11-15")',ctx);
+assert.strictEqual(ext18.hiOver,false,'18 kph highest is not red');
+assert.strictEqual(ext18.hiKph,18);
+assert.strictEqual(vm.runInContext('dayWindExtremes([],"2026-11-15").text',ctx),'UNAVAILABLE','missing daily wind is UNAVAILABLE, not invented');
+assert.strictEqual(vm.runInContext('dayWindExtremes('+JSON.stringify(dayHours([10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]))+',"2026-11-16").text',ctx),'UNAVAILABLE','hours from another day are not used');
+const extTie=vm.runInContext('dayWindExtremes('+JSON.stringify(dayHours([4,12,4,12,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]))+',"2026-11-15")',ctx);
+assert.strictEqual(extTie.loHour,0,'tied lowest keeps the first hour');
+assert.strictEqual(extTie.hiHour,1,'tied highest keeps the first hour');
+assert(/class="over"/.test(vm.runInContext('extremesLine('+JSON.stringify({loKph:3,loHour:10,hiKph:23,hiHour:2,hiOver:true})+',false)',ctx)),'Galoc highest above 18 kph is red');
+assert(!/class="over"/.test(vm.runInContext('extremesLine('+JSON.stringify({loKph:5,loHour:3,hiKph:18,hiHour:14,hiOver:false})+',false)',ctx)),'18 kph highest is not red');
 assert(nodes.galoc.innerHTML.includes('Nov 15')&&nodes.galoc.innerHTML.includes('Sunday')&&nodes.galoc.innerHTML.includes('Saturday'),'Galoc table uses Nov 15 over weekday');
 assert(nodes.coron.innerHTML.includes('Nov 15')&&nodes.coron.innerHTML.includes('Sunday'),'Coron table uses the same date labels');
 assert(nodes.sum.innerHTML.includes('Nov 15')&&nodes.sum.innerHTML.includes('Sunday'),'summary uses short month name and weekday');
@@ -133,5 +156,5 @@ assert.strictEqual(vm.runInContext('supplyWords("Hold")',ctx),'No','hold is No')
 console.log('fresh7 tests ok');
 console.log('Galoc verdicts:');
 for(const r of rendered.galoc){
-  console.log(`  ${r.md} ${r.wk}  ${vm.runInContext('plainVerdict('+JSON.stringify(r)+')',ctx)}  Ice: ${vm.runInContext('iceWords('+JSON.stringify(r.ice)+')',ctx)}  Supply: ${vm.runInContext('supplyWords('+JSON.stringify(r.supply)+')',ctx)}  Wind: ${r.goWindText}  Current: ${r.goCurrentText}`);
+  console.log(`  ${r.md} ${r.wk}  ${vm.runInContext('plainVerdict('+JSON.stringify(r)+')',ctx)}  Ice: ${vm.runInContext('iceWords('+JSON.stringify(r.ice)+')',ctx)}  Supply: ${vm.runInContext('supplyWords('+JSON.stringify(r.supply)+')',ctx)}  Wind: ${r.goWindText}  Current: ${r.goCurrentText}  ${r.extText}`);
 }
