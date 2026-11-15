@@ -8,7 +8,7 @@ assert(fs.readFileSync(path.join(__dirname,'../galoc/index.html'),'utf8').includ
 assert(/Color key/.test(raw)&&/Green/.test(raw)&&/Yellow/.test(raw)&&/Red/.test(raw)&&/Blue/.test(raw),'color key names all four inks');
 assert(/print-color-adjust:\s*exact/.test(raw)&&/-webkit-print-color-adjust:\s*exact/.test(raw),'print keeps ink colors');
 assert(/http-equiv="Cache-Control"/.test(raw),'HTML asks browsers not to reuse a stale copy');
-assert(/@page\{size:auto/.test(raw),'print uses the printer paper size, not a fixed A4 page box');
+assert(/@page\{size:A4 portrait;margin:10mm/.test(raw),'print is locked to A4 portrait with 10mm margins');
 assert(!/page-break-before:\s*always/.test(raw)&&!/break-before:\s*page/.test(raw),'Coron is not forced onto a second printed page');
 assert(/class="ctbl"/.test(raw)||/coronTable/.test(raw),'Coron prints as a tight table');
 
