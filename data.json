@@ -1,92 +1,80 @@
 {
- "reportTime": "Sun 15 Nov 2026 · ~2:20 PM PHT · afternoon",
+ "reportTime": "Mon 16 Nov 2026 · ~6:20 AM PHT · morning",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "15 Nov 2026 · 2:18 PM PHT",
- "overall": "MARGINAL overall: seven grounds GOOD, nine MARGINAL, none POOR",
- "limiter": "wind on the east side",
- "limiterDetail": "The main limiter is wind on the east side: Nangalao, Cabunlawan, Decabaitot and Barangonan 12 kt (gusts 17–18), Ciron 10.9 kt, Linapacan 9.1 kt. Current is a secondary limiter at Alava (0.7 kt), Culion and Decabaitot (0.6 kt). Rain is not a factor (light, 0.2 mm). 9.7 kt is about 18 kph, the line fishermen treat as bad.",
+ "liveSnapshot": "16 Nov 2026 · 6:19 AM PHT",
+ "overall": "MARGINAL overall: five grounds GOOD, ten MARGINAL, one POOR",
+ "limiter": "combination",
+ "limiterDetail": "The main limiter is a combination: wind on the east side (Nangalao 14.3 kt gusts 18.7, Ciron 13.5, Cabunlawan and Decabaitot 11.3) and current at Decabaitot (1.0 kt), Alava (0.8), Barangonan (0.7) and Tara (0.6). Rain is not a factor (0.0 mm). 9.7 kt is about 18 kph, the line fishermen treat as bad.",
  "pagasa": {
   "status": "CLEAR",
   "detail": "PAGASA: CLEAR (feed issued Sat 14 5:17 AM PHT): no active gale, TCWS or heavy-rain alert for Calamian/MIMAROPA. PAGASA alerts."
  },
  "changed": {
-  "title": "⚠️ What changed since this morning (6:20 AM)",
+  "title": "⚠️ What changed since yesterday afternoon (2:20 PM)",
   "items": [
-   "Mix is now 7 GOOD / 9 MARGINAL / 0 POOR / 0 VERY POOR (was 6 GOOD / 6 MARGINAL / 4 POOR / 0 VERY POOR). No POOR grounds left. GOOD now: Coron, Linapacan, Galoc, Maglalambay, Decabobo, Turda and Panlaitan. Tara slipped to MARGINAL on current (0.5 kt, building to 1.0 kt tonight). East-side wind eased from 15 kt to about 12 kt.",
-   "Supply outlook is unchanged: normal to softening today, above normal Mon 16 , then normal to softening Tue to Sat. Shortage detector ELEVATED, surge OFF. PAGASA: CLEAR."
+   "Mix is now 5 GOOD / 10 MARGINAL / 1 POOR / 0 VERY POOR (was 7 GOOD / 9 MARGINAL / 0 POOR / 0 VERY POOR). GOOD now: Galoc, Maglalambay, Decabobo, Turda and Panlaitan. Coron and Linapacan slipped to MARGINAL on current (0.5 kt). Decabaitot fell to POOR (current 1.0 kt, wind 11.3 kt).",
+   "Supply outlook is unchanged: above normal today Mon 16 , then normal to softening Tue to Sun. Shortage detector ELEVATED (Tue–Sun), surge OFF. PAGASA: CLEAR."
   ]
  },
  "supply": [
   {
-   "label": "Today Sun 15",
-   "value": "🟡 NORMAL → SOFTENING",
-   "note": "Landings reflect Saturday and last night",
-   "tone": "ok"
-  },
-  {
-   "label": "24h Mon 16",
+   "label": "Today Mon 16",
    "value": "🟢 ABOVE NORMAL",
-   "note": "Today's good fishing in the west and centre lifts arrivals",
+   "note": "Fishing GOOD, activity HIGH in the west and centre",
    "tone": "good"
   },
   {
-   "label": "48h Tue 17",
+   "label": "24h Tue 17",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Tue is the roughest day (11 kt, gusts 16)",
+   "note": "Wind 9.8 kt, gusts 14",
+   "tone": "ok"
+  },
+  {
+   "label": "48h Wed 18",
+   "value": "🟡 NORMAL → SOFTENING",
+   "note": "Wind 7.5 kt, gusts 13",
    "tone": "ok"
   },
   {
    "label": "3–7d",
-   "value": "🟡 Wed 18 onward normal → softening",
-   "note": "Fri 20 gusts reach 22 kt. Medium confidence beyond 48h",
+   "value": "🟡 Thu 19 to Sun 22 normal → softening",
+   "note": "Fri 20 roughest: 14 kt, gusts 22. Medium confidence beyond 48h",
    "tone": "ok"
   }
  ],
- "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Sun–Sat, guide only). Tightening risk: Tue 17. No surge expected.",
+ "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Tue–Sun, guide only). Tightening risk: Tue 17 onward, worst Fri 20. No surge expected.",
  "bestWindow": {
-  "headline": "Now through tonight at Galoc, Coron, Maglalambay, Decabobo, Turda and Panlaitan",
+  "headline": "Now through Mon morning at Galoc, Maglalambay, Decabobo, Turda and Panlaitan",
   "details": [
-   "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
+   "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
   ]
  },
  "turningPoint": {
-  "date": "2026-11-16",
-  "day": "Mon",
-  "from": "MARGINAL",
-  "to": "GOOD"
- },
- "worstDay": {
   "date": "2026-11-17",
   "day": "Tue",
-  "windKt": "11",
-  "gustKt": "16",
+  "from": "GOOD",
+  "to": "MARGINAL"
+ },
+ "worstDay": {
+  "date": "2026-11-20",
+  "day": "Fri",
+  "windKt": "14",
+  "gustKt": "22",
   "rain": "Mostly dry"
  },
  "sevenDay": [
-  {
-   "date": "2026-11-15",
-   "day": "Sun",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "5.2",
-   "gustKt": "8.7",
-   "rain": "Light (1.5 mm)",
-   "flags": [
-    "BEST",
-    "SHORTAGE"
-   ]
-  },
   {
    "date": "2026-11-16",
    "day": "Mon",
    "fishing": "GOOD",
    "activity": "HIGH",
    "supply": "ABOVE NORMAL",
-   "windKt": "9.7",
-   "gustKt": "15",
+   "windKt": "8.0",
+   "gustKt": "13",
    "rain": "Mostly dry",
-   "flags": []
+   "flags": [
+    "BEST"
+   ]
   },
   {
    "date": "2026-11-17",
@@ -94,12 +82,10 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "11",
-   "gustKt": "16",
+   "windKt": "9.8",
+   "gustKt": "14",
    "rain": "Mostly dry",
    "flags": [
-    "WORST",
-    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -109,8 +95,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.9",
-   "gustKt": "12",
+   "windKt": "7.5",
+   "gustKt": "13",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -122,8 +108,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "8.2",
-   "gustKt": "17",
+   "windKt": "9.4",
+   "gustKt": "16",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -135,10 +121,12 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "11",
+   "windKt": "14",
    "gustKt": "22",
    "rain": "Mostly dry",
    "flags": [
+    "WORST",
+    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -148,43 +136,56 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.3",
+   "windKt": "7.7",
    "gustKt": "17",
-   "rain": "Light (2.4 mm)",
+   "rain": "Light (1.5 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-11-22",
+   "day": "Sun",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "9.2",
+   "gustKt": "17",
+   "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
    ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Sun 15 Nov ~2:18 PM PHT. “Now” = 2 PM; range = next 24h.",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Mon 16 Nov ~6:19 AM PHT. “Now” = 6 AM; range = next 24h.",
  "areas": [
   {
    "id": "coron",
    "name": "Coron",
    "lat": 11.9988,
    "lng": 120.206,
-   "rating": "GOOD",
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "N",
-    "range24h": "0.1–0.7",
-    "status": "Favorable",
+    "kt": 0.5,
+    "dir": "NNE",
+    "range24h": "0.1–0.5",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.0,
-    "dir": "SE",
-    "gustKt": 8.7,
+    "kt": 5.1,
+    "dir": "E",
+    "gustKt": 7.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Sun 21"
+    "modelBestHour": "Mon 11"
    }
   },
   {
@@ -195,45 +196,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "W",
-    "range24h": "0.3–0.6",
+    "kt": 0.5,
+    "dir": "WNW",
+    "range24h": "0.4–0.7",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.0,
-    "dir": "SE",
-    "gustKt": 8.7,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": null,
-    "modelBestHour": "Mon 07"
-   }
-  },
-  {
-   "id": "linapacan",
-   "name": "Linapacan",
-   "lat": 11.491,
-   "lng": 119.8682,
-   "rating": "GOOD",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.4,
-    "dir": "W",
-    "range24h": "0.2–0.4",
-    "status": "Favorable",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 9.1,
-    "dir": "NE",
-    "gustKt": 14.8,
+    "kt": 5.1,
+    "dir": "E",
+    "gustKt": 7.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -242,7 +214,36 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 01"
+    "modelBestHour": "Mon 09"
+   }
+  },
+  {
+   "id": "linapacan",
+   "name": "Linapacan",
+   "lat": 11.491,
+   "lng": 119.8682,
+   "rating": "MARGINAL",
+   "ratingSource": "report",
+   "current": {
+    "kt": 0.5,
+    "dir": "WNW",
+    "range24h": "0.4–0.9",
+    "status": "Moderate",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 5.3,
+    "dir": "E",
+    "gustKt": 7.4,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Mon 06"
    }
   },
   {
@@ -253,16 +254,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
-    "dir": "SE",
-    "range24h": "0.5–1.0",
+    "kt": 0.6,
+    "dir": "ESE",
+    "range24h": "0.6–1.2",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 3.5,
-    "dir": "N",
-    "gustKt": 6.2,
+    "kt": 3.9,
+    "dir": "SSE",
+    "gustKt": 7.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -270,10 +271,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
-    ],
-    "modelBestHour": "Sun 18"
+    "report": null,
+    "modelBestHour": "Mon 07"
    }
   },
   {
@@ -284,16 +283,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "SW",
-    "range24h": "0.3–0.5",
-    "status": "Favorable",
+    "kt": 0.6,
+    "dir": "WSW",
+    "range24h": "0.5–0.8",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.3,
+    "kt": 14.3,
     "dir": "ENE",
-    "gustKt": 17.1,
+    "gustKt": 18.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -302,9 +301,9 @@
    },
    "bestWindow": {
     "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
+     "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
     ],
-    "modelBestHour": "Sun 15"
+    "modelBestHour": "Mon 14"
    }
   },
   {
@@ -316,15 +315,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.3,
-    "dir": "SSW",
-    "range24h": "0.3–0.4",
+    "dir": "SW",
+    "range24h": "0.3–0.7",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.3,
+    "kt": 11.3,
     "dir": "ENE",
-    "gustKt": 18.1,
+    "gustKt": 14.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -333,9 +332,9 @@
    },
    "bestWindow": {
     "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
+     "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
     ],
-    "modelBestHour": "Mon 02"
+    "modelBestHour": "Mon 06"
    }
   },
   {
@@ -343,19 +342,19 @@
    "name": "Decabaitot",
    "lat": 11.6483,
    "lng": 119.9629,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
+    "kt": 1.0,
     "dir": "WNW",
-    "range24h": "0.2–0.8",
-    "status": "Moderate",
+    "range24h": "0.6–1.2",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.3,
+    "kt": 11.3,
     "dir": "ENE",
-    "gustKt": 18.1,
+    "gustKt": 14.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -364,9 +363,9 @@
    },
    "bestWindow": {
     "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
+     "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
     ],
-    "modelBestHour": "Mon 02"
+    "modelBestHour": "Mon 06"
    }
   },
   {
@@ -377,25 +376,25 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.7,
-    "dir": "W",
-    "range24h": "0.3–0.7",
+    "kt": 0.8,
+    "dir": "WNW",
+    "range24h": "0.4–0.9",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.8,
-    "dir": "N",
-    "gustKt": 9.7,
+    "kt": 5.7,
+    "dir": "ESE",
+    "gustKt": 7.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 01"
+    "modelBestHour": "Mon 13"
    }
   },
   {
@@ -407,19 +406,19 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.2,
-    "dir": "SSW",
-    "range24h": "0.1–0.4",
+    "dir": "WNW",
+    "range24h": "0.1–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.0,
-    "dir": "SE",
-    "gustKt": 8.7,
+    "kt": 5.1,
+    "dir": "E",
+    "gustKt": 7.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
@@ -436,15 +435,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.2,
-    "dir": "SSW",
-    "range24h": "0.1–0.4",
+    "dir": "WNW",
+    "range24h": "0.1–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 1.4,
-    "dir": "N",
-    "gustKt": 5.8,
+    "kt": 3.9,
+    "dir": "ESE",
+    "gustKt": 6.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -453,7 +452,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Sun 14"
+    "modelBestHour": "Mon 17"
    }
   },
   {
@@ -464,16 +463,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "W",
-    "range24h": "0.2–0.6",
-    "status": "Moderate",
+    "kt": 0.4,
+    "dir": "WSW",
+    "range24h": "0.4–0.7",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.9,
+    "kt": 13.5,
     "dir": "ENE",
-    "gustKt": 14.6,
+    "gustKt": 17.3,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -481,8 +480,10 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
-    "modelBestHour": "Sun 22"
+    "report": [
+     "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
+    ],
+    "modelBestHour": "Mon 06"
    }
   },
   {
@@ -493,16 +494,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "S",
-    "range24h": "0.1–0.4",
+    "kt": 0.1,
+    "dir": "E",
+    "range24h": "0.0–0.4",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 3.5,
-    "dir": "N",
-    "gustKt": 6.2,
+    "kt": 3.9,
+    "dir": "SSE",
+    "gustKt": 7.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -510,7 +511,9 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": null,
+    "report": [
+     "Model best hour is about Mon 7 AM at Decabobo (lowest combined wind, current and rain). Keep small boats off Nangalao, Ciron, Cabunlawan and Decabaitot (11–14 kt, gusts up to 19)."
+    ],
     "modelBestHour": "Mon 07"
    }
   },
@@ -523,15 +526,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.2,
-    "dir": "SSE",
-    "range24h": "0.2–0.7",
+    "dir": "ESE",
+    "range24h": "0.2–0.8",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 3.5,
-    "dir": "N",
-    "gustKt": 6.2,
+    "kt": 3.9,
+    "dir": "SSE",
+    "gustKt": 7.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -540,7 +543,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 06"
+    "modelBestHour": "Mon 07"
    }
   },
   {
@@ -553,23 +556,23 @@
    "current": {
     "kt": 0.5,
     "dir": "W",
-    "range24h": "0.3–0.5",
+    "range24h": "0.4–0.7",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.8,
-    "dir": "N",
-    "gustKt": 9.7,
+    "kt": 5.7,
+    "dir": "ESE",
+    "gustKt": 7.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Mon 01"
+    "modelBestHour": "Mon 14"
    }
   },
   {
@@ -580,16 +583,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "E",
+    "kt": 0.1,
+    "dir": "N",
     "range24h": "0.0–0.2",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 1.4,
-    "dir": "N",
-    "gustKt": 5.8,
+    "kt": 3.9,
+    "dir": "ESE",
+    "gustKt": 6.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -597,10 +600,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
-    ],
-    "modelBestHour": "Mon 03"
+    "report": null,
+    "modelBestHour": "Mon 12"
    }
   },
   {
@@ -611,16 +612,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
-    "dir": "WNW",
-    "range24h": "0.0–0.6",
+    "kt": 0.7,
+    "dir": "NW",
+    "range24h": "0.1–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 12.0,
-    "dir": "ENE",
-    "gustKt": 17.3,
+    "kt": 7.3,
+    "dir": "NE",
+    "gustKt": 10.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -628,10 +629,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "Model best hour is about Mon 3 AM at Panlaitan (lowest combined wind, current and rain). Keep small boats off Nangalao, Cabunlawan, Decabaitot and Barangonan (12 kt, gusts 17–18). Tara current builds toward 1.0 kt tonight."
-    ],
-    "modelBestHour": "Sun 23"
+    "report": null,
+    "modelBestHour": "Mon 06"
    }
   }
  ],
