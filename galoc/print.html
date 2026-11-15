@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="version" content="20">
+<meta name="version" content="21">
 <title>LIV 7-day local fresh fish plan</title>
 <style>
 :root{
@@ -42,17 +42,18 @@ h1{font:700 32px/1.2 system-ui,sans-serif;margin:0 0 6px;color:var(--ink)}
 .sum p{margin:0 0 10px}
 .sum p:last-child{margin:0}
 .sum b.label{display:inline-block;min-width:5.5em}
+.sum p.careful,.sum p.careful b,.sum p.careful .dchip{color:var(--warn)}
 h2{font:700 26px/1.2 system-ui,sans-serif;margin:22px 0 10px;color:var(--ink)}
 h2 .place{display:block;font-weight:500;font-size:18px;margin-top:2px}
 h2.coron{font-size:22px;margin-top:22px}
 .dchip{white-space:nowrap}
 .days{display:flex;flex-direction:column;gap:12px}
-.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px}
+.day{display:grid;grid-template-columns:8.2em 1fr;grid-template-rows:auto auto auto auto auto;column-gap:16px;row-gap:2px;padding:14px 16px;border:2px solid var(--line);border-left-width:10px;border-radius:10px}
 .day.good{border-left-color:var(--good);background:#f7fbf8}
 .day.caut{border-left-color:var(--caut);background:#fffdf3}
 .day.warn{border-left-color:var(--warn);background:#fff8f8}
 .day.na{border-left-color:var(--na);background:#f5f5f5}
-.day .when{grid-row:1/5;align-self:center}
+.day .when{grid-row:1/6;align-self:center}
 .day .md{display:block;font-weight:700;font-size:24px;line-height:1.15;color:var(--ink)}
 .day .wk{display:block;font-weight:500;font-size:18px;margin-top:2px}
 .day .verdict{grid-column:2;font:700 28px/1.1 system-ui,sans-serif;letter-spacing:.02em}
@@ -62,7 +63,8 @@ h2.coron{font-size:22px;margin-top:22px}
 .day .verdict.na,.facts .na,.na{color:var(--na);font-weight:700}
 .day .facts{grid-column:2;font-size:20px;font-weight:600;display:flex;flex-wrap:wrap;gap:6px 22px}
 .day .wx{grid-column:2;margin:2px 0 0;font-size:18px;font-weight:500;display:flex;flex-wrap:wrap;gap:2px 18px}
-span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
+.day .ext{grid-column:2;margin:0;font-size:18px;font-weight:500}
+span.warn,.wx .over,.ext .over{color:var(--warn);background:var(--warn-bg);font-weight:700;padding:0 4px;border-radius:3px}
 .crows{display:flex;flex-direction:column;gap:6px}
 .crow{display:grid;grid-template-columns:7em 6.5em 1fr;gap:2px 12px;align-items:center;padding:8px 10px;border:2px solid var(--line);border-left-width:8px;border-radius:8px;font-size:18px}
 .crow.good{border-left-color:var(--good);background:#f7fbf8}
@@ -84,7 +86,7 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
   h1{font-size:28px}
   h2{font-size:24px}
   .day{grid-template-columns:1fr;grid-template-rows:auto}
-  .day .when,.day .verdict,.day .facts,.day .wx{grid-column:1;grid-row:auto}
+  .day .when,.day .verdict,.day .facts,.day .wx,.day .ext{grid-column:1;grid-row:auto}
   .day .when{margin-bottom:4px}
   .crow{grid-template-columns:1fr 1fr}
   .crow .when{grid-row:auto}
@@ -93,41 +95,45 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
 }
 @media print{
   @page{size:A4 portrait;margin:10mm}
-  html,body{background:#fff!important;font-size:11pt;line-height:1.3;color:var(--ink)}
+  html,body{background:#fff!important;font-size:10.5pt;line-height:1.2;color:var(--ink)}
   .wrap{max-width:none;padding:0;margin:0;background:#fff!important;box-shadow:none}
   .toolbar,.status{display:none!important}
-  h1{font-size:17pt;margin:0 0 2px}
-  .sub,.updated{font-size:10pt;margin:0 0 2px}
-  h2,h2.coron{font-size:13pt;margin:6px 0 3px;break-before:auto;break-after:auto;page-break-before:auto;page-break-after:auto;page-break-inside:auto}
-  h2.coron{font-size:11pt;margin:5px 0 2px}
+  h1{font-size:15.5pt;margin:0}
+  .sub,.updated{font-size:9.5pt;margin:0 0 1px}
+  h2,h2.coron{font-size:12pt;margin:3px 0 1px;break-before:auto;break-after:auto;page-break-before:auto;page-break-after:auto;page-break-inside:auto}
+  h2.coron{font-size:10pt;margin:2px 0 1px}
   h2 .place{font-size:10pt;display:inline;margin-left:6px}
-  .key{margin:0 0 4px;padding:3px 7px;font-size:9.5pt;gap:5px 10px;background:none}
+  .key{margin:0 0 2px;padding:1px 5px;font-size:8.5pt;gap:3px 8px;background:none}
   .key b{background:none!important;padding:0 5px;border:1px solid currentColor}
   .key .g{color:var(--good)}
   .key .c{color:var(--caut)}
   .key .w{color:var(--warn)}
   .key .b{color:var(--ink)}
-  .sum{margin:0 0 4px;padding:4px 7px;background:none}
-  .sum p{margin:0 0 1px;font-size:10pt}
-  .days{gap:3px}
+  .sum{margin:0 0 2px;padding:2px 5px;background:none}
+  .sum p{margin:0 0 1px;font-size:9.5pt}
+  .sum p.careful,.sum p.careful b,.sum p.careful .dchip{color:var(--warn)}
+  .days{gap:0}
   .day,.crow,.ctbl tr{background:none!important;break-inside:auto;page-break-inside:auto}
-  .day{padding:4px 9px;column-gap:11px;border-radius:0;border:1px solid var(--line);border-left-width:8px}
-  .day .md{font-size:14pt}
-  .day .wk{font-size:10.5pt}
-  .day .verdict{font-size:15pt}
-  .day .facts{font-size:12pt}
-  .day .wx{font-size:11pt}
+  .day{padding:1px 7px;column-gap:10px;line-height:1.15;border-radius:0;border:1px solid var(--line);border-left-width:7px}
+  .day .md{font-size:13pt}
+  .day .wk{font-size:10pt}
+  .day .verdict{font-size:14pt}
+  .day .facts{font-size:11pt}
+  .day .wx{font-size:10pt}
+  .day .ext{font-size:10pt;margin:0}
   .crows{display:none}
-  .ctbl{display:table;width:100%;border-collapse:collapse;font-size:9.5pt}
-  .ctbl td{border:1px solid var(--line);padding:2px 5px;vertical-align:top}
-  .ctbl .md{display:inline;font-weight:700;font-size:9.5pt}
-  .ctbl .wk{display:inline;font-size:9.5pt;margin-left:4px}
-  .ctbl .verdict{font-size:10.5pt;font-weight:700}
+  .ctbl{display:table;width:100%;border-collapse:collapse;font-size:8.5pt}
+  .ctbl td{border:1px solid var(--line);padding:0 4px;vertical-align:middle;line-height:1.2}
+  .ctbl .md{display:inline;font-weight:700;font-size:8.5pt}
+  .ctbl .wk{display:inline;font-size:8.5pt;margin-left:4px}
+  .ctbl .verdict{font-size:9.5pt;font-weight:700}
   .ctbl tr.good{border-left:5px solid var(--good)}
   .ctbl tr.caut{border-left:5px solid var(--caut)}
   .ctbl tr.warn{border-left:5px solid var(--warn)}
-  span.warn,.wx .over{color:var(--warn);background:none!important;font-weight:700}
-  .notes{margin:4px 0 0;font-size:8.5pt;break-before:auto;page-break-before:auto}
+  span.warn,.wx .over,.ext .over{color:var(--warn);background:none!important;font-weight:700}
+  .ctbl .d,.ctbl .verdict,.ctbl .facts{white-space:nowrap}
+  .ctbl .ext{font-size:8.5pt;margin:0}
+  .notes{margin:2px 0 0;font-size:7.5pt;line-height:1.2;break-before:auto;page-break-before:auto}
 }
 </style>
 </head>
@@ -158,7 +164,7 @@ span.warn,.wx .over{color:var(--warn);background:var(--warn-bg);font-weight:700;
   <p class="status" id="status"></p>
 </div>
 <script>
-const TZ='Asia/Manila',DATA_URL='fresh7.json?v=20',STORE_KEY='livFresh7V1',FRESH_MS=12*60*60e3;
+const TZ='Asia/Manila',DATA_URL='fresh7.json?v=21',STORE_KEY='livFresh7V1',FRESH_MS=12*60*60e3;
 const KT_TO_KPH=1.852,KMH_TO_KT=0.539957,WIND_BAD_KPH=18;
 const COMPASS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
@@ -361,9 +367,9 @@ function buildRows(payload,days,now){
     const dayh=hours.filter(h=>h.day===day);
     const emax=dayh.reduce((m,h)=>h.w_kph==null?m:m==null?h.w_kph:Math.max(m,h.w_kph),null);
     const fish=am.concat(pm);
-    const nw=nightWind(fish),nc=nightCurrent(fish);
+    const nw=nightWind(fish),nc=nightCurrent(fish),ext=dayWindExtremes(hours,day);
     const goOver=nw.over;
-    return {day,label:dayLabel(day),md:mdLabel(day),wk:weekdayLong(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,goWindKph:nw.kph,goWindDir:nw.dir,goWindText:nw.text,goCurrentKt:nc.kt,goCurrentWord:nc.word,goCurrentText:nc.text,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
+    return {day,label:dayLabel(day),md:mdLabel(day),wk:weekdayLong(day),weekday:weekday(day),wind:stats.wind,current:stats.current,rain:stats.rain,windMax:stats.windMax,windOver:stats.windOver,goOver,goWindKph:nw.kph,goWindDir:nw.dir,goWindText:nw.text,goCurrentKt:nc.kt,goCurrentWord:nc.word,goCurrentText:nc.text,loKph:ext.loKph,loHour:ext.loHour,hiKph:ext.hiKph,hiHour:ext.hiHour,hiOver:ext.hiOver,extText:ext.text,extShort:ext.shortText,fishing:fishingTone(am,pm),goout:goOutText(am,pm),catch:landing.catch,ice:landing.ice,ice_key:landing.ice_key,supply:landing.supply,G:landing.G,M:landing.M,conf:confidence(day,now),gfs:gfsAgree(emax,gmax),ecmwf_max:emax,gfs_max:gmax};
   });
 }
 function nightWind(hours){
@@ -386,6 +392,16 @@ function nightCurrent(hours){
   const kt=Math.max(...have.map(h=>h.ck));
   const word=currentWord(kt);
   return {kt,word,text:word+' ('+kt.toFixed(1)+' kt)'};
+}
+function dayWindExtremes(hours,day){
+  const have=(hours||[]).filter(h=>h&&h.day===day&&h.w_kph!=null);
+  if(!have.length)return {loKph:null,loHour:null,hiKph:null,hiHour:null,hiOver:false,text:'UNAVAILABLE',shortText:'UNAVAILABLE'};
+  const loH=have.reduce((a,b)=>a.w_kph<=b.w_kph?a:b);
+  const hiH=have.reduce((a,b)=>a.w_kph>=b.w_kph?a:b);
+  const loT=hourLabel(loH.hour),hiT=hourLabel(hiH.hour);
+  return {loKph:loH.w_kph,loHour:loH.hour,hiKph:hiH.w_kph,hiHour:hiH.hour,hiOver:hiH.w_kph>WIND_BAD_KPH,
+    text:'Lowest wind: '+loH.w_kph+' kph at '+loT+' · Highest: '+hiH.w_kph+' kph at '+hiT,
+    shortText:'Low '+loH.w_kph+' kph '+loT+' / High '+hiH.w_kph+' kph '+hiT};
 }
 function toneClass(fishing){
   const f=String(fishing).toUpperCase();
@@ -471,6 +487,18 @@ function currentLine(r){
   if(t==='UNAVAILABLE')return '<span class="na">Current: UNAVAILABLE</span>';
   return '<span>Current: '+esc(t)+'</span>';
 }
+function extremesLine(r,compact){
+  if(!r||r.loKph==null||r.hiKph==null)return '<span class="na">'+(compact?'Low / High: UNAVAILABLE':'Lowest wind: UNAVAILABLE')+'</span>';
+  const loT=hourLabel(r.loHour),hiT=hourLabel(r.hiHour);
+  if(compact){
+    const hi='High '+r.hiKph+' kph '+hiT;
+    const hiS=r.hiOver?'<span class="over">'+esc(hi)+'</span>':esc(hi);
+    return 'Low '+r.loKph+' kph '+esc(loT)+' / '+hiS;
+  }
+  const hi='Highest: '+r.hiKph+' kph at '+hiT;
+  const hiS=r.hiOver?'<span class="over">'+esc(hi)+'</span>':esc(hi);
+  return 'Lowest wind: '+r.loKph+' kph at '+esc(loT)+' · '+hiS;
+}
 function dayCard(r){
   const v=plainVerdict(r);
   const ice=iceWords(r.ice),sup=supplyWords(r.supply);
@@ -479,6 +507,7 @@ function dayCard(r){
     <div class="verdict ${wordClass(v)}">${esc(v)}</div>
     <div class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span><span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></div>
     <div class="wx">${windLine(r)} · ${currentLine(r)}</div>
+    <div class="wx ext">${extremesLine(r,false)}</div>
   </article>`;
 }
 function coronRow(r){
@@ -489,6 +518,7 @@ function coronRow(r){
     <div class="verdict ${wordClass(v)}">${esc(v)}</div>
     <div class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span> · <span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></div>
     <div class="wx">${windLine(r)} · ${currentLine(r)}</div>
+    <div class="wx ext">${extremesLine(r,true)}</div>
   </article>`;
 }
 function coronTable(rows){
@@ -499,8 +529,7 @@ function coronTable(rows){
       <td class="d"><span class="md">${esc(r.md||mdLabel(r.day))}</span> <span class="wk">${esc(r.wk||weekdayLong(r.day))}</span></td>
       <td class="verdict ${wordClass(v)}">${esc(v)}</td>
       <td class="facts"><span class="${wordClass(ice)}">Ice: ${esc(ice)}</span> · <span class="${wordClass(sup)}">Supply: ${esc(sup)}</span></td>
-      <td class="wx">${windLine(r)}</td>
-      <td class="wx">${currentLine(r)}</td>
+      <td class="wx">${windLine(r)} · ${currentLine(r)}<div class="ext">${extremesLine(r,true)}</div></td>
     </tr>`;
   }).join('');
   return `<table class="ctbl"><tbody>${body}</tbody></table>`;
@@ -534,7 +563,7 @@ function render(payload,now){
   }
   const p=prose(galoc);
   $('sum').innerHTML=`<p><b class="label good">Good days:</b> ${p.bestS}</p>
-    <p><b class="label caut">Be careful:</b> ${p.cutS}</p>
+    <p class="careful"><b class="label">Be careful:</b> ${p.cutS}</p>
     <p><b class="label good">Ice:</b> ${p.iceS}</p>`;
   $('galoc').innerHTML=daysHtml(galoc,false);
   $('coron').innerHTML=coron.length?daysHtml(coron,true):'<p>UNAVAILABLE</p>';
