@@ -44,9 +44,9 @@
  ],
  "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Wed–Tue, guide only). Tightening risk: all week. No surge expected.",
  "bestWindow": {
-  "headline": "Today around 2 PM (model best hour, Wed 18) at Coron, Galoc and Panlaitan",
+  "headline": "Tonight around 8 PM (model best hour, Wed 18) at Coron, Galoc and Panlaitan",
   "details": [
-   "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+   "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
   ]
  },
  "turningPoint": null,
@@ -181,7 +181,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 20"
    }
@@ -299,7 +299,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 14"
    }
@@ -330,7 +330,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 14"
    }
@@ -361,7 +361,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 14"
    }
@@ -479,7 +479,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 19"
    }
@@ -626,7 +626,7 @@
    },
    "bestWindow": {
     "report": [
-     "Wind at Coron drops near 0 kt around 2 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
+     "Wind at Coron drops near 0 kt around 8 PM, and the model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Barangonan, Cabunlawan, Decabaitot and Ciron (about 18 kt, gusts 23–26)."
     ],
     "modelBestHour": "Wed 17"
    }
