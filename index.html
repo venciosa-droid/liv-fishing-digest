@@ -113,16 +113,55 @@ let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,a
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
  const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;return Date.UTC(+m[3],mo,+m[1],h-8,+m[5])}
 /* ---------- live fetch (browser -> Open-Meteo, ONE batched request per API) ---------- */
-async function getJSON(url){let r;try{r=await fetch(url,{cache:'no-store'})}catch(e){throw new Error('network error or blocked')}if(r.status==429)throw new Error('Open-Meteo rate limit (HTTP 429)');
+const LIVE_TIMEOUT_MS=15e3,FORECAST_URL='https://api.open-meteo.com/v1/forecast',PREV_URL='https://previous-runs-api.open-meteo.com/v1/forecast';
+const WIND_VARS=['wind_speed_10m','wind_direction_10m','wind_gusts_10m','precipitation'];
+async function getJSON(url,ms=LIVE_TIMEOUT_MS){
+ const ac=typeof AbortController=='function'?new AbortController():null,to=setTimeout(()=>{try{ac&&ac.abort()}catch(_){}},ms);
+ let r;try{r=await fetch(url,ac?{cache:'no-store',signal:ac.signal}:{cache:'no-store'})}
+ catch(e){if(e&&(e.name==='AbortError'||e.name==='TimeoutError'))throw new Error('timed out after '+(ms/1000)+'s');throw new Error('network error or blocked')}
+ finally{clearTimeout(to)}
+ if(r.status==429)throw new Error('Open-Meteo rate limit (HTTP 429)');
  if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j&&j.error)throw new Error(j.reason||'API error');return Array.isArray(j)?j:[j]}
+function hourlyHoles(locs){
+ if(!locs||!locs.length)return true;
+ return locs.some(loc=>{const h=(loc&&loc.hourly)||{},t=h.time||[];if(!t.length)return true;return WIND_VARS.some(v=>(h[v]||[]).length<t.length||(h[v]||[]).some(x=>x==null))})}
+function mergeLoc(p,f,tag){
+ if(!f||!f.hourly||!(f.hourly.time||[]).length)return p||f;
+ if(!p||!p.hourly||!(p.hourly.time||[]).length){
+  const h={...f.hourly,wind_source:(f.hourly.time||[]).map(()=>tag)};return {...f,hourly:h}}
+ const fmap={},pmap={};(f.hourly.time||[]).forEach((t,j)=>{fmap[t]=j});(p.hourly.time||[]).forEach((t,j)=>{pmap[t]=j});
+ const times=[...p.hourly.time];for(const t of f.hourly.time){if(pmap[t]==null)times.push(t)}
+ times.sort((a,b)=>tPHT(a)-tPHT(b));
+ const out={time:times},src=times.map(t=>{const j=pmap[t];return j==null?null:(p.hourly.wind_source||[])[j]||null});
+ for(const v of WIND_VARS){
+  out[v]=times.map((t,k)=>{
+   const pj=pmap[t],fj=fmap[t];
+   const pv=pj==null?null:p.hourly[v]?.[pj];
+   if(pv!=null){if(v==='wind_speed_10m')src[k]=src[k]||'ecmwf';return pv}
+   const fv=fj==null?null:f.hourly[v]?.[fj];
+   if(fv!=null){if(v==='wind_speed_10m')src[k]=tag;return fv}
+   return null})}
+ out.wind_source=src;return {...p,hourly:out}}
+function mergeHourly(primary,fallback,tag){
+ if(!fallback||!fallback.length)return primary||null;
+ if(!primary||!primary.length)return fallback.map(loc=>mergeLoc(null,loc,tag));
+ return primary.map((p,i)=>mergeLoc(p,fallback[i],tag))}
+function windQs(lat,lon){return new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',past_days:'2',cell_selection:'sea'})}
 async function fetchLive(areas){
  const lat=areas.map(a=>a.lat).join(','),lon=areas.map(a=>a.lng).join(',');
- const eq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',past_days:'2',cell_selection:'sea'});
+ const eq=windQs(lat,lon),bq=windQs(lat,lon),pq=windQs(lat,lon);
+ bq.set('models','best_match');pq.set('models','ecmwf_ifs025');
  const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3',past_days:'2'});
- const [e,m]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq)]);
+ const [e,m,b]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq),getJSON(FORECAST_URL+'?'+bq)]);
  const ok=(r)=>r.status=='fulfilled'&&r.value.length==areas.length;
- return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf:ok(e)?e.value:null,marine:ok(m)?m.value:null,
-  ecmwfErr:ok(e)?null:'ECMWF: '+(e.reason?.message||'unexpected response'),marineErr:ok(m)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
+ let ecmwf=ok(e)?e.value:null,ecmwfErr=ok(e)?null:'ECMWF: '+(e.reason?.message||'unexpected response');
+ if(ok(b))ecmwf=mergeHourly(ecmwf,b.value,'best_match');
+ if(hourlyHoles(ecmwf)){
+  const p=await Promise.allSettled([getJSON(PREV_URL+'?'+pq)]);
+  if(ok(p[0]))ecmwf=mergeHourly(ecmwf,p[0].value,'previous');
+  if(!ecmwf)ecmwfErr=(ecmwfErr?ecmwfErr+'; ':'')+'fallback also missed past wind'}
+ return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf,marine:ok(m)?m.value:null,
+  ecmwfErr:ecmwf&&!hourlyHoles(ecmwf)?null:ecmwfErr,marineErr:ok(m)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
 function computeLive(a,i,L,time=selectedTime){
  const ec=L.ecmwf?.[i],ma=L.marine?.[i],eh=ec?.hourly||{},mh=ma?.hourly||{};
  const target=time||eh.time?.[nowIdx(eh.time,L.at)]||mh.time?.[nowIdx(mh.time,L.at)];
@@ -132,7 +171,7 @@ function computeLive(a,i,L,time=selectedTime){
  const ck=toKt(at(mh.ocean_current_velocity,mi),ma?.hourly_units?.ocean_current_velocity||'km/h');
  const cc=curClass(ck),wc=windClass(wk),rc=rainClass(r3),rating=fishing(cc,wc,rc);
  const worst=rating===U?null:Math.max(rankOf(cc),rankOf(wc),rankOf(rc));
- return {time:target,wind:{kt:r1(wk),gustKt:r1(gust),deg:wk==null?null:at(eh.wind_direction_10m,ei),dir:compass(at(eh.wind_direction_10m,ei)),source:'ECMWF via Open-Meteo'},
+ return {time:target,wind:{kt:r1(wk),gustKt:r1(gust),deg:wk==null?null:at(eh.wind_direction_10m,ei),dir:compass(at(eh.wind_direction_10m,ei)),source:({ecmwf:'ECMWF via Open-Meteo',best_match:'Open-Meteo best_match (ECMWF hour unavailable)',previous:'ECMWF previous run via Open-Meteo'}[(eh.wind_source||[])[ei]]||'ECMWF via Open-Meteo')},
  rain:{mmHour:r1(mm),mm3h:r1(r3),intensity:rainClass(r3),source:'ECMWF via Open-Meteo'},
  current:{kt:r1(ck),dir:ck==null?null:compass(at(mh.ocean_current_direction,mi)),status:cc,source:'Open-Meteo Marine currents'},
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
@@ -248,7 +287,7 @@ function createWindFlow(map){
  map.whenReady(()=>{size();start()});
  return {setData(A){data=A||[];project();if(!src.length)cx.clearRect(0,0,cv.width,cv.height);start()},
   enable(x){on=!!x;cx.clearRect(0,0,cv.width,cv.height);parts=[];if(on)start()},isOn:()=>on,count:()=>src.length}}
-function fit(){map.invalidateSize();map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
+function fit(){map.invalidateSize();if(pts&&pts.length)map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
 function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
  map.createPane('windflow').style.zIndex=350;markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);windFlow=createWindFlow(map);
  const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph<br>Current line (flows toward, Open-Meteo Marine): <span style="color:#4ade80">green</span> &lt;0.5, <span style="color:#facc15">yellow</span> 0.5–0.9, <span style="color:#fb923c">orange</span> 0.9–1.5, <span style="color:#f87171">red</span> ≥1.5 kt';return d};lg.addTo(map);
@@ -260,16 +299,18 @@ function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile
 function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
 async function refresh(why='manual',{live=true}={}){
  if(busy)return;busy=true;setBtn('busy','checking…');let newReport=false;
- try{const r=await fetch('data.json?'+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('data.json HTTP '+r.status);const txt=await r.text();
-  if(txt!==Dsig){const first=!D;D=JSON.parse(txt);newReport=!first;Dsig=txt;renderText();if(first){renderMap();fit();setTimeout(fit,300)}}}
- catch(e){if(!D){$('status').textContent='Data UNAVAILABLE ('+e.message+')';busy=false;setBtn('idle','retry');return}}
- if(live){const ids=D.areas.map(a=>a.id).join(',');
-  if(why=='manual'&&LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
-  else{try{const L2=await fetchLive(D.areas);if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}else LIVEERR=[L2.ecmwfErr,L2.marineErr].join('; ');
-    if(L2.ecmwf&&L2.marine)try{localStorage.setItem(CACHE_KEY,JSON.stringify(L2))}catch(_){}}
-   catch(e){LIVEERR=e.message}}}
- lastRefresh=Date.now();rebuildForecastTimes();renderMap();busy=false;
- setBtn('idle',(LIVE&&(LIVE.ecmwf||LIVE.marine)?'Updated ':'Checked ')+fmtLocal(lastRefresh)+(newReport?' · new report':''))}
+ try{
+  try{const r=await fetch('data.json?'+Date.now(),{cache:'no-store',signal:typeof AbortController=='function'?(AbortSignal.timeout?AbortSignal.timeout(LIVE_TIMEOUT_MS):undefined):undefined});if(!r.ok)throw new Error('data.json HTTP '+r.status);const txt=await r.text();
+   if(txt!==Dsig){const first=!D;D=JSON.parse(txt);newReport=!first;Dsig=txt;renderText();if(first){renderMap();fit();setTimeout(fit,300)}}}
+  catch(e){if(!D){$('status').textContent='Data UNAVAILABLE ('+e.message+')';return}}
+  if(!D)return;
+  if(live){const ids=D.areas.map(a=>a.id).join(',');
+   if(why=='manual'&&LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
+   else{try{const L2=await fetchLive(D.areas);if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}else LIVEERR=[L2.ecmwfErr,L2.marineErr].join('; ');
+     if(L2.ecmwf&&L2.marine)try{localStorage.setItem(CACHE_KEY,JSON.stringify(L2))}catch(_){}}
+    catch(e){LIVEERR=e.message}}}
+  try{rebuildForecastTimes();renderMap()}catch(e){console.error(e)}
+ }finally{lastRefresh=Date.now();busy=false;setBtn('idle',(LIVE&&(LIVE.ecmwf||LIVE.marine)?'Updated ':'Checked ')+fmtLocal(lastRefresh)+(newReport?' · new report':''))}}
 function lastTopOfHour(t=Date.now()){const d=new Date(t);d.setMinutes(0,0,0);return d.getTime()}
 function schedule(){clearTimeout(nextTimer);const d=new Date();d.setHours(d.getHours()+1,0,0,0);nextAt=d.getTime();
  nextTimer=setTimeout(async()=>{await refresh('hourly');schedule()},nextAt-Date.now()+(Math.random()*20e3));if(D)renderMap()}

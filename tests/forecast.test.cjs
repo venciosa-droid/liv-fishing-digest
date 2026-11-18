@@ -96,6 +96,24 @@ const keep=LIVE.ecmwf[0].hourly.wind_speed_10m.slice();LIVE.ecmwf[0].hourly.wind
 renderMap=saveRender;
 `,ctx);
 vm.runInContext(`
-var urls=[];getJSON=async u=>{urls.push(u);return [{}]};
-fetchLive([{id:'one',lat:1,lng:2}]).then(()=>{assert(urls.length===2&&urls.every(u=>u.includes('past_days=2')&&u.includes('forecast_days=3')&&u.includes('timezone=Asia%2FManila')),'past_days on both requests');console.log('PASS: past 48h window, labels, jumps, Now, play, no fallback, past_days requests')}).catch(e=>{console.error(e);process_exit(1)});
+function loc(times,winds){return {hourly:{time:times,wind_speed_10m:winds,wind_direction_10m:winds.map(()=>90),wind_gusts_10m:winds.map(w=>w==null?null:w+2),precipitation:winds.map(w=>w==null?null:0)}}};
+const HT=['2026-11-18T08:00','2026-11-18T09:00','2026-11-18T10:00'];
+const filled=mergeHourly([loc(HT,[null,5,null])],[loc(HT,[2,99,7])],'best_match');
+assert(filled[0].hourly.wind_speed_10m[0]===2&&filled[0].hourly.wind_speed_10m[1]===5&&filled[0].hourly.wind_speed_10m[2]===7,'fill only null ECMWF hours');
+assert(filled[0].hourly.wind_source[0]==='best_match'&&filled[0].hourly.wind_source[1]==='ecmwf'&&filled[0].hourly.wind_source[2]==='best_match','sources recorded');
+assert(hourlyHoles([loc(HT,[1,null,2])])&&!hourlyHoles([loc(HT,[1,2,3])]),'holes detect null winds');
+assert(mergeHourly(null,[loc(HT,[3,4,5])],'best_match')[0].hourly.wind_speed_10m[0]===3,'full fallback when ECMWF missing');
+const emptyMerge=mergeHourly([loc(HT,[null,null,null])],null,'best_match');
+assert(hourlyHoles(emptyMerge),'still holes when no fallback data — never invent');
+var urls=[];getJSON=async u=>{urls.push(u);return [loc(HT,[3,4,5])]};
+fetchLive([{id:'one',lat:1,lng:2}]).then((L)=>{
+ assert(urls.length===3&&urls.some(u=>u.includes('/v1/ecmwf'))&&urls.some(u=>u.includes('marine-api'))&&urls.some(u=>u.includes('models=best_match')),'three parallel live requests');
+ assert(urls.every(u=>u.includes('past_days=2')&&u.includes('forecast_days=3')&&u.includes('timezone=Asia%2FManila')),'past_days on live requests');
+ assert(!urls.some(u=>u.includes('previous-runs')),'previous-run only if holes remain');
+ assert(L.ecmwf&&L.ecmwf[0].hourly.wind_speed_10m[1]===4,'ECMWF values kept');
+ const row=computeLive({id:'one'},0,L,'2026-11-18T09:00');
+ assert(row.wind.kt===4&&row.wind.source.indexOf('ECMWF')>=0,'computeLive uses ECMWF source when present');
+ assert(LIVE_TIMEOUT_MS===15e3,'live fetches time out after 15s');
+ console.log('PASS: past 48h window, labels, jumps, Now, play, no report fallback, past_days requests, wind fill, 15s timeout');
+}).catch(e=>{console.error(e);process_exit(1)});
 `,Object.assign(ctx,{process_exit:c=>process.exit(c)}));
