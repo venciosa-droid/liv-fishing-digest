@@ -117,3 +117,20 @@ fetchLive([{id:'one',lat:1,lng:2}]).then((L)=>{
  console.log('PASS: past 48h window, labels, jumps, Now, play, no report fallback, past_days requests, wind fill, 15s timeout');
 }).catch(e=>{console.error(e);process_exit(1)});
 `,Object.assign(ctx,{process_exit:c=>process.exit(c)}));
+// LIV Galoc Station is a landmark only — not a 17th fishing ground.
+vm.runInContext(`
+assert(STATION.name==='LIV Galoc Station'&&STATION.lat===11.966933&&STATION.lng===119.845707&&STATION.href==='galoc/','station uses the known Galoc Island coordinates');
+assert(STATION.place.indexOf('Galoc Island')>=0,'station is on Galoc Island');
+const ground={id:'galoc',name:'Galoc',lat:11.9273,lng:119.8768};
+assert(ground.lat!==STATION.lat&&ground.lng!==STATION.lng,'existing Galoc fishing-ground point stays where it is');
+D={areas:[ground, {id:'maglalambay',name:'Maglalambay',lat:11.9935,lng:119.8684}]};
+assert(D.areas.length===2&&!D.areas.some(a=>a.name==='LIV Galoc Station'),'station is not pushed into areas');
+LIVE={at:Date.now(),ids:'galoc,maglalambay',ecmwf:null,marine:null};selectedTime=null;
+assert(merged().length===2&&merged().every(a=>a.id!=='liv-galoc-station'),'merged overlay stays at the fishing-ground count');
+`,ctx);
+const page=fs.readFileSync(require('path').join(__dirname,'../index.html'),'utf8');
+assert(/LIV Galoc Station/.test(page)&&/11\.966933/.test(page)&&/119\.845707/.test(page),'page includes the station name and coordinates');
+assert(/addStationMarker/.test(page)&&/stationLayer/.test(page)&&/lg-station/.test(page),'station marker, independent layer, and legend entry are present');
+assert(/Open the Galoc Station page/.test(page)&&page.includes("href:'galoc/'"),'popup links to the Galoc Station page');
+assert(!/D\.areas\.push\(STATION\)/.test(page),'station is never added as a 17th ground');
+console.log('PASS: LIV Galoc Station landmark, known coordinates, not a 17th ground, legend and link');

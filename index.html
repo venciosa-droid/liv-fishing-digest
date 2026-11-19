@@ -41,6 +41,7 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .past-hint{display:none;margin-top:4px;padding:4px 8px;border-radius:6px;background:#3b2f5c;color:#f3e8ff;font-size:12px}.forecast.past .past-hint{display:block}
 .map-clock.past strong{color:#e9d5ff}.map-clock.past small{color:#c4b5fd}.map-clock.past{border-bottom-color:#8b6cc9}
 @media(min-width:900px){#map{height:calc(100vh - 330px);min-height:340px}.side{height:calc(100vh - 300px)}}
+.liv-station{background:none!important;border:none!important}.liv-station svg{display:block;filter:drop-shadow(0 0 2px #000) drop-shadow(0 1px 1px #000)}.lbl.station-lbl{color:#8fd3ff;font-weight:700;white-space:nowrap}.lg-station{display:inline-block;width:16px;height:16px;vertical-align:-2px;margin-right:2px}
 </style></head><body>
 <div class="top"><span class="brand">🐠 LIV Fishing &amp; Supply</span><nav><a href="digest.html">Full report</a><a href="latest.png">Image</a><a href="archive/">Archive</a></nav>
 <button id="rf" type="button" title="Check for a new report and pull live ECMWF wind/rain + Open-Meteo Marine currents"><span><span class="ic">↻</span> <span id="rfl">Refresh</span></span><small id="rft">Auto every hour</small></button></div>
@@ -109,9 +110,20 @@ const dayWord=(t,now=Date.now())=>{const d=Math.round((Date.parse(phtDay(now))-D
 const hoursAgoIdx=(times,h,now=Date.now())=>{if(!times.length)return -1;const target=nowHourMs(now)-h*36e5;let b=0,bd=null;times.forEach((t,i)=>{const d=Math.abs(tPHT(t)-target);if(bd==null||d<bd){bd=d;b=i}});return b};
 const PAST_NOTE='Past hours show the model\u2019s recent values for those hours (Open-Meteo ECMWF near-analysis + Open-Meteo Marine currents), not on-site observations.';
 /* ---------- state ---------- */
-let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,windArrows,windFlow=null;
+let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,windArrows,windFlow=null,stationLayer=null;
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
  const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;return Date.UTC(+m[3],mo,+m[1],h-8,+m[5])}
+const STATION={name:'LIV Galoc Station',lat:11.966933,lng:119.845707,href:'galoc/',place:'Galoc Island, Culion, Palawan'};
+const STATION_SVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 13L14 4l10 9v11H4Z" fill="#11557e" stroke="#8fd3ff" stroke-width="1.8" stroke-linejoin="round"/><rect x="11.5" y="16" width="5" height="8" fill="#8fd3ff"/></svg>';
+function stationIcon(){return L.divIcon({className:'liv-station',iconSize:[28,28],iconAnchor:[14,26],tooltipAnchor:[16,-18],popupAnchor:[0,-24],html:STATION_SVG.replace('<svg','<svg width="28" height="28"')})}
+function addStationMarker(){
+ if(!stationLayer)return;
+ stationLayer.clearLayers();
+ const m=L.marker([STATION.lat,STATION.lng],{icon:stationIcon(),zIndexOffset:800,keyboard:true,title:STATION.name,alt:STATION.name});
+ m.bindTooltip(E(STATION.name),{permanent:true,direction:'right',offset:[12,-10],className:'lbl station-lbl'});
+ m.bindPopup(`<div class="pop station-pop"><h3>${E(STATION.name)}</h3><div class="srcl">${E(STATION.place)} · landmark only, not a fishing-ground rating</div><p><a href="${E(STATION.href)}">Open the Galoc Station page</a></p></div>`);
+ m.addTo(stationLayer);
+}
 /* ---------- live fetch (browser -> Open-Meteo, ONE batched request per API) ---------- */
 const LIVE_TIMEOUT_MS=15e3,FORECAST_URL='https://api.open-meteo.com/v1/forecast',PREV_URL='https://previous-runs-api.open-meteo.com/v1/forecast';
 const WIND_VARS=['wind_speed_10m','wind_direction_10m','wind_gusts_10m','precipitation'];
@@ -289,8 +301,8 @@ function createWindFlow(map){
   enable(x){on=!!x;cx.clearRect(0,0,cv.width,cv.height);parts=[];if(on)start()},isOn:()=>on,count:()=>src.length}}
 function fit(){map.invalidateSize();if(pts&&pts.length)map.fitBounds(pts,{paddingTopLeft:[20,20],paddingBottomRight:[80,20]})}
 function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenStreetMap contributors'}).addTo(map);
- map.createPane('windflow').style.zIndex=350;markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);windFlow=createWindFlow(map);
- const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph<br>Current line (flows toward, Open-Meteo Marine): <span style="color:#4ade80">green</span> &lt;0.5, <span style="color:#facc15">yellow</span> 0.5–0.9, <span style="color:#fb923c">orange</span> 0.9–1.5, <span style="color:#f87171">red</span> ≥1.5 kt';return d};lg.addTo(map);
+ map.createPane('windflow').style.zIndex=350;markers=L.layerGroup().addTo(map);arrows=L.layerGroup().addTo(map);windArrows=L.layerGroup().addTo(map);stationLayer=L.layerGroup().addTo(map);windFlow=createWindFlow(map);
+ const lg=L.control({position:'bottomleft'});lg.onAdd=()=>{const d=L.DomUtil.create('div','legend');d.innerHTML='<div class="map-clock"><small id="map-forecast-label">Forecast time</small><strong id="map-forecast-time">Loading…</strong></div>🟢 Good 🟡 Marginal<br>🟠 Poor 🔴 Very poor<br>⚪ Unavailable<br><span style="color:#7dd3fc">↑</span> current toward (size = kt)<br><svg class="lg-wind" width="22" height="12" viewBox="0 0 22 12"><line x1="1" y1="6" x2="14" y2="6" stroke="#0b1220" stroke-width="5"/><line x1="1" y1="6" x2="14" y2="6" stroke="#ef4444" stroke-width="2.5"/><path d="M21 6 L13 1 L13 11 Z" fill="#ef4444" stroke="#0b1220"/></svg> Wind arrow = blowing toward; red = above 18 kph (bad for fishing)<br><span style="color:#4ade80">■</span> ≤18 kph <span style="color:#fbbf24">■</span> 17–18 kph <span style="color:#f87171">■</span> &gt;18 kph<br>Current line (flows toward, Open-Meteo Marine): <span style="color:#4ade80">green</span> &lt;0.5, <span style="color:#facc15">yellow</span> 0.5–0.9, <span style="color:#fb923c">orange</span> 0.9–1.5, <span style="color:#f87171">red</span> ≥1.5 kt<br><span class="lg-station"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 13L14 4l10 9v11H4Z" fill="#11557e" stroke="#8fd3ff" stroke-width="1.8" stroke-linejoin="round"/><rect x="11.5" y="16" width="5" height="8" fill="#8fd3ff"/></svg></span> LIV Galoc Station <span style="opacity:.85">(landmark, not a fishing ground)</span>';return d};lg.addTo(map);addStationMarker();
  $('arr').onchange=e=>{e.target.checked?arrows.addTo(map):arrows.remove();map.getContainer().classList.toggle('hide-cur',!e.target.checked)};
  $('warr').onchange=e=>e.target.checked?windArrows.addTo(map):windArrows.remove();
  $('wflow').onchange=e=>windFlow.enable(e.target.checked);$('wflow').checked=windFlow.isOn();
