@@ -1,117 +1,64 @@
 {
- "reportTime": "Thu 19 Nov 2026 · ~2:20 PM PHT · afternoon",
+ "reportTime": "Fri 20 Nov 2026 · ~6:15 AM PHT · morning",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "19 Nov 2026 · 2:18 PM PHT",
- "overall": "MARGINAL overall: four GOOD, five MARGINAL, six POOR, one VERY POOR",
- "limiter": "combination",
- "limiterDetail": "The main limiter is a combination: wind on the east side (Nangalao 20.0 kt, Cabunlawan and Decabaitot 17.8, Ciron 17.6, Barangonan 15.8) and current at Tara 1.5 kt and Turda 1.0 kt. Rain is not a factor. 9.7 kt is about 18 kph, the line fishermen treat as bad.",
+ "liveSnapshot": "20 Nov 2026 · 6:13 AM PHT",
+ "overall": "MARGINAL overall: five GOOD, five MARGINAL, five POOR, one VERY POOR",
+ "limiter": "wind",
+ "limiterDetail": "The main limiter is wind on the east side (Nangalao 20.1 kt, Ciron 18.8, Cabunlawan and Decabaitot 15.6) with current at Tara 1.2 kt and Linapacan 1.0 kt. Rain is minor (light at Nangalao, Ciron, Alava, Binudac). 9.7 kt is about 18 kph, the line fishermen treat as bad.",
  "pagasa": {
-  "status": "UNVERIFIED",
-  "detail": "PAGASA: UNVERIFIED: the PAGASA feed failed (SSL) again; the dashboard shows last-known CLEAR. Check PAGASA alerts."
+  "status": "CLEAR",
+  "detail": "PAGASA: CLEAR (feed OK, issued 5:44 AM PHT). Related: GFA #2 (Final) MIMAROPA. See PAGASA alerts."
  },
  "changed": {
-  "title": "⚠️ What changed since this morning",
+  "title": "⚠️ What changed since yesterday afternoon",
   "items": [
-   "Mix is now 4 GOOD / 5 MARGINAL / 6 POOR / 1 VERY POOR (was 5 GOOD / 5 MARGINAL / 6 POOR). Tara fell to VERY POOR (current 1.5 kt). Decabobo slipped to MARGINAL. East side got windier: Nangalao 20.0 kt gusts 25.7, Cabunlawan and Decabaitot 17.8, Ciron 17.6, Barangonan 15.8.",
-   "Supply: no change. Normal to softening today through Wed 25. Shortage detector ELEVATED, surge OFF. PAGASA feed unreachable from here (SSL), so unverified."
+   "Mix is now 5 GOOD / 5 MARGINAL / 5 POOR / 1 VERY POOR (was 4 GOOD / 5 MARGINAL / 6 POOR / 1 VERY POOR). Barangonan improved to GOOD (wind 9.8 kt). Tara eased from VERY POOR to POOR (current 1.2 kt). Nangalao is still VERY POOR (wind 20.1 kt, gusts 26.4). Ciron 18.8 kt, Cabunlawan and Decabaitot 15.6 kt.",
+   "Supply: no material change. Normal to softening today through Thu 26. Shortage detector ELEVATED, surge OFF. PAGASA: CLEAR (no active gale/TCWS/heavy-rain alert for Calamian/MIMAROPA)."
   ]
  },
  "supply": [
   {
-   "label": "Today Thu 19",
+   "label": "Today Fri 20",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 8.9 kt, gusts 13, mostly dry",
+   "note": "Wind 7.2 kt, gusts 12, mostly dry, current 0.6 kt",
    "tone": "ok"
   },
   {
-   "label": "24h Fri 20",
+   "label": "24h Sat 21",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 7.6 kt, gusts 11, mostly dry",
+   "note": "Wind 10 kt, gusts 16, mostly dry",
    "tone": "ok"
   },
   {
-   "label": "48h Sat 21",
+   "label": "48h Sun 22",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 9.1 kt, gusts 15, light rain 2.1 mm",
+   "note": "Wind 10 kt, gusts 16, mostly dry",
    "tone": "ok"
   },
   {
    "label": "3–7d",
-   "value": "🟡 Sun 22 to Wed 25 normal → softening",
-   "note": "Sun 22 12 kt g18, Tue 24 12 kt g16, Wed 25 12 kt g19. Medium confidence beyond 48h",
+   "value": "🟡 Mon 23 to Thu 26 normal → softening",
+   "note": "Mon 23 11 kt g16, Tue 24 13 kt g16. Medium confidence beyond 48h",
    "tone": "ok"
   }
  ],
- "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Thu–Wed, guide only). Tightening risk: all week. No surge expected.",
+ "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Fri–Thu, guide only). Tightening risk: all week. No surge expected.",
  "bestWindow": {
-  "headline": "Around 1 AM Fri 20 (model best hour) at Panlaitan",
+  "headline": "Next 24h, model best hour ~Fri 20 at Coron (rated VERY POOR on the combined score)",
   "details": []
  },
  "turningPoint": null,
  "worstDay": {
-  "date": "2026-11-22",
-  "day": "Sun",
-  "windKt": "12",
-  "gustKt": "18",
+  "date": "2026-11-26",
+  "day": "Thu",
+  "windKt": "14",
+  "gustKt": "21",
   "rain": "Mostly dry"
  },
  "sevenDay": [
   {
-   "date": "2026-11-19",
-   "day": "Thu",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "8.9",
-   "gustKt": "13",
-   "rain": "Mostly dry",
-   "flags": [
-    "SHORTAGE"
-   ]
-  },
-  {
    "date": "2026-11-20",
    "day": "Fri",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "7.6",
-   "gustKt": "11",
-   "rain": "Mostly dry",
-   "flags": [
-    "SHORTAGE"
-   ]
-  },
-  {
-   "date": "2026-11-21",
-   "day": "Sat",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "9.1",
-   "gustKt": "15",
-   "rain": "Light (2.1 mm)",
-   "flags": [
-    "SHORTAGE"
-   ]
-  },
-  {
-   "date": "2026-11-22",
-   "day": "Sun",
-   "fishing": "MARGINAL",
-   "activity": "REDUCED",
-   "supply": "NORMAL → softening",
-   "windKt": "12",
-   "gustKt": "18",
-   "rain": "Mostly dry",
-   "flags": [
-    "WORST",
-    "SHORTAGE"
-   ]
-  },
-  {
-   "date": "2026-11-23",
-   "day": "Mon",
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
@@ -124,16 +71,54 @@
    ]
   },
   {
+   "date": "2026-11-21",
+   "day": "Sat",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "10",
+   "gustKt": "16",
+   "rain": "Mostly dry",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-11-22",
+   "day": "Sun",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "10",
+   "gustKt": "16",
+   "rain": "Mostly dry",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-11-23",
+   "day": "Mon",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "11",
+   "gustKt": "16",
+   "rain": "Mostly dry",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
    "date": "2026-11-24",
    "day": "Tue",
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "12",
+   "windKt": "13",
    "gustKt": "16",
    "rain": "Mostly dry",
    "flags": [
-    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -143,15 +128,30 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "12",
+   "windKt": "11",
    "gustKt": "19",
+   "rain": "Light (1.7 mm)",
+   "flags": [
+    "SHORTAGE"
+   ]
+  },
+  {
+   "date": "2026-11-26",
+   "day": "Thu",
+   "fishing": "MARGINAL",
+   "activity": "REDUCED",
+   "supply": "NORMAL → softening",
+   "windKt": "14",
+   "gustKt": "21",
    "rain": "Mostly dry",
    "flags": [
+    "WORST",
+    "TURNING",
     "SHORTAGE"
    ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Thu 19 Nov ~2:18 PM PHT. “Now” = 2 PM; range = next 24h.",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Fri 20 Nov ~6:14 AM PHT. “Now” = 6 AM; range = next 24h.",
  "areas": [
   {
    "id": "coron",
@@ -161,16 +161,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
+    "kt": 0.2,
     "dir": "W",
-    "range24h": "0.1–0.3",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.9,
-    "dir": "ESE",
-    "gustKt": 13.0,
+    "kt": 4.9,
+    "dir": "E",
+    "gustKt": 7.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -179,7 +179,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 00"
+    "modelBestHour": "Fri 19"
    }
   },
   {
@@ -190,16 +190,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.7,
-    "dir": "WSW",
-    "range24h": "0.6–0.8",
+    "kt": 0.6,
+    "dir": "W",
+    "range24h": "0.3–0.7",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.9,
-    "dir": "ESE",
-    "gustKt": 13.0,
+    "kt": 4.9,
+    "dir": "E",
+    "gustKt": 7.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -208,7 +208,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 01"
+    "modelBestHour": "Sat 01"
    }
   },
   {
@@ -216,19 +216,19 @@
    "name": "Linapacan",
    "lat": 11.491,
    "lng": 119.8682,
-   "rating": "MARGINAL",
+   "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.7,
+    "kt": 1.0,
     "dir": "W",
-    "range24h": "0.6–1.0",
-    "status": "Moderate",
+    "range24h": "0.4–1.1",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.6,
-    "dir": "ENE",
-    "gustKt": 17.7,
+    "kt": 5.4,
+    "dir": "NE",
+    "gustKt": 7.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -237,7 +237,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 16"
+    "modelBestHour": "Fri 06"
    }
   },
   {
@@ -248,16 +248,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.5,
+    "kt": 1.2,
     "dir": "SE",
-    "range24h": "1.0–1.5",
-    "status": "Very strong",
+    "range24h": "1.0–1.6",
+    "status": "Strong",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.2,
-    "dir": "NW",
-    "gustKt": 8.2,
+    "kt": 9.1,
+    "dir": "SE",
+    "gustKt": 11.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -266,7 +266,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 12"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -277,25 +277,25 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.4,
+    "kt": 0.6,
     "dir": "WSW",
-    "range24h": "0.4–0.6",
-    "status": "Favorable",
+    "range24h": "0.3–0.7",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 20.0,
+    "kt": 20.1,
     "dir": "ENE",
-    "gustKt": 25.7,
+    "gustKt": 26.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 14"
    }
   },
   {
@@ -308,14 +308,14 @@
    "current": {
     "kt": 0.8,
     "dir": "W",
-    "range24h": "0.7–1.0",
+    "range24h": "0.5–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 17.8,
+    "kt": 15.6,
     "dir": "ENE",
-    "gustKt": 23.1,
+    "gustKt": 18.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -324,7 +324,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 17"
    }
   },
   {
@@ -336,15 +336,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.8,
-    "dir": "WNW",
-    "range24h": "0.6–1.0",
+    "dir": "W",
+    "range24h": "0.3–1.1",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 17.8,
+    "kt": 15.6,
     "dir": "ENE",
-    "gustKt": 23.1,
+    "gustKt": 18.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -353,7 +353,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 17"
    }
   },
   {
@@ -364,25 +364,25 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.7,
+    "kt": 0.6,
     "dir": "W",
-    "range24h": "0.6–1.0",
+    "range24h": "0.1–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.8,
-    "dir": "E",
-    "gustKt": 10.5,
+    "kt": 5.3,
+    "dir": "ENE",
+    "gustKt": 7.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 18"
    }
   },
   {
@@ -393,16 +393,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "S",
-    "range24h": "0.2–0.3",
+    "kt": 0.2,
+    "dir": "SSW",
+    "range24h": "0.2–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.9,
-    "dir": "ESE",
-    "gustKt": 13.0,
+    "kt": 4.9,
+    "dir": "E",
+    "gustKt": 7.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -411,7 +411,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 00"
+    "modelBestHour": "Sat 01"
    }
   },
   {
@@ -422,16 +422,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.3,
-    "dir": "S",
-    "range24h": "0.2–0.3",
+    "kt": 0.2,
+    "dir": "SSW",
+    "range24h": "0.2–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.1,
-    "dir": "W",
-    "gustKt": 6.8,
+    "kt": 4.3,
+    "dir": "E",
+    "gustKt": 6.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -440,7 +440,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 21"
+    "modelBestHour": "Fri 21"
    }
   },
   {
@@ -452,24 +452,24 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "WNW",
-    "range24h": "0.4–0.5",
+    "dir": "W",
+    "range24h": "0.1–0.5",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 17.6,
-    "dir": "E",
-    "gustKt": 22.7,
+    "kt": 18.8,
+    "dir": "ENE",
+    "gustKt": 23.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 22"
    }
   },
   {
@@ -480,16 +480,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "SSE",
-    "range24h": "0.3–0.7",
+    "kt": 0.5,
+    "dir": "SE",
+    "range24h": "0.3–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.2,
-    "dir": "NW",
-    "gustKt": 8.2,
+    "kt": 9.1,
+    "dir": "SE",
+    "gustKt": 11.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -498,7 +498,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 20"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -506,19 +506,19 @@
    "name": "Turda",
    "lat": 12.0959,
    "lng": 120.3073,
-   "rating": "POOR",
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 1.0,
+    "kt": 0.7,
     "dir": "SE",
     "range24h": "0.5–1.2",
-    "status": "Strong",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 5.2,
-    "dir": "NW",
-    "gustKt": 8.2,
+    "kt": 9.1,
+    "dir": "SE",
+    "gustKt": 11.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -527,7 +527,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 12"
+    "modelBestHour": "Fri 23"
    }
   },
   {
@@ -539,24 +539,24 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "WSW",
-    "range24h": "0.5–0.7",
+    "dir": "W",
+    "range24h": "0.3–0.6",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.8,
-    "dir": "E",
-    "gustKt": 10.5,
+    "kt": 5.3,
+    "dir": "ENE",
+    "gustKt": 7.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 13"
+    "modelBestHour": "Fri 18"
    }
   },
   {
@@ -569,14 +569,14 @@
    "current": {
     "kt": 0.1,
     "dir": "E",
-    "range24h": "0.0–0.2",
+    "range24h": "0.0–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.1,
-    "dir": "W",
-    "gustKt": 6.8,
+    "kt": 4.3,
+    "dir": "E",
+    "gustKt": 6.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -585,7 +585,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 01"
+    "modelBestHour": "Fri 12"
    }
   },
   {
@@ -593,19 +593,19 @@
    "name": "Barangonan",
    "lat": 11.3443,
    "lng": 119.6945,
-   "rating": "POOR",
+   "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.5,
+    "kt": 0.4,
     "dir": "WNW",
-    "range24h": "0.3–0.9",
-    "status": "Moderate",
+    "range24h": "0.1–0.9",
+    "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 15.8,
-    "dir": "ENE",
-    "gustKt": 20.2,
+    "kt": 9.8,
+    "dir": "NE",
+    "gustKt": 13.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -614,7 +614,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 14"
+    "modelBestHour": "Fri 06"
    }
   }
  ],
