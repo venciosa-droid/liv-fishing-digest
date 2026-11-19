@@ -1,60 +1,58 @@
 {
- "reportTime": "Thu 19 Nov 2026 · ~6:20 AM PHT · morning",
+ "reportTime": "Thu 19 Nov 2026 · ~2:20 PM PHT · afternoon",
  "confidence": "HIGH (to 48h)",
- "liveSnapshot": "19 Nov 2026 · 6:17 AM PHT",
- "overall": "MARGINAL overall: five GOOD, five MARGINAL, six POOR",
+ "liveSnapshot": "19 Nov 2026 · 2:18 PM PHT",
+ "overall": "MARGINAL overall: four GOOD, five MARGINAL, six POOR, one VERY POOR",
  "limiter": "combination",
- "limiterDetail": "The main limiter is a combination: wind on the east side (Nangalao 18.3 kt, Cabunlawan and Decabaitot 17.0, Barangonan 16.8, Ciron 15.4) and current at Tara 1.1 kt and Decabaitot 1.0 kt. Rain is not a factor. 9.7 kt is about 18 kph, the line fishermen treat as bad.",
+ "limiterDetail": "The main limiter is a combination: wind on the east side (Nangalao 20.0 kt, Cabunlawan and Decabaitot 17.8, Ciron 17.6, Barangonan 15.8) and current at Tara 1.5 kt and Turda 1.0 kt. Rain is not a factor. 9.7 kt is about 18 kph, the line fishermen treat as bad.",
  "pagasa": {
-  "status": "CLEAR",
-  "detail": "PAGASA: CLEAR: no active gale, TCWS or heavy-rain alert for Calamian/MIMAROPA (feed checked Thu 19 Nov). PAGASA alerts."
+  "status": "UNVERIFIED",
+  "detail": "PAGASA: UNVERIFIED: the PAGASA feed failed (SSL) again; the dashboard shows last-known CLEAR. Check PAGASA alerts."
  },
  "changed": {
-  "title": "⚠️ What changed since yesterday afternoon",
+  "title": "⚠️ What changed since this morning",
   "items": [
-   "Mix is now 5 GOOD / 5 MARGINAL / 6 POOR / 0 VERY POOR (was 4 GOOD / 7 MARGINAL / 5 POOR). Decabobo moved up to GOOD (wind 3.1 kt, current 0.4). East side still windy: Nangalao 18.3 kt gusts 23, Cabunlawan and Decabaitot 17, Barangonan 16.8 gusts 22, Ciron 15.4. Tara is POOR on current (1.1 kt).",
-   "Supply: no change. Normal to softening today through Wed 25. Shortage detector ELEVATED (Thu–Wed), surge OFF. PAGASA: CLEAR."
+   "Mix is now 4 GOOD / 5 MARGINAL / 6 POOR / 1 VERY POOR (was 5 GOOD / 5 MARGINAL / 6 POOR). Tara fell to VERY POOR (current 1.5 kt). Decabobo slipped to MARGINAL. East side got windier: Nangalao 20.0 kt gusts 25.7, Cabunlawan and Decabaitot 17.8, Ciron 17.6, Barangonan 15.8.",
+   "Supply: no change. Normal to softening today through Wed 25. Shortage detector ELEVATED, surge OFF. PAGASA feed unreachable from here (SSL), so unverified."
   ]
  },
  "supply": [
   {
    "label": "Today Thu 19",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 12 kt, gusts 16, mostly dry (roughest day)",
+   "note": "Wind 8.9 kt, gusts 13, mostly dry",
    "tone": "ok"
   },
   {
    "label": "24h Fri 20",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 8.3 kt, gusts 12, mostly dry",
+   "note": "Wind 7.6 kt, gusts 11, mostly dry",
    "tone": "ok"
   },
   {
    "label": "48h Sat 21",
    "value": "🟡 NORMAL → SOFTENING",
-   "note": "Wind 6.3 kt, gusts 12; best day of the week",
+   "note": "Wind 9.1 kt, gusts 15, light rain 2.1 mm",
    "tone": "ok"
   },
   {
    "label": "3–7d",
    "value": "🟡 Sun 22 to Wed 25 normal → softening",
-   "note": "Light rain Sun 22 (1.9 mm). Medium confidence beyond 48h",
+   "note": "Sun 22 12 kt g18, Tue 24 12 kt g16, Wed 25 12 kt g19. Medium confidence beyond 48h",
    "tone": "ok"
   }
  ],
  "shortageRisk": "Surge flag OFF. Shortage detector ELEVATED (Thu–Wed, guide only). Tightening risk: all week. No surge expected.",
  "bestWindow": {
   "headline": "Around 1 AM Fri 20 (model best hour) at Panlaitan",
-  "details": [
-   "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-  ]
+  "details": []
  },
  "turningPoint": null,
  "worstDay": {
-  "date": "2026-11-25",
-  "day": "Wed",
+  "date": "2026-11-22",
+  "day": "Sun",
   "windKt": "12",
-  "gustKt": "19",
+  "gustKt": "18",
   "rain": "Mostly dry"
  },
  "sevenDay": [
@@ -64,8 +62,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "12",
-   "gustKt": "16",
+   "windKt": "8.9",
+   "gustKt": "13",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -77,8 +75,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "8.3",
-   "gustKt": "12",
+   "windKt": "7.6",
+   "gustKt": "11",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -90,11 +88,10 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "6.3",
-   "gustKt": "12",
-   "rain": "Mostly dry",
+   "windKt": "9.1",
+   "gustKt": "15",
+   "rain": "Light (2.1 mm)",
    "flags": [
-    "BEST",
     "SHORTAGE"
    ]
   },
@@ -104,10 +101,11 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.0",
-   "gustKt": "16",
-   "rain": "Light (1.9 mm)",
+   "windKt": "12",
+   "gustKt": "18",
+   "rain": "Mostly dry",
    "flags": [
+    "WORST",
     "SHORTAGE"
    ]
   },
@@ -117,10 +115,11 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.8",
+   "windKt": "7.2",
    "gustKt": "12",
    "rain": "Mostly dry",
    "flags": [
+    "BEST",
     "SHORTAGE"
    ]
   },
@@ -148,12 +147,11 @@
    "gustKt": "19",
    "rain": "Mostly dry",
    "flags": [
-    "WORST",
     "SHORTAGE"
    ]
   }
  ],
- "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Thu 19 Nov ~6:17 AM PHT. “Now” = 6 AM; range = next 24h.",
+ "currentsSourceLine": "Source: Open-Meteo Marine currents (includes tides). Not ECMWF. Fetched Thu 19 Nov ~2:18 PM PHT. “Now” = 2 PM; range = next 24h.",
  "areas": [
   {
    "id": "coron",
@@ -163,105 +161,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "NW",
-    "range24h": "0.2–0.3",
+    "kt": 0.3,
+    "dir": "W",
+    "range24h": "0.1–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.1,
-    "dir": "ENE",
-    "gustKt": 7.4,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 23"
-   }
-  },
-  {
-   "id": "culion",
-   "name": "Culion",
-   "lat": 11.8905,
-   "lng": 120.022,
-   "rating": "MARGINAL",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.6,
-    "dir": "W",
-    "range24h": "0.6–0.7",
-    "status": "Moderate",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 4.1,
-    "dir": "ENE",
-    "gustKt": 7.4,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": null,
-    "modelBestHour": "Thu 23"
-   }
-  },
-  {
-   "id": "linapacan",
-   "name": "Linapacan",
-   "lat": 11.491,
-   "lng": 119.8682,
-   "rating": "MARGINAL",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.8,
-    "dir": "W",
-    "range24h": "0.6–0.9",
-    "status": "Moderate",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 9.9,
-    "dir": "ENE",
-    "gustKt": 12.4,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": null,
-    "modelBestHour": "Thu 06"
-   }
-  },
-  {
-   "id": "tara",
-   "name": "Tara",
-   "lat": 12.2729,
-   "lng": 120.3641,
-   "rating": "POOR",
-   "ratingSource": "report",
-   "current": {
-    "kt": 1.1,
+    "kt": 8.9,
     "dir": "ESE",
-    "range24h": "1.0–1.5",
-    "status": "Strong",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 3.1,
-    "dir": "ESE",
-    "gustKt": 8.6,
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -274,23 +183,23 @@
    }
   },
   {
-   "id": "nangalao",
-   "name": "Nangalao",
-   "lat": 11.4362,
-   "lng": 120.1636,
-   "rating": "POOR",
+   "id": "culion",
+   "name": "Culion",
+   "lat": 11.8905,
+   "lng": 120.022,
+   "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
     "kt": 0.7,
-    "dir": "W",
-    "range24h": "0.4–0.7",
+    "dir": "WSW",
+    "range24h": "0.6–0.8",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 18.3,
-    "dir": "ENE",
-    "gustKt": 23.3,
+    "kt": 8.9,
+    "dir": "ESE",
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -298,10 +207,95 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 17"
+    "report": null,
+    "modelBestHour": "Fri 01"
+   }
+  },
+  {
+   "id": "linapacan",
+   "name": "Linapacan",
+   "lat": 11.491,
+   "lng": 119.8682,
+   "rating": "MARGINAL",
+   "ratingSource": "report",
+   "current": {
+    "kt": 0.7,
+    "dir": "W",
+    "range24h": "0.6–1.0",
+    "status": "Moderate",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 13.6,
+    "dir": "ENE",
+    "gustKt": 17.7,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Thu 16"
+   }
+  },
+  {
+   "id": "tara",
+   "name": "Tara",
+   "lat": 12.2729,
+   "lng": 120.3641,
+   "rating": "POOR",
+   "ratingSource": "report",
+   "current": {
+    "kt": 1.5,
+    "dir": "SE",
+    "range24h": "1.0–1.5",
+    "status": "Very strong",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 5.2,
+    "dir": "NW",
+    "gustKt": 8.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Fri 12"
+   }
+  },
+  {
+   "id": "nangalao",
+   "name": "Nangalao",
+   "lat": 11.4362,
+   "lng": 120.1636,
+   "rating": "POOR",
+   "ratingSource": "report",
+   "current": {
+    "kt": 0.4,
+    "dir": "WSW",
+    "range24h": "0.4–0.6",
+    "status": "Favorable",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 20.0,
+    "dir": "ENE",
+    "gustKt": 25.7,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Fri 13"
    }
   },
   {
@@ -314,14 +308,14 @@
    "current": {
     "kt": 0.8,
     "dir": "W",
-    "range24h": "0.8–1.0",
+    "range24h": "0.7–1.0",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 17.0,
+    "kt": 17.8,
     "dir": "ENE",
-    "gustKt": 22.0,
+    "gustKt": 23.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -329,10 +323,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 06"
+    "report": null,
+    "modelBestHour": "Fri 13"
    }
   },
   {
@@ -343,16 +335,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 1.0,
+    "kt": 0.8,
     "dir": "WNW",
-    "range24h": "0.6–1.1",
-    "status": "Strong",
+    "range24h": "0.6–1.0",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 17.0,
+    "kt": 17.8,
     "dir": "ENE",
-    "gustKt": 22.0,
+    "gustKt": 23.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -360,10 +352,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 16"
+    "report": null,
+    "modelBestHour": "Fri 13"
    }
   },
   {
@@ -374,16 +364,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.8,
-    "dir": "WNW",
-    "range24h": "0.6–0.9",
+    "kt": 0.7,
+    "dir": "W",
+    "range24h": "0.6–1.0",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.3,
-    "dir": "ENE",
-    "gustKt": 9.9,
+    "kt": 7.8,
+    "dir": "E",
+    "gustKt": 10.5,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -392,7 +382,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 07"
+    "modelBestHour": "Fri 13"
    }
   },
   {
@@ -403,16 +393,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "WSW",
+    "kt": 0.3,
+    "dir": "S",
     "range24h": "0.2–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 4.1,
-    "dir": "ENE",
-    "gustKt": 7.4,
+    "kt": 8.9,
+    "dir": "ESE",
+    "gustKt": 13.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -420,10 +410,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 23"
+    "report": null,
+    "modelBestHour": "Fri 00"
    }
   },
   {
@@ -434,16 +422,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.2,
-    "dir": "WSW",
+    "kt": 0.3,
+    "dir": "S",
     "range24h": "0.2–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.3,
-    "dir": "ENE",
-    "gustKt": 10.9,
+    "kt": 4.1,
+    "dir": "W",
+    "gustKt": 6.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -451,10 +439,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 10"
+    "report": null,
+    "modelBestHour": "Thu 21"
    }
   },
   {
@@ -466,77 +452,15 @@
    "ratingSource": "report",
    "current": {
     "kt": 0.5,
-    "dir": "W",
+    "dir": "WNW",
     "range24h": "0.4–0.5",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 15.4,
-    "dir": "ENE",
-    "gustKt": 20.0,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 06"
-   }
-  },
-  {
-   "id": "decabobo",
-   "name": "Decabobo",
-   "lat": 12.1295,
-   "lng": 120.2089,
-   "rating": "GOOD",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.4,
-    "dir": "SE",
-    "range24h": "0.3–0.7",
-    "status": "Favorable",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 3.1,
-    "dir": "ESE",
-    "gustKt": 8.6,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 09"
-   }
-  },
-  {
-   "id": "turda",
-   "name": "Turda",
-   "lat": 12.0959,
-   "lng": 120.3073,
-   "rating": "MARGINAL",
-   "ratingSource": "report",
-   "current": {
-    "kt": 0.7,
-    "dir": "SE",
-    "range24h": "0.6–1.2",
-    "status": "Moderate",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 3.1,
-    "dir": "ESE",
-    "gustKt": 8.6,
+    "kt": 17.6,
+    "dir": "E",
+    "gustKt": 22.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -545,7 +469,65 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 10"
+    "modelBestHour": "Fri 13"
+   }
+  },
+  {
+   "id": "decabobo",
+   "name": "Decabobo",
+   "lat": 12.1295,
+   "lng": 120.2089,
+   "rating": "MARGINAL",
+   "ratingSource": "report",
+   "current": {
+    "kt": 0.6,
+    "dir": "SSE",
+    "range24h": "0.3–0.7",
+    "status": "Moderate",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 5.2,
+    "dir": "NW",
+    "gustKt": 8.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Thu 20"
+   }
+  },
+  {
+   "id": "turda",
+   "name": "Turda",
+   "lat": 12.0959,
+   "lng": 120.3073,
+   "rating": "POOR",
+   "ratingSource": "report",
+   "current": {
+    "kt": 1.0,
+    "dir": "SE",
+    "range24h": "0.5–1.2",
+    "status": "Strong",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 5.2,
+    "dir": "NW",
+    "gustKt": 8.2,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Fri 12"
    }
   },
   {
@@ -556,16 +538,16 @@
    "rating": "MARGINAL",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
-    "dir": "W",
+    "kt": 0.5,
+    "dir": "WSW",
     "range24h": "0.5–0.7",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 7.3,
-    "dir": "ENE",
-    "gustKt": 9.9,
+    "kt": 7.8,
+    "dir": "E",
+    "gustKt": 10.5,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -574,7 +556,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 08"
+    "modelBestHour": "Fri 13"
    }
   },
   {
@@ -585,16 +567,16 @@
    "rating": "GOOD",
    "ratingSource": "report",
    "current": {
-    "kt": 0.0,
+    "kt": 0.1,
     "dir": "E",
     "range24h": "0.0–0.2",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 8.3,
-    "dir": "ENE",
-    "gustKt": 10.9,
+    "kt": 4.1,
+    "dir": "W",
+    "gustKt": 6.8,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -614,16 +596,16 @@
    "rating": "POOR",
    "ratingSource": "report",
    "current": {
-    "kt": 0.6,
+    "kt": 0.5,
     "dir": "WNW",
     "range24h": "0.3–0.9",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 16.8,
-    "dir": "NE",
-    "gustKt": 22.2,
+    "kt": 15.8,
+    "dir": "ENE",
+    "gustKt": 20.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -631,10 +613,8 @@
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
-    "report": [
-     "The model rates the best hour POOR overall because east-side grounds stay rough. Keep small boats off Nangalao, Cabunlawan, Decabaitot, Barangonan and Ciron (15–18 kt, gusts 20–23). Daytime today is best at Coron, Galoc, Decabobo and Maglalambay."
-    ],
-    "modelBestHour": "Thu 17"
+    "report": null,
+    "modelBestHour": "Thu 14"
    }
   }
  ],
