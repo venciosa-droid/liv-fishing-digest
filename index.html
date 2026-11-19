@@ -24,11 +24,11 @@ a{color:#8fd3ff}.top{background:#0b3d5c;padding:8px 12px;display:flex;flex-wrap:
 .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{background:#0e2333;border-radius:6px;padding:5px 3px;text-align:center;font-size:11px}
 .day b{display:block;font-size:12px}.day .r{font-size:16px}.fn{font-size:12px;opacity:.75}
 .lbl{background:none;border:none;box-shadow:none;color:#fff;font-weight:600;text-shadow:0 0 3px #000,0 0 3px #000;font-size:11px;padding:0}
-.lbl:before{display:none}.lbl-left{text-align:right}.lbl-left .wl,.lbl-left .cl{margin-left:auto}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:11.5px;line-height:1.4;max-width:270px}
+.lbl:before{display:none}.lbl-left{text-align:right}.lbl-left .wl,.lbl-left .cl,.lbl-left .wx{margin-left:auto}.map-clock{border-bottom:1px solid #63849b;padding:1px 0 7px;margin-bottom:6px;max-width:245px}.map-clock small{display:block;color:#bfe6ff;font-size:11px}.map-clock strong{display:block;font-size:13px;line-height:1.5;color:#fff}.legend{background:#132e40e6;color:#e8f1f7;padding:6px 8px;border-radius:8px;font-size:11.5px;line-height:1.4;max-width:270px}
 .leaflet-popup-content{font-size:13px;margin:10px 12px}.pop h3{margin:0 0 4px;font-size:15px}.pop td{padding:1px 6px 1px 0;vertical-align:top}.pop .srcl{font-size:11px;color:#475569}
 .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .lbl .wl{display:table;font-size:11px;font-weight:700;margin-top:2px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:16px}.lbl .cl{display:table;font-size:11px;font-weight:700;margin-top:1px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:15px}.cl.c-fav{color:#4ade80}.cl.c-mod{color:#facc15}.cl.c-str{color:#fb923c}.cl.c-vs{color:#f87171}.cl.c-na{color:#cbd5e1;font-weight:600}.hide-cur .lbl .cl{display:none}
-.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1;font-weight:600}
+.wl.w-ok{color:#4ade80}.wl.w-near{color:#fbbf24}.wl.w-bad{color:#f87171}.wl.w-na{color:#cbd5e1;font-weight:600}.lbl .wx{display:table;font-size:11px;font-weight:700;margin-top:1px;padding:0 5px;border-radius:4px;background:rgba(11,18,32,.85);text-shadow:none;line-height:15px;color:#bae6fd}.wx.wx-rain{color:#7dd3fc}.wx.wx-na{color:#cbd5e1;font-weight:600}
 .windico{pointer-events:none}.windico svg{overflow:visible;display:block}.windico .flow{stroke-dasharray:5 4;animation:windflow .9s linear infinite}
 @keyframes windflow{to{stroke-dashoffset:-9}}.windico .head{animation:windpulse 1.8s ease-in-out infinite}@keyframes windpulse{50%{opacity:.55}}
 .windflow-canvas{pointer-events:none}.lg-wind{display:inline-block;width:22px;vertical-align:middle}
@@ -68,7 +68,7 @@ const COL={GOOD:'#22c55e',MARGINAL:'#eab308',POOR:'#f97316',BAD:'#dc2626','VERY 
 const DIR={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
 const v=(x,u='')=>x==null||x===''?U:x+u,$=id=>document.getElementById(id);
 const ECMWF_URL='https://api.open-meteo.com/v1/ecmwf',MARINE_URL='https://marine-api.open-meteo.com/v1/marine';
-const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livLiveV2',PAST_HOURS=48;
+const LIVE_REUSE_MS=2*60e3,LIVE_STALE_MS=60*60e3,CACHE_KEY='livLiveV3',PAST_HOURS=48;
 /* ---------- rating rules: faithful port of server.py (current/wind/rain classes, worst-of) ---------- */
 const MS_TO_KT=1.94384,KMH_TO_KT=0.539957;
 const RANK={NONE:0,LIGHT:1,FAVORABLE:0,GOOD:0,MODERATE:2,MARGINAL:2,STRONG:3,POOR:3,HEAVY:3,'VERY STRONG':4,'VERY POOR':4,UNAVAILABLE:1};
@@ -113,20 +113,46 @@ const PAST_NOTE='Past hours show the model\u2019s recent values for those hours 
 let D=null,Dsig='',LIVE=null,LIVEERR=null,busy=false,lastRefresh=0,map,markers,arrows,pts=[],nextTimer=null,nextAt=0,forecastTimes=[],selectedTime=null,playTimer=null,windArrows,windFlow=null,stationLayer=null;
 function parseSnap(s){const m=/(\d{1,2}) (\w{3}) (\d{4}) · (\d{1,2}):(\d{2}) (AM|PM)/.exec(s||'');if(!m)return null;let h=+m[4]%12+(m[6]=='PM'?12:0);
  const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;return Date.UTC(+m[3],mo,+m[1],h-8,+m[5])}
-const STATION={name:'LIV Galoc Station',lat:11.966933,lng:119.845707,href:'galoc/',place:'Galoc Island, Culion, Palawan'};
+const STATION={name:'LIV Galoc Station',lat:11.966933,lng:119.845707,href:'galoc/',place:'Galoc Island, Culion, Palawan',seaLat:11.966933,seaLng:119.857};
 const STATION_SVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 13L14 4l10 9v11H4Z" fill="#11557e" stroke="#8fd3ff" stroke-width="1.8" stroke-linejoin="round"/><rect x="11.5" y="16" width="5" height="8" fill="#8fd3ff"/></svg>';
-function stationIcon(){return L.divIcon({className:'liv-station',iconSize:[28,28],iconAnchor:[14,26],tooltipAnchor:[16,-18],popupAnchor:[0,-24],html:STATION_SVG.replace('<svg','<svg width="28" height="28"')})}
+function stationIcon(){return L.divIcon({className:'liv-station',iconSize:[28,28],iconAnchor:[14,26],tooltipAnchor:[-16,-18],popupAnchor:[0,-24],html:STATION_SVG.replace('<svg','<svg width="28" height="28"')})}
+function kmBetween(a,b){if(!a||!b||a.lat==null||b.lat==null||a.lng==null||b.lng==null)return null;const p=Math.PI/180,dlat=(b.lat-a.lat)*p,dlng=(b.lng-a.lng)*p,x=Math.sin(dlat/2)**2+Math.cos(a.lat*p)*Math.cos(b.lat*p)*Math.sin(dlng/2)**2;return 2*6371*Math.asin(Math.min(1,Math.sqrt(x)))}
+function wxWord(code){const c=num(code);if(c==null)return null;if(c<=1)return 'Clear';if(c<=3||c===45||c===48)return 'Cloudy';if((c>=51&&c<=67)||(c>=71&&c<=77)||(c>=80&&c<=82)||(c>=85&&c<=86)||(c>=95&&c<=99))return 'Rain';return 'Cloudy'}
+function weatherLabel(w){if(!w||(w.condition==null&&w.mmHour==null&&w.tempC==null))return 'Weather UNAVAILABLE';return (w.condition||U)+' · '+(w.mmHour==null?U:w.mmHour+' mm/h')+' · '+(w.tempC==null?U:String(w.tempC)+'°C')}
+function windPts(areas){return {lat:areas.map(a=>a.lat).concat(STATION.lat).join(','),lon:areas.map(a=>a.lng).concat(STATION.lng).join(','),n:areas.length+1,stationI:areas.length}}
+function marinePts(areas){return {lat:areas.map(a=>a.lat).concat(STATION.lat,STATION.seaLat).join(','),lon:areas.map(a=>a.lng).concat(STATION.lng,STATION.seaLng).join(','),n:areas.length+2,stationI:areas.length,seaI:areas.length+1}}
 function addStationMarker(){
  if(!stationLayer)return;
  stationLayer.clearLayers();
+ const valid=LIVE&&selectedTime&&(LIVE.ecmwf||LIVE.marine),x=valid?computeStationLive(LIVE,selectedTime):null;
+ const wk=kph(x?.wind?.kt),wt=windTone(wk),wx=x?.weather,wxCls=!wx||(wx.condition==null&&wx.mmHour==null&&wx.tempC==null)?' wx-na':wx.condition==='Rain'?' wx-rain':'';
+ const tip=E(STATION.name)+(x?`<span class="wl w-${wt}">${E(windLabel(x.wind))}</span><span class="cl c-${curTone(x.current?.kt)}">${E(currentLabel(x.current))}</span><span class="wx${wxCls}">${E(weatherLabel(wx))}</span>`:'');
  const m=L.marker([STATION.lat,STATION.lng],{icon:stationIcon(),zIndexOffset:800,keyboard:true,title:STATION.name,alt:STATION.name});
- m.bindTooltip(E(STATION.name),{permanent:true,direction:'right',offset:[12,-10],className:'lbl station-lbl'});
- m.bindPopup(`<div class="pop station-pop"><h3>${E(STATION.name)}</h3><div class="srcl">${E(STATION.place)} · landmark only, not a fishing-ground rating</div><p><a href="${E(STATION.href)}">Open the Galoc Station page</a></p></div>`);
+ m.bindTooltip(tip,{permanent:true,direction:'left',offset:[-12,-10],className:'lbl lbl-left station-lbl'});
+ if($('lab')&&$('lab').checked===false)setTimeout(()=>m.closeTooltip(),0);
+ const when=x?(isPast(selectedTime)?'Past hour · '+forecastLabel(selectedTime)+' · model values, not observations':'Forecast for '+forecastLabel(selectedTime)):'Weather, wind and current appear after the forecast loads';
+ const curCell=x?.current,curLine=curCell?(curCell.kt==null?'<b>current UNAVAILABLE</b>':`<b>${v(curCell.kt,' kt')}</b> toward ${E(curCell.dir)}`)+ (curCell.note?'<br><span class="srcl">'+E(curCell.note)+'</span>':'')+'<br><span class="srcl">Open-Meteo Marine (not ECMWF)</span>':'—';
+ const wxLine=wx?(E(weatherLabel(wx))+'<br><span class="srcl">ECMWF via Open-Meteo</span>'):E('Weather UNAVAILABLE');
+ const windCell=x? (wk==null?'<b>wind UNAVAILABLE</b>':`<b style="color:${WINDCOL[wt]}">${wk} kph</b> (${E(x.wind.kt)} kt) from ${E(windDeg(x.wind)==null?U:compass(windDeg(x.wind)))}${windDeg(x.wind)==null?'':' → blowing toward '+compass(windToward(windDeg(x.wind)))}<br>gust ${kph(x.wind.gustKt)==null?U:kph(x.wind.gustKt)+' kph ('+E(x.wind.gustKt)+' kt)'}<br>${wt=='bad'?'<b style="color:#b91c1c">Above 18 kph: bad for fishermen</b>':wt=='near'?'<b style="color:#b45309">Near the 18 kph limit</b>':'At or below 18 kph'}`)+'<br><span class="srcl">'+E(x.wind.source)+'</span>':'—';
+ m.bindPopup(`<div class="pop station-pop"><h3>${E(STATION.name)}</h3><div class="srcl">${E(STATION.place)} · landmark only, not a fishing-ground rating</div><div class="srcl">${E(when)}</div><table>
+  <tr><td>💨 Wind</td><td>${windCell}</td></tr>
+  <tr><td>🌊 Current</td><td>${curLine}</td></tr>
+  <tr><td>⛅ Weather</td><td>${wxLine}</td></tr>
+ </table><p><a href="${E(STATION.href)}">Open the Galoc Station page</a></p></div>`,{maxWidth:320});
  m.addTo(stationLayer);
+ if(x){
+  if(x.current&&x.current.kt!=null&&DIR[x.current.dir]!=null){const sz=14+x.current.kt*22;
+   L.marker([STATION.lat,STATION.lng],{interactive:false,icon:L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
+   html:`<div style="width:${sz}px;height:${sz}px;transform:rotate(${DIR[x.current.dir]}deg) translateY(-${sz*0.75}px);color:#7dd3fc;font-size:${sz}px;line-height:${sz}px;text-align:center;text-shadow:0 0 2px #000">↑</div>`})}).addTo(arrows)}
+  const wd=windToward(windDeg(x.wind));
+  if(wk!=null&&wd!=null){const len=Math.round(Math.min(46,22+wk*0.6)),col=WINDCOL[wt],box=len*2+16;
+   L.marker([STATION.lat,STATION.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
+   html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${wd})"><line x1="0" y1="-12" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line class="flow" x1="0" y1="-12" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path class="head" d="M0 ${-len-9} L-6 ${-len+1} L6 ${-len+1} Z" fill="${col}" stroke="#0b1220" stroke-width="1.6" stroke-linejoin="round"/></g></svg>`})}).addTo(windArrows)}
+ }
 }
 /* ---------- live fetch (browser -> Open-Meteo, ONE batched request per API) ---------- */
 const LIVE_TIMEOUT_MS=15e3,FORECAST_URL='https://api.open-meteo.com/v1/forecast',PREV_URL='https://previous-runs-api.open-meteo.com/v1/forecast';
-const WIND_VARS=['wind_speed_10m','wind_direction_10m','wind_gusts_10m','precipitation'];
+const WIND_VARS=['wind_speed_10m','wind_direction_10m','wind_gusts_10m','precipitation'],HOURLY_VARS=WIND_VARS.concat(['weather_code','temperature_2m']);
 async function getJSON(url,ms=LIVE_TIMEOUT_MS){
  const ac=typeof AbortController=='function'?new AbortController():null,to=setTimeout(()=>{try{ac&&ac.abort()}catch(_){}},ms);
  let r;try{r=await fetch(url,ac?{cache:'no-store',signal:ac.signal}:{cache:'no-store'})}
@@ -145,7 +171,7 @@ function mergeLoc(p,f,tag){
  const times=[...p.hourly.time];for(const t of f.hourly.time){if(pmap[t]==null)times.push(t)}
  times.sort((a,b)=>tPHT(a)-tPHT(b));
  const out={time:times},src=times.map(t=>{const j=pmap[t];return j==null?null:(p.hourly.wind_source||[])[j]||null});
- for(const v of WIND_VARS){
+ for(const v of HOURLY_VARS){
   out[v]=times.map((t,k)=>{
    const pj=pmap[t],fj=fmap[t];
    const pv=pj==null?null:p.hourly[v]?.[pj];
@@ -158,22 +184,23 @@ function mergeHourly(primary,fallback,tag){
  if(!fallback||!fallback.length)return primary||null;
  if(!primary||!primary.length)return fallback.map(loc=>mergeLoc(null,loc,tag));
  return primary.map((p,i)=>mergeLoc(p,fallback[i],tag))}
-function windQs(lat,lon){return new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',past_days:'2',cell_selection:'sea'})}
+function windQs(lat,lon){return new URLSearchParams({latitude:lat,longitude:lon,hourly:'wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,weather_code,temperature_2m',wind_speed_unit:'kn',precipitation_unit:'mm',timezone:'Asia/Manila',forecast_days:'3',past_days:'2',cell_selection:'sea'})}
 async function fetchLive(areas){
- const lat=areas.map(a=>a.lat).join(','),lon=areas.map(a=>a.lng).join(',');
- const eq=windQs(lat,lon),bq=windQs(lat,lon),pq=windQs(lat,lon);
+ const w=windPts(areas),s=marinePts(areas);
+ const eq=windQs(w.lat,w.lon),bq=windQs(w.lat,w.lon),pq=windQs(w.lat,w.lon);
  bq.set('models','best_match');pq.set('models','ecmwf_ifs025');
- const mq=new URLSearchParams({latitude:lat,longitude:lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3',past_days:'2'});
+ const mq=new URLSearchParams({latitude:s.lat,longitude:s.lon,hourly:'ocean_current_velocity,ocean_current_direction',timezone:'Asia/Manila',forecast_days:'3',past_days:'2'});
  const [e,m,b]=await Promise.allSettled([getJSON(ECMWF_URL+'?'+eq),getJSON(MARINE_URL+'?'+mq),getJSON(FORECAST_URL+'?'+bq)]);
- const ok=(r)=>r.status=='fulfilled'&&r.value.length==areas.length;
- let ecmwf=ok(e)?e.value:null,ecmwfErr=ok(e)?null:'ECMWF: '+(e.reason?.message||'unexpected response');
- if(ok(b))ecmwf=mergeHourly(ecmwf,b.value,'best_match');
+ const ok=(r,n)=>r.status=='fulfilled'&&r.value.length==n;
+ let ecmwf=ok(e,w.n)?e.value:null,ecmwfErr=ok(e,w.n)?null:'ECMWF: '+(e.reason?.message||'unexpected response');
+ if(ok(b,w.n))ecmwf=mergeHourly(ecmwf,b.value,'best_match');
  if(hourlyHoles(ecmwf)){
   const p=await Promise.allSettled([getJSON(PREV_URL+'?'+pq)]);
-  if(ok(p[0]))ecmwf=mergeHourly(ecmwf,p[0].value,'previous');
+  if(ok(p[0],w.n))ecmwf=mergeHourly(ecmwf,p[0].value,'previous');
   if(!ecmwf)ecmwfErr=(ecmwfErr?ecmwfErr+'; ':'')+'fallback also missed past wind'}
- return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf,marine:ok(m)?m.value:null,
-  ecmwfErr:ecmwf&&!hourlyHoles(ecmwf)?null:ecmwfErr,marineErr:ok(m)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
+ return {at:Date.now(),ids:areas.map(a=>a.id).join(','),ecmwf,marine:ok(m,s.n)?m.value:null,
+  stationWindI:w.stationI,stationMarineI:s.stationI,stationSeaI:s.seaI,
+  ecmwfErr:ecmwf&&!hourlyHoles(ecmwf)?null:ecmwfErr,marineErr:ok(m,s.n)?null:'Marine: '+(m.reason?.message||'unexpected response')}}
 function computeLive(a,i,L,time=selectedTime){
  const ec=L.ecmwf?.[i],ma=L.marine?.[i],eh=ec?.hourly||{},mh=ma?.hourly||{};
  const target=time||eh.time?.[nowIdx(eh.time,L.at)]||mh.time?.[nowIdx(mh.time,L.at)];
@@ -187,6 +214,31 @@ function computeLive(a,i,L,time=selectedTime){
  rain:{mmHour:r1(mm),mm3h:r1(r3),intensity:rainClass(r3),source:'ECMWF via Open-Meteo'},
  current:{kt:r1(ck),dir:ck==null?null:compass(at(mh.ocean_current_direction,mi)),status:cc,source:'Open-Meteo Marine currents'},
  rating,lim:worst>=2?[['current',cc],['wind',wc],['rain',rc]].filter(x=>rankOf(x[1])===worst).map(x=>x[0]):[]};
+}
+function marineAt(L,i,target){
+ const ma=L.marine?.[i],mh=ma?.hourly||{},mi=(mh.time||[]).indexOf(target);
+ const at=(arr,j)=>j<0?null:num(arr?.[j]);
+ const ck=toKt(at(mh.ocean_current_velocity,mi),ma?.hourly_units?.ocean_current_velocity||'km/h');
+ if(ck==null)return null;
+ const cellLat=ma.latitude,cellLng=ma.longitude,off=kmBetween(STATION,{lat:cellLat,lng:cellLng});
+ return {kt:r1(ck),dir:compass(at(mh.ocean_current_direction,mi)),deg:at(mh.ocean_current_direction,mi),status:curClass(ck),source:'Open-Meteo Marine currents',cell:{lat:cellLat,lng:cellLng},km:off};
+}
+function computeStationLive(L,time=selectedTime){
+ const i=L.stationWindI,ec=i==null?null:L.ecmwf?.[i],eh=ec?.hourly||{};
+ const target=time||eh.time?.[nowIdx(eh.time,L.at)];
+ const ei=(eh.time||[]).indexOf(target);
+ const at=(arr,j)=>j<0?null:num(arr?.[j]);
+ const wk=at(eh.wind_speed_10m,ei),gust=at(eh.wind_gusts_10m,ei),mm=at(eh.precipitation,ei),temp=at(eh.temperature_2m,ei),code=at(eh.weather_code,ei);
+ let cur=marineAt(L,L.stationMarineI,target),fromSea=false,note=null;
+ if(!cur){cur=marineAt(L,L.stationSeaI,target);if(cur)fromSea=true}
+ if(cur&&(fromSea||(cur.km!=null&&cur.km>1))){fromSea=true;note='current from sea just off the station'}
+ if(!cur)cur={kt:null,dir:null,deg:null,status:U,source:'Open-Meteo Marine currents',cell:null,km:null};
+ cur={...cur,fromSea,note};
+ return {time:target,rating:null,
+  wind:{kt:r1(wk),gustKt:r1(gust),deg:wk==null?null:at(eh.wind_direction_10m,ei),dir:compass(at(eh.wind_direction_10m,ei)),source:({ecmwf:'ECMWF via Open-Meteo',best_match:'Open-Meteo best_match (ECMWF hour unavailable)',previous:'ECMWF previous run via Open-Meteo'}[(eh.wind_source||[])[ei]]||'ECMWF via Open-Meteo')},
+  rain:{mmHour:r1(mm),source:'ECMWF via Open-Meteo'},
+  weather:{condition:wxWord(code),code,mmHour:r1(mm),tempC:r1(temp),source:'ECMWF via Open-Meteo'},
+  current:cur};
 }
 function stopPlayback(){if(playTimer)clearInterval(playTimer);playTimer=null;$('forecast-play').textContent='▶ Play';$('forecast-play').setAttribute('aria-pressed','false')}
 function updateMapClock(){const active=forecastTimes.includes(selectedTime),past=active&&isPast(selectedTime);$('map-forecast-label').textContent=active?(past?'Past hour (model values, not observations)':'Forecast time'):'Report snapshot';$('map-forecast-time').textContent=active?(past?'Past · ':'')+forecastLabel(selectedTime):(D?RT():'Loading…');const mc=$('map-forecast-time').parentNode;if(mc&&mc.classList)mc.classList.toggle('past',past)}
@@ -205,7 +257,7 @@ function updateForecastControls(){
  $('forecast-start').textContent=active?forecastLabel(forecastTimes[0]):'—';
  $('forecast-end').textContent=active?forecastLabel(forecastTimes[forecastTimes.length-1]):'—';
  $('forecast-state').textContent=active&&LIVE?'Data updated '+fmtPHT(LIVE.at):'Report snapshot only';
- $('forecast-note').textContent=active?'Map conditions follow the selected hour (past 48 h to forecast end); click a ground for wind, gusts, hourly rain and currents. Gray means incomplete data. Supply panels stay from the report.':'Forecast data unavailable. Report map is not a future forecast. Use Refresh to retry.';
+ $('forecast-note').textContent=active?'Map conditions follow the selected hour (past 48 h to forecast end); click a ground or the LIV Galoc Station for wind, weather and currents. Gray means incomplete data. Supply panels stay from the report.':'Forecast data unavailable. Report map is not a future forecast. Use Refresh to retry.';
 }
 function rebuildForecastTimes(){
  const ids=D?.areas.map(a=>a.id).join(','),valid=LIVE&&LIVE.ids===ids;
@@ -264,7 +316,7 @@ function renderMap(){
   if(wk!=null&&wd!=null){const len=Math.round(Math.min(46,22+wk*0.6)),col=WINDCOL[wt],box=len*2+16;
    L.marker([a.lat,a.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'windico',iconSize:[box,box],iconAnchor:[box/2,box/2],
    html:`<svg width="${box}" height="${box}" viewBox="${-box/2} ${-box/2} ${box} ${box}"><g transform="rotate(${wd})"><line x1="0" y1="-12" x2="0" y2="${-len}" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/><line class="flow" x1="0" y1="-12" x2="0" y2="${-len}" stroke="${col}" stroke-width="3" stroke-linecap="round"/><path class="head" d="M0 ${-len-9} L-6 ${-len+1} L6 ${-len+1} Z" fill="${col}" stroke="#0b1220" stroke-width="1.6" stroke-linejoin="round"/></g></svg>`})}).addTo(windArrows)}});
- if(windFlow)windFlow.setData(A);
+ if(windFlow)windFlow.setData(A);addStationMarker();
  // Forecast summary never reuses report ratings for missing selected-hour data.
  const F=A.filter(a=>a._forecast),pill=(k,x,cls='')=>`<span class="pill ${cls}">${k}: <b>${E(x)}</b></span>`;
  let chips=[pill('🕑 Report',D.reportTime)];
@@ -306,7 +358,7 @@ function initMap(){map=L.map('map',{zoomSnap:.25});L.tileLayer('https://{s}.tile
  $('arr').onchange=e=>{e.target.checked?arrows.addTo(map):arrows.remove();map.getContainer().classList.toggle('hide-cur',!e.target.checked)};
  $('warr').onchange=e=>e.target.checked?windArrows.addTo(map):windArrows.remove();
  $('wflow').onchange=e=>windFlow.enable(e.target.checked);$('wflow').checked=windFlow.isOn();
- $('lab').onchange=e=>markers.eachLayer(l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip()));addEventListener('resize',fit)}
+ $('lab').onchange=e=>{const fn=l=>l.getTooltip&&l.getTooltip()&&(e.target.checked?l.openTooltip():l.closeTooltip());markers.eachLayer(fn);if(stationLayer)stationLayer.eachLayer(fn)};addEventListener('resize',fit)}
 /* ---------- refresh ---------- */
 function setBtn(state,txt){const b=$('rf');b.disabled=state=='busy';b.classList.toggle('busy',state=='busy');$('rfl').textContent=state=='busy'?'Refreshing…':'Refresh';if(txt!=null)$('rft').textContent=txt}
 async function refresh(why='manual',{live=true}={}){
@@ -317,7 +369,7 @@ async function refresh(why='manual',{live=true}={}){
   catch(e){if(!D){$('status').textContent='Data UNAVAILABLE ('+e.message+')';return}}
   if(!D)return;
   if(live){const ids=D.areas.map(a=>a.id).join(',');
-   if(why=='manual'&&LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
+   if(why=='manual'&&LIVE&&LIVE.ids==ids&&LIVE.ecmwf&&LIVE.marine&&LIVE.stationWindI!=null&&Date.now()-LIVE.at<LIVE_REUSE_MS){/* reuse very recent live data: avoids hammering Open-Meteo */}
    else{try{const L2=await fetchLive(D.areas);if(L2.ecmwf||L2.marine||!LIVE){LIVE=L2;LIVEERR=null}else LIVEERR=[L2.ecmwfErr,L2.marineErr].join('; ');
      if(L2.ecmwf&&L2.marine)try{localStorage.setItem(CACHE_KEY,JSON.stringify(L2))}catch(_){}}
     catch(e){LIVEERR=e.message}}}
@@ -330,8 +382,8 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='
 $('rf').onclick=()=>refresh('manual');
 initMap();
 (async()=>{ // Load hourly arrays even when the published report is fresh.
- try{const c=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');if(c&&Date.now()-c.at<15*60e3)LIVE=c}catch(_){}
+ try{const c=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');if(c&&Date.now()-c.at<15*60e3&&c.stationWindI!=null)LIVE=c}catch(_){}
  await refresh('load',{live:false});
- if(D){rebuildForecastTimes();renderMap();if(!LIVE||Date.now()-LIVE.at>15*60e3)await refresh('load-forecast')}
+ if(D){rebuildForecastTimes();renderMap();if(!LIVE||Date.now()-LIVE.at>15*60e3||LIVE.stationWindI==null)await refresh('load-forecast')}
  schedule()})();
 </script></body></html>

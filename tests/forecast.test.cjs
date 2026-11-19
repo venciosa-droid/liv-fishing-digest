@@ -105,7 +105,9 @@ assert(hourlyHoles([loc(HT,[1,null,2])])&&!hourlyHoles([loc(HT,[1,2,3])]),'holes
 assert(mergeHourly(null,[loc(HT,[3,4,5])],'best_match')[0].hourly.wind_speed_10m[0]===3,'full fallback when ECMWF missing');
 const emptyMerge=mergeHourly([loc(HT,[null,null,null])],null,'best_match');
 assert(hourlyHoles(emptyMerge),'still holes when no fallback data — never invent');
-var urls=[];getJSON=async u=>{urls.push(u);return [loc(HT,[3,4,5])]};
+var urls=[];
+function nFromUrl(u){const m=/[?&]latitude=([^&]+)/.exec(u);return m?decodeURIComponent(m[1]).split(',').length:1}
+getJSON=async u=>{urls.push(u);return Array.from({length:nFromUrl(u)},()=>loc(HT,[3,4,5]))};
 fetchLive([{id:'one',lat:1,lng:2}]).then((L)=>{
  assert(urls.length===3&&urls.some(u=>u.includes('/v1/ecmwf'))&&urls.some(u=>u.includes('marine-api'))&&urls.some(u=>u.includes('models=best_match')),'three parallel live requests');
  assert(urls.every(u=>u.includes('past_days=2')&&u.includes('forecast_days=3')&&u.includes('timezone=Asia%2FManila')),'past_days on live requests');
@@ -114,7 +116,14 @@ fetchLive([{id:'one',lat:1,lng:2}]).then((L)=>{
  const row=computeLive({id:'one'},0,L,'2026-11-18T09:00');
  assert(row.wind.kt===4&&row.wind.source.indexOf('ECMWF')>=0,'computeLive uses ECMWF source when present');
  assert(LIVE_TIMEOUT_MS===15e3,'live fetches time out after 15s');
- console.log('PASS: past 48h window, labels, jumps, Now, play, no report fallback, past_days requests, wind fill, 15s timeout');
+ const windUrls=urls.filter(u=>u.includes('/v1/ecmwf')||u.includes('models=best_match'));
+ const marineUrls=urls.filter(u=>u.includes('marine-api'));
+ assert(windUrls.length>=2&&windUrls.every(u=>u.includes('weather_code')&&u.includes('temperature_2m')&&u.includes(String(STATION.lat))&&u.includes(String(STATION.lng))),'station is batched into ECMWF/best_match with weather fields');
+ assert(marineUrls.length===1&&marineUrls[0].includes(String(STATION.lat))&&marineUrls[0].includes(String(STATION.lng))&&marineUrls[0].includes(String(STATION.seaLng)),'station and nearby sea cell are batched into the Marine request');
+ assert(!marineUrls[0].includes('weather_code')&&!marineUrls[0].includes('ecmwf'),'current stays on Open-Meteo Marine only');
+ assert(L.stationWindI===1&&L.stationMarineI===1&&L.stationSeaI===2&&L.ids==='one','station indices sit after the grounds; ids stay ground-only');
+ assert(L.ecmwf.length===2&&L.marine.length===3,'one extra wind loc and two extra marine locs, not a 17th ground');
+ console.log('PASS: past 48h window, labels, jumps, Now, play, no report fallback, past_days requests, wind fill, 15s timeout, station batched');
 }).catch(e=>{console.error(e);process_exit(1)});
 `,Object.assign(ctx,{process_exit:c=>process.exit(c)}));
 // LIV Galoc Station is a landmark only — not a 17th fishing ground.
@@ -133,4 +142,41 @@ assert(/LIV Galoc Station/.test(page)&&/11\.966933/.test(page)&&/119\.845707/.te
 assert(/addStationMarker/.test(page)&&/stationLayer/.test(page)&&/lg-station/.test(page),'station marker, independent layer, and legend entry are present');
 assert(/Open the Galoc Station page/.test(page)&&page.includes("href:'galoc/'"),'popup links to the Galoc Station page');
 assert(!/D\.areas\.push\(STATION\)/.test(page),'station is never added as a 17th ground');
+assert(/weather_code/.test(page)&&/temperature_2m/.test(page)&&/computeStationLive/.test(page)&&/current from sea just off the station/.test(page),'station weather, temp and nearby-sea current are in the page');
+assert(/mm\/h/.test(page)&&page.includes('°C'),'weather line uses mm/h and °C');
 console.log('PASS: LIV Galoc Station landmark, known coordinates, not a 17th ground, legend and link');
+
+// Station weather / wind / current follow the slider; never a fishing rating.
+vm.runInContext(`
+assert(wxWord(0)==='Clear'&&wxWord(1)==='Clear'&&wxWord(2)==='Cloudy'&&wxWord(3)==='Cloudy'&&wxWord(45)==='Cloudy','clear/cloudy WMO mapping');
+assert(wxWord(61)==='Rain'&&wxWord(80)==='Rain'&&wxWord(95)==='Rain'&&wxWord(null)===null,'rain mapping; null stays null — never invent');
+assert(weatherLabel({condition:null,mmHour:null,tempC:null})==='Weather UNAVAILABLE','all-missing weather is UNAVAILABLE');
+assert(weatherLabel({condition:'Cloudy',mmHour:0,tempC:29.2})==='Cloudy · 0 mm/h · 29.2°C','weather line format');
+const HT2=['2026-11-19T13:00','2026-11-19T14:00'];
+function sloc(winds,extra){return Object.assign({hourly:Object.assign({time:HT2,wind_speed_10m:winds,wind_direction_10m:winds.map(w=>w==null?null:270),wind_gusts_10m:winds.map(w=>w==null?null:w+2),precipitation:winds.map(w=>w==null?null:0),weather_code:winds.map(w=>w==null?null:3),temperature_2m:winds.map(w=>w==null?null:29.2)},extra||{})})};
+function mloc(vel,dir,lat,lng){return {latitude:lat,longitude:lng,hourly_units:{ocean_current_velocity:'km/h'},hourly:{time:HT2,ocean_current_velocity:vel,ocean_current_direction:dir}}};
+const LS={at:Date.now(),ids:'galoc,maglalambay',stationWindI:2,stationMarineI:2,stationSeaI:3,
+ ecmwf:[sloc([4,5]),sloc([4,5]),sloc([4.1,8])],
+ marine:[mloc([0.4,0.5],[180,180],11.9,119.9),mloc([0.4,0.5],[180,180],11.9,119.9),mloc([null,null],[null,null],STATION.lat,STATION.lng),mloc([0.4,0.5],[180,180],11.958336,119.875015)]};
+D={areas:[{id:'galoc',name:'Galoc',lat:11.9273,lng:119.8768},{id:'maglalambay',name:'Maglalambay',lat:11.9935,lng:119.8684}]};
+LIVE=LS;selectedTime='2026-11-19T14:00';
+assert(merged().length===2&&merged().every(a=>a.rating!='undefined'),'merged stays at two grounds');
+const st=computeStationLive(LS,'2026-11-19T14:00');
+assert(st.rating==null,'station has no fishing color rating');
+assert(st.wind.kt===8&&st.wind.dir==='W'&&st.wind.gustKt===10,'station wind/gust/direction from ECMWF at the selected hour');
+assert(st.weather.condition==='Cloudy'&&st.weather.mmHour===0&&st.weather.tempC===29.2,'station weather from ECMWF');
+assert(st.current.kt===0.3&&st.current.dir==='S'&&st.current.fromSea&&st.current.note==='current from sea just off the station','null land/station marine uses the nearby sea cell and labels it');
+const past=computeStationLive(LS,'2026-11-19T13:00');
+assert(past.wind.kt===4.1&&past.weather.condition==='Cloudy','station follows a past slider hour');
+const hole={...LS,ecmwf:[sloc([4,5]),sloc([4,5]),sloc([null,null])],marine:[LS.marine[0],LS.marine[1],mloc([null,null],[null,null],STATION.lat,STATION.lng),mloc([null,null],[null,null],11.958336,119.875015)]};
+const miss=computeStationLive(hole,'2026-11-19T14:00');
+assert(miss.wind.kt===null&&miss.weather.condition===null&&miss.weather.tempC===null&&miss.current.kt===null,'UNAVAILABLE when every source is empty — never invent');
+assert(weatherLabel(miss.weather)==='Weather UNAVAILABLE'&&windLabel(miss.wind)==='wind UNAVAILABLE'&&currentLabel(miss.current)==='Current UNAVAILABLE','labels say UNAVAILABLE');
+const snapped={...LS,marine:[LS.marine[0],LS.marine[1],mloc([0.5,0.7],[90,90],11.958336,119.875015),mloc([0.4,0.5],[180,180],11.958336,119.875015)]};
+const sn=computeStationLive(snapped,'2026-11-19T14:00');
+assert(sn.current.kt===0.4&&sn.current.dir==='E'&&sn.current.fromSea&&sn.current.note==='current from sea just off the station','snapped Marine cell off the island is labeled as sea just off the station');
+const filledWx=mergeHourly([Object.assign(sloc([null,5]),{})],[sloc([2,99],{weather_code:[0,1],temperature_2m:[27,28]})],'best_match');
+assert(filledWx[0].hourly.wind_speed_10m[0]===2&&filledWx[0].hourly.weather_code[0]===0&&filledWx[0].hourly.temperature_2m[0]===27&&filledWx[0].hourly.weather_code[1]===3,'weather/temp fill only on null hours');
+assert(STATION.seaLat===11.966933&&STATION.seaLng===119.857&&kmBetween(STATION,{lat:STATION.seaLat,lng:STATION.seaLng})<2,'backup sea cell is just east of the station');
+console.log('PASS: station weather/wind/current, slider, nearby sea current, no invented values, not a 17th ground');
+`,ctx);
