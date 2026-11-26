@@ -1,7 +1,7 @@
 {
  "reportTime": "UNAVAILABLE",
  "confidence": "UNAVAILABLE",
- "liveSnapshot": "26 Nov 2026 · 6:20 AM PHT",
+ "liveSnapshot": "26 Nov 2026 · 2:12 PM PHT",
  "overall": "UNAVAILABLE",
  "limiter": "UNAVAILABLE",
  "limiterDetail": "UNAVAILABLE",
@@ -39,8 +39,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "15",
-   "gustKt": "22",
+   "windKt": "13",
+   "gustKt": "20",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -52,7 +52,7 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "14",
+   "windKt": "13",
    "gustKt": "20",
    "rain": "Mostly dry",
    "flags": [
@@ -65,9 +65,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "13",
-   "gustKt": "18",
-   "rain": "Light (2.9 mm)",
+   "windKt": "14",
+   "gustKt": "20",
+   "rain": "Light (2.7 mm)",
    "flags": [
     "SHORTAGE"
    ]
@@ -78,8 +78,8 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "9.2",
-   "gustKt": "14",
+   "windKt": "10",
+   "gustKt": "15",
    "rain": "Mostly dry",
    "flags": [
     "SHORTAGE"
@@ -91,9 +91,9 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "7.5",
+   "windKt": "8.7",
    "gustKt": "10",
-   "rain": "Light (1.2 mm)",
+   "rain": "Mostly dry",
    "flags": [
     "BEST",
     "SHORTAGE"
@@ -105,11 +105,10 @@
    "fishing": "MARGINAL",
    "activity": "REDUCED",
    "supply": "NORMAL → softening",
-   "windKt": "13",
+   "windKt": "10",
    "gustKt": "19",
-   "rain": "Light (4.0 mm)",
+   "rain": "Light (4.6 mm)",
    "flags": [
-    "TURNING",
     "SHORTAGE"
    ]
   },
@@ -124,6 +123,7 @@
    "rain": "Mostly dry",
    "flags": [
     "WORST",
+    "TURNING",
     "SHORTAGE"
    ]
   }
@@ -138,46 +138,16 @@
    "rating": "MARGINAL",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.3,
-    "dir": "WNW",
+    "kt": 0.4,
+    "dir": "WSW",
     "range24h": "0.2–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "E",
-    "gustKt": 15.9,
-    "source": "ECMWF via Open-Meteo"
-   },
-   "rain": {
-    "intensity": "None–Light",
-    "source": "ECMWF via Open-Meteo"
-   },
-   "bestWindow": {
-    "report": null,
-    "modelBestHour": "Thu 23"
-   },
-   "note": "Not listed in this report; rating from live model rules"
-  },
-  {
-   "id": "culion",
-   "name": "Culion",
-   "lat": 11.8905,
-   "lng": 120.022,
-   "rating": "MARGINAL",
-   "ratingSource": "live model rules (same as /api/live for all grounds)",
-   "current": {
-    "kt": 0.7,
-    "dir": "W",
-    "range24h": "0.5–1.2",
-    "status": "Moderate",
-    "source": "Open-Meteo Marine currents"
-   },
-   "wind": {
-    "kt": 11.1,
-    "dir": "E",
-    "gustKt": 15.9,
+    "kt": 13.1,
+    "dir": "ESE",
+    "gustKt": 20.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -191,6 +161,36 @@
    "note": "Not listed in this report; rating from live model rules"
   },
   {
+   "id": "culion",
+   "name": "Culion",
+   "lat": 11.8905,
+   "lng": 120.022,
+   "rating": "MARGINAL",
+   "ratingSource": "live model rules (same as /api/live for all grounds)",
+   "current": {
+    "kt": 0.8,
+    "dir": "WNW",
+    "range24h": "0.5–1.2",
+    "status": "Moderate",
+    "source": "Open-Meteo Marine currents"
+   },
+   "wind": {
+    "kt": 13.1,
+    "dir": "ESE",
+    "gustKt": 20.4,
+    "source": "ECMWF via Open-Meteo"
+   },
+   "rain": {
+    "intensity": "None–Light",
+    "source": "ECMWF via Open-Meteo"
+   },
+   "bestWindow": {
+    "report": null,
+    "modelBestHour": "Thu 20"
+   },
+   "note": "Not listed in this report; rating from live model rules"
+  },
+  {
    "id": "linapacan",
    "name": "Linapacan",
    "lat": 11.491,
@@ -199,24 +199,24 @@
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
     "kt": 0.6,
-    "dir": "WNW",
+    "dir": "W",
     "range24h": "0.3–1.2",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "E",
-    "gustKt": 16.5,
+    "kt": 12.5,
+    "dir": "ENE",
+    "gustKt": 18.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "Moderate",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 07"
+    "modelBestHour": "Thu 19"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -228,16 +228,16 @@
    "rating": "MARGINAL",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.5,
+    "kt": 0.6,
     "dir": "SE",
     "range24h": "0.2–1.2",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.5,
+    "kt": 5.9,
     "dir": "E",
-    "gustKt": 15.4,
+    "gustKt": 10.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -258,25 +258,25 @@
    "rating": "POOR",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.3,
-    "dir": "NW",
+    "kt": 0.4,
+    "dir": "WSW",
     "range24h": "0.2–0.8",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 16.7,
+    "kt": 17.8,
     "dir": "ENE",
-    "gustKt": 21.8,
+    "gustKt": 23.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Light",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 17"
+    "modelBestHour": "Thu 20"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -289,19 +289,19 @@
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
     "kt": 0.4,
-    "dir": "NW",
-    "range24h": "0.2–0.6",
+    "dir": "WSW",
+    "range24h": "0.1–0.6",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 15.6,
-    "dir": "E",
-    "gustKt": 21.6,
+    "kt": 17.7,
+    "dir": "ENE",
+    "gustKt": 22.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
@@ -318,25 +318,25 @@
    "rating": "POOR",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.9,
+    "kt": 0.8,
     "dir": "WNW",
     "range24h": "0.2–1.8",
-    "status": "Strong",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 15.6,
-    "dir": "E",
-    "gustKt": 21.6,
+    "kt": 17.7,
+    "dir": "ENE",
+    "gustKt": 22.0,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "Moderate",
+    "intensity": "None–Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 17"
+    "modelBestHour": "Thu 18"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -355,18 +355,18 @@
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.8,
+    "kt": 12.6,
     "dir": "E",
-    "gustKt": 20.2,
+    "gustKt": 20.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 14"
+    "modelBestHour": "Thu 17"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -385,9 +385,9 @@
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 11.1,
-    "dir": "E",
-    "gustKt": 15.9,
+    "kt": 13.1,
+    "dir": "ESE",
+    "gustKt": 20.4,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -396,7 +396,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 22"
+    "modelBestHour": "Thu 21"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -415,9 +415,9 @@
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.8,
-    "dir": "E",
-    "gustKt": 18.9,
+    "kt": 12.4,
+    "dir": "ESE",
+    "gustKt": 19.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -426,7 +426,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 05"
+    "modelBestHour": "Fri 07"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -438,16 +438,16 @@
    "rating": "POOR",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.3,
-    "dir": "NW",
+    "kt": 0.6,
+    "dir": "W",
     "range24h": "0.3–0.6",
-    "status": "Favorable",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 18.8,
-    "dir": "ENE",
-    "gustKt": 24.9,
+    "kt": 18.0,
+    "dir": "E",
+    "gustKt": 23.1,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -456,7 +456,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 17"
+    "modelBestHour": "Thu 23"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -465,19 +465,19 @@
    "name": "Decabobo",
    "lat": 12.1295,
    "lng": 120.2089,
-   "rating": "MARGINAL",
+   "rating": "GOOD",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.1,
-    "dir": "N",
-    "range24h": "0.0–0.5",
+    "kt": 0.2,
+    "dir": "SE",
+    "range24h": "0.1–0.5",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.5,
+    "kt": 5.9,
     "dir": "E",
-    "gustKt": 15.4,
+    "gustKt": 10.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -486,7 +486,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 05"
+    "modelBestHour": "Thu 18"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -498,16 +498,16 @@
    "rating": "MARGINAL",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.4,
+    "kt": 0.5,
     "dir": "SE",
     "range24h": "0.0–1.2",
-    "status": "Favorable",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 10.5,
+    "kt": 5.9,
     "dir": "E",
-    "gustKt": 15.4,
+    "gustKt": 10.9,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -529,24 +529,24 @@
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
     "kt": 0.8,
-    "dir": "WNW",
+    "dir": "W",
     "range24h": "0.4–1.1",
     "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.8,
+    "kt": 12.6,
     "dir": "E",
-    "gustKt": 20.2,
+    "gustKt": 20.6,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
-    "intensity": "None–Light",
+    "intensity": "Light",
     "source": "ECMWF via Open-Meteo"
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 14"
+    "modelBestHour": "Thu 16"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -558,16 +558,16 @@
    "rating": "MARGINAL",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 0.2,
-    "dir": "WNW",
+    "kt": 0.3,
+    "dir": "W",
     "range24h": "0.1–0.3",
     "status": "Favorable",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 13.8,
-    "dir": "E",
-    "gustKt": 18.9,
+    "kt": 12.4,
+    "dir": "ESE",
+    "gustKt": 19.2,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -576,7 +576,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Fri 05"
+    "modelBestHour": "Fri 07"
    },
    "note": "Not listed in this report; rating from live model rules"
   },
@@ -585,19 +585,19 @@
    "name": "Barangonan",
    "lat": 11.3443,
    "lng": 119.6945,
-   "rating": "POOR",
+   "rating": "MARGINAL",
    "ratingSource": "live model rules (same as /api/live for all grounds)",
    "current": {
-    "kt": 1.0,
+    "kt": 0.8,
     "dir": "NW",
     "range24h": "0.0–1.8",
-    "status": "Strong",
+    "status": "Moderate",
     "source": "Open-Meteo Marine currents"
    },
    "wind": {
-    "kt": 14.2,
+    "kt": 13.6,
     "dir": "E",
-    "gustKt": 20.0,
+    "gustKt": 17.7,
     "source": "ECMWF via Open-Meteo"
    },
    "rain": {
@@ -606,7 +606,7 @@
    },
    "bestWindow": {
     "report": null,
-    "modelBestHour": "Thu 17"
+    "modelBestHour": "Thu 20"
    },
    "note": "Not listed in this report; rating from live model rules"
   }
